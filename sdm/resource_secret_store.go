@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -31,18 +30,21 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Hostname of server that is hosting NDES (Network Device Enrollment Services). Often this is the same host as Active Directory Certificate Services",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -57,28 +59,33 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"region": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The AWS region to target e.g. us-east-1",
 						},
 						"role_arn": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The role to assume after logging in.",
 						},
 						"role_external_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -93,38 +100,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"ca_arn": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The ARN of the CA in AWS Private CA",
 						},
 						"certificate_template_arn": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The ARN of the AWS certificate template for requested certificates. Must allow SAN, key usage, and ext key usage passthrough from CSR",
 						},
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA represented in minutes.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"region": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The AWS region to target e.g. us-east-1",
 						},
 						"signing_algo": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The specified signing algorithm family (RSA or ECDSA) must match the algorithm family of the CA's secret key. e.g. SHA256WITHRSA",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -139,18 +153,21 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
 						"vault_uri": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URI of the key vault to target e.g. https://myvault.vault.azure.net",
 						},
@@ -165,18 +182,21 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"app_url": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Cyberark instance",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -191,18 +211,21 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"app_url": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Cyberark instance",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -217,18 +240,21 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"app_url": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Cyberark instance",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -243,23 +269,27 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"server_url": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The URL of the Delinea instance",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
 						"tenant_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The tenant name to target",
 						},
@@ -274,18 +304,21 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"project_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The GCP project ID to target.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -300,38 +333,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"ca_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The ID of the target CA",
 						},
 						"ca_pool_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The ID of the target CA pool",
 						},
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA represented in minutes.",
 						},
 						"location": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The Region for the CA in GCP format e.g. us-west1",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"project_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The GCP project ID to target.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -346,58 +386,69 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"ca_file_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Path to the root CA that signed the certificate passed to the client for HTTPS connection. This is not required if the CA is trusted by the host operating system. This should be a PEM formatted certificate, and doesn't necessarily have to be the CA that signed CertificateFile.",
 						},
 						"certificate_file_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Path to client certificate in PEM format. This certificate must contain a client certificate that is recognized by the EJBCA instance represented by Hostname. This PEM file may also contain the private key associated with the certificate, but KeyFile can also be set to configure the private key.",
 						},
 						"default_certificate_authority_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Name of EJBCA certificate authority that will enroll CSR.",
 						},
 						"default_certificate_profile_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Certificate profile name that EJBCA will enroll the CSR with.",
 						},
 						"default_end_entity_profile_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "End entity profile that EJBCA will enroll the CSR with.",
 						},
 						"enrollment_code_env_var": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "code used by EJBCA during enrollment. May be left blank if no code is required.",
 						},
 						"enrollment_username_env_var": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "username that used by the EJBCA during enrollment. This can be left out.  If so, the username must be auto-generated on the Keyfactor side.",
 						},
 						"key_file_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Path to private key in PEM format. This file should contain the private key associated with the client certificate configured in CertificateFile.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "the host of the Key Factor CA",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -412,58 +463,69 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"ca_file_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Path to the root CA that signed the certificate passed to the client for HTTPS connection. This is not required if the CA is trusted by the host operating system. This should be a PEM formatted certificate, and doesn't necessarily have to be the CA that signed CertificateFile.",
 						},
 						"certificate_file_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Path to client certificate in PEM format. This certificate must contain a client certificate that is recognized by the EJBCA instance represented by Hostname. This PEM file may also contain the private key associated with the certificate, but KeyFile can also be set to configure the private key.",
 						},
 						"default_certificate_authority_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Name of EJBCA certificate authority that will enroll CSR.",
 						},
 						"default_certificate_profile_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Certificate profile name that EJBCA will enroll the CSR with.",
 						},
 						"default_end_entity_profile_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "End entity profile that EJBCA will enroll the CSR with.",
 						},
 						"enrollment_code_env_var": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "code used by EJBCA during enrollment. May be left blank if no code is required.",
 						},
 						"enrollment_username_env_var": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "username that used by the EJBCA during enrollment. This can be left out.  If so, the username must be auto-generated on the Keyfactor side.",
 						},
 						"key_file_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Path to private key in PEM format. This file should contain the private key associated with the client certificate configured in CertificateFile.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "the host of the Key Factor CA",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -478,13 +540,15 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -499,23 +563,27 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -530,38 +598,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA represented in minutes.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"ssh_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the SSH engine configured with the desired CA",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -576,38 +651,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"pki_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the PKI engine configured with the desired CA",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -622,23 +704,27 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -653,38 +739,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"ssh_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the SSH engine configured with the desired CA",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -699,38 +792,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA represented in minutes.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"pki_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the PKI engine configured with the desired CA",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -745,23 +845,27 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -776,38 +880,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"ssh_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the SSH engine configured with the desired CA",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -822,38 +933,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA represented in minutes.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"pki_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the PKI engine configured with the desired CA",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -868,38 +986,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"ca_cert_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "A path to a CA file accessible by a Node",
 						},
 						"client_cert_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "A path to a client certificate file accessible by a Node",
 						},
 						"client_key_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "A path to a client key file accessible by a Node",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -914,53 +1039,63 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"ca_cert_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "A path to a CA file accessible by a Node",
 						},
 						"client_cert_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "A path to a client certificate file accessible by a Node",
 						},
 						"client_key_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "A path to a client key file accessible by a Node",
 						},
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA represented in minutes.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"ssh_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the SSH engine configured with the desired CA",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -975,53 +1110,63 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"ca_cert_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "A path to a CA file accessible by a Node",
 						},
 						"client_cert_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "A path to a client certificate file accessible by a Node",
 						},
 						"client_key_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "A path to a client key file accessible by a Node",
 						},
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA represented in minutes.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"pki_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the PKI engine configured with the desired CA",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -1036,23 +1181,27 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -1067,38 +1216,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA in minutes. Recommended value is 5.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"ssh_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the SSH engine configured with the desired CA",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -1113,38 +1269,45 @@ func resourceSecretStore() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"issued_cert_ttl_minutes": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Required:    true,
 							Description: "The lifetime of certificates issued by this CA represented in minutes.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the SecretStore.",
 						},
 						"namespace": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The namespace to make requests within",
 						},
 						"pki_mount_point": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The mount point of the PKI engine configured with the desired CA",
 						},
 						"server_address": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The URL of the Vault to target",
 						},
 						"signing_role": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The signing role to be used for signing certificates",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},

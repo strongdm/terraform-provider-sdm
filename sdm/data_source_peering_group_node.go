@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,17 +22,20 @@ func dataSourcePeeringGroupNode() *schema.Resource {
 			},
 
 			"group_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Peering Group ID to which the node will be attached to.",
 			},
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the Attachment.",
 			},
 			"node_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Node ID to be attached.",
 			},
@@ -44,17 +46,20 @@ func dataSourcePeeringGroupNode() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"group_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Peering Group ID to which the node will be attached to.",
 						},
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the Attachment.",
 						},
 						"node_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Node ID to be attached.",
 						},

@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -24,25 +23,29 @@ func resourceRole() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 			"access_rules": {
-				Type:             schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:         true,
 				Computed:         true,
 				DiffSuppressFunc: accessRulesDiffSuppress,
 				Description:      "AccessRules is a list of access rules defining the resources this Role has access to.",
 			},
 			"managed_by": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Computed:    true,
 				Description: "Managed By is a read only field for what service manages this role, e.g. StrongDM, Okta, Azure.",
 			},
 			"name": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				Description: "Unique human-readable name of the Role.",
 			},
 			"tags": {
-				Type:        schema.TypeMap,
-				Elem:        tagsElemType,
+				Type: schema.TypeMap,
+				Elem: tagsElemType,
+
 				Optional:    true,
 				Description: "Tags is a map of key, value pairs.",
 			},

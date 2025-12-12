@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,17 +22,20 @@ func dataSourceGroupRole() *schema.Resource {
 			},
 
 			"group_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The assigned Group ID.",
 			},
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the GroupRole.",
 			},
 			"role_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The assigned Role ID.",
 			},
@@ -44,17 +46,20 @@ func dataSourceGroupRole() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"group_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The assigned Group ID.",
 						},
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the GroupRole.",
 						},
 						"role_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The assigned Role ID.",
 						},

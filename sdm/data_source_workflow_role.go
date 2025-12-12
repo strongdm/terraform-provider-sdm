@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,17 +22,20 @@ func dataSourceWorkflowRole() *schema.Resource {
 			},
 
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the WorkflowRole.",
 			},
 			"role_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The role id.",
 			},
 			"workflow_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The workflow id.",
 			},
@@ -44,17 +46,20 @@ func dataSourceWorkflowRole() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the WorkflowRole.",
 						},
 						"role_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The role id.",
 						},
 						"workflow_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The workflow id.",
 						},

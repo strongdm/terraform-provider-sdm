@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,13 +22,15 @@ func resourceAccountGroup() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 			"account_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				ForceNew:    true,
 				Description: "Unique identifier of the Account.",
 			},
 			"group_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				ForceNew:    true,
 				Description: "Unique identifier of the Group.",

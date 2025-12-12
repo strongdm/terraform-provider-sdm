@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -63,74 +62,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_services_alternate": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, uses UseServicesAlternates directive for Aerospike connection",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -144,106 +157,126 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_resource_role_bypass": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The key to authenticate TLS connections with.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of a cluster to be run from a node.",
 									},
 									"discovery_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -257,74 +290,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -338,93 +385,111 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_resource_role_bypass": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of a cluster to be run from a node.",
 									},
 									"discovery_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"token": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The API token to authenticate with.",
@@ -440,68 +505,81 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"token": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The API token to authenticate with.",
@@ -517,81 +595,96 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The key to authenticate TLS connections with.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -605,120 +698,143 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Access Key ID to use to authenticate.",
 									},
 									"allow_resource_role_bypass": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"cluster_name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The name of the cluster to connect to.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of a cluster to be run from a node.",
 									},
 									"discovery_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -732,109 +848,130 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_resource_role_bypass": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"cluster_name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The name of the cluster to connect to.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of a cluster to be run from a node.",
 									},
 									"discovery_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -849,84 +986,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"cluster_name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The name of the cluster to connect to.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -941,95 +1094,113 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"cluster_name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The name of the cluster to connect to.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1043,79 +1214,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial e.g. search-?.region.es.amazonaws.com\"",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1129,73 +1315,87 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial e.g. search-?.region.es.amazonaws.com\"",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Use TLS to connect to the OpenSearch server",
 									},
@@ -1209,74 +1409,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -1290,74 +1504,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -1371,79 +1599,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"output": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS S3 output location.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1457,68 +1700,81 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"output": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS S3 output location.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to e.g. us-east-1.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1532,84 +1788,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -1623,78 +1895,93 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_assumption_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -1708,79 +1995,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -1794,83 +2096,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_assumption_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -1884,74 +2202,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region healthcheck requests should attempt to connect to.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -1965,83 +2297,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"enable_env_variables": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, prefer environment variables to authenticate connection even if EC2 roles are configured.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"session_expiry": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The length of time in seconds AWS console sessions will live before needing to reauthenticate.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2055,89 +2403,106 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Access Key ID to authenticate with.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Secret Access Key to authenticate with.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"session_expiry": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The length of time in seconds AWS console sessions will live before needing to reauthenticate.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2151,68 +2516,81 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"enable_env_variables": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, prefer environment variables to authenticate connection even if EC2 roles are configured.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -2226,64 +2604,76 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"app_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The application ID to authenticate with.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tenant_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The tenant ID to authenticate to.",
 									},
@@ -2297,64 +2687,76 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"app_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The application ID to authenticate with.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"client_certificate": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The service Principal certificate file, both private and public key included.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tenant_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The tenant ID to authenticate to.",
 									},
@@ -2368,84 +2770,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -2459,79 +2877,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -2545,79 +2978,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with. For Azure Postgres, this also will include the hostname of the target server for Azure Single Server compatibility. For Flexible servers, use the normal Postgres type.",
 									},
@@ -2631,84 +3079,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -2722,69 +3186,82 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"private_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The JSON Private key to authenticate with.",
 									},
 									"project": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The project to connect to.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -2798,74 +3275,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -2879,79 +3370,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -2965,64 +3471,76 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"url": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The URL to dial to initiate a connection from the egress node to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3036,79 +3554,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3122,79 +3655,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3208,84 +3756,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3299,79 +3863,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3385,79 +3964,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"n_1_ql_port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port number for N1QL queries. Default HTTP is 8093. Default HTTPS is 18093.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3471,64 +4065,76 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"url": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The base address of your website without the path.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3542,74 +4148,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3623,79 +4243,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3709,74 +4344,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auth_database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3790,63 +4439,75 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -3860,79 +4521,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auth_database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"connect_to_replica": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Set to connect to a replica instead of the primary node.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"replica_set": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The name of the mongo replicaset.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -3946,63 +4622,75 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"connect_to_replica": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Set to connect to a replica instead of the primary node.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The region of the document db cluster",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4016,69 +4704,82 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -4092,79 +4793,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial e.g. dynamodb.region.amazonaws.com",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The region to authenticate requests against e.g. us-east-1",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4178,68 +4894,81 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial e.g. dynamodb.region.amazonaws.com",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The region to authenticate requests against e.g. us-east-1",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4253,74 +4982,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -4334,74 +5077,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -4415,83 +5172,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "AWS region is needed in addition to hostname to generate the IAM signature",
 									},
 									"role_assumption_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -4505,83 +5278,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of the tenant to be run from a node.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"group_names": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "comma separated list of group names to filter by. Supports wildcards (*)",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"management_group_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The management group ID to authenticate scope Privileges to.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"privilege_levels": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The privilege levels specify which Groups are managed externally",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"resource_group_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "filters discovered groups to the specified Resource Group",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"subscription_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The subscription ID to authenticate scope Privileges to.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tenant_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The connector ID to authenticate through.",
 									},
@@ -4595,59 +5384,70 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"keyfile": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The service account keyfile to authenticate with.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"scopes": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Space separated scopes that this login should assume into when authenticating.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4661,73 +5461,87 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"session_expiry": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The length of time in seconds console sessions will live before needing to reauthenticate.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"workforce_pool_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the Workforce Identity Pool in GCP to use for federated authentication.",
 									},
 									"workforce_provider_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the Workforce Identity Provider in GCP to use for federated authentication.",
 									},
@@ -4741,83 +5555,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"project_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "When specified, all project scoped requests will use this Project ID, overriding the project ID specified by clients",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"scopes": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Space separated scopes that this login should assume into when authenticating.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"session_expiry": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The length of time in seconds console sessions will live before needing to reauthenticate.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"workforce_pool_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the Workforce Identity Pool in GCP to use for federated authentication.",
 									},
 									"workforce_provider_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the Workforce Identity Provider in GCP to use for federated authentication.",
 									},
@@ -4831,95 +5661,113 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_resource_role_bypass": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of a cluster to be run from a node.",
 									},
 									"discovery_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"service_account_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The service account key to authenticate with.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -4934,70 +5782,83 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The endpoint to dial.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"service_account_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The service account key to authenticate with.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -5011,79 +5872,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -5097,79 +5973,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auth_header": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The content to set as the authorization header.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"default_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Automatically redirect to this path upon connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"headers_blacklist": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Header names (e.g. Authorization), to omit from logs.",
 									},
 									"healthcheck_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "This path will be used to check the health of your site.",
 									},
 									"host_override": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host header will be overwritten with this field if provided.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"url": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The base address of your website without the path.",
 									},
@@ -5183,84 +6074,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"default_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Automatically redirect to this path upon connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"headers_blacklist": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Header names (e.g. Authorization), to omit from logs.",
 									},
 									"healthcheck_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "This path will be used to check the health of your site.",
 									},
 									"host_override": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host header will be overwritten with this field if provided.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"url": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The base address of your website without the path.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -5274,73 +6181,87 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"default_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Automatically redirect to this path upon connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"headers_blacklist": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Header names (e.g. Authorization), to omit from logs.",
 									},
 									"healthcheck_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "This path will be used to check the health of your site.",
 									},
 									"host_override": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host header will be overwritten with this field if provided.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"url": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The base address of your website without the path.",
 									},
@@ -5354,106 +6275,126 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_resource_role_bypass": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The key to authenticate TLS connections with.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of a cluster to be run from a node.",
 									},
 									"discovery_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -5467,74 +6408,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -5548,84 +6503,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_resource_role_bypass": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of a cluster to be run from a node.",
 									},
 									"discovery_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -5639,93 +6610,111 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_resource_role_bypass": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"discovery_enabled": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, configures discovery of a cluster to be run from a node.",
 									},
 									"discovery_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If a cluster is configured for user impersonation, this is the user to impersonate when running discovery.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"token": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The API token to authenticate with.",
@@ -5741,68 +6730,81 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"token": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The API token to authenticate with.",
@@ -5818,81 +6820,96 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The key to authenticate TLS connections with.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_namespace": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The path used to check the health of your connection.  Defaults to `default`.  This field is required, and is only marked as optional for backwards compatibility.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -5906,84 +6923,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -5997,66 +7030,84 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
-										Description: "The password to authenticate with.",
+										Description: "OAuth App Client Secret",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"username": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "OAuth App Client ID",
 									},
 								},
 							},
@@ -6068,58 +7119,69 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -6133,84 +7195,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6224,79 +7302,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auth_database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6310,79 +7403,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auth_database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6396,89 +7504,106 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auth_database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"connect_to_replica": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Set to connect to a replica instead of the primary node.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"replica_set": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The name of the mongo replicaset.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6492,89 +7617,106 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auth_database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"connect_to_replica": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Set to connect to a replica instead of the primary node.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"replica_set": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The name of the mongo replicaset.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6588,74 +7730,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"auth_database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The authentication database to use.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6669,107 +7825,127 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The key to authenticate TLS connections with.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"server_name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Server name for TLS verification (unverified by StrongDM if empty)",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6783,102 +7959,121 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"certificate_authority": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The CA to authenticate TLS connections with.",
 									},
 									"client_certificate": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The certificate to authenticate TLS connections with.",
 									},
 									"client_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The key to authenticate TLS connections with.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"server_name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Server name for TLS verification (unverified by StrongDM if empty)",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6892,84 +8087,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -6983,58 +8194,69 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The neptune endpoint to connect to as in endpoint.region.neptune.amazonaws.com",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -7048,84 +8270,176 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Access Key ID to use to authenticate.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"endpoint": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The neptune endpoint to connect to as in endpoint.region.neptune.amazonaws.com",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The role to assume after logging in.",
 									},
 									"role_external_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.",
 									},
 									"secret_access_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Secret Access Key to use to authenticate.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"okta_groups": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+									},
+									"domain": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Represents the Okta Org Client URL",
+									},
+									"egress_filter": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"identity_set_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
+									},
+									"name": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"privilege_levels": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The privilege levels specify which Groups are managed externally",
+									},
+									"proxy_cluster_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"secret_store_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -7139,79 +8453,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Oracle service name to connect to",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7225,79 +8554,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Oracle service name to connect to",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7311,79 +8655,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7397,79 +8756,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7483,74 +8857,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7564,58 +8952,69 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -7629,89 +9028,106 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"downgrade_nla_connections": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "When set, network level authentication will not be used. May resolve unexpected authentication errors to older servers. When set, healthchecks cannot detect if a provided username / password pair is correct.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "if provided use identity_set to map username to secret store path",
 									},
 									"lock_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7725,93 +9141,111 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"dc_hostnames": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Comma-separated list of Active Directory Domain Controller hostnames. Required in on-premises AD environments for Kerberos Network Level Authentication (NLA), and for LDAPS SID resolution for strong certificate mapping in full enforcement mode when the identity alias does not specify a SID. Unused for Entra ID.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Username of the AD service account for health checks, and LDAPS SID resolution if necessary. Required for on-premises AD environments, unused for Entra ID.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"lock_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"server_fqdn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Fully-qualified DNS name of the target Windows server, including the AD domain. Must match the Service Principal Name (SPN) of the server in AD. Required in on-premises AD environments for Kerberos Network Level Authentication (NLA), unused for Entra ID.",
 									},
 									"sid": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Windows Security Identifier (SID) of the configured Username, or AD service account if using LDAPS SID resolution. Required in on-premises AD environments for strong certificate mapping in full enforcement mode, unused for Entra ID.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7825,83 +9259,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_assumption_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7915,74 +9365,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -7996,74 +9460,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Hostname must contain the hostname/port pairs of all instances in the replica set separated by commas.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -8077,79 +9555,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -8163,83 +9656,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Cluster Identified of Redshift cluster",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_assumption_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -8253,83 +9762,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"region": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The AWS region to connect to.",
 									},
 									"role_assumption_arn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "If provided, the gateway/relay will try to assume this role instead of the underlying compute's role.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"workgroup": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Workgroup name in the serverless Redshift",
 									},
@@ -8343,84 +9868,100 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks. Does not affect client requests.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"require_native_auth": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether native auth (mysql_native_password) is used for all connections (for backwards compatibility)",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"use_azure_single_server_usernames": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, appends the hostname to the username when hitting a database.azure.com address",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -8434,80 +9975,95 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Computed:    true,
 										Sensitive:   true,
 										Description: "Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"private_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "RSA Private Key for authentication",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"schema": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The schema to provide on authentication.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -8521,63 +10077,75 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"connect_to_default": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, select the ACS with isDefault=true",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The StrongDM user email to use for healthchecks.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"saml_metadata": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Metadata for your snowflake IDP integration",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -8591,89 +10159,106 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_deprecated_encryption": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether to allow deprecated encryption protocols to be used for this resource. For example, TLS 1.0.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"schema": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Schema to use to direct initial requests.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -8687,94 +10272,112 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_deprecated_encryption": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether to allow deprecated encryption protocols to be used for this resource. For example, TLS 1.0.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"client_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Azure AD application (client) ID with which to authenticate.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"schema": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Schema to use to direct initial requests.",
 									},
 									"secret": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Azure AD client secret (application password) with which to authenticate.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tenant_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Azure AD directory (tenant) ID with which to authenticate.",
 									},
@@ -8788,105 +10391,125 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_deprecated_encryption": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether to allow deprecated encryption protocols to be used for this resource. For example, TLS 1.0.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The database for healthchecks, and used for clients if Override Default Database is true.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"keytab": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The keytab file in base64 format containing an entry with the principal name (username@realm) and key version number with which to authenticate.",
 									},
 									"krb_config": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The Kerberos 5 configuration file (krb5.conf) specifying the Active Directory server (KDC) for the configured realm.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"override_database": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"realm": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Active Directory domain (realm) to which the configured username belongs.",
 									},
 									"schema": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Schema to use to direct initial requests.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"server_spn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The Service Principal Name of the Microsoft SQL Server instance in Active Directory.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -8900,83 +10523,99 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_deprecated_key_exchanges": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"key_type": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The key type to use e.g. rsa-2048 or ed25519",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_forwarding": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether port forwarding is allowed through this server.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"public_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Computed:    true,
 										Description: "The public key to append to a server's authorized keys. This will be generated after resource creation.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -8990,88 +10629,105 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_deprecated_key_exchanges": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"key_type": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The key type to use e.g. rsa-2048 or ed25519",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_forwarding": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether port forwarding is allowed through this server.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -9085,89 +10741,106 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_deprecated_key_exchanges": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"identity_alias_healthcheck_username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
 									},
 									"identity_set_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_forwarding": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether port forwarding is allowed through this server.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"private_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The private key used to authenticate with the server.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -9181,79 +10854,94 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"allow_deprecated_key_exchanges": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether deprecated, insecure key exchanges are allowed for use to connect to the target ssh server.",
 									},
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_forwarding": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "Whether port forwarding is allowed through this server.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -9267,69 +10955,82 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -9343,69 +11044,82 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -9419,69 +11133,82 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -9495,74 +11222,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls_required": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set, TLS must be used to connect to this resource.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -9576,74 +11317,88 @@ func dataSourceResource() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"bind_interface": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
 									},
 									"egress_filter": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The password to authenticate with.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The port to dial to initiate a connection from the egress node to this resource.",
 									},
 									"port_override": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
 									},
 									"proxy_cluster_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "ID of the secret store containing credentials for this resource, if any.",
 									},
 									"subdomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The username to authenticate with.",
 									},
@@ -10971,6 +12726,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"username":         (v.Username),
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
@@ -11194,6 +12950,20 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.OktaGroups:
+			output[0]["okta_groups"] = append(output[0]["okta_groups"], entity{
+				"bind_interface":   (v.BindInterface),
+				"domain":           (v.Domain),
+				"egress_filter":    (v.EgressFilter),
+				"id":               (v.ID),
+				"identity_set_id":  (v.IdentitySetID),
+				"name":             (v.Name),
+				"privilege_levels": (v.PrivilegeLevels),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Oracle:
 			output[0]["oracle"] = append(output[0]["oracle"], entity{

@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,13 +22,15 @@ func resourceWorkflowRole() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 			"role_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				ForceNew:    true,
 				Description: "The role id.",
 			},
 			"workflow_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				ForceNew:    true,
 				Description: "The workflow id.",

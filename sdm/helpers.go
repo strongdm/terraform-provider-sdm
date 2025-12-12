@@ -50,7 +50,6 @@ func convertAccessRuleToPlumbing(porcelain interface{}) sdm.AccessRule {
 	}
 	return sdm.AccessRule(porcelain.(string))
 }
-
 func convertTagsToPlumbing(porcelain interface{}) sdm.Tags {
 	if porcelain == nil {
 		return nil

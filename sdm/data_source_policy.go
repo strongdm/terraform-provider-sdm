@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,22 +22,26 @@ func dataSourcePolicy() *schema.Resource {
 			},
 
 			"description": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Optional description of the Policy.",
 			},
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the Policy.",
 			},
 			"name": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique human-readable name of the Policy.",
 			},
 			"policy": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The content of the Policy, in Cedar policy language.",
 			},
@@ -49,22 +52,26 @@ func dataSourcePolicy() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"description": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Optional description of the Policy.",
 						},
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the Policy.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique human-readable name of the Policy.",
 						},
 						"policy": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The content of the Policy, in Cedar policy language.",
 						},

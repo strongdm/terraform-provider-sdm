@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -24,7 +23,8 @@ func resourceIdentitySet() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 			"name": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				Description: "Unique human-readable name of the IdentitySet.",
 			},

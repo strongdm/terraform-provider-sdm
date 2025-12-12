@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,48 +22,57 @@ func dataSourceWorkflow() *schema.Resource {
 			},
 
 			"access_request_fixed_duration": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Fixed Duration of access requests bound to this workflow. If fixed duration is provided, max duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
 			},
 			"access_request_max_duration": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Maximum Duration of access requests bound to this workflow. If max duration is provided, fixed duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
 			},
 			"approval_flow_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Optional approval flow ID identifies an approval flow that linked to the workflow",
 			},
 			"auto_grant": {
-				Type:        schema.TypeBool,
+				Type: schema.TypeBool,
+
 				Optional:    true,
 				Description: "Optional auto grant setting to automatically approve requests or not, defaults to false.",
 				Deprecated:  "auto_grant is deprecated, see docs for more info",
 			},
 			"description": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Optional description of the Workflow.",
 			},
 			"enabled": {
-				Type:        schema.TypeBool,
+				Type: schema.TypeBool,
+
 				Optional:    true,
 				Description: "Optional enabled state for workflow. This setting may be overridden by the system if the workflow doesn't meet the requirements to be enabled or if other conditions prevent enabling the workflow. The requirements to enable a workflow are that the workflow must be either set up for with auto grant enabled or have one or more WorkflowApprovers created for the workflow.",
 			},
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the Workflow.",
 			},
 			"name": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique human-readable name of the Workflow.",
 			},
 			"weight": {
-				Type:        schema.TypeInt,
+				Type: schema.TypeInt,
+
 				Optional:    true,
 				Description: "Optional weight for workflow to specify it's priority in matching a request.",
 			},
@@ -75,53 +83,63 @@ func dataSourceWorkflow() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"access_request_fixed_duration": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Fixed Duration of access requests bound to this workflow. If fixed duration is provided, max duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
 						},
 						"access_request_max_duration": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Maximum Duration of access requests bound to this workflow. If max duration is provided, fixed duration must be empty. If neither max nor fixed duration are provided, requests that bind to this workflow will use the organization-level settings.",
 						},
 						"access_rules": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "AccessRules is a list of access rules defining the resources this Workflow provides access to.",
 						},
 						"approval_flow_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Optional approval flow ID identifies an approval flow that linked to the workflow",
 						},
 						"auto_grant": {
-							Type:        schema.TypeBool,
+							Type: schema.TypeBool,
+
 							Optional:    true,
 							Description: "Optional auto grant setting to automatically approve requests or not, defaults to false.",
 							Deprecated:  "auto_grant is deprecated, see docs for more info",
 						},
 						"description": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Optional description of the Workflow.",
 						},
 						"enabled": {
-							Type:        schema.TypeBool,
+							Type: schema.TypeBool,
+
 							Optional:    true,
 							Description: "Optional enabled state for workflow. This setting may be overridden by the system if the workflow doesn't meet the requirements to be enabled or if other conditions prevent enabling the workflow. The requirements to enable a workflow are that the workflow must be either set up for with auto grant enabled or have one or more WorkflowApprovers created for the workflow.",
 						},
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the Workflow.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique human-readable name of the Workflow.",
 						},
 						"weight": {
-							Type:        schema.TypeInt,
+							Type: schema.TypeInt,
+
 							Optional:    true,
 							Description: "Optional weight for workflow to specify it's priority in matching a request.",
 						},

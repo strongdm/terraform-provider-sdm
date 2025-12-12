@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,14 +22,16 @@ func resourcePeeringGroupResource() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 			"group_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Computed:    true,
 				ForceNew:    true,
 				Description: "Peering Group ID to which the resource will be attached to.",
 			},
 			"resource_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Computed:    true,
 				ForceNew:    true,

@@ -1002,6 +1002,7 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"name", `"all-resources-mcp-name"`},
 				{"password", `"password"`},
 				{"port", `443`},
+				{"username", `"username"`},
 			},
 		},
 		{
@@ -1165,6 +1166,16 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"role_arn", `"role_arn"`},
 				{"role_external_id", `"role_external_id"`},
 				{"secret_access_key", `"secret_access_key"`},
+			},
+		},
+		{
+			resource: "okta_groups",
+			pairs: [][2]string{
+				{"domain", `"domain"`},
+				{"egress_filter", `"name:value"`},
+				{"identity_set_id", identitySetID},
+				{"name", `"all-resources-oktagroups-name"`},
+				{"privilege_levels", `"privilege_levels"`},
 			},
 		},
 		{
@@ -2599,6 +2610,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
 				{"secret_store_id", `"` + seID + `"`},
+				{"username", `"username"`},
 			},
 		},
 

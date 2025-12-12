@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,17 +22,20 @@ func dataSourceAccountAttachment() *schema.Resource {
 			},
 
 			"account_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The id of the account of this AccountAttachment.",
 			},
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the AccountAttachment.",
 			},
 			"role_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The id of the attached role of this AccountAttachment.",
 			},
@@ -44,17 +46,20 @@ func dataSourceAccountAttachment() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"account_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The id of the account of this AccountAttachment.",
 						},
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the AccountAttachment.",
 						},
 						"role_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The id of the attached role of this AccountAttachment.",
 						},

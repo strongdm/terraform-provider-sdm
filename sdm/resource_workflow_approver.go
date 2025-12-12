@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -24,19 +23,22 @@ func resourceWorkflowApprover() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 			"account_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				ForceNew:    true,
 				Description: "The approver account id.",
 			},
 			"role_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				ForceNew:    true,
 				Description: "The approver role id",
 			},
 			"workflow_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				ForceNew:    true,
 				Description: "The workflow id.",

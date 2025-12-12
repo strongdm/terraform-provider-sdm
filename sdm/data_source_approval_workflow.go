@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,28 +22,33 @@ func dataSourceApprovalWorkflow() *schema.Resource {
 			},
 
 			"approval_mode": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Approval mode of the ApprovalWorkflow",
 			},
 			"approval_step": {
-				Type:        schema.TypeList,
-				Elem:        approvalFlowStepElemType,
+				Type: schema.TypeList,
+				Elem: approvalFlowStepElemType,
+
 				Optional:    true,
 				Description: "The approval steps of this approval workflow",
 			},
 			"description": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Optional description of the ApprovalWorkflow.",
 			},
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the ApprovalWorkflow.",
 			},
 			"name": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique human-readable name of the ApprovalWorkflow.",
 			},
@@ -55,28 +59,33 @@ func dataSourceApprovalWorkflow() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"approval_mode": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Approval mode of the ApprovalWorkflow",
 						},
 						"approval_step": {
-							Type:        schema.TypeList,
-							Elem:        approvalFlowStepElemType,
+							Type: schema.TypeList,
+							Elem: approvalFlowStepElemType,
+
 							Optional:    true,
 							Description: "The approval steps of this approval workflow",
 						},
 						"description": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Optional description of the ApprovalWorkflow.",
 						},
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the ApprovalWorkflow.",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique human-readable name of the ApprovalWorkflow.",
 						},

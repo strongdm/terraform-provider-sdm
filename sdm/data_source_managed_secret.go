@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,48 +22,57 @@ func dataSourceManagedSecret() *schema.Resource {
 			},
 
 			"config": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Computed:    true,
 				Description: "public part of the secret value",
 			},
 			"expires_at": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Computed:    true,
 				Description: "Timestamp of when secret is going to be rotated",
 			},
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the Managed Secret.",
 			},
 			"last_rotated_at": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Computed:    true,
 				Description: "Timestamp of when secret was last rotated",
 			},
 			"name": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique human-readable name of the Managed Secret.",
 			},
 			"secret_engine_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "An ID of a Secret Engine linked with the Managed Secret.",
 			},
 			"secret_store_path": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Computed:    true,
 				Description: "Path in a secret store.",
 			},
 			"tags": {
-				Type:        schema.TypeMap,
-				Elem:        tagsElemType,
+				Type: schema.TypeMap,
+				Elem: tagsElemType,
+
 				Optional:    true,
 				Description: "Tags is a map of key, value pairs.",
 			},
 			"value": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Sensitive:   true,
 				Description: "Sensitive value of the secret.",
@@ -76,48 +84,57 @@ func dataSourceManagedSecret() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"config": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "public part of the secret value",
 						},
 						"expires_at": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "Timestamp of when secret is going to be rotated",
 						},
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the Managed Secret.",
 						},
 						"last_rotated_at": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "Timestamp of when secret was last rotated",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique human-readable name of the Managed Secret.",
 						},
 						"secret_engine_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "An ID of a Secret Engine linked with the Managed Secret.",
 						},
 						"secret_store_path": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "Path in a secret store.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
 						"value": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Sensitive:   true,
 							Description: "Sensitive value of the secret.",

@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -24,17 +23,20 @@ func resourcePolicy() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 			"description": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Optional description of the Policy.",
 			},
 			"name": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				Description: "Unique human-readable name of the Policy.",
 			},
 			"policy": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The content of the Policy, in Cedar policy language.",
 			},

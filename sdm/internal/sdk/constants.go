@@ -129,6 +129,7 @@ const (
 	ActivityEntityTypePeeringGroupPeer     = "peering_group_peer"
 	ActivityEntityTypeOrgIntegration       = "org_integration"
 	ActivityEntityTypeCredential           = "credential"
+	ActivityEntityTypeUserOAuthToken       = "user_oauth_token"
 	ActivityEntityTypeCertificateAuthority = "certificate_authority"
 	ActivityEntityTypePolicy               = "policy"
 	ActivityEntityTypeProxyClusterKey      = "proxy_cluster_key"
@@ -162,6 +163,8 @@ const (
 	ActivityVerbAdminTokenCloned                                 = "admin token cloned"
 	ActivityVerbAdminTokenSuspended                              = "admin token suspended"
 	ActivityVerbAdminTokenReinstated                             = "admin token reinstated"
+	ActivityVerbUserOAuthTokenUpserted                           = "user oauth token for resource upserted"
+	ActivityVerbUserOAuthTokenDeleted                            = "user oauth token for resource deleted"
 	ActivityVerbSSOUserLoggedIntoTheUI                           = "user logged into the Admin UI using SSO"
 	ActivityVerbSSOUserLoggedIntoTheClient                       = "user logged into the local client using SSO"
 	ActivityVerbUserLoggedOutFromTheClient                       = "user logged out from the local client"
@@ -608,6 +611,7 @@ var AllActivityEntityType = []string{
 	ActivityEntityTypePeeringGroupPeer,
 	ActivityEntityTypeOrgIntegration,
 	ActivityEntityTypeCredential,
+	ActivityEntityTypeUserOAuthToken,
 	ActivityEntityTypeCertificateAuthority,
 	ActivityEntityTypePolicy,
 	ActivityEntityTypeProxyClusterKey,
@@ -644,6 +648,8 @@ var AllActivityVerb = []string{
 	ActivityVerbAdminTokenCloned,
 	ActivityVerbAdminTokenSuspended,
 	ActivityVerbAdminTokenReinstated,
+	ActivityVerbUserOAuthTokenUpserted,
+	ActivityVerbUserOAuthTokenDeleted,
 	ActivityVerbSSOUserLoggedIntoTheUI,
 	ActivityVerbSSOUserLoggedIntoTheClient,
 	ActivityVerbUserLoggedOutFromTheClient,

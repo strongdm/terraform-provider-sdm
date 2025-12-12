@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,12 +22,14 @@ func dataSourceProxyClusterKey() *schema.Resource {
 			},
 
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the Relay.",
 			},
 			"proxy_cluster_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The ID of the proxy cluster which this key authenticates to.",
 			},
@@ -39,12 +40,14 @@ func dataSourceProxyClusterKey() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the Relay.",
 						},
 						"proxy_cluster_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The ID of the proxy cluster which this key authenticates to.",
 						},

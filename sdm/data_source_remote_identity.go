@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -23,22 +22,26 @@ func dataSourceRemoteIdentity() *schema.Resource {
 			},
 
 			"account_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The account for this remote identity.",
 			},
 			"id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Unique identifier of the RemoteIdentity.",
 			},
 			"remote_identity_group_id": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The remote identity group.",
 			},
 			"username": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "The username to be used as the remote identity for this account.",
 			},
@@ -49,22 +52,26 @@ func dataSourceRemoteIdentity() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 
 						"account_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The account for this remote identity.",
 						},
 						"id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Unique identifier of the RemoteIdentity.",
 						},
 						"remote_identity_group_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The remote identity group.",
 						},
 						"username": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "The username to be used as the remote identity for this account.",
 						},

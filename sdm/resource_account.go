@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -31,23 +30,27 @@ func resourceAccount() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"created_at": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "CreatedAt is the timestamp when the service was created",
 						},
 						"name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "Unique human-readable name of the Service.",
 						},
 						"suspended": {
-							Type:        schema.TypeBool,
+							Type: schema.TypeBool,
+
 							Optional:    true,
 							Description: "The Service's suspended state.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
@@ -68,64 +71,76 @@ func resourceAccount() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"scim": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "SCIM contains the raw SCIM metadata for the user. This is a read-only field.",
 						},
 						"created_at": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "CreatedAt is the timestamp when the user was created",
 						},
 						"email": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The User's email address. Must be unique.",
 						},
 						"external_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "External ID is an alternative unique ID this user is represented by within an external service.",
 						},
 						"first_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The User's first name.",
 						},
 						"last_name": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Required:    true,
 							Description: "The User's last name.",
 						},
 						"managed_by": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "Managed By is a read only field for what service manages this user, e.g. StrongDM, Okta, Azure.",
 						},
 						"manager_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Description: "Manager ID is the ID of the user's manager. This field is empty when the user has no manager.",
 						},
 						"permission_level": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Optional:    true,
 							Computed:    true,
 							Description: "PermissionLevel is the user's permission level e.g. admin, DBA, user.",
 						},
 						"resolved_manager_id": {
-							Type:        schema.TypeString,
+							Type: schema.TypeString,
+
 							Computed:    true,
 							Description: "Resolved Manager ID is the ID of the user's manager derived from the manager_id, if present, or from the SCIM metadata. This is a read-only field that's only populated for get and list.",
 						},
 						"suspended": {
-							Type:        schema.TypeBool,
+							Type: schema.TypeBool,
+
 							Computed:    true,
 							Description: "Suspended is a read only field for the User's suspended state.",
 						},
 						"tags": {
-							Type:        schema.TypeMap,
-							Elem:        tagsElemType,
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},

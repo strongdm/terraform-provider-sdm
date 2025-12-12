@@ -1100,13 +1100,14 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
+	* `password` - (Required, either in plaintext, or as a secret store path) OAuth App Client Secret
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `username` - (Required) OAuth App Client ID
 * memcached:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -1291,6 +1292,17 @@ The following arguments are supported by the Resource resource:
 	* `role_arn` - (Optional) The role to assume after logging in.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_access_key` - (Optional) The Secret Access Key to use to authenticate.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* okta_groups:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	* `domain` - (Required) Represents the Okta Org Client URL
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `identity_set_id` - (Required) The ID of the identity set to use for identity connections.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `privilege_levels` - (Required) The privilege levels specify which Groups are managed externally
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.

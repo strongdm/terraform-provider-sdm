@@ -11989,6 +11989,7 @@ func convertMCPToPorcelain(plumbing *proto.MCP) (*MCP, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
 
@@ -12010,6 +12011,7 @@ func convertMCPToPlumbing(porcelain *MCP) *proto.MCP {
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
 func convertRepeatedMCPToPlumbing(
@@ -14664,6 +14666,73 @@ func convertRepeatedNodeUpdateResponseToPorcelain(plumbings []*proto.NodeUpdateR
 	var items []*NodeUpdateResponse
 	for _, plumbing := range plumbings {
 		if v, err := convertNodeUpdateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertOktaGroupsToPorcelain(plumbing *proto.OktaGroups) (*OktaGroups, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &OktaGroups{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Domain = plumbing.Domain
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.Name = plumbing.Name
+	porcelain.PrivilegeLevels = plumbing.PrivilegeLevels
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertOktaGroupsToPlumbing(porcelain *OktaGroups) *proto.OktaGroups {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.OktaGroups{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Domain = (porcelain.Domain)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PrivilegeLevels = (porcelain.PrivilegeLevels)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedOktaGroupsToPlumbing(
+	porcelains []*OktaGroups,
+) []*proto.OktaGroups {
+	var items []*proto.OktaGroups
+	for _, porcelain := range porcelains {
+		items = append(items, convertOktaGroupsToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedOktaGroupsToPorcelain(plumbings []*proto.OktaGroups) (
+	[]*OktaGroups,
+	error,
+) {
+	var items []*OktaGroups
+	for _, plumbing := range plumbings {
+		if v, err := convertOktaGroupsToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -18579,6 +18648,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Neptune{Neptune: convertNeptuneToPlumbing(v)}
 	case *NeptuneIAM:
 		plumbing.Resource = &proto.Resource_NeptuneIam{NeptuneIam: convertNeptuneIAMToPlumbing(v)}
+	case *OktaGroups:
+		plumbing.Resource = &proto.Resource_OktaGroups{OktaGroups: convertOktaGroupsToPlumbing(v)}
 	case *Oracle:
 		plumbing.Resource = &proto.Resource_Oracle{Oracle: convertOracleToPlumbing(v)}
 	case *OracleNNE:
@@ -18887,6 +18958,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetNeptuneIam() != nil {
 		return convertNeptuneIAMToPorcelain(plumbing.GetNeptuneIam())
+	}
+	if plumbing.GetOktaGroups() != nil {
+		return convertOktaGroupsToPorcelain(plumbing.GetOktaGroups())
 	}
 	if plumbing.GetOracle() != nil {
 		return convertOracleToPorcelain(plumbing.GetOracle())

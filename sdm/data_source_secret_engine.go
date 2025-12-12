@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -135,108 +134,129 @@ func dataSourceSecretEngine() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"after_read_ttl": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.",
 									},
 									"binddn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com",
 									},
 									"bindpass": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Password to use along with binddn when performing user search.",
 									},
 									"certificate": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "CA certificate to use when verifying LDAP server certificate, must be x509 PEM encoded.",
 									},
 									"connection_timeout": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "Timeout, in seconds, when attempting to connect to the LDAP server before trying the next URL in the configuration.",
 									},
 									"do_not_validate_timestamps": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If set to true this will prevent password change timestamp validation in Active Directory when validating credentials",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Secret Engine.",
 									},
 									"insecure_tls": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, skips LDAP server SSL certificate verification - insecure, use with caution!",
 									},
 									"key_rotation_interval_days": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "An interval of public/private key rotation for secret engine in days",
 									},
 									"max_backoff_duration": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The maximum retry duration in case of automatic failure. On failed ttl rotation attempt it will be retried in an increasing intervals until it reaches max_backoff_duration",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
 									},
 									"public_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Computed:    true,
 										Description: "Public key linked with a secret engine",
 									},
 									"request_timeout": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "Timeout, in seconds, for the connection when making requests against the server before returning back an error.",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing secret store identifier",
 									},
 									"secret_store_root_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing Secret Store root path where managed secrets are going to be stored",
 									},
 									"start_tls": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "If true, issues a StartTLS command after establishing an unencrypted connection.",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"ttl": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.",
 									},
 									"upndomain": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The domain (userPrincipalDomain) used to construct a UPN string for authentication.",
 									},
 									"url": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The LDAP server to connect to.",
 									},
 									"userdn": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Base DN under which to perform user search. Example: ou=Users,dc=example,dc=com",
 									},
@@ -250,38 +270,45 @@ func dataSourceSecretEngine() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Secret Engine.",
 									},
 									"key_rotation_interval_days": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "An interval of public/private key rotation for secret engine in days",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
 									},
 									"public_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Computed:    true,
 										Description: "Public key linked with a secret engine",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing secret store identifier",
 									},
 									"secret_store_root_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing Secret Store root path where managed secrets are going to be stored",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
@@ -295,83 +322,99 @@ func dataSourceSecretEngine() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"after_read_ttl": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Database is the database to verify credential against.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Hostname is the hostname or IP address of the MySQL server.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Secret Engine.",
 									},
 									"key_rotation_interval_days": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "An interval of public/private key rotation for secret engine in days",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Password is the password to connect to the MySQL server.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "Port is the port number of the MySQL server.",
 									},
 									"public_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Computed:    true,
 										Description: "Public key linked with a secret engine",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing secret store identifier",
 									},
 									"secret_store_root_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing Secret Store root path where managed secrets are going to be stored",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "TLS enables TLS/SSL when connecting to the MySQL server.",
 									},
 									"tls_skip_verify": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "TLS disable certificate verification",
 									},
 									"ttl": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Username is the username to connect to the MySQL server.",
 									},
@@ -385,78 +428,93 @@ func dataSourceSecretEngine() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"after_read_ttl": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Database is the database to verify credential against.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Hostname is the hostname or IP address of the Postgres server.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Secret Engine.",
 									},
 									"key_rotation_interval_days": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "An interval of public/private key rotation for secret engine in days",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Password is the password to connect to the Postgres server.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "Port is the port number of the Postgres server.",
 									},
 									"public_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Computed:    true,
 										Description: "Public key linked with a secret engine",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing secret store identifier",
 									},
 									"secret_store_root_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing Secret Store root path where managed secrets are going to be stored",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "TLS enables TLS/SSL when connecting to the Postgres server.",
 									},
 									"ttl": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Username is the username to connect to the Postgres server.",
 									},
@@ -470,83 +528,99 @@ func dataSourceSecretEngine() *schema.Resource {
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
 									"after_read_ttl": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.",
 									},
 									"database": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Database is the database to verify credential against.",
 									},
 									"hostname": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Hostname is the hostname or IP address of the SQL Server.",
 									},
 									"id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique identifier of the Secret Engine.",
 									},
 									"key_rotation_interval_days": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "An interval of public/private key rotation for secret engine in days",
 									},
 									"name": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
 									},
 									"password": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Password is the password to connect to the SQL Server server.",
 									},
 									"port": {
-										Type:        schema.TypeInt,
+										Type: schema.TypeInt,
+
 										Optional:    true,
 										Description: "Port is the port number of the SQL Server server.",
 									},
 									"public_key": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Computed:    true,
 										Description: "Public key linked with a secret engine",
 									},
 									"secret_store_id": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing secret store identifier",
 									},
 									"secret_store_root_path": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Backing Secret Store root path where managed secrets are going to be stored",
 									},
 									"tags": {
-										Type:        schema.TypeMap,
-										Elem:        tagsElemType,
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
 									"tls": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "TLS enables TLS/SSL when connecting to the SQL Server server.",
 									},
 									"tls_skip_verify": {
-										Type:        schema.TypeBool,
+										Type: schema.TypeBool,
+
 										Optional:    true,
 										Description: "TLS disable certificate verification",
 									},
 									"ttl": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.",
 									},
 									"username": {
-										Type:        schema.TypeString,
+										Type: schema.TypeString,
+
 										Optional:    true,
 										Description: "Username is the username to connect to the SQL Server.",
 									},

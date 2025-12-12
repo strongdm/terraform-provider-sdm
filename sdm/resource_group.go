@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	sdm "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk"
 )
 
@@ -24,23 +23,27 @@ func resourceGroup() *schema.Resource {
 		},
 		Schema: map[string]*schema.Schema{
 			"description": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Optional:    true,
 				Description: "Description of the Group.",
 			},
 			"name": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Required:    true,
 				Description: "Unique human-readable name of the Group.",
 			},
 			"source": {
-				Type:        schema.TypeString,
+				Type: schema.TypeString,
+
 				Computed:    true,
 				Description: "Source is a read only field for what service manages this group, e.g. StrongDM, Okta, Azure.",
 			},
 			"tags": {
-				Type:        schema.TypeMap,
-				Elem:        tagsElemType,
+				Type: schema.TypeMap,
+				Elem: tagsElemType,
+
 				Optional:    true,
 				Description: "Tags is a map of key/value pairs that can be attached to a Group.",
 			},
