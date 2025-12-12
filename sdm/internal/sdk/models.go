@@ -31,6 +31,20 @@ func (t Tags) clone() Tags {
 	return res
 }
 
+// Tag clone creates a deep copy of a Tag pointer.
+// This method is required for proper handling of repeated Tag fields in oneof common_fields,
+// specifically for include_tags and exclude_tags in discovery connectors which need to
+// support duplicate tag names and require deep copying of slice elements.
+func (tag *Tag) clone() *Tag {
+	if tag == nil {
+		return nil
+	}
+	return &Tag{
+		Name:  tag.Name,
+		Value: tag.Value,
+	}
+}
+
 type LogCategoryConfigMap map[string]*LogCategoryConfig
 
 type AKS struct {
@@ -311,6 +325,29 @@ type AWSCertX509Store struct {
 	SigningAlgo string `json:"signingAlgo"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+}
+
+type AWSConnector struct {
+	// AccountIds is the list of AWS Accounts to scan
+	AccountIDs []string `json:"accountIds"`
+	// Description of the Connector.
+	Description string `json:"description"`
+	// ExcludeTags filters out discovered resources that have the tag and value.
+	// We do allow duplicate tag names for ExcludeTags to support multiple excluded values for the tag.
+	ExcludeTags []*Tag `json:"excludeTags"`
+	// Unique identifier of the Connector.
+	ID string `json:"id"`
+	// IncludeTags only discovers cloud resources that have one of the included tags.
+	// We do not allow duplicate tag names for IncludeTags
+	IncludeTags []*Tag `json:"includeTags"`
+	// Unique human-readable name of the Connector.
+	Name string `json:"name"`
+	// RoleName is the Role we're assuming into for an account
+	RoleName string `json:"roleName"`
+	// ScanPeriod identifies which remote system this Connector discovers
+	ScanPeriod string `json:"scanPeriod"`
+	// Services is a list of services this connector should scan.
+	Services []string `json:"services"`
 }
 
 type AWSConsole struct {
@@ -1906,6 +1943,31 @@ type AzureCertificate struct {
 	TenantID string `json:"tenantId"`
 }
 
+type AzureConnector struct {
+	// ClientId is the ID of the Application / Service Account we're acting as
+	ClientID string `json:"clientId"`
+	// Description of the Connector.
+	Description string `json:"description"`
+	// ExcludeTags filters out discovered resources that have the tag and value.
+	// We do allow duplicate tag names for ExcludeTags to support multiple excluded values for the tag.
+	ExcludeTags []*Tag `json:"excludeTags"`
+	// Unique identifier of the Connector.
+	ID string `json:"id"`
+	// IncludeTags only discovers cloud resources that have one of the included tags.
+	// We do not allow duplicate tag names for IncludeTags
+	IncludeTags []*Tag `json:"includeTags"`
+	// Unique human-readable name of the Connector.
+	Name string `json:"name"`
+	// ScanPeriod identifies which remote system this Connector discovers
+	ScanPeriod string `json:"scanPeriod"`
+	// Services is a list of services this connector should scan.
+	Services []string `json:"services"`
+	// SubscriptionIds are the targets of discovery.
+	SubscriptionIDs []string `json:"subscriptionIds"`
+	// TenantId is the Azure Tenant we're discovering in
+	TenantID string `json:"tenantId"`
+}
+
 type AzureMysql struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
@@ -2329,6 +2391,368 @@ type Cockroach struct {
 	Tags Tags `json:"tags"`
 	// The username to authenticate with.
 	Username string `json:"username"`
+}
+
+// A Connector configures scanning for a given system.
+type Connector interface {
+	// GetID returns the unique identifier of the Connector.
+	GetID() string
+	// GetName returns the name of the Connector.
+	GetName() string
+	// SetName sets the name of the Connector.
+	SetName(string)
+	// GetDescription returns the description of the Connector.
+	GetDescription() string
+	// SetDescription sets the description of the Connector.
+	SetDescription(string)
+	// GetServices returns the services of the Connector.
+	GetServices() []string
+	// SetServices sets the services of the Connector.
+	SetServices([]string)
+	// GetIncludeTags returns the include tags of the Connector.
+	GetIncludeTags() []*Tag
+	// SetIncludeTags sets the include tags of the Connector.
+	SetIncludeTags([]*Tag)
+	// GetExcludeTags returns the exclude tags of the Connector.
+	GetExcludeTags() []*Tag
+	// SetExcludeTags sets the exclude tags of the Connector.
+	SetExcludeTags([]*Tag)
+	// GetScanPeriod returns the scan period of the Connector.
+	GetScanPeriod() string
+	// SetScanPeriod sets the scan period of the Connector.
+	SetScanPeriod(string)
+	isOneOf_Connector()
+}
+
+func (*AWSConnector) isOneOf_Connector() {}
+
+// GetID returns the unique identifier of the AWSConnector.
+func (m *AWSConnector) GetID() string { return m.ID }
+
+// GetName returns the name of the AWSConnector.
+func (m *AWSConnector) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AWSConnector.
+func (m *AWSConnector) SetName(v string) {
+	m.Name = v
+}
+
+// GetDescription returns the description of the AWSConnector.
+func (m *AWSConnector) GetDescription() string {
+	return m.Description
+}
+
+// SetDescription sets the description of the AWSConnector.
+func (m *AWSConnector) SetDescription(v string) {
+	m.Description = v
+}
+
+// GetServices returns the services of the AWSConnector.
+func (m *AWSConnector) GetServices() []string {
+	return m.Services
+}
+
+// SetServices sets the services of the AWSConnector.
+func (m *AWSConnector) SetServices(v []string) {
+	m.Services = v
+}
+
+// GetIncludeTags returns the include tags of the AWSConnector.
+func (m *AWSConnector) GetIncludeTags() []*Tag {
+	result := make([]*Tag, len(m.IncludeTags))
+	for i, v := range m.IncludeTags {
+		if v != nil {
+			result[i] = v.clone()
+		}
+	}
+	return result
+}
+
+// SetIncludeTags sets the include tags of the AWSConnector.
+func (m *AWSConnector) SetIncludeTags(v []*Tag) {
+	m.IncludeTags = make([]*Tag, len(v))
+	for i, val := range v {
+		if val != nil {
+			m.IncludeTags[i] = val.clone()
+		}
+	}
+}
+
+// GetExcludeTags returns the exclude tags of the AWSConnector.
+func (m *AWSConnector) GetExcludeTags() []*Tag {
+	result := make([]*Tag, len(m.ExcludeTags))
+	for i, v := range m.ExcludeTags {
+		if v != nil {
+			result[i] = v.clone()
+		}
+	}
+	return result
+}
+
+// SetExcludeTags sets the exclude tags of the AWSConnector.
+func (m *AWSConnector) SetExcludeTags(v []*Tag) {
+	m.ExcludeTags = make([]*Tag, len(v))
+	for i, val := range v {
+		if val != nil {
+			m.ExcludeTags[i] = val.clone()
+		}
+	}
+}
+
+// GetScanPeriod returns the scan period of the AWSConnector.
+func (m *AWSConnector) GetScanPeriod() string {
+	return m.ScanPeriod
+}
+
+// SetScanPeriod sets the scan period of the AWSConnector.
+func (m *AWSConnector) SetScanPeriod(v string) {
+	m.ScanPeriod = v
+}
+func (*AzureConnector) isOneOf_Connector() {}
+
+// GetID returns the unique identifier of the AzureConnector.
+func (m *AzureConnector) GetID() string { return m.ID }
+
+// GetName returns the name of the AzureConnector.
+func (m *AzureConnector) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the AzureConnector.
+func (m *AzureConnector) SetName(v string) {
+	m.Name = v
+}
+
+// GetDescription returns the description of the AzureConnector.
+func (m *AzureConnector) GetDescription() string {
+	return m.Description
+}
+
+// SetDescription sets the description of the AzureConnector.
+func (m *AzureConnector) SetDescription(v string) {
+	m.Description = v
+}
+
+// GetServices returns the services of the AzureConnector.
+func (m *AzureConnector) GetServices() []string {
+	return m.Services
+}
+
+// SetServices sets the services of the AzureConnector.
+func (m *AzureConnector) SetServices(v []string) {
+	m.Services = v
+}
+
+// GetIncludeTags returns the include tags of the AzureConnector.
+func (m *AzureConnector) GetIncludeTags() []*Tag {
+	result := make([]*Tag, len(m.IncludeTags))
+	for i, v := range m.IncludeTags {
+		if v != nil {
+			result[i] = v.clone()
+		}
+	}
+	return result
+}
+
+// SetIncludeTags sets the include tags of the AzureConnector.
+func (m *AzureConnector) SetIncludeTags(v []*Tag) {
+	m.IncludeTags = make([]*Tag, len(v))
+	for i, val := range v {
+		if val != nil {
+			m.IncludeTags[i] = val.clone()
+		}
+	}
+}
+
+// GetExcludeTags returns the exclude tags of the AzureConnector.
+func (m *AzureConnector) GetExcludeTags() []*Tag {
+	result := make([]*Tag, len(m.ExcludeTags))
+	for i, v := range m.ExcludeTags {
+		if v != nil {
+			result[i] = v.clone()
+		}
+	}
+	return result
+}
+
+// SetExcludeTags sets the exclude tags of the AzureConnector.
+func (m *AzureConnector) SetExcludeTags(v []*Tag) {
+	m.ExcludeTags = make([]*Tag, len(v))
+	for i, val := range v {
+		if val != nil {
+			m.ExcludeTags[i] = val.clone()
+		}
+	}
+}
+
+// GetScanPeriod returns the scan period of the AzureConnector.
+func (m *AzureConnector) GetScanPeriod() string {
+	return m.ScanPeriod
+}
+
+// SetScanPeriod sets the scan period of the AzureConnector.
+func (m *AzureConnector) SetScanPeriod(v string) {
+	m.ScanPeriod = v
+}
+func (*GCPConnector) isOneOf_Connector() {}
+
+// GetID returns the unique identifier of the GCPConnector.
+func (m *GCPConnector) GetID() string { return m.ID }
+
+// GetName returns the name of the GCPConnector.
+func (m *GCPConnector) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GCPConnector.
+func (m *GCPConnector) SetName(v string) {
+	m.Name = v
+}
+
+// GetDescription returns the description of the GCPConnector.
+func (m *GCPConnector) GetDescription() string {
+	return m.Description
+}
+
+// SetDescription sets the description of the GCPConnector.
+func (m *GCPConnector) SetDescription(v string) {
+	m.Description = v
+}
+
+// GetServices returns the services of the GCPConnector.
+func (m *GCPConnector) GetServices() []string {
+	return m.Services
+}
+
+// SetServices sets the services of the GCPConnector.
+func (m *GCPConnector) SetServices(v []string) {
+	m.Services = v
+}
+
+// GetIncludeTags returns the include tags of the GCPConnector.
+func (m *GCPConnector) GetIncludeTags() []*Tag {
+	result := make([]*Tag, len(m.IncludeTags))
+	for i, v := range m.IncludeTags {
+		if v != nil {
+			result[i] = v.clone()
+		}
+	}
+	return result
+}
+
+// SetIncludeTags sets the include tags of the GCPConnector.
+func (m *GCPConnector) SetIncludeTags(v []*Tag) {
+	m.IncludeTags = make([]*Tag, len(v))
+	for i, val := range v {
+		if val != nil {
+			m.IncludeTags[i] = val.clone()
+		}
+	}
+}
+
+// GetExcludeTags returns the exclude tags of the GCPConnector.
+func (m *GCPConnector) GetExcludeTags() []*Tag {
+	result := make([]*Tag, len(m.ExcludeTags))
+	for i, v := range m.ExcludeTags {
+		if v != nil {
+			result[i] = v.clone()
+		}
+	}
+	return result
+}
+
+// SetExcludeTags sets the exclude tags of the GCPConnector.
+func (m *GCPConnector) SetExcludeTags(v []*Tag) {
+	m.ExcludeTags = make([]*Tag, len(v))
+	for i, val := range v {
+		if val != nil {
+			m.ExcludeTags[i] = val.clone()
+		}
+	}
+}
+
+// GetScanPeriod returns the scan period of the GCPConnector.
+func (m *GCPConnector) GetScanPeriod() string {
+	return m.ScanPeriod
+}
+
+// SetScanPeriod sets the scan period of the GCPConnector.
+func (m *GCPConnector) SetScanPeriod(v string) {
+	m.ScanPeriod = v
+}
+
+// ConnectorCreateRequest specifies a connector to create.
+type ConnectorCreateRequest struct {
+	// Parameters to define the new Connector.
+	Connector Connector `json:"connector"`
+}
+
+// ConnectorCreateResponse reports the result of a create.
+type ConnectorCreateResponse struct {
+	// The created Connector.
+	Connector Connector `json:"connector"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ConnectorDeleteRequest identifies a connector by ID to delete.
+type ConnectorDeleteRequest struct {
+	// The unique identifier of the connector to delete.
+	ID string `json:"id"`
+}
+
+// ConnectorDeleteResponse returns information about a connector that was deleted.
+type ConnectorDeleteResponse struct {
+	// Reserved for future use.
+	Meta *DeleteResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ConnectorGetRequest specifies which Connector to retrieve.
+type ConnectorGetRequest struct {
+	// The unique identifier of the Connector to retrieve.
+	ID string `json:"id"`
+}
+
+// ConnectorGetResponse returns a requested Connector.
+type ConnectorGetResponse struct {
+	// The requested Connector.
+	Connector Connector `json:"connector"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ConnectorListRequest specifies criteria for retrieving a list of connectors.
+type ConnectorListRequest struct {
+	// A human-readable filter query string.
+	Filter string `json:"filter"`
+}
+
+// ConnectorListResponse returns a list of connectors that meet the criteria of a
+// ConnectorListRequest.
+type ConnectorListResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+// ConnectorUpdateRequest updates a connector.
+type ConnectorUpdateRequest struct {
+	// Parameters to overwrite the specified connector.
+	Connector Connector `json:"connector"`
+}
+
+// ConnectorUpdateResponse returns the fields of a connector after it has been updated by
+// a connectorUpdateRequest.
+type ConnectorUpdateResponse struct {
+	// The updated connector.
+	Connector Connector `json:"connector"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // ControlPanelGetRDPCAPublicKeyResponse represents a request for an
@@ -2964,6 +3388,33 @@ type GCPCertX509Store struct {
 	ProjectID string `json:"projectId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+}
+
+type GCPConnector struct {
+	// Description of the Connector.
+	Description string `json:"description"`
+	// ExcludeTags filters out discovered resources that have the tag and value.
+	// We do allow duplicate tag names for ExcludeTags to support multiple excluded values for the tag.
+	ExcludeTags []*Tag `json:"excludeTags"`
+	// Unique identifier of the Connector.
+	ID string `json:"id"`
+	// IncludeTags only discovers cloud resources that have one of the included tags.
+	// We do not allow duplicate tag names for IncludeTags
+	IncludeTags []*Tag `json:"includeTags"`
+	// Unique human-readable name of the Connector.
+	Name string `json:"name"`
+	// PoolId is the GCP Workload Pool Identifier used to authenticate our JWT
+	PoolID string `json:"poolId"`
+	// ProjectIds is the list of GCP Projects the connector will scan
+	ProjectIDs []string `json:"projectIds"`
+	// ProjectNumber is the GCP Project the Workload Pool is defined in
+	ProjectNumber string `json:"projectNumber"`
+	// ProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
+	ProviderID string `json:"providerId"`
+	// ScanPeriod identifies which remote system this Connector discovers
+	ScanPeriod string `json:"scanPeriod"`
+	// Services is a list of services this connector should scan.
+	Services []string `json:"services"`
 }
 
 type GCPConsole struct {
@@ -15180,6 +15631,23 @@ type ApprovalWorkflowHistoryIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *ApprovalWorkflowHistory
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// ConnectorIterator provides read access to a list of Connector.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    connector := iterator.Value()
+//	    // ...
+//	}
+type ConnectorIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() Connector
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }

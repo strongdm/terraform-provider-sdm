@@ -459,6 +459,8 @@ const (
 	PermissionCredentialWrite              = "credential:write"
 	PermissionPolicyRead                   = "policy:read"
 	PermissionPolicyWrite                  = "policy:write"
+	PermissionDiscoveryConnectorRead       = "discoveryconnector:read"
+	PermissionDiscoveryConnectorWrite      = "discoveryconnector:write"
 	PermissionManagedSecretCreate          = "managedsecret:create"
 	PermissionManagedSecretList            = "managedsecret:list"
 	PermissionManagedSecretDelete          = "managedsecret:delete"
@@ -1093,6 +1095,8 @@ var AllPermission = []string{
 	PermissionCredentialWrite,
 	PermissionPolicyRead,
 	PermissionPolicyWrite,
+	PermissionDiscoveryConnectorRead,
+	PermissionDiscoveryConnectorWrite,
 	PermissionManagedSecretCreate,
 	PermissionManagedSecretList,
 	PermissionManagedSecretDelete,

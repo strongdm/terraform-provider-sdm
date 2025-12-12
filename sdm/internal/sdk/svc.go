@@ -2265,6 +2265,223 @@ func (svc *ControlPanel) VerifyJWT(
 	return resp, nil
 }
 
+// A Discovery Connector is a configuration object for performing Resource
+// Scans in remote systems such as AWS, GCP, Azure, and other systems.
+type DiscoveryConnectors struct {
+	client plumbing.DiscoveryConnectorsClient
+	parent *Client
+}
+
+// A SnapshotDiscoveryConnectors exposes the read only methods of the DiscoveryConnectors
+// service for historical queries.
+type SnapshotDiscoveryConnectors interface {
+	Get(
+		ctx context.Context,
+		id string) (
+		*ConnectorGetResponse,
+		error)
+	List(
+		ctx context.Context,
+		filter string,
+		args ...interface{}) (
+		ConnectorIterator,
+		error)
+}
+
+// Create adds a new Connector.
+func (svc *DiscoveryConnectors) Create(
+	ctx context.Context,
+	connector Connector) (
+	*ConnectorCreateResponse,
+	error) {
+	req := plumbing.ConnectorCreateRequest{}
+
+	req.Connector = convertConnectorToPlumbing(connector)
+	req.Meta = &plumbing.CreateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ConnectorCreateResponse, error) {
+			return svc.client.Create(svc.parent.wrapContext(ctx, &req, "DiscoveryConnectors.Create"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &ConnectorCreateResponse{}
+	if v, err := convertConnectorToPorcelain(plumbingResponse.Connector); err != nil {
+		return nil, err
+	} else {
+		resp.Connector = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Get reads one Connector by ID
+func (svc *DiscoveryConnectors) Get(
+	ctx context.Context,
+	id string) (
+	*ConnectorGetResponse,
+	error) {
+	req := plumbing.ConnectorGetRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.GetRequestMetadata{}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ConnectorGetResponse, error) {
+			return svc.client.Get(svc.parent.wrapContext(ctx, &req, "DiscoveryConnectors.Get"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &ConnectorGetResponse{}
+	if v, err := convertConnectorToPorcelain(plumbingResponse.Connector); err != nil {
+		return nil, err
+	} else {
+		resp.Connector = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Update replaces all the fields of a Connector by ID.
+func (svc *DiscoveryConnectors) Update(
+	ctx context.Context,
+	connector Connector) (
+	*ConnectorUpdateResponse,
+	error) {
+	req := plumbing.ConnectorUpdateRequest{}
+
+	req.Connector = convertConnectorToPlumbing(connector)
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ConnectorUpdateResponse, error) {
+			return svc.client.Update(svc.parent.wrapContext(ctx, &req, "DiscoveryConnectors.Update"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &ConnectorUpdateResponse{}
+	if v, err := convertConnectorToPorcelain(plumbingResponse.Connector); err != nil {
+		return nil, err
+	} else {
+		resp.Connector = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// Delete removes a Connector by ID.
+func (svc *DiscoveryConnectors) Delete(
+	ctx context.Context,
+	id string) (
+	*ConnectorDeleteResponse,
+	error) {
+	req := plumbing.ConnectorDeleteRequest{}
+
+	req.Id = (id)
+	req.Meta = &plumbing.DeleteRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ConnectorDeleteResponse, error) {
+			return svc.client.Delete(svc.parent.wrapContext(ctx, &req, "DiscoveryConnectors.Delete"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &ConnectorDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// List gets a list of Connectors matching a given set of criteria.
+func (svc *DiscoveryConnectors) List(
+	ctx context.Context,
+	filter string,
+	args ...interface{}) (
+	ConnectorIterator,
+	error) {
+	req := plumbing.ConnectorListRequest{}
+
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newConnectorIteratorImpl(
+		func() (
+			[]Connector,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.ConnectorListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "DiscoveryConnectors.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedConnectorToPorcelain(plumbingResponse.Connectors)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // A Role has a list of access rules which determine which Resources the members
 // of the Role have access to. An Account can be a member of multiple Roles via
 // AccountAttachments.

@@ -42,7 +42,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/15.39.0"
+	defaultUserAgent = "strongdm-sdk-go/15.40.0"
 )
 
 var _ = metadata.Pairs
@@ -87,6 +87,7 @@ type Client struct {
 	approvalWorkflows                *ApprovalWorkflows
 	approvalWorkflowsHistory         *ApprovalWorkflowsHistory
 	controlPanel                     *ControlPanel
+	discoveryConnectors              *DiscoveryConnectors
 	roles                            *Roles
 	groups                           *Groups
 	groupsHistory                    *GroupsHistory
@@ -277,6 +278,10 @@ func (c *Client) initializeServices() {
 	}
 	c.controlPanel = &ControlPanel{
 		client: plumbing.NewControlPanelClient(c.grpcConn),
+		parent: c,
+	}
+	c.discoveryConnectors = &DiscoveryConnectors{
+		client: plumbing.NewDiscoveryConnectorsClient(c.grpcConn),
 		parent: c,
 	}
 	c.roles = &Roles{
@@ -625,6 +630,12 @@ func (c *Client) ControlPanel() *ControlPanel {
 	return c.controlPanel
 }
 
+// A Discovery Connector is a configuration object for performing Resource
+// Scans in remote systems such as AWS, GCP, Azure, and other systems.
+func (c *Client) DiscoveryConnectors() *DiscoveryConnectors {
+	return c.discoveryConnectors
+}
+
 // A Role has a list of access rules which determine which Resources the members
 // of the Role have access to. An Account can be a member of multiple Roles via
 // AccountAttachments.
@@ -907,6 +918,10 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewApprovalWorkflowsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.discoveryConnectors = &DiscoveryConnectors{
+		client: plumbing.NewDiscoveryConnectorsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.roles = &Roles{
 		client: plumbing.NewRolesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -1028,6 +1043,12 @@ func (c *SnapshotClient) ApprovalWorkflowSteps() SnapshotApprovalWorkflowSteps {
 // approvers and be approved or denied.
 func (c *SnapshotClient) ApprovalWorkflows() SnapshotApprovalWorkflows {
 	return c.client.approvalWorkflows
+}
+
+// A Discovery Connector is a configuration object for performing Resource
+// Scans in remote systems such as AWS, GCP, Azure, and other systems.
+func (c *SnapshotClient) DiscoveryConnectors() SnapshotDiscoveryConnectors {
+	return c.client.discoveryConnectors
 }
 
 // A Role has a list of access rules which determine which Resources the members

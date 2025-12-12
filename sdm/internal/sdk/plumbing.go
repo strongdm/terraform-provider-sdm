@@ -704,6 +704,71 @@ func convertRepeatedAWSCertX509StoreToPorcelain(plumbings []*proto.AWSCertX509St
 	}
 	return items, nil
 }
+func convertAWSConnectorToPorcelain(plumbing *proto.AWSConnector) (*AWSConnector, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AWSConnector{}
+	porcelain.AccountIDs = plumbing.AccountIds
+	porcelain.Description = plumbing.Description
+	if v, err := convertRepeatedTagToPorcelain(plumbing.ExcludeTags); err != nil {
+		return nil, fmt.Errorf("error converting field ExcludeTags: %v", err)
+	} else {
+		porcelain.ExcludeTags = v
+	}
+	porcelain.ID = plumbing.Id
+	if v, err := convertRepeatedTagToPorcelain(plumbing.IncludeTags); err != nil {
+		return nil, fmt.Errorf("error converting field IncludeTags: %v", err)
+	} else {
+		porcelain.IncludeTags = v
+	}
+	porcelain.Name = plumbing.Name
+	porcelain.RoleName = plumbing.RoleName
+	porcelain.ScanPeriod = plumbing.ScanPeriod
+	porcelain.Services = plumbing.Services
+	return porcelain, nil
+}
+
+func convertAWSConnectorToPlumbing(porcelain *AWSConnector) *proto.AWSConnector {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AWSConnector{}
+	plumbing.AccountIds = (porcelain.AccountIDs)
+	plumbing.Description = (porcelain.Description)
+	plumbing.ExcludeTags = convertRepeatedTagToPlumbing(porcelain.ExcludeTags)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IncludeTags = convertRepeatedTagToPlumbing(porcelain.IncludeTags)
+	plumbing.Name = (porcelain.Name)
+	plumbing.RoleName = (porcelain.RoleName)
+	plumbing.ScanPeriod = (porcelain.ScanPeriod)
+	plumbing.Services = (porcelain.Services)
+	return plumbing
+}
+func convertRepeatedAWSConnectorToPlumbing(
+	porcelains []*AWSConnector,
+) []*proto.AWSConnector {
+	var items []*proto.AWSConnector
+	for _, porcelain := range porcelains {
+		items = append(items, convertAWSConnectorToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAWSConnectorToPorcelain(plumbings []*proto.AWSConnector) (
+	[]*AWSConnector,
+	error,
+) {
+	var items []*AWSConnector
+	for _, plumbing := range plumbings {
+		if v, err := convertAWSConnectorToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAWSConsoleToPorcelain(plumbing *proto.AWSConsole) (*AWSConsole, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -5603,6 +5668,73 @@ func convertRepeatedAzureCertificateToPorcelain(plumbings []*proto.AzureCertific
 	}
 	return items, nil
 }
+func convertAzureConnectorToPorcelain(plumbing *proto.AzureConnector) (*AzureConnector, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &AzureConnector{}
+	porcelain.ClientID = plumbing.ClientId
+	porcelain.Description = plumbing.Description
+	if v, err := convertRepeatedTagToPorcelain(plumbing.ExcludeTags); err != nil {
+		return nil, fmt.Errorf("error converting field ExcludeTags: %v", err)
+	} else {
+		porcelain.ExcludeTags = v
+	}
+	porcelain.ID = plumbing.Id
+	if v, err := convertRepeatedTagToPorcelain(plumbing.IncludeTags); err != nil {
+		return nil, fmt.Errorf("error converting field IncludeTags: %v", err)
+	} else {
+		porcelain.IncludeTags = v
+	}
+	porcelain.Name = plumbing.Name
+	porcelain.ScanPeriod = plumbing.ScanPeriod
+	porcelain.Services = plumbing.Services
+	porcelain.SubscriptionIDs = plumbing.SubscriptionIds
+	porcelain.TenantID = plumbing.TenantId
+	return porcelain, nil
+}
+
+func convertAzureConnectorToPlumbing(porcelain *AzureConnector) *proto.AzureConnector {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.AzureConnector{}
+	plumbing.ClientId = (porcelain.ClientID)
+	plumbing.Description = (porcelain.Description)
+	plumbing.ExcludeTags = convertRepeatedTagToPlumbing(porcelain.ExcludeTags)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IncludeTags = convertRepeatedTagToPlumbing(porcelain.IncludeTags)
+	plumbing.Name = (porcelain.Name)
+	plumbing.ScanPeriod = (porcelain.ScanPeriod)
+	plumbing.Services = (porcelain.Services)
+	plumbing.SubscriptionIds = (porcelain.SubscriptionIDs)
+	plumbing.TenantId = (porcelain.TenantID)
+	return plumbing
+}
+func convertRepeatedAzureConnectorToPlumbing(
+	porcelains []*AzureConnector,
+) []*proto.AzureConnector {
+	var items []*proto.AzureConnector
+	for _, porcelain := range porcelains {
+		items = append(items, convertAzureConnectorToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedAzureConnectorToPorcelain(plumbings []*proto.AzureConnector) (
+	[]*AzureConnector,
+	error,
+) {
+	var items []*AzureConnector
+	for _, plumbing := range plumbings {
+		if v, err := convertAzureConnectorToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertAzureMysqlToPorcelain(plumbing *proto.AzureMysql) (*AzureMysql, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -6541,6 +6673,527 @@ func convertRepeatedCockroachToPorcelain(plumbings []*proto.Cockroach) (
 	var items []*Cockroach
 	for _, plumbing := range plumbings {
 		if v, err := convertCockroachToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorToPlumbing(porcelain Connector) *proto.Connector {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Connector{}
+
+	switch v := porcelain.(type) {
+	case *AWSConnector:
+		plumbing.Cloud = &proto.Connector_Aws{Aws: convertAWSConnectorToPlumbing(v)}
+	case *AzureConnector:
+		plumbing.Cloud = &proto.Connector_Azure{Azure: convertAzureConnectorToPlumbing(v)}
+	case *GCPConnector:
+		plumbing.Cloud = &proto.Connector_Gcp{Gcp: convertGCPConnectorToPlumbing(v)}
+	}
+	return plumbing
+}
+
+func convertConnectorToPorcelain(plumbing *proto.Connector) (Connector, error) {
+	if plumbing.GetAws() != nil {
+		return convertAWSConnectorToPorcelain(plumbing.GetAws())
+	}
+	if plumbing.GetAzure() != nil {
+		return convertAzureConnectorToPorcelain(plumbing.GetAzure())
+	}
+	if plumbing.GetGcp() != nil {
+		return convertGCPConnectorToPorcelain(plumbing.GetGcp())
+	}
+	return nil, &UnknownError{Wrapped: fmt.Errorf("unknown polymorphic type, please upgrade your SDK")}
+}
+func convertRepeatedConnectorToPlumbing(
+	porcelains []Connector,
+) []*proto.Connector {
+	var items []*proto.Connector
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorToPorcelain(plumbings []*proto.Connector) (
+	[]Connector,
+	error,
+) {
+	var items []Connector
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorCreateRequestToPorcelain(plumbing *proto.ConnectorCreateRequest) (*ConnectorCreateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorCreateRequest{}
+	if v, err := convertConnectorToPorcelain(plumbing.Connector); err != nil {
+		return nil, fmt.Errorf("error converting field Connector: %v", err)
+	} else {
+		porcelain.Connector = v
+	}
+	return porcelain, nil
+}
+
+func convertConnectorCreateRequestToPlumbing(porcelain *ConnectorCreateRequest) *proto.ConnectorCreateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorCreateRequest{}
+	plumbing.Connector = convertConnectorToPlumbing(porcelain.Connector)
+	return plumbing
+}
+func convertRepeatedConnectorCreateRequestToPlumbing(
+	porcelains []*ConnectorCreateRequest,
+) []*proto.ConnectorCreateRequest {
+	var items []*proto.ConnectorCreateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorCreateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorCreateRequestToPorcelain(plumbings []*proto.ConnectorCreateRequest) (
+	[]*ConnectorCreateRequest,
+	error,
+) {
+	var items []*ConnectorCreateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorCreateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorCreateResponseToPorcelain(plumbing *proto.ConnectorCreateResponse) (*ConnectorCreateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorCreateResponse{}
+	if v, err := convertConnectorToPorcelain(plumbing.Connector); err != nil {
+		return nil, fmt.Errorf("error converting field Connector: %v", err)
+	} else {
+		porcelain.Connector = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertConnectorCreateResponseToPlumbing(porcelain *ConnectorCreateResponse) *proto.ConnectorCreateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorCreateResponse{}
+	plumbing.Connector = convertConnectorToPlumbing(porcelain.Connector)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedConnectorCreateResponseToPlumbing(
+	porcelains []*ConnectorCreateResponse,
+) []*proto.ConnectorCreateResponse {
+	var items []*proto.ConnectorCreateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorCreateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorCreateResponseToPorcelain(plumbings []*proto.ConnectorCreateResponse) (
+	[]*ConnectorCreateResponse,
+	error,
+) {
+	var items []*ConnectorCreateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorCreateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorDeleteRequestToPorcelain(plumbing *proto.ConnectorDeleteRequest) (*ConnectorDeleteRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorDeleteRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertConnectorDeleteRequestToPlumbing(porcelain *ConnectorDeleteRequest) *proto.ConnectorDeleteRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorDeleteRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedConnectorDeleteRequestToPlumbing(
+	porcelains []*ConnectorDeleteRequest,
+) []*proto.ConnectorDeleteRequest {
+	var items []*proto.ConnectorDeleteRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorDeleteRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorDeleteRequestToPorcelain(plumbings []*proto.ConnectorDeleteRequest) (
+	[]*ConnectorDeleteRequest,
+	error,
+) {
+	var items []*ConnectorDeleteRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorDeleteRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorDeleteResponseToPorcelain(plumbing *proto.ConnectorDeleteResponse) (*ConnectorDeleteResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorDeleteResponse{}
+	if v, err := convertDeleteResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertConnectorDeleteResponseToPlumbing(porcelain *ConnectorDeleteResponse) *proto.ConnectorDeleteResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorDeleteResponse{}
+	plumbing.Meta = convertDeleteResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedConnectorDeleteResponseToPlumbing(
+	porcelains []*ConnectorDeleteResponse,
+) []*proto.ConnectorDeleteResponse {
+	var items []*proto.ConnectorDeleteResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorDeleteResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorDeleteResponseToPorcelain(plumbings []*proto.ConnectorDeleteResponse) (
+	[]*ConnectorDeleteResponse,
+	error,
+) {
+	var items []*ConnectorDeleteResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorDeleteResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorGetRequestToPorcelain(plumbing *proto.ConnectorGetRequest) (*ConnectorGetRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorGetRequest{}
+	porcelain.ID = plumbing.Id
+	return porcelain, nil
+}
+
+func convertConnectorGetRequestToPlumbing(porcelain *ConnectorGetRequest) *proto.ConnectorGetRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorGetRequest{}
+	plumbing.Id = (porcelain.ID)
+	return plumbing
+}
+func convertRepeatedConnectorGetRequestToPlumbing(
+	porcelains []*ConnectorGetRequest,
+) []*proto.ConnectorGetRequest {
+	var items []*proto.ConnectorGetRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorGetRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorGetRequestToPorcelain(plumbings []*proto.ConnectorGetRequest) (
+	[]*ConnectorGetRequest,
+	error,
+) {
+	var items []*ConnectorGetRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorGetRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorGetResponseToPorcelain(plumbing *proto.ConnectorGetResponse) (*ConnectorGetResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorGetResponse{}
+	if v, err := convertConnectorToPorcelain(plumbing.Connector); err != nil {
+		return nil, fmt.Errorf("error converting field Connector: %v", err)
+	} else {
+		porcelain.Connector = v
+	}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertConnectorGetResponseToPlumbing(porcelain *ConnectorGetResponse) *proto.ConnectorGetResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorGetResponse{}
+	plumbing.Connector = convertConnectorToPlumbing(porcelain.Connector)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedConnectorGetResponseToPlumbing(
+	porcelains []*ConnectorGetResponse,
+) []*proto.ConnectorGetResponse {
+	var items []*proto.ConnectorGetResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorGetResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorGetResponseToPorcelain(plumbings []*proto.ConnectorGetResponse) (
+	[]*ConnectorGetResponse,
+	error,
+) {
+	var items []*ConnectorGetResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorGetResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorListRequestToPorcelain(plumbing *proto.ConnectorListRequest) (*ConnectorListRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorListRequest{}
+	porcelain.Filter = plumbing.Filter
+	return porcelain, nil
+}
+
+func convertConnectorListRequestToPlumbing(porcelain *ConnectorListRequest) *proto.ConnectorListRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorListRequest{}
+	plumbing.Filter = (porcelain.Filter)
+	return plumbing
+}
+func convertRepeatedConnectorListRequestToPlumbing(
+	porcelains []*ConnectorListRequest,
+) []*proto.ConnectorListRequest {
+	var items []*proto.ConnectorListRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorListRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorListRequestToPorcelain(plumbings []*proto.ConnectorListRequest) (
+	[]*ConnectorListRequest,
+	error,
+) {
+	var items []*ConnectorListRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorListRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorListResponseToPorcelain(plumbing *proto.ConnectorListResponse) (*ConnectorListResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorListResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertConnectorListResponseToPlumbing(porcelain *ConnectorListResponse) *proto.ConnectorListResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorListResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedConnectorListResponseToPlumbing(
+	porcelains []*ConnectorListResponse,
+) []*proto.ConnectorListResponse {
+	var items []*proto.ConnectorListResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorListResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorListResponseToPorcelain(plumbings []*proto.ConnectorListResponse) (
+	[]*ConnectorListResponse,
+	error,
+) {
+	var items []*ConnectorListResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorListResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorUpdateRequestToPorcelain(plumbing *proto.ConnectorUpdateRequest) (*ConnectorUpdateRequest, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorUpdateRequest{}
+	if v, err := convertConnectorToPorcelain(plumbing.Connector); err != nil {
+		return nil, fmt.Errorf("error converting field Connector: %v", err)
+	} else {
+		porcelain.Connector = v
+	}
+	return porcelain, nil
+}
+
+func convertConnectorUpdateRequestToPlumbing(porcelain *ConnectorUpdateRequest) *proto.ConnectorUpdateRequest {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorUpdateRequest{}
+	plumbing.Connector = convertConnectorToPlumbing(porcelain.Connector)
+	return plumbing
+}
+func convertRepeatedConnectorUpdateRequestToPlumbing(
+	porcelains []*ConnectorUpdateRequest,
+) []*proto.ConnectorUpdateRequest {
+	var items []*proto.ConnectorUpdateRequest
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorUpdateRequestToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorUpdateRequestToPorcelain(plumbings []*proto.ConnectorUpdateRequest) (
+	[]*ConnectorUpdateRequest,
+	error,
+) {
+	var items []*ConnectorUpdateRequest
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorUpdateRequestToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertConnectorUpdateResponseToPorcelain(plumbing *proto.ConnectorUpdateResponse) (*ConnectorUpdateResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ConnectorUpdateResponse{}
+	if v, err := convertConnectorToPorcelain(plumbing.Connector); err != nil {
+		return nil, fmt.Errorf("error converting field Connector: %v", err)
+	} else {
+		porcelain.Connector = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertConnectorUpdateResponseToPlumbing(porcelain *ConnectorUpdateResponse) *proto.ConnectorUpdateResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ConnectorUpdateResponse{}
+	plumbing.Connector = convertConnectorToPlumbing(porcelain.Connector)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedConnectorUpdateResponseToPlumbing(
+	porcelains []*ConnectorUpdateResponse,
+) []*proto.ConnectorUpdateResponse {
+	var items []*proto.ConnectorUpdateResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertConnectorUpdateResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedConnectorUpdateResponseToPorcelain(plumbings []*proto.ConnectorUpdateResponse) (
+	[]*ConnectorUpdateResponse,
+	error,
+) {
+	var items []*ConnectorUpdateResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertConnectorUpdateResponseToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -8205,6 +8858,75 @@ func convertRepeatedGCPCertX509StoreToPorcelain(plumbings []*proto.GCPCertX509St
 	var items []*GCPCertX509Store
 	for _, plumbing := range plumbings {
 		if v, err := convertGCPCertX509StoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGCPConnectorToPorcelain(plumbing *proto.GCPConnector) (*GCPConnector, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GCPConnector{}
+	porcelain.Description = plumbing.Description
+	if v, err := convertRepeatedTagToPorcelain(plumbing.ExcludeTags); err != nil {
+		return nil, fmt.Errorf("error converting field ExcludeTags: %v", err)
+	} else {
+		porcelain.ExcludeTags = v
+	}
+	porcelain.ID = plumbing.Id
+	if v, err := convertRepeatedTagToPorcelain(plumbing.IncludeTags); err != nil {
+		return nil, fmt.Errorf("error converting field IncludeTags: %v", err)
+	} else {
+		porcelain.IncludeTags = v
+	}
+	porcelain.Name = plumbing.Name
+	porcelain.PoolID = plumbing.PoolId
+	porcelain.ProjectIDs = plumbing.ProjectIds
+	porcelain.ProjectNumber = plumbing.ProjectNumber
+	porcelain.ProviderID = plumbing.ProviderId
+	porcelain.ScanPeriod = plumbing.ScanPeriod
+	porcelain.Services = plumbing.Services
+	return porcelain, nil
+}
+
+func convertGCPConnectorToPlumbing(porcelain *GCPConnector) *proto.GCPConnector {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GCPConnector{}
+	plumbing.Description = (porcelain.Description)
+	plumbing.ExcludeTags = convertRepeatedTagToPlumbing(porcelain.ExcludeTags)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IncludeTags = convertRepeatedTagToPlumbing(porcelain.IncludeTags)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PoolId = (porcelain.PoolID)
+	plumbing.ProjectIds = (porcelain.ProjectIDs)
+	plumbing.ProjectNumber = (porcelain.ProjectNumber)
+	plumbing.ProviderId = (porcelain.ProviderID)
+	plumbing.ScanPeriod = (porcelain.ScanPeriod)
+	plumbing.Services = (porcelain.Services)
+	return plumbing
+}
+func convertRepeatedGCPConnectorToPlumbing(
+	porcelains []*GCPConnector,
+) []*proto.GCPConnector {
+	var items []*proto.GCPConnector
+	for _, porcelain := range porcelains {
+		items = append(items, convertGCPConnectorToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGCPConnectorToPorcelain(plumbings []*proto.GCPConnector) (
+	[]*GCPConnector,
+	error,
+) {
+	var items []*GCPConnector
+	for _, plumbing := range plumbings {
+		if v, err := convertGCPConnectorToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -25904,6 +26626,51 @@ func (a *approvalWorkflowHistoryIteratorImpl) Value() *ApprovalWorkflowHistory {
 
 func (a *approvalWorkflowHistoryIteratorImpl) Err() error {
 	return a.err
+}
+
+type connectorIteratorImplFetchFunc func() (
+	[]Connector,
+	bool, error)
+type connectorIteratorImpl struct {
+	buffer      []Connector
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       connectorIteratorImplFetchFunc
+}
+
+func newConnectorIteratorImpl(f connectorIteratorImplFetchFunc) *connectorIteratorImpl {
+	return &connectorIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (c *connectorIteratorImpl) Next() bool {
+	if c.index < len(c.buffer)-1 {
+		c.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !c.hasNextPage {
+		return false
+	}
+
+	c.index = 0
+	c.buffer, c.hasNextPage, c.err = c.fetch()
+	return len(c.buffer) > 0
+}
+
+func (c *connectorIteratorImpl) Value() Connector {
+	if c.index >= len(c.buffer) {
+		return nil
+	}
+	return c.buffer[c.index]
+}
+
+func (c *connectorIteratorImpl) Err() error {
+	return c.err
 }
 
 type roleIteratorImplFetchFunc func() (

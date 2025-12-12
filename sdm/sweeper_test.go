@@ -125,6 +125,8 @@ func testCheckDestroy(s *terraform.State) error {
 			_, err = client.GroupsRoles().Get(context.Background(), rs.Primary.ID)
 		case "sdm_group":
 			_, err = client.Groups().Get(context.Background(), rs.Primary.ID)
+		case "sdm_connector":
+			_, err = client.DiscoveryConnectors().Get(context.Background(), rs.Primary.ID)
 		default:
 			return fmt.Errorf("undefined resource type in testCheckDestroy: %s", rs.Type)
 		}
