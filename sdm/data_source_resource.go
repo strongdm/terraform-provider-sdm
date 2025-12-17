@@ -10558,6 +10558,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The key type to use e.g. rsa-2048 or ed25519",
 									},
+									"lock_required": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+									},
 									"name": {
 										Type: schema.TypeString,
 
@@ -10676,6 +10682,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The key type to use e.g. rsa-2048 or ed25519",
 									},
+									"lock_required": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+									},
 									"name": {
 										Type: schema.TypeString,
 
@@ -10782,6 +10794,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The ID of the identity set to use for identity connections.",
 									},
+									"lock_required": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+									},
 									"name": {
 										Type: schema.TypeString,
 
@@ -10882,6 +10900,12 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
+									},
+									"lock_required": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
 									},
 									"name": {
 										Type: schema.TypeString,
@@ -13342,6 +13366,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                       (v.Hostname),
 				"id":                             (v.ID),
 				"key_type":                       (v.KeyType),
+				"lock_required":                  (v.LockRequired),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
@@ -13363,6 +13388,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
 				"identity_set_id":                     (v.IdentitySetID),
 				"key_type":                            (v.KeyType),
+				"lock_required":                       (v.LockRequired),
 				"name":                                (v.Name),
 				"port":                                (v.Port),
 				"port_forwarding":                     (v.PortForwarding),
@@ -13382,6 +13408,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                                  (v.ID),
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
 				"identity_set_id":                     (v.IdentitySetID),
+				"lock_required":                       (v.LockRequired),
 				"name":                                (v.Name),
 				"port":                                (v.Port),
 				"port_forwarding":                     (v.PortForwarding),
@@ -13400,6 +13427,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"id":                             (v.ID),
+				"lock_required":                  (v.LockRequired),
 				"name":                           (v.Name),
 				"password":                       (v.Password),
 				"port":                           (v.Port),

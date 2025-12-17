@@ -10317,6 +10317,12 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "The key type to use e.g. rsa-2048 or ed25519",
 						},
+						"lock_required": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+						},
 						"name": {
 							Type: schema.TypeString,
 
@@ -10434,6 +10440,12 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "The key type to use e.g. rsa-2048 or ed25519",
 						},
+						"lock_required": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+						},
 						"name": {
 							Type: schema.TypeString,
 
@@ -10538,6 +10550,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "The ID of the identity set to use for identity connections.",
 						},
+						"lock_required": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
+						},
 						"name": {
 							Type: schema.TypeString,
 
@@ -10636,6 +10654,12 @@ func resourceResource() *schema.Resource {
 
 							Required:    true,
 							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"lock_required": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.",
 						},
 						"name": {
 							Type: schema.TypeString,
@@ -17024,6 +17048,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:                    convertStringToPlumbing(raw["hostname"]),
 			KeyType:                     convertStringToPlumbing(raw["key_type"]),
+			LockRequired:                convertBoolToPlumbing(raw["lock_required"]),
 			Name:                        convertStringToPlumbing(raw["name"]),
 			Port:                        convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:              convertBoolToPlumbing(raw["port_forwarding"]),
@@ -17055,6 +17080,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			IdentityAliasHealthcheckUsername: convertStringToPlumbing(raw["identity_alias_healthcheck_username"]),
 			IdentitySetID:                    convertStringToPlumbing(raw["identity_set_id"]),
 			KeyType:                          convertStringToPlumbing(raw["key_type"]),
+			LockRequired:                     convertBoolToPlumbing(raw["lock_required"]),
 			Name:                             convertStringToPlumbing(raw["name"]),
 			Port:                             convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:                   convertBoolToPlumbing(raw["port_forwarding"]),
@@ -17085,6 +17111,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:                         convertStringToPlumbing(raw["hostname"]),
 			IdentityAliasHealthcheckUsername: convertStringToPlumbing(raw["identity_alias_healthcheck_username"]),
 			IdentitySetID:                    convertStringToPlumbing(raw["identity_set_id"]),
+			LockRequired:                     convertBoolToPlumbing(raw["lock_required"]),
 			Name:                             convertStringToPlumbing(raw["name"]),
 			Port:                             convertInt32ToPlumbing(raw["port"]),
 			PortForwarding:                   convertBoolToPlumbing(raw["port_forwarding"]),
@@ -17114,6 +17141,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			BindInterface:               convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
 			Hostname:                    convertStringToPlumbing(raw["hostname"]),
+			LockRequired:                convertBoolToPlumbing(raw["lock_required"]),
 			Name:                        convertStringToPlumbing(raw["name"]),
 			Password:                    convertStringToPlumbing(raw["password"]),
 			Port:                        convertInt32ToPlumbing(raw["port"]),
@@ -19468,6 +19496,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"key_type":                       (v.KeyType),
+				"lock_required":                  (v.LockRequired),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
@@ -19492,6 +19521,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
 				"identity_set_id":                     (v.IdentitySetID),
 				"key_type":                            (v.KeyType),
+				"lock_required":                       (v.LockRequired),
 				"name":                                (v.Name),
 				"port":                                (v.Port),
 				"port_forwarding":                     (v.PortForwarding),
@@ -19514,6 +19544,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":                            (v.Hostname),
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
 				"identity_set_id":                     (v.IdentitySetID),
+				"lock_required":                       (v.LockRequired),
 				"name":                                (v.Name),
 				"port":                                (v.Port),
 				"port_forwarding":                     (v.PortForwarding),
@@ -19535,6 +19566,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
+				"lock_required":                  (v.LockRequired),
 				"name":                           (v.Name),
 				"password":                       seValues["password"],
 				"port":                           (v.Port),
@@ -22775,6 +22807,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
 				"key_type":                       (v.KeyType),
+				"lock_required":                  (v.LockRequired),
 				"name":                           (v.Name),
 				"port":                           (v.Port),
 				"port_forwarding":                (v.PortForwarding),
@@ -22805,6 +22838,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
 				"identity_set_id":                     (v.IdentitySetID),
 				"key_type":                            (v.KeyType),
+				"lock_required":                       (v.LockRequired),
 				"name":                                (v.Name),
 				"port":                                (v.Port),
 				"port_forwarding":                     (v.PortForwarding),
@@ -22836,6 +22870,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":                            (v.Hostname),
 				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
 				"identity_set_id":                     (v.IdentitySetID),
+				"lock_required":                       (v.LockRequired),
 				"name":                                (v.Name),
 				"port":                                (v.Port),
 				"port_forwarding":                     (v.PortForwarding),
@@ -22866,6 +22901,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"bind_interface":                 (v.BindInterface),
 				"egress_filter":                  (v.EgressFilter),
 				"hostname":                       (v.Hostname),
+				"lock_required":                  (v.LockRequired),
 				"name":                           (v.Name),
 				"password":                       seValues["password"],
 				"port":                           (v.Port),

@@ -1620,6 +1620,7 @@ The following arguments are supported by the Resource resource:
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `key_type` - (Optional) The key type to use e.g. rsa-2048 or ed25519
+	* `lock_required` - (Optional) When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_forwarding` - (Optional) Whether port forwarding is allowed through this server.
@@ -1637,6 +1638,7 @@ The following arguments are supported by the Resource resource:
 	* `identity_alias_healthcheck_username` - (Optional) The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `key_type` - (Optional) The key type to use e.g. rsa-2048 or ed25519
+	* `lock_required` - (Optional) When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_forwarding` - (Optional) Whether port forwarding is allowed through this server.
@@ -1653,6 +1655,7 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `identity_alias_healthcheck_username` - (Optional) The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
 	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
+	* `lock_required` - (Optional) When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.
 	* `port_forwarding` - (Optional) Whether port forwarding is allowed through this server.
@@ -1668,6 +1671,7 @@ The following arguments are supported by the Resource resource:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `lock_required` - (Optional) When set, require a resource lock to access the resource to ensure it can only be used by one user at a time.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port` - (Required) The port to dial to initiate a connection from the egress node to this resource.

@@ -20873,6 +20873,7 @@ func convertSSHToPorcelain(plumbing *proto.SSH) (*SSH, error) {
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
 	porcelain.KeyType = plumbing.KeyType
+	porcelain.LockRequired = plumbing.LockRequired
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
@@ -20902,6 +20903,7 @@ func convertSSHToPlumbing(porcelain *SSH) *proto.SSH {
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.KeyType = (porcelain.KeyType)
+	plumbing.LockRequired = (porcelain.LockRequired)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
@@ -20952,6 +20954,7 @@ func convertSSHCertToPorcelain(plumbing *proto.SSHCert) (*SSHCert, error) {
 	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
 	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.KeyType = plumbing.KeyType
+	porcelain.LockRequired = plumbing.LockRequired
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
@@ -20982,6 +20985,7 @@ func convertSSHCertToPlumbing(porcelain *SSHCert) *proto.SSHCert {
 	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.KeyType = (porcelain.KeyType)
+	plumbing.LockRequired = (porcelain.LockRequired)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
@@ -21030,6 +21034,7 @@ func convertSSHCustomerKeyToPorcelain(plumbing *proto.SSHCustomerKey) (*SSHCusto
 	porcelain.ID = plumbing.Id
 	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
 	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.LockRequired = plumbing.LockRequired
 	porcelain.Name = plumbing.Name
 	porcelain.Port = plumbing.Port
 	porcelain.PortForwarding = plumbing.PortForwarding
@@ -21060,6 +21065,7 @@ func convertSSHCustomerKeyToPlumbing(porcelain *SSHCustomerKey) *proto.SSHCustom
 	plumbing.Id = (porcelain.ID)
 	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.LockRequired = (porcelain.LockRequired)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortForwarding = (porcelain.PortForwarding)
@@ -21107,6 +21113,7 @@ func convertSSHPasswordToPorcelain(plumbing *proto.SSHPassword) (*SSHPassword, e
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.LockRequired = plumbing.LockRequired
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
@@ -21135,6 +21142,7 @@ func convertSSHPasswordToPlumbing(porcelain *SSHPassword) *proto.SSHPassword {
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.LockRequired = (porcelain.LockRequired)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
