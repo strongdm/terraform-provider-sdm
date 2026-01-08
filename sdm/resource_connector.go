@@ -261,12 +261,6 @@ func resourceConnector() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Connector.",
 						},
-						"pool_id": {
-							Type: schema.TypeString,
-
-							Optional:    true,
-							Description: "PoolId is the GCP Workload Pool Identifier used to authenticate our JWT",
-						},
 						"project_ids": {
 							Type: schema.TypeList,
 							Elem: &schema.Schema{
@@ -274,18 +268,6 @@ func resourceConnector() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "ProjectIds is the list of GCP Projects the connector will scan",
-						},
-						"project_number": {
-							Type: schema.TypeString,
-
-							Optional:    true,
-							Description: "ProjectNumber is the GCP Project the Workload Pool is defined in",
-						},
-						"provider_id": {
-							Type: schema.TypeString,
-
-							Optional:    true,
-							Description: "ProviderId is the GCP Workload Provider Identifier used to authenticate our JWT",
 						},
 						"scan_period": {
 							Type: schema.TypeString,
@@ -300,6 +282,30 @@ func resourceConnector() *schema.Resource {
 							},
 							Optional:    true,
 							Description: "Services is a list of services this connector should scan.",
+						},
+						"workload_pool_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "WorkloadPoolId is the GCP Workload Pool Identifier used to authenticate our JWT",
+						},
+						"workload_project_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "WorkloadProjectId is the GCP Project ID where the Workload Pool is defined",
+						},
+						"workload_project_number": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "WorkloadProjectNumber is the GCP Project Number where the Workload Pool is defined",
+						},
+						"workload_provider_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "WorkloadProviderId is the GCP Workload Provider Identifier used to authenticate our JWT",
 						},
 					},
 				},
@@ -358,15 +364,16 @@ func convertConnectorToPlumbing(d *schema.ResourceData) sdm.Connector {
 			return &sdm.GCPConnector{}
 		}
 		out := &sdm.GCPConnector{
-			ID:            d.Id(),
-			Description:   convertStringToPlumbing(raw["description"]),
-			Name:          convertStringToPlumbing(raw["name"]),
-			PoolID:        convertStringToPlumbing(raw["pool_id"]),
-			ProjectIDs:    convertRepeatedStringToPlumbing(raw["project_ids"]),
-			ProjectNumber: convertStringToPlumbing(raw["project_number"]),
-			ProviderID:    convertStringToPlumbing(raw["provider_id"]),
-			ScanPeriod:    convertStringToPlumbing(raw["scan_period"]),
-			Services:      convertRepeatedStringToPlumbing(raw["services"]),
+			ID:                    d.Id(),
+			Description:           convertStringToPlumbing(raw["description"]),
+			Name:                  convertStringToPlumbing(raw["name"]),
+			ProjectIDs:            convertRepeatedStringToPlumbing(raw["project_ids"]),
+			ScanPeriod:            convertStringToPlumbing(raw["scan_period"]),
+			Services:              convertRepeatedStringToPlumbing(raw["services"]),
+			WorkloadPoolID:        convertStringToPlumbing(raw["workload_pool_id"]),
+			WorkloadProjectID:     convertStringToPlumbing(raw["workload_project_id"]),
+			WorkloadProjectNumber: convertStringToPlumbing(raw["workload_project_number"]),
+			WorkloadProviderID:    convertStringToPlumbing(raw["workload_provider_id"]),
 		}
 		return out
 	}
@@ -415,14 +422,15 @@ func resourceConnectorCreate(ctx context.Context, d *schema.ResourceData, cc *sd
 		_ = localV
 		d.Set("gcp", []map[string]interface{}{
 			{
-				"description":    (v.Description),
-				"name":           (v.Name),
-				"pool_id":        (v.PoolID),
-				"project_ids":    (v.ProjectIDs),
-				"project_number": (v.ProjectNumber),
-				"provider_id":    (v.ProviderID),
-				"scan_period":    (v.ScanPeriod),
-				"services":       (v.Services),
+				"description":             (v.Description),
+				"name":                    (v.Name),
+				"project_ids":             (v.ProjectIDs),
+				"scan_period":             (v.ScanPeriod),
+				"services":                (v.Services),
+				"workload_pool_id":        (v.WorkloadPoolID),
+				"workload_project_id":     (v.WorkloadProjectID),
+				"workload_project_number": (v.WorkloadProjectNumber),
+				"workload_provider_id":    (v.WorkloadProviderID),
 			},
 		})
 	}
@@ -484,14 +492,15 @@ func resourceConnectorRead(ctx context.Context, d *schema.ResourceData, cc *sdm.
 		_ = localV
 		d.Set("gcp", []map[string]interface{}{
 			{
-				"description":    (v.Description),
-				"name":           (v.Name),
-				"pool_id":        (v.PoolID),
-				"project_ids":    (v.ProjectIDs),
-				"project_number": (v.ProjectNumber),
-				"provider_id":    (v.ProviderID),
-				"scan_period":    (v.ScanPeriod),
-				"services":       (v.Services),
+				"description":             (v.Description),
+				"name":                    (v.Name),
+				"project_ids":             (v.ProjectIDs),
+				"scan_period":             (v.ScanPeriod),
+				"services":                (v.Services),
+				"workload_pool_id":        (v.WorkloadPoolID),
+				"workload_project_id":     (v.WorkloadProjectID),
+				"workload_project_number": (v.WorkloadProjectNumber),
+				"workload_provider_id":    (v.WorkloadProviderID),
 			},
 		})
 	}

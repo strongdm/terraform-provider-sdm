@@ -44,19 +44,7 @@ func dataSourceConnector() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"pool_id": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
 			"project_ids": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"project_number": {
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"provider_id": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
@@ -77,6 +65,22 @@ func dataSourceConnector() *schema.Resource {
 				Optional: true,
 			},
 			"tenant_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"workload_pool_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"workload_project_id": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"workload_project_number": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"workload_provider_id": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
@@ -226,12 +230,6 @@ func dataSourceConnector() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Connector.",
 									},
-									"pool_id": {
-										Type: schema.TypeString,
-
-										Optional:    true,
-										Description: "PoolId is the GCP Workload Pool Identifier used to authenticate our JWT",
-									},
 									"project_ids": {
 										Type: schema.TypeList,
 										Elem: &schema.Schema{
@@ -239,18 +237,6 @@ func dataSourceConnector() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "ProjectIds is the list of GCP Projects the connector will scan",
-									},
-									"project_number": {
-										Type: schema.TypeString,
-
-										Optional:    true,
-										Description: "ProjectNumber is the GCP Project the Workload Pool is defined in",
-									},
-									"provider_id": {
-										Type: schema.TypeString,
-
-										Optional:    true,
-										Description: "ProviderId is the GCP Workload Provider Identifier used to authenticate our JWT",
 									},
 									"scan_period": {
 										Type: schema.TypeString,
@@ -265,6 +251,30 @@ func dataSourceConnector() *schema.Resource {
 										},
 										Optional:    true,
 										Description: "Services is a list of services this connector should scan.",
+									},
+									"workload_pool_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "WorkloadPoolId is the GCP Workload Pool Identifier used to authenticate our JWT",
+									},
+									"workload_project_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "WorkloadProjectId is the GCP Project ID where the Workload Pool is defined",
+									},
+									"workload_project_number": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "WorkloadProjectNumber is the GCP Project Number where the Workload Pool is defined",
+									},
+									"workload_provider_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "WorkloadProviderId is the GCP Workload Provider Identifier used to authenticate our JWT",
 									},
 								},
 							},
@@ -318,20 +328,8 @@ func convertConnectorFilterToPlumbing(d *schema.ResourceData) (string, []interfa
 		filter += "name:? "
 		args = append(args, v)
 	}
-	if v, ok := d.GetOkExists("pool_id"); ok {
-		filter += "poolid:? "
-		args = append(args, v)
-	}
 	if v, ok := d.GetOkExists("project_ids"); ok {
 		filter += "projectids:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("project_number"); ok {
-		filter += "projectnumber:? "
-		args = append(args, v)
-	}
-	if v, ok := d.GetOkExists("provider_id"); ok {
-		filter += "providerid:? "
 		args = append(args, v)
 	}
 	if v, ok := d.GetOkExists("role_name"); ok {
@@ -352,6 +350,22 @@ func convertConnectorFilterToPlumbing(d *schema.ResourceData) (string, []interfa
 	}
 	if v, ok := d.GetOkExists("tenant_id"); ok {
 		filter += "tenantid:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("workload_pool_id"); ok {
+		filter += "workloadpoolid:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("workload_project_id"); ok {
+		filter += "workloadprojectid:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("workload_project_number"); ok {
+		filter += "workloadprojectnumber:? "
+		args = append(args, v)
+	}
+	if v, ok := d.GetOkExists("workload_provider_id"); ok {
+		filter += "workloadproviderid:? "
 		args = append(args, v)
 	}
 	return filter, args
@@ -395,15 +409,16 @@ func dataSourceConnectorList(ctx context.Context, d *schema.ResourceData, cc *sd
 			})
 		case *sdm.GCPConnector:
 			output[0]["gcp"] = append(output[0]["gcp"], entity{
-				"description":    (v.Description),
-				"id":             (v.ID),
-				"name":           (v.Name),
-				"pool_id":        (v.PoolID),
-				"project_ids":    (v.ProjectIDs),
-				"project_number": (v.ProjectNumber),
-				"provider_id":    (v.ProviderID),
-				"scan_period":    (v.ScanPeriod),
-				"services":       (v.Services),
+				"description":             (v.Description),
+				"id":                      (v.ID),
+				"name":                    (v.Name),
+				"project_ids":             (v.ProjectIDs),
+				"scan_period":             (v.ScanPeriod),
+				"services":                (v.Services),
+				"workload_pool_id":        (v.WorkloadPoolID),
+				"workload_project_id":     (v.WorkloadProjectID),
+				"workload_project_number": (v.WorkloadProjectNumber),
+				"workload_provider_id":    (v.WorkloadProviderID),
 			})
 		}
 	}

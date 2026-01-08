@@ -29,12 +29,13 @@ The following arguments are supported by the Connector resource:
 * gcp:
 	* `description` - (Optional) Description of the Connector.
 	* `name` - (Required) Unique human-readable name of the Connector.
-	* `pool_id` - (Optional) PoolId is the GCP Workload Pool Identifier used to authenticate our JWT
 	* `project_ids` - (Optional) ProjectIds is the list of GCP Projects the connector will scan
-	* `project_number` - (Optional) ProjectNumber is the GCP Project the Workload Pool is defined in
-	* `provider_id` - (Optional) ProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
 	* `scan_period` - (Optional) ScanPeriod identifies which remote system this Connector discovers
 	* `services` - (Optional) Services is a list of services this connector should scan.
+	* `workload_pool_id` - (Optional) WorkloadPoolId is the GCP Workload Pool Identifier used to authenticate our JWT
+	* `workload_project_id` - (Optional) WorkloadProjectId is the GCP Project ID where the Workload Pool is defined
+	* `workload_project_number` - (Optional) WorkloadProjectNumber is the GCP Project Number where the Workload Pool is defined
+	* `workload_provider_id` - (Optional) WorkloadProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Connector resource:
 * `id` - A unique identifier for the Connector resource.

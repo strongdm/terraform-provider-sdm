@@ -3403,18 +3403,20 @@ type GCPConnector struct {
 	IncludeTags []*Tag `json:"includeTags"`
 	// Unique human-readable name of the Connector.
 	Name string `json:"name"`
-	// PoolId is the GCP Workload Pool Identifier used to authenticate our JWT
-	PoolID string `json:"poolId"`
 	// ProjectIds is the list of GCP Projects the connector will scan
 	ProjectIDs []string `json:"projectIds"`
-	// ProjectNumber is the GCP Project the Workload Pool is defined in
-	ProjectNumber string `json:"projectNumber"`
-	// ProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
-	ProviderID string `json:"providerId"`
 	// ScanPeriod identifies which remote system this Connector discovers
 	ScanPeriod string `json:"scanPeriod"`
 	// Services is a list of services this connector should scan.
 	Services []string `json:"services"`
+	// WorkloadPoolId is the GCP Workload Pool Identifier used to authenticate our JWT
+	WorkloadPoolID string `json:"workloadPoolId"`
+	// WorkloadProjectId is the GCP Project ID where the Workload Pool is defined
+	WorkloadProjectID string `json:"workloadProjectId"`
+	// WorkloadProjectNumber is the GCP Project Number where the Workload Pool is defined
+	WorkloadProjectNumber string `json:"workloadProjectNumber"`
+	// WorkloadProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
+	WorkloadProviderID string `json:"workloadProviderId"`
 }
 
 type GCPConsole struct {

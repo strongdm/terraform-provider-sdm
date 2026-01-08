@@ -336,6 +336,7 @@ const (
 	ActivityVerbResourceLocked                                   = "user locked a resource"
 	ActivityVerbResourceUnlocked                                 = "user unlocked a resource"
 	ActivityVerbResourceForceUnlocked                            = "admin force-unlocked a resource"
+	ActivityVerbResourceLockRejected                             = "user lock rejected for a resource"
 	ActivityVerbConcurrentAuthenticationRevokedPerOrgSetting     = "concurrent authentications revoked per organization settings"
 	ActivityVerbPeeringGroupToggled                              = "peering group toggled"
 	ActivityVerbPeeringGroupCreated                              = "peering group created"
@@ -823,6 +824,7 @@ var AllActivityVerb = []string{
 	ActivityVerbResourceLocked,
 	ActivityVerbResourceUnlocked,
 	ActivityVerbResourceForceUnlocked,
+	ActivityVerbResourceLockRejected,
 	ActivityVerbConcurrentAuthenticationRevokedPerOrgSetting,
 	ActivityVerbPeeringGroupToggled,
 	ActivityVerbPeeringGroupCreated,

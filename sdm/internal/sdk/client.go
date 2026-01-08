@@ -21,6 +21,7 @@ package sdm
 import (
 	"context"
 	"crypto/hmac"
+	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/tls"
 	"encoding/base64"
@@ -28,6 +29,7 @@ import (
 	"math/rand"
 	"net"
 	"strings"
+	"sync"
 	"time"
 
 	plumbing "github.com/strongdm/terraform-provider-sdm/sdm/internal/sdk/v1"
@@ -42,18 +44,24 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/15.41.0"
+	defaultUserAgent = "strongdm-sdk-go/15.44.0"
 )
 
 var _ = metadata.Pairs
 
 type dialer func(ctx context.Context, addr string) (net.Conn, error)
 
+type clientInterceptor func(c *Client, ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (stop bool, err error)
+
 // Client is the strongDM API client implementation.
 type Client struct {
-	apiHost              string
-	apiToken             string
-	apiSecret            []byte
+	apiHost   string
+	apiToken  string
+	apiSecret []byte
+	// ENCRYPTION support fields
+	getEphemeralKeyFunc func() *rsa.PrivateKey
+	publicKeyCache      map[string]*rsa.PublicKey
+
 	apiInsecureTransport bool
 	apiTLSConfig         *tls.Config
 	userAgent            string
@@ -61,6 +69,7 @@ type Client struct {
 	pageLimit            int
 	snapshotAt           time.Time
 	dialer               dialer
+	clientInterceptors   map[string]clientInterceptor
 
 	grpcConn *grpc.ClientConn
 
@@ -142,11 +151,17 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	}
 
 	client := &Client{
-		apiHost:      defaultAPIHost,
-		retryOptions: defaultRetryOptions(),
-		apiToken:     token,
-		apiSecret:    decodedSecret,
-		userAgent:    defaultUserAgent,
+		apiHost:             defaultAPIHost,
+		retryOptions:        defaultRetryOptions(),
+		apiToken:            token,
+		apiSecret:           decodedSecret,
+		userAgent:           defaultUserAgent,
+		getEphemeralKeyFunc: sync.OnceValue(privKeyGenerator),
+		publicKeyCache:      make(map[string]*rsa.PublicKey),
+	}
+
+	for _, opt := range defaultClientOptions {
+		opt(client)
 	}
 
 	for _, opt := range opts {
@@ -454,6 +469,16 @@ func (c *Client) initializeServices() {
 	}
 }
 
+func (c *Client) clientInterceptor(ctx context.Context, method string, req, reply any, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
+	if interceptor, ok := c.clientInterceptors[method]; ok && interceptor != nil {
+		stop, err := interceptor(c, ctx, method, req, reply, cc, invoker, opts...)
+		if err != nil || stop {
+			return err
+		}
+	}
+	return invoker(ctx, method, req, reply, cc, opts...)
+}
+
 // A ClientOption is an optional argument to New that can override the created
 // client's default behavior.
 type ClientOption func(c *Client)
@@ -509,6 +534,29 @@ func WithUserAgentExtra(userAgentExtra string) ClientOption {
 func WithRateLimitRetries(enabled bool) ClientOption {
 	return func(c *Client) {
 		c.retryOptions.retryRateLimitErrors = enabled
+	}
+}
+
+func withClientInterceptor(method string, interceptor clientInterceptor) ClientOption {
+	return func(c *Client) {
+		if c.clientInterceptors == nil {
+			c.clientInterceptors = make(map[string]clientInterceptor)
+		}
+		c.clientInterceptors[method] = interceptor
+	}
+}
+
+// WithEphemeralKey configures an ephemeral key used for managed secret retrieval.
+// If set to nil it will generate a new ephmeral key on the first request.
+func WithEphemeralKey(key *rsa.PrivateKey) ClientOption {
+	return func(c *Client) {
+		if key == nil {
+			c.getEphemeralKeyFunc = sync.OnceValue(privKeyGenerator)
+		} else {
+			c.getEphemeralKeyFunc = func() *rsa.PrivateKey {
+				return key
+			}
+		}
 	}
 }
 

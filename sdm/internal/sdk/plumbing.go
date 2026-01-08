@@ -8883,12 +8883,13 @@ func convertGCPConnectorToPorcelain(plumbing *proto.GCPConnector) (*GCPConnector
 		porcelain.IncludeTags = v
 	}
 	porcelain.Name = plumbing.Name
-	porcelain.PoolID = plumbing.PoolId
 	porcelain.ProjectIDs = plumbing.ProjectIds
-	porcelain.ProjectNumber = plumbing.ProjectNumber
-	porcelain.ProviderID = plumbing.ProviderId
 	porcelain.ScanPeriod = plumbing.ScanPeriod
 	porcelain.Services = plumbing.Services
+	porcelain.WorkloadPoolID = plumbing.WorkloadPoolId
+	porcelain.WorkloadProjectID = plumbing.WorkloadProjectId
+	porcelain.WorkloadProjectNumber = plumbing.WorkloadProjectNumber
+	porcelain.WorkloadProviderID = plumbing.WorkloadProviderId
 	return porcelain, nil
 }
 
@@ -8902,12 +8903,13 @@ func convertGCPConnectorToPlumbing(porcelain *GCPConnector) *proto.GCPConnector 
 	plumbing.Id = (porcelain.ID)
 	plumbing.IncludeTags = convertRepeatedTagToPlumbing(porcelain.IncludeTags)
 	plumbing.Name = (porcelain.Name)
-	plumbing.PoolId = (porcelain.PoolID)
 	plumbing.ProjectIds = (porcelain.ProjectIDs)
-	plumbing.ProjectNumber = (porcelain.ProjectNumber)
-	plumbing.ProviderId = (porcelain.ProviderID)
 	plumbing.ScanPeriod = (porcelain.ScanPeriod)
 	plumbing.Services = (porcelain.Services)
+	plumbing.WorkloadPoolId = (porcelain.WorkloadPoolID)
+	plumbing.WorkloadProjectId = (porcelain.WorkloadProjectID)
+	plumbing.WorkloadProjectNumber = (porcelain.WorkloadProjectNumber)
+	plumbing.WorkloadProviderId = (porcelain.WorkloadProviderID)
 	return plumbing
 }
 func convertRepeatedGCPConnectorToPlumbing(

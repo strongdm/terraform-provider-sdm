@@ -132,9 +132,9 @@ func TestAccSDMConnector_CreateGCP(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.name", connectorName),
 					resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.scan_period", "Daily"),
-					resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.project_number", "123456789"),
-					resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.provider_id", "provider-123"),
-					resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.pool_id", "pool-456"),
+					resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.workload_project_id", "project-123456789"), resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.workload_project_number", "123456789"),
+					resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.workload_provider_id", "provider-123"),
+					resource.TestCheckResourceAttr("sdm_connector."+rsName, "gcp.0.workload_pool_id", "pool-456"),
 				),
 			},
 			{
@@ -247,9 +247,10 @@ func testAccSDMGCPConnectorConfig(resourceName string, connectorName string) str
 		gcp {
 			name = "%s"
 			scan_period = "Daily"
-			project_number = "123456789"
-			provider_id = "provider-123"
-			pool_id = "pool-456"
+			workload_project_id = "project-123456789"
+			workload_project_number = "123456789"
+			workload_provider_id = "provider-123"
+			workload_pool_id = "pool-456"
 			project_ids = ["project-1", "project-2"]
 		}
 	}`, resourceName, connectorName)

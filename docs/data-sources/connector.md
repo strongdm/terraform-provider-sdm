@@ -16,15 +16,16 @@ The following arguments are supported by a DiscoveryConnectors data source:
 * `description` - (Optional) Description of the Connector.
 * `id` - (Optional) Unique identifier of the Connector.
 * `name` - (Optional) Unique human-readable name of the Connector.
-* `pool_id` - (Optional) PoolId is the GCP Workload Pool Identifier used to authenticate our JWT
 * `project_ids` - (Optional) ProjectIds is the list of GCP Projects the connector will scan
-* `project_number` - (Optional) ProjectNumber is the GCP Project the Workload Pool is defined in
-* `provider_id` - (Optional) ProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
 * `role_name` - (Optional) RoleName is the Role we're assuming into for an account
 * `scan_period` - (Optional) ScanPeriod identifies which remote system this Connector discovers
 * `services` - (Optional) Services is a list of services this connector should scan.
 * `subscription_ids` - (Optional) SubscriptionIds are the targets of discovery.
 * `tenant_id` - (Optional) TenantId is the Azure Tenant we're discovering in
+* `workload_pool_id` - (Optional) WorkloadPoolId is the GCP Workload Pool Identifier used to authenticate our JWT
+* `workload_project_id` - (Optional) WorkloadProjectId is the GCP Project ID where the Workload Pool is defined
+* `workload_project_number` - (Optional) WorkloadProjectNumber is the GCP Project Number where the Workload Pool is defined
+* `workload_provider_id` - (Optional) WorkloadProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a DiscoveryConnectors data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_connector ids.
@@ -51,9 +52,10 @@ In addition to provided arguments above, the following attributes are returned b
 		* `description` - Description of the Connector.
 		* `id` - Unique identifier of the Connector.
 		* `name` - Unique human-readable name of the Connector.
-		* `pool_id` - PoolId is the GCP Workload Pool Identifier used to authenticate our JWT
 		* `project_ids` - ProjectIds is the list of GCP Projects the connector will scan
-		* `project_number` - ProjectNumber is the GCP Project the Workload Pool is defined in
-		* `provider_id` - ProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
 		* `scan_period` - ScanPeriod identifies which remote system this Connector discovers
 		* `services` - Services is a list of services this connector should scan.
+		* `workload_pool_id` - WorkloadPoolId is the GCP Workload Pool Identifier used to authenticate our JWT
+		* `workload_project_id` - WorkloadProjectId is the GCP Project ID where the Workload Pool is defined
+		* `workload_project_number` - WorkloadProjectNumber is the GCP Project Number where the Workload Pool is defined
+		* `workload_provider_id` - WorkloadProviderId is the GCP Workload Provider Identifier used to authenticate our JWT
