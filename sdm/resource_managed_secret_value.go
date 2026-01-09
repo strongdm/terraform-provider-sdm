@@ -4,15 +4,10 @@ package sdm
 
 import (
 	"context"
-	"crypto/rand"
-	"crypto/rsa"
 	"crypto/sha1"
-	"crypto/sha256"
-	"crypto/x509"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
-	"encoding/pem"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
@@ -21,9 +16,10 @@ import (
 
 func resourceManagedSecretValue() *schema.Resource {
 	return &schema.Resource{
-		ReadContext:   nilCrudFunc,
-		CreateContext: managedSecretValueCreate,
-		DeleteContext: nilCrudFunc,
+		ReadContext:        nilCrudFunc,
+		CreateContext:      managedSecretValueCreate,
+		DeleteContext:      nilCrudFunc,
+		DeprecationMessage: "sdm_managed_secret_value is deprecated. Set sdm_managed_secret resource's value directly with base64 encoded json value.",
 		Schema: map[string]*schema.Schema{
 			"value": {
 				Description: "value object",
@@ -55,37 +51,14 @@ func nilCrudFunc(_ context.Context, _ *schema.ResourceData, _ any) diag.Diagnost
 
 func managedSecretValueCreate(ctx context.Context, d *schema.ResourceData, meta any) diag.Diagnostics {
 	value := d.Get("value")
-	publicKey := d.Get("public_key").(string)
-
-	// try to decode first
-	publicKeyData, err := base64.StdEncoding.DecodeString(publicKey)
-	if err != nil {
-		publicKeyData = []byte(publicKey)
-	}
-
-	block, _ := pem.Decode(publicKeyData)
-	if block == nil {
-		return diag.Errorf("failed to find PEM data block")
-	}
-
-	key, err := x509.ParsePKCS1PublicKey(block.Bytes)
-	if err != nil {
-		return diag.Errorf("failed to parse PKCS1 public key: %s", err)
-	}
 
 	payload, err := json.Marshal(value)
 	if err != nil {
 		return diag.Errorf("failed to marshal value to json: %s", err)
 	}
 
-	encrypted, err := rsa.EncryptOAEP(sha256.New(), rand.Reader, key, payload, nil)
-	if err != nil {
-		return diag.Errorf("failed to encrypt the value: %s", err)
-	}
-
-	encodedValue := base64.StdEncoding.EncodeToString(encrypted)
-	d.Set("encrypted", encodedValue)
-	d.SetId(hashForValue(encodedValue))
+	d.Set("encrypted", base64.StdEncoding.EncodeToString(payload))
+	d.SetId(hashForValue(string(payload)))
 	return nil
 }
 

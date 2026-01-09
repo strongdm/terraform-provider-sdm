@@ -182,6 +182,7 @@ func New(token, secret string, opts ...ClientOption) (*Client, error) {
 	if client.dialer != nil {
 		dialOpts = append(dialOpts, grpc.WithContextDialer(client.dialer))
 	}
+	dialOpts = append(dialOpts, grpc.WithUnaryInterceptor(client.clientInterceptor))
 	cc, err := grpc.Dial(client.apiHost, dialOpts...)
 	if err != nil {
 		return nil, convertErrorToPorcelain(fmt.Errorf("cannot dial API server: %w", err))

@@ -4,7 +4,6 @@ package sdm
 import (
 	"crypto/rand"
 	"crypto/rsa"
-	"crypto/sha256"
 	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
@@ -44,7 +43,7 @@ func TestAccSDMManagedSecretValue_Create_Base64(t *testing.T) {
 			}`, name, pubKeyBase64),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_managed_secret_value."+name, "public_key", strings.TrimSpace(pubKeyBase64)),
-					validateEncryptedKeyValue(privKey, "sdm_managed_secret_value."+name, "user_dn", "cn=john a. zoidberg,ou=people,dc=planetexpress,dc=com"),
+					validateEncodedKeyValue(privKey, "sdm_managed_secret_value."+name, "user_dn", "cn=john a. zoidberg,ou=people,dc=planetexpress,dc=com"),
 				),
 			},
 		},
@@ -77,14 +76,14 @@ func TestAccSDMManagedSecretValue_Create_PEM(t *testing.T) {
 			}`, name, pubKey),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("sdm_managed_secret_value."+name, "public_key", strings.TrimSpace(pubKey)),
-					validateEncryptedKeyValue(privKey, "sdm_managed_secret_value."+name, "user_dn", "cn=john a. zoidberg,ou=people,dc=planetexpress,dc=com"),
+					validateEncodedKeyValue(privKey, "sdm_managed_secret_value."+name, "user_dn", "cn=john a. zoidberg,ou=people,dc=planetexpress,dc=com"),
 				),
 			},
 		},
 	})
 }
 
-func validateEncryptedKeyValue(privKey *rsa.PrivateKey, resource string, key, expected string) func(s *terraform.State) error {
+func validateEncodedKeyValue(privKey *rsa.PrivateKey, resource string, key, expected string) func(s *terraform.State) error {
 	return func(s *terraform.State) error {
 		r := s.RootModule().Resources[resource]
 		encrypted := r.Primary.Attributes["encrypted"]
@@ -93,12 +92,8 @@ func validateEncryptedKeyValue(privKey *rsa.PrivateKey, resource string, key, ex
 			return err
 		}
 
-		decryptedData, err := rsa.DecryptOAEP(sha256.New(), rand.Reader, privKey, bytes, nil)
-		if err != nil {
-			return err
-		}
 		var value map[string]string
-		if err := json.Unmarshal(decryptedData, &value); err != nil {
+		if err := json.Unmarshal(bytes, &value); err != nil {
 			return err
 		}
 		if value[key] != expected {
