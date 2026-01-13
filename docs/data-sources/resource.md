@@ -1144,6 +1144,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
+		* `oauth_auth_endpoint` - The OAuth 2.0 authorization endpoint URL.
+		* `oauth_token_endpoint` - The OAuth 2.0 token endpoint URL.
 		* `password` - OAuth App Client Secret
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.

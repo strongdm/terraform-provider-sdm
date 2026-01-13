@@ -4174,14 +4174,12 @@ func (svc *ManagedSecrets) Get(
 // Retrieve returns Managed Secret with sensitive data
 func (svc *ManagedSecrets) Retrieve(
 	ctx context.Context,
-	id string,
-	publicKey []byte) (
+	id string) (
 	*ManagedSecretRetrieveResponse,
 	error) {
 	req := plumbing.ManagedSecretRetrieveRequest{}
 
 	req.Id = (id)
-	req.PublicKey = (publicKey)
 	req.Meta = &plumbing.GetRequestMetadata{}
 	plumbingResponse, err := retryWrapper(
 		ctx,

@@ -7059,6 +7059,18 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Resource.",
 									},
+									"oauth_auth_endpoint": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The OAuth 2.0 authorization endpoint URL.",
+									},
+									"oauth_token_endpoint": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The OAuth 2.0 token endpoint URL.",
+									},
 									"password": {
 										Type: schema.TypeString,
 
@@ -12738,19 +12750,21 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.MCP:
 			output[0]["mcp"] = append(output[0]["mcp"], entity{
-				"bind_interface":   (v.BindInterface),
-				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
-				"id":               (v.ID),
-				"name":             (v.Name),
-				"password":         (v.Password),
-				"port":             (v.Port),
-				"port_override":    (v.PortOverride),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
-				"username":         (v.Username),
+				"bind_interface":       (v.BindInterface),
+				"egress_filter":        (v.EgressFilter),
+				"hostname":             (v.Hostname),
+				"id":                   (v.ID),
+				"name":                 (v.Name),
+				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
+				"oauth_token_endpoint": (v.OauthTokenEndpoint),
+				"password":             (v.Password),
+				"port":                 (v.Port),
+				"port_override":        (v.PortOverride),
+				"proxy_cluster_id":     (v.ProxyClusterID),
+				"secret_store_id":      (v.SecretStoreID),
+				"subdomain":            (v.Subdomain),
+				"tags":                 convertTagsToPorcelain(v.Tags),
+				"username":             (v.Username),
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
