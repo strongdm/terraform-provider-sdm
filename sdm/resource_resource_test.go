@@ -562,7 +562,6 @@ func TestAccSDMImportMongoLegacyReplicaSet(t *testing.T) {
 						auth_database = "asdf"
 						bind_interface = "127.0.0.2"
 						username = "username"
-						replica_set = "blah"
 					}
 				}`, name, name, port),
 				Check: resource.ComposeTestCheckFunc(

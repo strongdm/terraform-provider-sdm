@@ -4459,12 +4459,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "ID of the proxy cluster for this resource, if any.",
 						},
-						"replica_set": {
-							Type: schema.TypeString,
-
-							Required:    true,
-							Description: "The name of the mongo replicaset.",
-						},
 						"secret_store_id": {
 							Type: schema.TypeString,
 
@@ -5699,6 +5693,104 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Sensitive:   true,
 							Description: "The service account key to authenticate with.",
+						},
+						"subdomain": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"google_spanner": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "GoogleSpanner is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+						},
+						"database": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+						},
+						"egress_filter": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"endpoint": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The endpoint to dial e.g. spanner.googleapis.com",
+						},
+						"instance": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The Spanner instance ID within the GCP project.",
+						},
+						"name": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port": {
+							Type: schema.TypeInt,
+
+							Optional:    true,
+							Description: "The port to dial to initiate a connection from the egress node to this resource.",
+						},
+						"port_override": {
+							Type: schema.TypeInt,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
+						},
+						"project": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The GCP project ID containing the Spanner database.",
+						},
+						"proxy_cluster_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"service_account_to_impersonate": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "Optional service account email to impersonate. When set, the relay's Application Default Credentials will impersonate this service account to access Spanner. This allows role separation where the relay uses one service account but operates as another.",
 						},
 						"subdomain": {
 							Type: schema.TypeString,
@@ -7400,12 +7492,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "ID of the proxy cluster for this resource, if any.",
 						},
-						"replica_set": {
-							Type: schema.TypeString,
-
-							Required:    true,
-							Description: "The name of the mongo replicaset.",
-						},
 						"secret_store_id": {
 							Type: schema.TypeString,
 
@@ -7510,12 +7596,6 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "ID of the proxy cluster for this resource, if any.",
-						},
-						"replica_set": {
-							Type: schema.TypeString,
-
-							Required:    true,
-							Description: "The name of the mongo replicaset.",
 						},
 						"secret_store_id": {
 							Type: schema.TypeString,
@@ -12747,6 +12827,17 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"service_account_key":   convertStringToPlumbing(raw["service_account_key"]),
 		}, nil
 	}
+	if list := d.Get("google_spanner").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		}
+
+		return map[string]string{}, nil
+	}
 	if list := d.Get("greenplum").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -15357,7 +15448,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Password:         convertStringToPlumbing(raw["password"]),
 			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
-			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -15724,6 +15814,35 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ServiceAccountKey:    convertStringToPlumbing(raw["service_account_key"]),
 			Subdomain:            convertStringToPlumbing(raw["subdomain"]),
 			Tags:                 convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("google_spanner").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.GoogleSpanner{}
+		}
+		out := &sdm.GoogleSpanner{
+			ID:                          d.Id(),
+			BindInterface:               convertStringToPlumbing(raw["bind_interface"]),
+			Database:                    convertStringToPlumbing(raw["database"]),
+			EgressFilter:                convertStringToPlumbing(raw["egress_filter"]),
+			Endpoint:                    convertStringToPlumbing(raw["endpoint"]),
+			Instance:                    convertStringToPlumbing(raw["instance"]),
+			Name:                        convertStringToPlumbing(raw["name"]),
+			Port:                        convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                convertInt32ToPlumbing(raw["port_override"]),
+			Project:                     convertStringToPlumbing(raw["project"]),
+			ProxyClusterID:              convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:               convertStringToPlumbing(raw["secret_store_id"]),
+			ServiceAccountToImpersonate: convertStringToPlumbing(raw["service_account_to_impersonate"]),
+			Subdomain:                   convertStringToPlumbing(raw["subdomain"]),
+			Tags:                        convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -16217,7 +16336,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Port:             convertInt32ToPlumbing(raw["port"]),
 			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
-			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -16248,7 +16366,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Port:             convertInt32ToPlumbing(raw["port"]),
 			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
-			ReplicaSet:       convertStringToPlumbing(raw["replica_set"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -18268,7 +18385,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":           seValues["password"],
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -18536,6 +18652,27 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"service_account_key":   seValues["service_account_key"],
 				"subdomain":             (v.Subdomain),
 				"tags":                  convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.GoogleSpanner:
+		localV, _ := localVersion.(*sdm.GoogleSpanner)
+		_ = localV
+		d.Set("google_spanner", []map[string]interface{}{
+			{
+				"bind_interface":                 (v.BindInterface),
+				"database":                       (v.Database),
+				"egress_filter":                  (v.EgressFilter),
+				"endpoint":                       (v.Endpoint),
+				"instance":                       (v.Instance),
+				"name":                           (v.Name),
+				"port":                           (v.Port),
+				"port_override":                  (v.PortOverride),
+				"project":                        (v.Project),
+				"proxy_cluster_id":               (v.ProxyClusterID),
+				"secret_store_id":                (v.SecretStoreID),
+				"service_account_to_impersonate": (v.ServiceAccountToImpersonate),
+				"subdomain":                      (v.Subdomain),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Greenplum:
@@ -18893,7 +19030,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -18916,7 +19052,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -21098,7 +21233,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"password":           seValues["password"],
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -21462,6 +21596,30 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"service_account_key":   seValues["service_account_key"],
 				"subdomain":             (v.Subdomain),
 				"tags":                  convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.GoogleSpanner:
+		localV, ok := localVersion.(*sdm.GoogleSpanner)
+		if !ok {
+			localV = &sdm.GoogleSpanner{}
+		}
+		_ = localV
+		d.Set("google_spanner", []map[string]interface{}{
+			{
+				"bind_interface":                 (v.BindInterface),
+				"database":                       (v.Database),
+				"egress_filter":                  (v.EgressFilter),
+				"endpoint":                       (v.Endpoint),
+				"instance":                       (v.Instance),
+				"name":                           (v.Name),
+				"port":                           (v.Port),
+				"port_override":                  (v.PortOverride),
+				"project":                        (v.Project),
+				"proxy_cluster_id":               (v.ProxyClusterID),
+				"secret_store_id":                (v.SecretStoreID),
+				"service_account_to_impersonate": (v.ServiceAccountToImpersonate),
+				"subdomain":                      (v.Subdomain),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Greenplum:
@@ -21951,7 +22109,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -21983,7 +22140,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),

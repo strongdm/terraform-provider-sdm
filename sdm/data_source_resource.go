@@ -4581,12 +4581,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
-									"replica_set": {
-										Type: schema.TypeString,
-
-										Optional:    true,
-										Description: "The name of the mongo replicaset.",
-									},
 									"secret_store_id": {
 										Type: schema.TypeString,
 
@@ -5848,6 +5842,106 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Sensitive:   true,
 										Description: "The service account key to authenticate with.",
+									},
+									"subdomain": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
+						"google_spanner": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+									},
+									"database": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.",
+									},
+									"egress_filter": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"endpoint": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The endpoint to dial e.g. spanner.googleapis.com",
+									},
+									"id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"instance": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The Spanner instance ID within the GCP project.",
+									},
+									"name": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"port": {
+										Type: schema.TypeInt,
+
+										Optional:    true,
+										Description: "The port to dial to initiate a connection from the egress node to this resource.",
+									},
+									"port_override": {
+										Type: schema.TypeInt,
+
+										Optional:    true,
+										Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
+									},
+									"project": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The GCP project ID containing the Spanner database.",
+									},
+									"proxy_cluster_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"secret_store_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"service_account_to_impersonate": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Optional service account email to impersonate. When set, the relay's Application Default Credentials will impersonate this service account to access Spanner. This allows role separation where the relay uses one service account but operates as another.",
 									},
 									"subdomain": {
 										Type: schema.TypeString,
@@ -7582,12 +7676,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
-									"replica_set": {
-										Type: schema.TypeString,
-
-										Optional:    true,
-										Description: "The name of the mongo replicaset.",
-									},
 									"secret_store_id": {
 										Type: schema.TypeString,
 
@@ -7694,12 +7782,6 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
-									},
-									"replica_set": {
-										Type: schema.TypeString,
-
-										Optional:    true,
-										Description: "The name of the mongo replicaset.",
 									},
 									"secret_store_id": {
 										Type: schema.TypeString,
@@ -12313,7 +12395,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":           (v.Password),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -12542,6 +12623,24 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"service_account_key":   (v.ServiceAccountKey),
 				"subdomain":             (v.Subdomain),
 				"tags":                  convertTagsToPorcelain(v.Tags),
+			})
+		case *sdm.GoogleSpanner:
+			output[0]["google_spanner"] = append(output[0]["google_spanner"], entity{
+				"bind_interface":                 (v.BindInterface),
+				"database":                       (v.Database),
+				"egress_filter":                  (v.EgressFilter),
+				"endpoint":                       (v.Endpoint),
+				"id":                             (v.ID),
+				"instance":                       (v.Instance),
+				"name":                           (v.Name),
+				"port":                           (v.Port),
+				"port_override":                  (v.PortOverride),
+				"project":                        (v.Project),
+				"proxy_cluster_id":               (v.ProxyClusterID),
+				"secret_store_id":                (v.SecretStoreID),
+				"service_account_to_impersonate": (v.ServiceAccountToImpersonate),
+				"subdomain":                      (v.Subdomain),
+				"tags":                           convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Greenplum:
 			output[0]["greenplum"] = append(output[0]["greenplum"], entity{
@@ -12848,7 +12947,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -12868,7 +12966,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
-				"replica_set":        (v.ReplicaSet),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),

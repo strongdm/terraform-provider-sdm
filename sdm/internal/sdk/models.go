@@ -3062,8 +3062,6 @@ type DocumentDBReplicaSet struct {
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
-	// The name of the mongo replicaset.
-	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
@@ -3631,6 +3629,46 @@ type GoogleGKEUserImpersonation struct {
 	SecretStoreID string `json:"secretStoreId"`
 	// The service account key to authenticate with.
 	ServiceAccountKey string `json:"serviceAccountKey"`
+	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+// GoogleSpanner is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type GoogleSpanner struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	BindInterface string `json:"bindInterface"`
+	// The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
+	Database string `json:"database"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// The endpoint to dial e.g. spanner.googleapis.com
+	Endpoint string `json:"endpoint"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// The Spanner instance ID within the GCP project.
+	Instance string `json:"instance"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The port to dial to initiate a connection from the egress node to this resource.
+	Port int32 `json:"port"`
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	PortOverride int32 `json:"portOverride"`
+	// The GCP project ID containing the Spanner database.
+	Project string `json:"project"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// Optional service account email to impersonate. When set, the relay's
+	// Application Default Credentials will impersonate this service account
+	// to access Spanner. This allows role separation where the relay uses
+	// one service account but operates as another.
+	ServiceAccountToImpersonate string `json:"serviceAccountToImpersonate"`
 	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
@@ -5040,8 +5078,6 @@ type MongoLegacyReplicaset struct {
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
-	// The name of the mongo replicaset.
-	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
@@ -5079,8 +5115,6 @@ type MongoReplicaSet struct {
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
-	// The name of the mongo replicaset.
-	ReplicaSet string `json:"replicaSet"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
@@ -9836,6 +9870,60 @@ func (m *GoogleGKEUserImpersonation) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the GoogleGKEUserImpersonation.
 func (m *GoogleGKEUserImpersonation) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*GoogleSpanner) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the GoogleSpanner.
+func (m *GoogleSpanner) GetID() string { return m.ID }
+
+// GetName returns the name of the GoogleSpanner.
+func (m *GoogleSpanner) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GoogleSpanner.
+func (m *GoogleSpanner) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GoogleSpanner.
+func (m *GoogleSpanner) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GoogleSpanner.
+func (m *GoogleSpanner) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the GoogleSpanner.
+func (m *GoogleSpanner) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the GoogleSpanner.
+func (m *GoogleSpanner) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GoogleSpanner.
+func (m *GoogleSpanner) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GoogleSpanner.
+func (m *GoogleSpanner) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the GoogleSpanner.
+func (m *GoogleSpanner) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the GoogleSpanner.
+func (m *GoogleSpanner) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*Greenplum) isOneOf_Resource() {}

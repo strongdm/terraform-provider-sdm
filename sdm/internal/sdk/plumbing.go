@@ -8094,7 +8094,6 @@ func convertDocumentDBReplicaSetToPorcelain(plumbing *proto.DocumentDBReplicaSet
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
-	porcelain.ReplicaSet = plumbing.ReplicaSet
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -8122,7 +8121,6 @@ func convertDocumentDBReplicaSetToPlumbing(porcelain *DocumentDBReplicaSet) *pro
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
-	plumbing.ReplicaSet = (porcelain.ReplicaSet)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -9515,6 +9513,81 @@ func convertRepeatedGoogleGKEUserImpersonationToPorcelain(plumbings []*proto.Goo
 	var items []*GoogleGKEUserImpersonation
 	for _, plumbing := range plumbings {
 		if v, err := convertGoogleGKEUserImpersonationToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGoogleSpannerToPorcelain(plumbing *proto.GoogleSpanner) (*GoogleSpanner, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GoogleSpanner{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.Database = plumbing.Database
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Endpoint = plumbing.Endpoint
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Instance = plumbing.Instance
+	porcelain.Name = plumbing.Name
+	porcelain.Port = plumbing.Port
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.Project = plumbing.Project
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.ServiceAccountToImpersonate = plumbing.ServiceAccountToImpersonate
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertGoogleSpannerToPlumbing(porcelain *GoogleSpanner) *proto.GoogleSpanner {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GoogleSpanner{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.Database = (porcelain.Database)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Endpoint = (porcelain.Endpoint)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Instance = (porcelain.Instance)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Port = (porcelain.Port)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.Project = (porcelain.Project)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.ServiceAccountToImpersonate = (porcelain.ServiceAccountToImpersonate)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedGoogleSpannerToPlumbing(
+	porcelains []*GoogleSpanner,
+) []*proto.GoogleSpanner {
+	var items []*proto.GoogleSpanner
+	for _, porcelain := range porcelains {
+		items = append(items, convertGoogleSpannerToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGoogleSpannerToPorcelain(plumbings []*proto.GoogleSpanner) (
+	[]*GoogleSpanner,
+	error,
+) {
+	var items []*GoogleSpanner
+	for _, plumbing := range plumbings {
+		if v, err := convertGoogleSpannerToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -14441,7 +14514,6 @@ func convertMongoLegacyReplicasetToPorcelain(plumbing *proto.MongoLegacyReplicas
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
-	porcelain.ReplicaSet = plumbing.ReplicaSet
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -14471,7 +14543,6 @@ func convertMongoLegacyReplicasetToPlumbing(porcelain *MongoLegacyReplicaset) *p
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
-	plumbing.ReplicaSet = (porcelain.ReplicaSet)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -14520,7 +14591,6 @@ func convertMongoReplicaSetToPorcelain(plumbing *proto.MongoReplicaSet) (*MongoR
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
-	porcelain.ReplicaSet = plumbing.ReplicaSet
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -14550,7 +14620,6 @@ func convertMongoReplicaSetToPlumbing(porcelain *MongoReplicaSet) *proto.MongoRe
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
-	plumbing.ReplicaSet = (porcelain.ReplicaSet)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -19326,6 +19395,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_GoogleGke{GoogleGke: convertGoogleGKEToPlumbing(v)}
 	case *GoogleGKEUserImpersonation:
 		plumbing.Resource = &proto.Resource_GoogleGkeUserImpersonation{GoogleGkeUserImpersonation: convertGoogleGKEUserImpersonationToPlumbing(v)}
+	case *GoogleSpanner:
+		plumbing.Resource = &proto.Resource_GoogleSpanner{GoogleSpanner: convertGoogleSpannerToPlumbing(v)}
 	case *Greenplum:
 		plumbing.Resource = &proto.Resource_Greenplum{Greenplum: convertGreenplumToPlumbing(v)}
 	case *HTTPAuth:
@@ -19612,6 +19683,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetGoogleGkeUserImpersonation() != nil {
 		return convertGoogleGKEUserImpersonationToPorcelain(plumbing.GetGoogleGkeUserImpersonation())
+	}
+	if plumbing.GetGoogleSpanner() != nil {
+		return convertGoogleSpannerToPorcelain(plumbing.GetGoogleSpanner())
 	}
 	if plumbing.GetGreenplum() != nil {
 		return convertGreenplumToPorcelain(plumbing.GetGreenplum())
