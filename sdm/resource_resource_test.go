@@ -973,6 +973,7 @@ func testAccSDMResourceTagsConfig(resourceName string, sdmResourceName string, t
 		redis {
 			name = "%s"
 			hostname = "test.com"
+			port = 6379
 			tags = {
 %s
 			}

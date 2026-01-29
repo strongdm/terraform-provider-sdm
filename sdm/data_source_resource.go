@@ -7159,6 +7159,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The OAuth 2.0 authorization endpoint URL.",
 									},
+									"oauth_register_endpoint": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The OAuth 2.0 dynamic client registration endpoint URL.",
+									},
 									"oauth_token_endpoint": {
 										Type: schema.TypeString,
 
@@ -8476,6 +8482,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 									},
+									"discovery_enabled": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "If true, configures discovery of the Okta org to be run from a node.",
+									},
 									"domain": {
 										Type: schema.TypeString,
 
@@ -8487,6 +8499,12 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"group_names": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "comma separated list of group names to filter by. Supports wildcards (*)",
 									},
 									"id": {
 										Type: schema.TypeString,
@@ -12849,21 +12867,22 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.MCP:
 			output[0]["mcp"] = append(output[0]["mcp"], entity{
-				"bind_interface":       (v.BindInterface),
-				"egress_filter":        (v.EgressFilter),
-				"hostname":             (v.Hostname),
-				"id":                   (v.ID),
-				"name":                 (v.Name),
-				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
-				"oauth_token_endpoint": (v.OauthTokenEndpoint),
-				"password":             (v.Password),
-				"port":                 (v.Port),
-				"port_override":        (v.PortOverride),
-				"proxy_cluster_id":     (v.ProxyClusterID),
-				"secret_store_id":      (v.SecretStoreID),
-				"subdomain":            (v.Subdomain),
-				"tags":                 convertTagsToPorcelain(v.Tags),
-				"username":             (v.Username),
+				"bind_interface":          (v.BindInterface),
+				"egress_filter":           (v.EgressFilter),
+				"hostname":                (v.Hostname),
+				"id":                      (v.ID),
+				"name":                    (v.Name),
+				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
+				"oauth_register_endpoint": (v.OauthRegisterEndpoint),
+				"oauth_token_endpoint":    (v.OauthTokenEndpoint),
+				"password":                (v.Password),
+				"port":                    (v.Port),
+				"port_override":           (v.PortOverride),
+				"proxy_cluster_id":        (v.ProxyClusterID),
+				"secret_store_id":         (v.SecretStoreID),
+				"subdomain":               (v.Subdomain),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+				"username":                (v.Username),
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
@@ -13088,17 +13107,19 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.OktaGroups:
 			output[0]["okta_groups"] = append(output[0]["okta_groups"], entity{
-				"bind_interface":   (v.BindInterface),
-				"domain":           (v.Domain),
-				"egress_filter":    (v.EgressFilter),
-				"id":               (v.ID),
-				"identity_set_id":  (v.IdentitySetID),
-				"name":             (v.Name),
-				"privilege_levels": (v.PrivilegeLevels),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
+				"bind_interface":    (v.BindInterface),
+				"discovery_enabled": (v.DiscoveryEnabled),
+				"domain":            (v.Domain),
+				"egress_filter":     (v.EgressFilter),
+				"group_names":       (v.GroupNames),
+				"id":                (v.ID),
+				"identity_set_id":   (v.IdentitySetID),
+				"name":              (v.Name),
+				"privilege_levels":  (v.PrivilegeLevels),
+				"proxy_cluster_id":  (v.ProxyClusterID),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.Oracle:
 			output[0]["oracle"] = append(output[0]["oracle"], entity{

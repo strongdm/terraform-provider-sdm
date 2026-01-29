@@ -6984,6 +6984,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "The OAuth 2.0 authorization endpoint URL.",
 						},
+						"oauth_register_endpoint": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The OAuth 2.0 dynamic client registration endpoint URL.",
+						},
 						"oauth_token_endpoint": {
 							Type: schema.TypeString,
 
@@ -8281,6 +8287,12 @@ func resourceResource() *schema.Resource {
 							Computed:    true,
 							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
 						},
+						"discovery_enabled": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "If true, configures discovery of the Okta org to be run from a node.",
+						},
 						"domain": {
 							Type: schema.TypeString,
 
@@ -8292,6 +8304,12 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"group_names": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "comma separated list of group names to filter by. Supports wildcards (*)",
 						},
 						"identity_set_id": {
 							Type: schema.TypeString,
@@ -8308,7 +8326,7 @@ func resourceResource() *schema.Resource {
 						"privilege_levels": {
 							Type: schema.TypeString,
 
-							Required:    true,
+							Optional:    true,
 							Description: "The privilege levels specify which Groups are managed externally",
 						},
 						"proxy_cluster_id": {
@@ -16183,21 +16201,22 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.MCP{}
 		}
 		out := &sdm.MCP{
-			ID:                 d.Id(),
-			BindInterface:      convertStringToPlumbing(raw["bind_interface"]),
-			EgressFilter:       convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:           convertStringToPlumbing(raw["hostname"]),
-			Name:               convertStringToPlumbing(raw["name"]),
-			OauthAuthEndpoint:  convertStringToPlumbing(raw["oauth_auth_endpoint"]),
-			OauthTokenEndpoint: convertStringToPlumbing(raw["oauth_token_endpoint"]),
-			Password:           convertStringToPlumbing(raw["password"]),
-			Port:               convertInt32ToPlumbing(raw["port"]),
-			PortOverride:       convertInt32ToPlumbing(raw["port_override"]),
-			ProxyClusterID:     convertStringToPlumbing(raw["proxy_cluster_id"]),
-			SecretStoreID:      convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:          convertStringToPlumbing(raw["subdomain"]),
-			Tags:               convertTagsToPlumbing(raw["tags"]),
-			Username:           convertStringToPlumbing(raw["username"]),
+			ID:                    d.Id(),
+			BindInterface:         convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:          convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:              convertStringToPlumbing(raw["hostname"]),
+			Name:                  convertStringToPlumbing(raw["name"]),
+			OauthAuthEndpoint:     convertStringToPlumbing(raw["oauth_auth_endpoint"]),
+			OauthRegisterEndpoint: convertStringToPlumbing(raw["oauth_register_endpoint"]),
+			OauthTokenEndpoint:    convertStringToPlumbing(raw["oauth_token_endpoint"]),
+			Password:              convertStringToPlumbing(raw["password"]),
+			Port:                  convertInt32ToPlumbing(raw["port"]),
+			PortOverride:          convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:        convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:         convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:             convertStringToPlumbing(raw["subdomain"]),
+			Tags:                  convertTagsToPlumbing(raw["tags"]),
+			Username:              convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -16565,17 +16584,19 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.OktaGroups{}
 		}
 		out := &sdm.OktaGroups{
-			ID:              d.Id(),
-			BindInterface:   convertStringToPlumbing(raw["bind_interface"]),
-			Domain:          convertStringToPlumbing(raw["domain"]),
-			EgressFilter:    convertStringToPlumbing(raw["egress_filter"]),
-			IdentitySetID:   convertStringToPlumbing(raw["identity_set_id"]),
-			Name:            convertStringToPlumbing(raw["name"]),
-			PrivilegeLevels: convertStringToPlumbing(raw["privilege_levels"]),
-			ProxyClusterID:  convertStringToPlumbing(raw["proxy_cluster_id"]),
-			SecretStoreID:   convertStringToPlumbing(raw["secret_store_id"]),
-			Subdomain:       convertStringToPlumbing(raw["subdomain"]),
-			Tags:            convertTagsToPlumbing(raw["tags"]),
+			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
+			DiscoveryEnabled: convertBoolToPlumbing(raw["discovery_enabled"]),
+			Domain:           convertStringToPlumbing(raw["domain"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			GroupNames:       convertStringToPlumbing(raw["group_names"]),
+			IdentitySetID:    convertStringToPlumbing(raw["identity_set_id"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			PrivilegeLevels:  convertStringToPlumbing(raw["privilege_levels"]),
+			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
 		}
 		return out
 	}
@@ -18918,20 +18939,21 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("mcp", []map[string]interface{}{
 			{
-				"bind_interface":       (v.BindInterface),
-				"egress_filter":        (v.EgressFilter),
-				"hostname":             (v.Hostname),
-				"name":                 (v.Name),
-				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
-				"oauth_token_endpoint": (v.OauthTokenEndpoint),
-				"password":             seValues["password"],
-				"port":                 (v.Port),
-				"port_override":        (v.PortOverride),
-				"proxy_cluster_id":     (v.ProxyClusterID),
-				"secret_store_id":      (v.SecretStoreID),
-				"subdomain":            (v.Subdomain),
-				"tags":                 convertTagsToPorcelain(v.Tags),
-				"username":             (v.Username),
+				"bind_interface":          (v.BindInterface),
+				"egress_filter":           (v.EgressFilter),
+				"hostname":                (v.Hostname),
+				"name":                    (v.Name),
+				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
+				"oauth_register_endpoint": (v.OauthRegisterEndpoint),
+				"oauth_token_endpoint":    (v.OauthTokenEndpoint),
+				"password":                seValues["password"],
+				"port":                    (v.Port),
+				"port_override":           (v.PortOverride),
+				"proxy_cluster_id":        (v.ProxyClusterID),
+				"secret_store_id":         (v.SecretStoreID),
+				"subdomain":               (v.Subdomain),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+				"username":                (v.Username),
 			},
 		})
 	case *sdm.Memcached:
@@ -19196,16 +19218,18 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("okta_groups", []map[string]interface{}{
 			{
-				"bind_interface":   (v.BindInterface),
-				"domain":           (v.Domain),
-				"egress_filter":    (v.EgressFilter),
-				"identity_set_id":  (v.IdentitySetID),
-				"name":             (v.Name),
-				"privilege_levels": (v.PrivilegeLevels),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
+				"bind_interface":    (v.BindInterface),
+				"discovery_enabled": (v.DiscoveryEnabled),
+				"domain":            (v.Domain),
+				"egress_filter":     (v.EgressFilter),
+				"group_names":       (v.GroupNames),
+				"identity_set_id":   (v.IdentitySetID),
+				"name":              (v.Name),
+				"privilege_levels":  (v.PrivilegeLevels),
+				"proxy_cluster_id":  (v.ProxyClusterID),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Oracle:
@@ -21958,20 +21982,21 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("mcp", []map[string]interface{}{
 			{
-				"bind_interface":       (v.BindInterface),
-				"egress_filter":        (v.EgressFilter),
-				"hostname":             (v.Hostname),
-				"name":                 (v.Name),
-				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
-				"oauth_token_endpoint": (v.OauthTokenEndpoint),
-				"password":             seValues["password"],
-				"port":                 (v.Port),
-				"port_override":        (v.PortOverride),
-				"proxy_cluster_id":     (v.ProxyClusterID),
-				"secret_store_id":      (v.SecretStoreID),
-				"subdomain":            (v.Subdomain),
-				"tags":                 convertTagsToPorcelain(v.Tags),
-				"username":             (v.Username),
+				"bind_interface":          (v.BindInterface),
+				"egress_filter":           (v.EgressFilter),
+				"hostname":                (v.Hostname),
+				"name":                    (v.Name),
+				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
+				"oauth_register_endpoint": (v.OauthRegisterEndpoint),
+				"oauth_token_endpoint":    (v.OauthTokenEndpoint),
+				"password":                seValues["password"],
+				"port":                    (v.Port),
+				"port_override":           (v.PortOverride),
+				"proxy_cluster_id":        (v.ProxyClusterID),
+				"secret_store_id":         (v.SecretStoreID),
+				"subdomain":               (v.Subdomain),
+				"tags":                    convertTagsToPorcelain(v.Tags),
+				"username":                (v.Username),
 			},
 		})
 	case *sdm.Memcached:
@@ -22359,16 +22384,18 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		_ = localV
 		d.Set("okta_groups", []map[string]interface{}{
 			{
-				"bind_interface":   (v.BindInterface),
-				"domain":           (v.Domain),
-				"egress_filter":    (v.EgressFilter),
-				"identity_set_id":  (v.IdentitySetID),
-				"name":             (v.Name),
-				"privilege_levels": (v.PrivilegeLevels),
-				"proxy_cluster_id": (v.ProxyClusterID),
-				"secret_store_id":  (v.SecretStoreID),
-				"subdomain":        (v.Subdomain),
-				"tags":             convertTagsToPorcelain(v.Tags),
+				"bind_interface":    (v.BindInterface),
+				"discovery_enabled": (v.DiscoveryEnabled),
+				"domain":            (v.Domain),
+				"egress_filter":     (v.EgressFilter),
+				"group_names":       (v.GroupNames),
+				"identity_set_id":   (v.IdentitySetID),
+				"name":              (v.Name),
+				"privilege_levels":  (v.PrivilegeLevels),
+				"proxy_cluster_id":  (v.ProxyClusterID),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Oracle:

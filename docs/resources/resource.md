@@ -1115,6 +1115,7 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `oauth_auth_endpoint` - (Required) The OAuth 2.0 authorization endpoint URL.
+	* `oauth_register_endpoint` - (Optional) The OAuth 2.0 dynamic client registration endpoint URL.
 	* `oauth_token_endpoint` - (Required) The OAuth 2.0 token endpoint URL.
 	* `password` - (Required, either in plaintext, or as a secret store path) OAuth App Client Secret
 	* `port` - (Optional) The port to dial to initiate a connection from the egress node to this resource.
@@ -1311,11 +1312,13 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 * okta_groups:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	* `discovery_enabled` - (Optional) If true, configures discovery of the Okta org to be run from a node.
 	* `domain` - (Required) Represents the Okta Org Client URL
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `group_names` - (Optional) comma separated list of group names to filter by. Supports wildcards (*)
 	* `identity_set_id` - (Required) The ID of the identity set to use for identity connections.
 	* `name` - (Required) Unique human-readable name of the Resource.
-	* `privilege_levels` - (Required) The privilege levels specify which Groups are managed externally
+	* `privilege_levels` - (Optional) The privilege levels specify which Groups are managed externally
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.

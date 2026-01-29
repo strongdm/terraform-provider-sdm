@@ -7543,6 +7543,96 @@ func convertRepeatedCreateResponseMetadataToPorcelain(plumbings []*proto.CreateR
 	}
 	return items, nil
 }
+func convertCustomHeaderToPorcelain(plumbing *proto.CustomHeader) (*CustomHeader, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &CustomHeader{}
+	porcelain.Name = plumbing.Name
+	porcelain.Secret = plumbing.Secret
+	porcelain.Value = plumbing.Value
+	return porcelain, nil
+}
+
+func convertCustomHeaderToPlumbing(porcelain *CustomHeader) *proto.CustomHeader {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.CustomHeader{}
+	plumbing.Name = (porcelain.Name)
+	plumbing.Secret = (porcelain.Secret)
+	plumbing.Value = (porcelain.Value)
+	return plumbing
+}
+func convertRepeatedCustomHeaderToPlumbing(
+	porcelains []*CustomHeader,
+) []*proto.CustomHeader {
+	var items []*proto.CustomHeader
+	for _, porcelain := range porcelains {
+		items = append(items, convertCustomHeaderToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCustomHeaderToPorcelain(plumbings []*proto.CustomHeader) (
+	[]*CustomHeader,
+	error,
+) {
+	var items []*CustomHeader
+	for _, plumbing := range plumbings {
+		if v, err := convertCustomHeaderToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertCustomHeadersToPorcelain(plumbing *proto.CustomHeaders) (*CustomHeaders, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &CustomHeaders{}
+	if v, err := convertRepeatedCustomHeaderToPorcelain(plumbing.CustomHeaders); err != nil {
+		return nil, fmt.Errorf("error converting field CustomHeaders: %v", err)
+	} else {
+		porcelain.CustomHeaders = v
+	}
+	return porcelain, nil
+}
+
+func convertCustomHeadersToPlumbing(porcelain *CustomHeaders) *proto.CustomHeaders {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.CustomHeaders{}
+	plumbing.CustomHeaders = convertRepeatedCustomHeaderToPlumbing(porcelain.CustomHeaders)
+	return plumbing
+}
+func convertRepeatedCustomHeadersToPlumbing(
+	porcelains []*CustomHeaders,
+) []*proto.CustomHeaders {
+	var items []*proto.CustomHeaders
+	for _, porcelain := range porcelains {
+		items = append(items, convertCustomHeadersToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedCustomHeadersToPorcelain(plumbings []*proto.CustomHeaders) (
+	[]*CustomHeaders,
+	error,
+) {
+	var items []*CustomHeaders
+	for _, plumbing := range plumbings {
+		if v, err := convertCustomHeadersToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertCyberarkConjurStoreToPorcelain(plumbing *proto.CyberarkConjurStore) (*CyberarkConjurStore, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -10902,6 +10992,11 @@ func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) (*HTTPAuth, error) {
 	porcelain := &HTTPAuth{}
 	porcelain.AuthHeader = plumbing.AuthHeader
 	porcelain.BindInterface = plumbing.BindInterface
+	if v, err := convertCustomHeadersToPorcelain(plumbing.CustomHeaders); err != nil {
+		return nil, fmt.Errorf("error converting field CustomHeaders: %v", err)
+	} else {
+		porcelain.CustomHeaders = v
+	}
 	porcelain.DefaultPath = plumbing.DefaultPath
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
@@ -10930,6 +11025,7 @@ func convertHTTPAuthToPlumbing(porcelain *HTTPAuth) *proto.HTTPAuth {
 	plumbing := &proto.HTTPAuth{}
 	plumbing.AuthHeader = (porcelain.AuthHeader)
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.CustomHeaders = convertCustomHeadersToPlumbing(porcelain.CustomHeaders)
 	plumbing.DefaultPath = (porcelain.DefaultPath)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
@@ -10976,6 +11072,11 @@ func convertHTTPBasicAuthToPorcelain(plumbing *proto.HTTPBasicAuth) (*HTTPBasicA
 	}
 	porcelain := &HTTPBasicAuth{}
 	porcelain.BindInterface = plumbing.BindInterface
+	if v, err := convertCustomHeadersToPorcelain(plumbing.CustomHeaders); err != nil {
+		return nil, fmt.Errorf("error converting field CustomHeaders: %v", err)
+	} else {
+		porcelain.CustomHeaders = v
+	}
 	porcelain.DefaultPath = plumbing.DefaultPath
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
@@ -11005,6 +11106,7 @@ func convertHTTPBasicAuthToPlumbing(porcelain *HTTPBasicAuth) *proto.HTTPBasicAu
 	}
 	plumbing := &proto.HTTPBasicAuth{}
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.CustomHeaders = convertCustomHeadersToPlumbing(porcelain.CustomHeaders)
 	plumbing.DefaultPath = (porcelain.DefaultPath)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
@@ -11053,6 +11155,11 @@ func convertHTTPNoAuthToPorcelain(plumbing *proto.HTTPNoAuth) (*HTTPNoAuth, erro
 	}
 	porcelain := &HTTPNoAuth{}
 	porcelain.BindInterface = plumbing.BindInterface
+	if v, err := convertCustomHeadersToPorcelain(plumbing.CustomHeaders); err != nil {
+		return nil, fmt.Errorf("error converting field CustomHeaders: %v", err)
+	} else {
+		porcelain.CustomHeaders = v
+	}
 	porcelain.DefaultPath = plumbing.DefaultPath
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.HeadersBlacklist = plumbing.HeadersBlacklist
@@ -11080,6 +11187,7 @@ func convertHTTPNoAuthToPlumbing(porcelain *HTTPNoAuth) *proto.HTTPNoAuth {
 	}
 	plumbing := &proto.HTTPNoAuth{}
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.CustomHeaders = convertCustomHeadersToPlumbing(porcelain.CustomHeaders)
 	plumbing.DefaultPath = (porcelain.DefaultPath)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.HeadersBlacklist = (porcelain.HeadersBlacklist)
@@ -12776,6 +12884,7 @@ func convertMCPToPorcelain(plumbing *proto.MCP) (*MCP, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.OauthAuthEndpoint = plumbing.OauthAuthEndpoint
+	porcelain.OauthRegisterEndpoint = plumbing.OauthRegisterEndpoint
 	porcelain.OauthTokenEndpoint = plumbing.OauthTokenEndpoint
 	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
@@ -12804,6 +12913,7 @@ func convertMCPToPlumbing(porcelain *MCP) *proto.MCP {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.OauthAuthEndpoint = (porcelain.OauthAuthEndpoint)
+	plumbing.OauthRegisterEndpoint = (porcelain.OauthRegisterEndpoint)
 	plumbing.OauthTokenEndpoint = (porcelain.OauthTokenEndpoint)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
@@ -15474,8 +15584,10 @@ func convertOktaGroupsToPorcelain(plumbing *proto.OktaGroups) (*OktaGroups, erro
 	}
 	porcelain := &OktaGroups{}
 	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
 	porcelain.Domain = plumbing.Domain
 	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.GroupNames = plumbing.GroupNames
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.ID = plumbing.Id
 	porcelain.IdentitySetID = plumbing.IdentitySetId
@@ -15498,8 +15610,10 @@ func convertOktaGroupsToPlumbing(porcelain *OktaGroups) *proto.OktaGroups {
 	}
 	plumbing := &proto.OktaGroups{}
 	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
 	plumbing.Domain = (porcelain.Domain)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.GroupNames = (porcelain.GroupNames)
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Id = (porcelain.ID)
 	plumbing.IdentitySetId = (porcelain.IdentitySetID)
@@ -23469,6 +23583,7 @@ func convertUserToPorcelain(plumbing *proto.User) (*User, error) {
 		porcelain.CreatedAt = v
 	}
 	porcelain.Email = plumbing.Email
+	porcelain.EmployeeNumber = plumbing.EmployeeNumber
 	porcelain.ExternalID = plumbing.ExternalId
 	porcelain.FirstName = plumbing.FirstName
 	porcelain.ID = plumbing.Id
@@ -23495,6 +23610,7 @@ func convertUserToPlumbing(porcelain *User) *proto.User {
 	plumbing.SCIM = (porcelain.SCIM)
 	plumbing.CreatedAt = convertTimestampToPlumbing(porcelain.CreatedAt)
 	plumbing.Email = (porcelain.Email)
+	plumbing.EmployeeNumber = (porcelain.EmployeeNumber)
 	plumbing.ExternalId = (porcelain.ExternalID)
 	plumbing.FirstName = (porcelain.FirstName)
 	plumbing.Id = (porcelain.ID)

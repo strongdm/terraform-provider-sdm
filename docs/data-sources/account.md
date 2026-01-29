@@ -38,6 +38,7 @@ The following arguments are supported by a Accounts data source:
 * `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://docs.strongdm.com/references/cli/filters/) for more information.
 * `account_type` - (Optional) Corresponds to the type of token, e.g. api or admin-token.
 * `email` - (Optional) The User's email address. Must be unique.
+* `employee_number` - (Optional) Internal employee ID used to identify the user.
 * `external_id` - (Optional) External ID is an alternative unique ID this user is represented by within an external service.
 * `first_name` - (Optional) The User's first name.
 * `id` - (Optional) Unique identifier of the User.
@@ -74,6 +75,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `scim` - SCIM contains the raw SCIM metadata for the user. This is a read-only field.
 		* `created_at` - CreatedAt is the timestamp when the user was created
 		* `email` - The User's email address. Must be unique.
+		* `employee_number` - Internal employee ID used to identify the user.
 		* `external_id` - External ID is an alternative unique ID this user is represented by within an external service.
 		* `first_name` - The User's first name.
 		* `id` - Unique identifier of the User.

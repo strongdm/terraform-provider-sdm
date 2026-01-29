@@ -542,6 +542,7 @@ func testAccSDMRoleAccessRulesConfig(resourceName string, roleName string, acces
 		redis {
 			name = "%[1]s"
 			hostname = "example.com"
+			port = 6379
 		}
 	}
 

@@ -2857,6 +2857,22 @@ type CouchbaseWebUI struct {
 type CreateResponseMetadata struct {
 }
 
+// CustomHeader describes a single HTTP header
+type CustomHeader struct {
+	// The name of this header.
+	Name string `json:"name"`
+	// Headers containing sensitive values must be stored encrypted and redacted from logs.
+	Secret bool `json:"secret"`
+	// The value of this header.
+	Value string `json:"value"`
+}
+
+// CustomHeaders holds an array of HTTP headers to be injected into requests by the driver
+type CustomHeaders struct {
+	// Entries, each describing a single header
+	CustomHeaders []*CustomHeader `json:"customHeaders"`
+}
+
 type CyberarkConjurStore struct {
 	// The URL of the Cyberark instance
 	AppURL string `json:"appUrl"`
@@ -3927,6 +3943,8 @@ type HTTPAuth struct {
 	AuthHeader string `json:"authHeader"`
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
+	// Additional HTTP headers to include in requests.
+	CustomHeaders *CustomHeaders `json:"customHeaders"`
 	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -3960,6 +3978,8 @@ type HTTPAuth struct {
 type HTTPBasicAuth struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
+	// Additional HTTP headers to include in requests.
+	CustomHeaders *CustomHeaders `json:"customHeaders"`
 	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -3997,6 +4017,8 @@ type HTTPBasicAuth struct {
 type HTTPNoAuth struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
+	// Additional HTTP headers to include in requests.
+	CustomHeaders *CustomHeaders `json:"customHeaders"`
 	// Automatically redirect to this path upon connecting.
 	DefaultPath string `json:"defaultPath"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -4560,6 +4582,8 @@ type MCP struct {
 	Name string `json:"name"`
 	// The OAuth 2.0 authorization endpoint URL.
 	OauthAuthEndpoint string `json:"oauthAuthEndpoint"`
+	// The OAuth 2.0 dynamic client registration endpoint URL.
+	OauthRegisterEndpoint string `json:"oauthRegisterEndpoint"`
 	// The OAuth 2.0 token endpoint URL.
 	OauthTokenEndpoint string `json:"oauthTokenEndpoint"`
 	// OAuth App Client Secret
@@ -5480,10 +5504,14 @@ type NodeUpdateResponse struct {
 type OktaGroups struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
+	// If true, configures discovery of the Okta org to be run from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
 	// Represents the Okta Org Client URL
 	Domain string `json:"domain"`
 	// A filter applied to the routing logic to pin datasource to nodes.
 	EgressFilter string `json:"egressFilter"`
+	// comma separated list of group names to filter by. Supports wildcards (*)
+	GroupNames string `json:"groupNames"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
 	// Unique identifier of the Resource.
@@ -14806,6 +14834,8 @@ type User struct {
 	CreatedAt time.Time `json:"createdAt"`
 	// The User's email address. Must be unique.
 	Email string `json:"email"`
+	// Internal employee ID used to identify the user.
+	EmployeeNumber string `json:"employeeNumber"`
 	// External ID is an alternative unique ID this user is represented by within an external service.
 	ExternalID string `json:"externalId"`
 	// The User's first name.

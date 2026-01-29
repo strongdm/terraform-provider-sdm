@@ -48,6 +48,7 @@ The following arguments are supported by the Account resource:
 
 * user:
 	* `email` - (Required) The User's email address. Must be unique.
+	* `employee_number` - (Optional) Internal employee ID used to identify the user.
 	* `external_id` - (Optional) External ID is an alternative unique ID this user is represented by within an external service.
 	* `first_name` - (Required) The User's first name.
 	* `last_name` - (Required) The User's last name.

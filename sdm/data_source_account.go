@@ -32,6 +32,10 @@ func dataSourceAccount() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"employee_number": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"external_id": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -215,6 +219,12 @@ func dataSourceAccount() *schema.Resource {
 										Optional:    true,
 										Description: "The User's email address. Must be unique.",
 									},
+									"employee_number": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Internal employee ID used to identify the user.",
+									},
 									"external_id": {
 										Type: schema.TypeString,
 
@@ -324,6 +334,10 @@ func convertAccountFilterToPlumbing(d *schema.ResourceData) (string, []interface
 		filter += "email:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("employee_number"); ok {
+		filter += "employeenumber:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("external_id"); ok {
 		filter += "externalid:? "
 		args = append(args, v)
@@ -427,6 +441,7 @@ func dataSourceAccountList(ctx context.Context, d *schema.ResourceData, cc *sdm.
 				"scim":                (v.SCIM),
 				"created_at":          convertTimestampToPorcelain(v.CreatedAt),
 				"email":               (v.Email),
+				"employee_number":     (v.EmployeeNumber),
 				"external_id":         (v.ExternalID),
 				"first_name":          (v.FirstName),
 				"id":                  (v.ID),

@@ -1160,6 +1160,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `oauth_auth_endpoint` - The OAuth 2.0 authorization endpoint URL.
+		* `oauth_register_endpoint` - The OAuth 2.0 dynamic client registration endpoint URL.
 		* `oauth_token_endpoint` - The OAuth 2.0 token endpoint URL.
 		* `password` - OAuth App Client Secret
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
@@ -1368,8 +1369,10 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 	* okta_groups:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+		* `discovery_enabled` - If true, configures discovery of the Okta org to be run from a node.
 		* `domain` - Represents the Okta Org Client URL
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `group_names` - comma separated list of group names to filter by. Supports wildcards (*)
 		* `id` - Unique identifier of the Resource.
 		* `identity_set_id` - The ID of the identity set to use for identity connections.
 		* `name` - Unique human-readable name of the Resource.

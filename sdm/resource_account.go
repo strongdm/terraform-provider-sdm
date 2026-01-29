@@ -88,6 +88,12 @@ func resourceAccount() *schema.Resource {
 							Required:    true,
 							Description: "The User's email address. Must be unique.",
 						},
+						"employee_number": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "Internal employee ID used to identify the user.",
+						},
 						"external_id": {
 							Type: schema.TypeString,
 
@@ -184,6 +190,7 @@ func convertAccountToPlumbing(d *schema.ResourceData) sdm.Account {
 		out := &sdm.User{
 			ID:              d.Id(),
 			Email:           convertStringToPlumbing(raw["email"]),
+			EmployeeNumber:  convertStringToPlumbing(raw["employee_number"]),
 			ExternalID:      convertStringToPlumbing(raw["external_id"]),
 			FirstName:       convertStringToPlumbing(raw["first_name"]),
 			LastName:        convertStringToPlumbing(raw["last_name"]),
@@ -227,6 +234,7 @@ func resourceAccountCreate(ctx context.Context, d *schema.ResourceData, cc *sdm.
 				"scim":                (v.SCIM),
 				"created_at":          convertTimestampToPorcelain(v.CreatedAt),
 				"email":               (v.Email),
+				"employee_number":     (v.EmployeeNumber),
 				"external_id":         (v.ExternalID),
 				"first_name":          (v.FirstName),
 				"last_name":           (v.LastName),
@@ -283,6 +291,7 @@ func resourceAccountRead(ctx context.Context, d *schema.ResourceData, cc *sdm.Cl
 				"scim":                (v.SCIM),
 				"created_at":          convertTimestampToPorcelain(v.CreatedAt),
 				"email":               (v.Email),
+				"employee_number":     (v.EmployeeNumber),
 				"external_id":         (v.ExternalID),
 				"first_name":          (v.FirstName),
 				"last_name":           (v.LastName),

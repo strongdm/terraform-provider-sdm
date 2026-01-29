@@ -1013,6 +1013,7 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"hostname", `"hostname"`},
 				{"name", `"all-resources-mcp-name"`},
 				{"oauth_auth_endpoint", `"oauth_auth_endpoint"`},
+				{"oauth_register_endpoint", `"oauth_register_endpoint"`},
 				{"oauth_token_endpoint", `"oauth_token_endpoint"`},
 				{"password", `"password"`},
 				{"port", `443`},
@@ -1183,8 +1184,10 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 		{
 			resource: "okta_groups",
 			pairs: [][2]string{
+				{"discovery_enabled", `true`},
 				{"domain", `"domain"`},
 				{"egress_filter", `"name:value"`},
+				{"group_names", `"group_names"`},
 				{"identity_set_id", identitySetID},
 				{"name", `"all-resources-oktagroups-name"`},
 				{"privilege_levels", `"privilege_levels"`},
@@ -2623,6 +2626,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"hostname", `"hostname"`},
 				{"name", `"all-resources-secret-mcp-name"`},
 				{"oauth_auth_endpoint", `"oauth_auth_endpoint"`},
+				{"oauth_register_endpoint", `"oauth_register_endpoint"`},
 				{"oauth_token_endpoint", `"oauth_token_endpoint"`},
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
