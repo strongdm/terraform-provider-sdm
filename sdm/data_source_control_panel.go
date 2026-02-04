@@ -78,7 +78,59 @@ func dataSourceControlPanelRDPCAPublicKeyGet(ctx context.Context, d *schema.Reso
 	return nil
 }
 
+func dataSourceControlPanelOrgURLInfo() *schema.Resource {
+	return &schema.Resource{
+		ReadContext: wrapCrudOperation(dataSourceControlPanelOrgURLInfoGet),
+		Schema: map[string]*schema.Schema{
+			"id": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "Unique identifier of the Org URL Info.",
+			},
+			"base_url": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "The base URL of the organization, e.g. https://app.strongdm.com",
+			},
+			"websites_subdomain": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "The organization's website subdomain, used to construct URLs.",
+			},
+			"oidc_issuer_url": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "The OIDC issuer URL for the organization, used for OIDC federation with cloud providers.",
+			},
+			"saml_metadata_url": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Description: "The SAML metadata URL for the organization, used for SAML SSO configuration.",
+			},
+		},
+		Timeouts: &schema.ResourceTimeout{
+			Default: schema.DefaultTimeout(60 * time.Second),
+		},
+	}
+}
+
+func dataSourceControlPanelOrgURLInfoGet(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
+	resp, err := cc.ControlPanel().GetOrgURLInfo(ctx)
+	if err != nil {
+		return fmt.Errorf("cannot get Org URL Info %s: %w", d.Id(), err)
+	}
+
+	d.Set("base_url", resp.BaseUrl)
+	d.Set("websites_subdomain", resp.WebsitesSubdomain)
+	d.Set("oidc_issuer_url", resp.OidcIssuerUrl)
+	d.Set("saml_metadata_url", resp.SamlMetadataUrl)
+	d.SetId("ControlPanelOrgURLInfo")
+
+	return nil
+}
+
 func init() {
 	dataSourcesMap["sdm_ssh_ca_pubkey"] = dataSourceControlPanelSSHCAPublicKey
 	dataSourcesMap["sdm_rdp_ca_pubkey"] = dataSourceControlPanelRDPCAPublicKey
+	dataSourcesMap["sdm_org_url_info"] = dataSourceControlPanelOrgURLInfo
 }

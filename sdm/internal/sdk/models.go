@@ -47,6 +47,252 @@ func (tag *Tag) clone() *Tag {
 
 type LogCategoryConfigMap map[string]*LogCategoryConfig
 
+type ResourceType string
+
+const (
+	ResourceTypeUnspecified ResourceType = "RESOURCE_TYPE_UNSPECIFIED"
+
+	ResourceTypeAks ResourceType = "RESOURCE_TYPE_AKS"
+
+	ResourceTypeAksBasicAuth ResourceType = "RESOURCE_TYPE_AKS_BASIC_AUTH"
+
+	ResourceTypeAksServiceAccount ResourceType = "RESOURCE_TYPE_AKS_SERVICE_ACCOUNT"
+
+	ResourceTypeAksServiceAccountUserImpersonation ResourceType = "RESOURCE_TYPE_AKS_SERVICE_ACCOUNT_USER_IMPERSONATION"
+
+	ResourceTypeAksUserImpersonation ResourceType = "RESOURCE_TYPE_AKS_USER_IMPERSONATION"
+
+	ResourceTypeAmazonMqamqp ResourceType = "RESOURCE_TYPE_AMAZON_MQAMQP"
+
+	ResourceTypeAws ResourceType = "RESOURCE_TYPE_AWS"
+
+	ResourceTypeAwsConsole ResourceType = "RESOURCE_TYPE_AWS_CONSOLE"
+
+	ResourceTypeAwsConsoleStaticKeyPair ResourceType = "RESOURCE_TYPE_AWS_CONSOLE_STATIC_KEY_PAIR"
+
+	ResourceTypeAwsInstanceProfile ResourceType = "RESOURCE_TYPE_AWS_INSTANCE_PROFILE"
+
+	ResourceTypeAerospike ResourceType = "RESOURCE_TYPE_AEROSPIKE"
+
+	ResourceTypeAmazonEks ResourceType = "RESOURCE_TYPE_AMAZON_EKS"
+
+	ResourceTypeAmazonEksInstanceProfile ResourceType = "RESOURCE_TYPE_AMAZON_EKS_INSTANCE_PROFILE"
+
+	ResourceTypeAmazonEksInstanceProfileUserImpersonation ResourceType = "RESOURCE_TYPE_AMAZON_EKS_INSTANCE_PROFILE_USER_IMPERSONATION"
+
+	ResourceTypeAmazonEksUserImpersonation ResourceType = "RESOURCE_TYPE_AMAZON_EKS_USER_IMPERSONATION"
+
+	ResourceTypeAmazonEs ResourceType = "RESOURCE_TYPE_AMAZON_ES"
+
+	ResourceTypeAmazonEsiam ResourceType = "RESOURCE_TYPE_AMAZON_ESIAM"
+
+	ResourceTypeAmazonMqamqp091 ResourceType = "RESOURCE_TYPE_AMAZON_MQAMQP_091"
+
+	ResourceTypeAthena ResourceType = "RESOURCE_TYPE_ATHENA"
+
+	ResourceTypeAthenaIam ResourceType = "RESOURCE_TYPE_ATHENA_IAM"
+
+	ResourceTypeAuroraMySql ResourceType = "RESOURCE_TYPE_AURORA_MY_SQL"
+
+	ResourceTypeAuroraMySqliam ResourceType = "RESOURCE_TYPE_AURORA_MY_SQLIAM"
+
+	ResourceTypeAuroraPostgres ResourceType = "RESOURCE_TYPE_AURORA_POSTGRES"
+
+	ResourceTypeAuroraPostgresIam ResourceType = "RESOURCE_TYPE_AURORA_POSTGRES_IAM"
+
+	ResourceTypeAzure ResourceType = "RESOURCE_TYPE_AZURE"
+
+	ResourceTypeAzureCert ResourceType = "RESOURCE_TYPE_AZURE_CERT"
+
+	ResourceTypeAzureMySql ResourceType = "RESOURCE_TYPE_AZURE_MY_SQL"
+
+	ResourceTypeAzureMySqlManagedIdentity ResourceType = "RESOURCE_TYPE_AZURE_MY_SQL_MANAGED_IDENTITY"
+
+	ResourceTypeAzurePostgres ResourceType = "RESOURCE_TYPE_AZURE_POSTGRES"
+
+	ResourceTypeAzurePostgresManagedIdentity ResourceType = "RESOURCE_TYPE_AZURE_POSTGRES_MANAGED_IDENTITY"
+
+	ResourceTypeBigquery ResourceType = "RESOURCE_TYPE_BIGQUERY"
+
+	ResourceTypeCassandra ResourceType = "RESOURCE_TYPE_CASSANDRA"
+
+	ResourceTypeCitus ResourceType = "RESOURCE_TYPE_CITUS"
+
+	ResourceTypeClickHouseHttp ResourceType = "RESOURCE_TYPE_CLICK_HOUSE_HTTP"
+
+	ResourceTypeClickHouseMySql ResourceType = "RESOURCE_TYPE_CLICK_HOUSE_MY_SQL"
+
+	ResourceTypeClickHouseTcp ResourceType = "RESOURCE_TYPE_CLICK_HOUSE_TCP"
+
+	ResourceTypeClustrix ResourceType = "RESOURCE_TYPE_CLUSTRIX"
+
+	ResourceTypeCockroach ResourceType = "RESOURCE_TYPE_COCKROACH"
+
+	ResourceTypeCouchbaseDatabase ResourceType = "RESOURCE_TYPE_COUCHBASE_DATABASE"
+
+	ResourceTypeCouchbaseWebUi ResourceType = "RESOURCE_TYPE_COUCHBASE_WEB_UI"
+
+	ResourceTypeDb2I ResourceType = "RESOURCE_TYPE_DB_2_I"
+
+	ResourceTypeDb2Luw ResourceType = "RESOURCE_TYPE_DB_2_LUW"
+
+	ResourceTypeDocumentDbHost ResourceType = "RESOURCE_TYPE_DOCUMENT_DB_HOST"
+
+	ResourceTypeDocumentDbHostIam ResourceType = "RESOURCE_TYPE_DOCUMENT_DB_HOST_IAM"
+
+	ResourceTypeDocumentDbReplicaSet ResourceType = "RESOURCE_TYPE_DOCUMENT_DB_REPLICA_SET"
+
+	ResourceTypeDocumentDbReplicaSetIam ResourceType = "RESOURCE_TYPE_DOCUMENT_DB_REPLICA_SET_IAM"
+
+	ResourceTypeDruID ResourceType = "RESOURCE_TYPE_DRUID"
+
+	ResourceTypeDynamoDb ResourceType = "RESOURCE_TYPE_DYNAMO_DB"
+
+	ResourceTypeDynamoDbiam ResourceType = "RESOURCE_TYPE_DYNAMO_DBIAM"
+
+	ResourceTypeElastic ResourceType = "RESOURCE_TYPE_ELASTIC"
+
+	ResourceTypeElastiCacheRedis ResourceType = "RESOURCE_TYPE_ELASTI_CACHE_REDIS"
+
+	ResourceTypeElastiCacheRedisIam ResourceType = "RESOURCE_TYPE_ELASTI_CACHE_REDIS_IAM"
+
+	ResourceTypeEntraID ResourceType = "RESOURCE_TYPE_ENTRA_ID"
+
+	ResourceTypeGcp ResourceType = "RESOURCE_TYPE_GCP"
+
+	ResourceTypeGcpConsole ResourceType = "RESOURCE_TYPE_GCP_CONSOLE"
+
+	ResourceTypeGcpwif ResourceType = "RESOURCE_TYPE_GCPWIF"
+
+	ResourceTypeGitHub ResourceType = "RESOURCE_TYPE_GIT_HUB"
+
+	ResourceTypeGoogleAdmin ResourceType = "RESOURCE_TYPE_GOOGLE_ADMIN"
+
+	ResourceTypeGoogleGke ResourceType = "RESOURCE_TYPE_GOOGLE_GKE"
+
+	ResourceTypeGoogleGkeUserImpersonation ResourceType = "RESOURCE_TYPE_GOOGLE_GKE_USER_IMPERSONATION"
+
+	ResourceTypeGoogleSpanner ResourceType = "RESOURCE_TYPE_GOOGLE_SPANNER"
+
+	ResourceTypeGreenplum ResourceType = "RESOURCE_TYPE_GREENPLUM"
+
+	ResourceTypeHttpAuth ResourceType = "RESOURCE_TYPE_HTTP_AUTH"
+
+	ResourceTypeHttpBasic ResourceType = "RESOURCE_TYPE_HTTP_BASIC"
+
+	ResourceTypeHttpNoAuth ResourceType = "RESOURCE_TYPE_HTTP_NO_AUTH"
+
+	ResourceTypeKubernetes ResourceType = "RESOURCE_TYPE_KUBERNETES"
+
+	ResourceTypeKubernetesBasicAuth ResourceType = "RESOURCE_TYPE_KUBERNETES_BASIC_AUTH"
+
+	ResourceTypeKubernetesPodIdentity ResourceType = "RESOURCE_TYPE_KUBERNETES_POD_IDENTITY"
+
+	ResourceTypeKubernetesServiceAccount ResourceType = "RESOURCE_TYPE_KUBERNETES_SERVICE_ACCOUNT"
+
+	ResourceTypeKubernetesServiceAccountUserImpersonation ResourceType = "RESOURCE_TYPE_KUBERNETES_SERVICE_ACCOUNT_USER_IMPERSONATION"
+
+	ResourceTypeKubernetesUserImpersonation ResourceType = "RESOURCE_TYPE_KUBERNETES_USER_IMPERSONATION"
+
+	ResourceTypeMcp ResourceType = "RESOURCE_TYPE_MCP"
+
+	ResourceTypeMcpdcr ResourceType = "RESOURCE_TYPE_MCPDCR"
+
+	ResourceTypeMtlsMySql ResourceType = "RESOURCE_TYPE_MTLS_MY_SQL"
+
+	ResourceTypeMtlsPostgres ResourceType = "RESOURCE_TYPE_MTLS_POSTGRES"
+
+	ResourceTypeMaria ResourceType = "RESOURCE_TYPE_MARIA"
+
+	ResourceTypeMemcached ResourceType = "RESOURCE_TYPE_MEMCACHED"
+
+	ResourceTypeMemSql ResourceType = "RESOURCE_TYPE_MEM_SQL"
+
+	ResourceTypeMicrosoft365 ResourceType = "RESOURCE_TYPE_MICROSOFT_365"
+
+	ResourceTypeMongoDbHost ResourceType = "RESOURCE_TYPE_MONGO_DB_HOST"
+
+	ResourceTypeMongoDb ResourceType = "RESOURCE_TYPE_MONGO_DB"
+
+	ResourceTypeMongoDbLegacyReplicaSet ResourceType = "RESOURCE_TYPE_MONGO_DB_LEGACY_REPLICA_SET"
+
+	ResourceTypeMongoDbReplicaSet ResourceType = "RESOURCE_TYPE_MONGO_DB_REPLICA_SET"
+
+	ResourceTypeMongoDbShardedCluster ResourceType = "RESOURCE_TYPE_MONGO_DB_SHARDED_CLUSTER"
+
+	ResourceTypeMySql ResourceType = "RESOURCE_TYPE_MY_SQL"
+
+	ResourceTypeNeptune ResourceType = "RESOURCE_TYPE_NEPTUNE"
+
+	ResourceTypeNeptuneIam ResourceType = "RESOURCE_TYPE_NEPTUNE_IAM"
+
+	ResourceTypeOktaAdmin ResourceType = "RESOURCE_TYPE_OKTA_ADMIN"
+
+	ResourceTypeOktaGroups ResourceType = "RESOURCE_TYPE_OKTA_GROUPS"
+
+	ResourceTypeOracle ResourceType = "RESOURCE_TYPE_ORACLE"
+
+	ResourceTypeOracleNne ResourceType = "RESOURCE_TYPE_ORACLE_NNE"
+
+	ResourceTypePostgres ResourceType = "RESOURCE_TYPE_POSTGRES"
+
+	ResourceTypePresto ResourceType = "RESOURCE_TYPE_PRESTO"
+
+	ResourceTypeRdp ResourceType = "RESOURCE_TYPE_RDP"
+
+	ResourceTypeRdpCert ResourceType = "RESOURCE_TYPE_RDP_CERT"
+
+	ResourceTypeRdsPostgresIam ResourceType = "RESOURCE_TYPE_RDS_POSTGRES_IAM"
+
+	ResourceTypeRabbitMqamqp091 ResourceType = "RESOURCE_TYPE_RABBIT_MQAMQP_091"
+
+	ResourceTypeTcp ResourceType = "RESOURCE_TYPE_TCP"
+
+	ResourceTypeRedis ResourceType = "RESOURCE_TYPE_REDIS"
+
+	ResourceTypeRedisCluster ResourceType = "RESOURCE_TYPE_REDIS_CLUSTER"
+
+	ResourceTypeRedshift ResourceType = "RESOURCE_TYPE_REDSHIFT"
+
+	ResourceTypeRedshiftIam ResourceType = "RESOURCE_TYPE_REDSHIFT_IAM"
+
+	ResourceTypeRedshiftServerlessIam ResourceType = "RESOURCE_TYPE_REDSHIFT_SERVERLESS_IAM"
+
+	ResourceTypeSqlServer ResourceType = "RESOURCE_TYPE_SQL_SERVER"
+
+	ResourceTypeSqlServerAzureAd ResourceType = "RESOURCE_TYPE_SQL_SERVER_AZURE_AD"
+
+	ResourceTypeSqlServerKerberos ResourceType = "RESOURCE_TYPE_SQL_SERVER_KERBEROS"
+
+	ResourceTypeSsh ResourceType = "RESOURCE_TYPE_SSH"
+
+	ResourceTypeSshCert ResourceType = "RESOURCE_TYPE_SSH_CERT"
+
+	ResourceTypeSshCertUserProvision ResourceType = "RESOURCE_TYPE_SSH_CERT_USER_PROVISION"
+
+	ResourceTypeSshCustomerKey ResourceType = "RESOURCE_TYPE_SSH_CUSTOMER_KEY"
+
+	ResourceTypeSshPassword ResourceType = "RESOURCE_TYPE_SSH_PASSWORD"
+
+	ResourceTypeSalesforce ResourceType = "RESOURCE_TYPE_SALESFORCE"
+
+	ResourceTypeSingleStore ResourceType = "RESOURCE_TYPE_SINGLE_STORE"
+
+	ResourceTypeSnowflake ResourceType = "RESOURCE_TYPE_SNOWFLAKE"
+
+	ResourceTypeSnowsight ResourceType = "RESOURCE_TYPE_SNOWSIGHT"
+
+	ResourceTypeSybaseAse ResourceType = "RESOURCE_TYPE_SYBASE_ASE"
+
+	ResourceTypeSybaseIq ResourceType = "RESOURCE_TYPE_SYBASE_IQ"
+
+	ResourceTypeTeradata ResourceType = "RESOURCE_TYPE_TERADATA"
+
+	ResourceTypeTrino ResourceType = "RESOURCE_TYPE_TRINO"
+
+	ResourceTypeVertica ResourceType = "RESOURCE_TYPE_VERTICA"
+)
+
 type AKS struct {
 	// If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set)
 	// when a resource role is not provided.
@@ -2755,6 +3001,24 @@ type ConnectorUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// ControlPanelGetOrgURLInfoResponse represents the response containing
+// organization URL configuration.
+type ControlPanelGetOrgURLInfoResponse struct {
+	// The base URL of the organization, e.g. https://app.strongdm.com
+	BaseUrl string `json:"baseUrl"`
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The OIDC issuer URL for the organization, used for OIDC federation
+	// with cloud providers
+	OidcIssuerUrl string `json:"oidcIssuerUrl"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+	// The SAML metadata URL for the organization, used for SAML SSO configuration.
+	SamlMetadataUrl string `json:"samlMetadataUrl"`
+	// The organization's website subdomain, used to construct URLs.
+	WebsitesSubdomain string `json:"websitesSubdomain"`
+}
+
 // ControlPanelGetRDPCAPublicKeyResponse represents a request for an
 // organization's RDP Certificate Authority public key.
 type ControlPanelGetRDPCAPublicKeyResponse struct {
@@ -4582,14 +4846,10 @@ type MCP struct {
 	Name string `json:"name"`
 	// The OAuth 2.0 authorization endpoint URL.
 	OauthAuthEndpoint string `json:"oauthAuthEndpoint"`
-	// The OAuth 2.0 dynamic client registration endpoint URL.
-	OauthRegisterEndpoint string `json:"oauthRegisterEndpoint"`
 	// The OAuth 2.0 token endpoint URL.
 	OauthTokenEndpoint string `json:"oauthTokenEndpoint"`
 	// OAuth App Client Secret
 	Password string `json:"password"`
-	// The port to dial to initiate a connection from the egress node to this resource.
-	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
@@ -4602,6 +4862,39 @@ type MCP struct {
 	Tags Tags `json:"tags"`
 	// OAuth App Client ID
 	Username string `json:"username"`
+}
+
+// MCPDCR is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type MCPDCR struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The OAuth 2.0 authorization endpoint URL.
+	OauthAuthEndpoint string `json:"oauthAuthEndpoint"`
+	// The OAuth 2.0 dynamic client registration endpoint URL.
+	OauthRegisterEndpoint string `json:"oauthRegisterEndpoint"`
+	// The OAuth 2.0 token endpoint URL.
+	OauthTokenEndpoint string `json:"oauthTokenEndpoint"`
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
 }
 
 type MTLSMysql struct {
@@ -10600,6 +10893,60 @@ func (m *MCP) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the MCP.
 func (m *MCP) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*MCPDCR) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the MCPDCR.
+func (m *MCPDCR) GetID() string { return m.ID }
+
+// GetName returns the name of the MCPDCR.
+func (m *MCPDCR) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the MCPDCR.
+func (m *MCPDCR) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MCPDCR.
+func (m *MCPDCR) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MCPDCR.
+func (m *MCPDCR) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the MCPDCR.
+func (m *MCPDCR) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the MCPDCR.
+func (m *MCPDCR) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MCPDCR.
+func (m *MCPDCR) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MCPDCR.
+func (m *MCPDCR) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the MCPDCR.
+func (m *MCPDCR) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MCPDCR.
+func (m *MCPDCR) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*Memcached) isOneOf_Resource() {}

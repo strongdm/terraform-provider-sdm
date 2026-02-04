@@ -50,6 +50,46 @@ func convertAccessRuleToPlumbing(porcelain interface{}) sdm.AccessRule {
 	}
 	return sdm.AccessRule(porcelain.(string))
 }
+func convertResourceTypeToPorcelain(plumbing sdm.ResourceType) interface{} {
+	return string(plumbing)
+}
+
+func convertResourceTypeToPlumbing(porcelain interface{}) sdm.ResourceType {
+	if porcelain == nil {
+		return sdm.ResourceType("")
+	}
+	return sdm.ResourceType(porcelain.(string))
+}
+
+func convertRepeatedResourceTypeToPorcelain(plumbings []sdm.ResourceType) interface{} {
+	if plumbings == nil {
+		return nil
+	}
+	values := make([]string, 0, len(plumbings))
+	for _, plumbing := range plumbings {
+		values = append(values, string(plumbing))
+	}
+	return values
+}
+
+func convertRepeatedResourceTypeToPlumbing(porcelain interface{}) []sdm.ResourceType {
+	if porcelain == nil {
+		return nil
+	}
+	interfaces, ok := porcelain.([]interface{})
+	if !ok {
+		return nil
+	}
+	values := make([]sdm.ResourceType, 0, len(interfaces))
+	for _, v := range interfaces {
+		str, ok := v.(string)
+		if !ok {
+			continue
+		}
+		values = append(values, sdm.ResourceType(str))
+	}
+	return values
+}
 func convertTagsToPlumbing(porcelain interface{}) sdm.Tags {
 	if porcelain == nil {
 		return nil

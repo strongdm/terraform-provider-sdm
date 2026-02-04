@@ -59,3 +59,29 @@ func testAccSDMControlPanelRDPCAPublicKeyGetConfig(dataName string) string {
 		dataName,
 	)
 }
+
+func TestAccSDMControlPanel_OrgURLInfoGet(t *testing.T) {
+	initAcceptanceTest(t)
+
+	dataName := randomWithPrefix("test")
+	resource.ParallelTest(t, resource.TestCase{
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccSDMControlPanelOrgURLInfoGetConfig(dataName),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttrSet("data.sdm_org_url_info."+dataName, "base_url"),
+					resource.TestCheckResourceAttrSet("data.sdm_org_url_info."+dataName, "websites_subdomain"),
+				),
+			},
+		},
+	})
+}
+
+func testAccSDMControlPanelOrgURLInfoGetConfig(dataName string) string {
+	return fmt.Sprintf(`
+	data "sdm_org_url_info" "%s" {
+	}`,
+		dataName,
+	)
+}

@@ -35,6 +35,9 @@ type ControlPanelClient interface {
 	GetSSHCAPublicKey(ctx context.Context, in *ControlPanelGetSSHCAPublicKeyRequest, opts ...grpc.CallOption) (*ControlPanelGetSSHCAPublicKeyResponse, error)
 	// GetRDPCAPublicKey retrieves the RDP CA public key.
 	GetRDPCAPublicKey(ctx context.Context, in *ControlPanelGetRDPCAPublicKeyRequest, opts ...grpc.CallOption) (*ControlPanelGetRDPCAPublicKeyResponse, error)
+	// GetOrgURLInfo retrieves URL configuration for the organization.
+	// This includes the base URL, website subdomain, OIDC issuer URL, and SAML metadata URL.
+	GetOrgURLInfo(ctx context.Context, in *ControlPanelGetOrgURLInfoRequest, opts ...grpc.CallOption) (*ControlPanelGetOrgURLInfoResponse, error)
 	// VerifyJWT reports whether the given JWT token (x-sdm-token) is valid.
 	VerifyJWT(ctx context.Context, in *ControlPanelVerifyJWTRequest, opts ...grpc.CallOption) (*ControlPanelVerifyJWTResponse, error)
 }
@@ -65,6 +68,15 @@ func (c *controlPanelClient) GetRDPCAPublicKey(ctx context.Context, in *ControlP
 	return out, nil
 }
 
+func (c *controlPanelClient) GetOrgURLInfo(ctx context.Context, in *ControlPanelGetOrgURLInfoRequest, opts ...grpc.CallOption) (*ControlPanelGetOrgURLInfoResponse, error) {
+	out := new(ControlPanelGetOrgURLInfoResponse)
+	err := c.cc.Invoke(ctx, "/v1.ControlPanel/GetOrgURLInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *controlPanelClient) VerifyJWT(ctx context.Context, in *ControlPanelVerifyJWTRequest, opts ...grpc.CallOption) (*ControlPanelVerifyJWTResponse, error) {
 	out := new(ControlPanelVerifyJWTResponse)
 	err := c.cc.Invoke(ctx, "/v1.ControlPanel/VerifyJWT", in, out, opts...)
@@ -82,6 +94,9 @@ type ControlPanelServer interface {
 	GetSSHCAPublicKey(context.Context, *ControlPanelGetSSHCAPublicKeyRequest) (*ControlPanelGetSSHCAPublicKeyResponse, error)
 	// GetRDPCAPublicKey retrieves the RDP CA public key.
 	GetRDPCAPublicKey(context.Context, *ControlPanelGetRDPCAPublicKeyRequest) (*ControlPanelGetRDPCAPublicKeyResponse, error)
+	// GetOrgURLInfo retrieves URL configuration for the organization.
+	// This includes the base URL, website subdomain, OIDC issuer URL, and SAML metadata URL.
+	GetOrgURLInfo(context.Context, *ControlPanelGetOrgURLInfoRequest) (*ControlPanelGetOrgURLInfoResponse, error)
 	// VerifyJWT reports whether the given JWT token (x-sdm-token) is valid.
 	VerifyJWT(context.Context, *ControlPanelVerifyJWTRequest) (*ControlPanelVerifyJWTResponse, error)
 	mustEmbedUnimplementedControlPanelServer()
@@ -96,6 +111,9 @@ func (UnimplementedControlPanelServer) GetSSHCAPublicKey(context.Context, *Contr
 }
 func (UnimplementedControlPanelServer) GetRDPCAPublicKey(context.Context, *ControlPanelGetRDPCAPublicKeyRequest) (*ControlPanelGetRDPCAPublicKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRDPCAPublicKey not implemented")
+}
+func (UnimplementedControlPanelServer) GetOrgURLInfo(context.Context, *ControlPanelGetOrgURLInfoRequest) (*ControlPanelGetOrgURLInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrgURLInfo not implemented")
 }
 func (UnimplementedControlPanelServer) VerifyJWT(context.Context, *ControlPanelVerifyJWTRequest) (*ControlPanelVerifyJWTResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyJWT not implemented")
@@ -149,6 +167,24 @@ func _ControlPanel_GetRDPCAPublicKey_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ControlPanel_GetOrgURLInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlPanelGetOrgURLInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ControlPanelServer).GetOrgURLInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1.ControlPanel/GetOrgURLInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ControlPanelServer).GetOrgURLInfo(ctx, req.(*ControlPanelGetOrgURLInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ControlPanel_VerifyJWT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ControlPanelVerifyJWTRequest)
 	if err := dec(in); err != nil {
@@ -178,6 +214,10 @@ var _ControlPanel_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRDPCAPublicKey",
 			Handler:    _ControlPanel_GetRDPCAPublicKey_Handler,
+		},
+		{
+			MethodName: "GetOrgURLInfo",
+			Handler:    _ControlPanel_GetOrgURLInfo_Handler,
 		},
 		{
 			MethodName: "VerifyJWT",

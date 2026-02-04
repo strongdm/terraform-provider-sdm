@@ -2228,6 +2228,45 @@ func (svc *ControlPanel) GetRDPCAPublicKey(
 	return resp, nil
 }
 
+// GetOrgURLInfo retrieves URL configuration for the organization.
+// This includes the base URL, website subdomain, OIDC issuer URL, and SAML metadata URL.
+func (svc *ControlPanel) GetOrgURLInfo(
+	ctx context.Context) (
+	*ControlPanelGetOrgURLInfoResponse,
+	error) {
+	req := plumbing.ControlPanelGetOrgURLInfoRequest{}
+
+	req.Meta = &plumbing.GetRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.ControlPanelGetOrgURLInfoResponse, error) {
+			return svc.client.GetOrgURLInfo(svc.parent.wrapContext(ctx, &req, "ControlPanel.GetOrgURLInfo"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &ControlPanelGetOrgURLInfoResponse{}
+	resp.BaseUrl = (plumbingResponse.BaseUrl)
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	resp.OidcIssuerUrl = (plumbingResponse.OidcIssuerUrl)
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	resp.SamlMetadataUrl = (plumbingResponse.SamlMetadataUrl)
+	resp.WebsitesSubdomain = (plumbingResponse.WebsitesSubdomain)
+	return resp, nil
+}
+
 // VerifyJWT reports whether the given JWT token (x-sdm-token) is valid.
 func (svc *ControlPanel) VerifyJWT(
 	ctx context.Context,

@@ -114,6 +114,38 @@ func convertLogCategoryConfigMapToPlumbing(porcelain LogCategoryConfigMap) *prot
 	}
 	return &proto.LogCategoryConfigMap{Entries: entries}
 }
+func convertResourceTypeToPorcelain(plumbing proto.ResourceType) ResourceType {
+	return ResourceType(plumbing.String())
+}
+
+func convertResourceTypeToPlumbing(porcelain ResourceType) proto.ResourceType {
+	if v, ok := proto.ResourceType_value[string(porcelain)]; ok {
+		return proto.ResourceType(v)
+	}
+	return proto.ResourceType(0)
+}
+
+func convertRepeatedResourceTypeToPorcelain(plumbings []proto.ResourceType) []ResourceType {
+	if plumbings == nil {
+		return nil
+	}
+	porcelains := make([]ResourceType, 0, len(plumbings))
+	for _, plumbing := range plumbings {
+		porcelains = append(porcelains, convertResourceTypeToPorcelain(plumbing))
+	}
+	return porcelains
+}
+
+func convertRepeatedResourceTypeToPlumbing(porcelains []ResourceType) []proto.ResourceType {
+	if porcelains == nil {
+		return nil
+	}
+	plumbings := make([]proto.ResourceType, 0, len(porcelains))
+	for _, porcelain := range porcelains {
+		plumbings = append(plumbings, convertResourceTypeToPlumbing(porcelain))
+	}
+	return plumbings
+}
 func convertAKSToPorcelain(plumbing *proto.AKS) (*AKS, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -7201,6 +7233,65 @@ func convertRepeatedConnectorUpdateResponseToPorcelain(plumbings []*proto.Connec
 	}
 	return items, nil
 }
+func convertControlPanelGetOrgURLInfoResponseToPorcelain(plumbing *proto.ControlPanelGetOrgURLInfoResponse) (*ControlPanelGetOrgURLInfoResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &ControlPanelGetOrgURLInfoResponse{}
+	porcelain.BaseUrl = plumbing.BaseUrl
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	porcelain.OidcIssuerUrl = plumbing.OidcIssuerUrl
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	porcelain.SamlMetadataUrl = plumbing.SamlMetadataUrl
+	porcelain.WebsitesSubdomain = plumbing.WebsitesSubdomain
+	return porcelain, nil
+}
+
+func convertControlPanelGetOrgURLInfoResponseToPlumbing(porcelain *ControlPanelGetOrgURLInfoResponse) *proto.ControlPanelGetOrgURLInfoResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.ControlPanelGetOrgURLInfoResponse{}
+	plumbing.BaseUrl = (porcelain.BaseUrl)
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.OidcIssuerUrl = (porcelain.OidcIssuerUrl)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	plumbing.SamlMetadataUrl = (porcelain.SamlMetadataUrl)
+	plumbing.WebsitesSubdomain = (porcelain.WebsitesSubdomain)
+	return plumbing
+}
+func convertRepeatedControlPanelGetOrgURLInfoResponseToPlumbing(
+	porcelains []*ControlPanelGetOrgURLInfoResponse,
+) []*proto.ControlPanelGetOrgURLInfoResponse {
+	var items []*proto.ControlPanelGetOrgURLInfoResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertControlPanelGetOrgURLInfoResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedControlPanelGetOrgURLInfoResponseToPorcelain(plumbings []*proto.ControlPanelGetOrgURLInfoResponse) (
+	[]*ControlPanelGetOrgURLInfoResponse,
+	error,
+) {
+	var items []*ControlPanelGetOrgURLInfoResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertControlPanelGetOrgURLInfoResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertControlPanelGetRDPCAPublicKeyResponseToPorcelain(plumbing *proto.ControlPanelGetRDPCAPublicKeyResponse) (*ControlPanelGetRDPCAPublicKeyResponse, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -12884,10 +12975,8 @@ func convertMCPToPorcelain(plumbing *proto.MCP) (*MCP, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.OauthAuthEndpoint = plumbing.OauthAuthEndpoint
-	porcelain.OauthRegisterEndpoint = plumbing.OauthRegisterEndpoint
 	porcelain.OauthTokenEndpoint = plumbing.OauthTokenEndpoint
 	porcelain.Password = plumbing.Password
-	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
 	porcelain.SecretStoreID = plumbing.SecretStoreId
@@ -12913,10 +13002,8 @@ func convertMCPToPlumbing(porcelain *MCP) *proto.MCP {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.OauthAuthEndpoint = (porcelain.OauthAuthEndpoint)
-	plumbing.OauthRegisterEndpoint = (porcelain.OauthRegisterEndpoint)
 	plumbing.OauthTokenEndpoint = (porcelain.OauthTokenEndpoint)
 	plumbing.Password = (porcelain.Password)
-	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
@@ -12942,6 +13029,77 @@ func convertRepeatedMCPToPorcelain(plumbings []*proto.MCP) (
 	var items []*MCP
 	for _, plumbing := range plumbings {
 		if v, err := convertMCPToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertMCPDCRToPorcelain(plumbing *proto.MCPDCR) (*MCPDCR, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &MCPDCR{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.OauthAuthEndpoint = plumbing.OauthAuthEndpoint
+	porcelain.OauthRegisterEndpoint = plumbing.OauthRegisterEndpoint
+	porcelain.OauthTokenEndpoint = plumbing.OauthTokenEndpoint
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertMCPDCRToPlumbing(porcelain *MCPDCR) *proto.MCPDCR {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.MCPDCR{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.OauthAuthEndpoint = (porcelain.OauthAuthEndpoint)
+	plumbing.OauthRegisterEndpoint = (porcelain.OauthRegisterEndpoint)
+	plumbing.OauthTokenEndpoint = (porcelain.OauthTokenEndpoint)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedMCPDCRToPlumbing(
+	porcelains []*MCPDCR,
+) []*proto.MCPDCR {
+	var items []*proto.MCPDCR
+	for _, porcelain := range porcelains {
+		items = append(items, convertMCPDCRToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMCPDCRToPorcelain(plumbings []*proto.MCPDCR) (
+	[]*MCPDCR,
+	error,
+) {
+	var items []*MCPDCR
+	for _, plumbing := range plumbings {
+		if v, err := convertMCPDCRToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -19535,6 +19693,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_Maria{Maria: convertMariaToPlumbing(v)}
 	case *MCP:
 		plumbing.Resource = &proto.Resource_Mcp{Mcp: convertMCPToPlumbing(v)}
+	case *MCPDCR:
+		plumbing.Resource = &proto.Resource_Mcpdcr{Mcpdcr: convertMCPDCRToPlumbing(v)}
 	case *Memcached:
 		plumbing.Resource = &proto.Resource_Memcached{Memcached: convertMemcachedToPlumbing(v)}
 	case *Memsql:
@@ -19836,6 +19996,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetMcp() != nil {
 		return convertMCPToPorcelain(plumbing.GetMcp())
+	}
+	if plumbing.GetMcpdcr() != nil {
+		return convertMCPDCRToPorcelain(plumbing.GetMcpdcr())
 	}
 	if plumbing.GetMemcached() != nil {
 		return convertMemcachedToPorcelain(plumbing.GetMemcached())
