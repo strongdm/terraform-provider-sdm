@@ -668,6 +668,19 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `url` - (Required) The base address of your website without the path.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
+* databricks:
+	* `access_token` - (Required, either in plaintext, or as a secret store path) Databricks Personal Access Token (PAT)
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The Databricks workspace hostname (e.g., dbc-xxx.cloud.databricks.com)
+	* `http_path` - (Required) The HTTP path to the SQL warehouse or cluster (e.g., /sql/1.0/warehouses/xxx)
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `schema` - (Optional) The Schema to use to direct initial requests.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * db_2_i:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.

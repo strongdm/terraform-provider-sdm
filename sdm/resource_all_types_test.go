@@ -622,6 +622,17 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 			},
 		},
 		{
+			resource: "databricks",
+			pairs: [][2]string{
+				{"access_token", `"access_token"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"http_path", `"http_path"`},
+				{"name", `"all-resources-databricks-name"`},
+				{"schema", `"schema"`},
+			},
+		},
+		{
 			resource: "db_2_i",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
@@ -2285,6 +2296,19 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"subdomain", `"all-resources-secret-couchbasewebui-subdomain"`},
 				{"url", `"https://app.strongdm.com"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
+			},
+		},
+
+		{
+			resource: "databricks",
+			pairs: [][2]string{
+				{"access_token", `"path/to/secret?key=key&encoding=base64"`},
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"http_path", `"http_path"`},
+				{"name", `"all-resources-secret-databricks-name"`},
+				{"schema", `"schema"`},
+				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
 

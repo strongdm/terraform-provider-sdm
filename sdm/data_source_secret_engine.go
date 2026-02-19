@@ -68,6 +68,10 @@ func dataSourceSecretEngine() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
+			"node_selector": {
+				Type:     schema.TypeString,
+				Optional: true,
+			},
 			"password": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -199,6 +203,12 @@ func dataSourceSecretEngine() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
 									},
+									"node_selector": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
+									},
 									"public_key": {
 										Type: schema.TypeString,
 
@@ -287,6 +297,12 @@ func dataSourceSecretEngine() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
 									},
+									"node_selector": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
+									},
 									"public_key": {
 										Type: schema.TypeString,
 
@@ -356,6 +372,12 @@ func dataSourceSecretEngine() *schema.Resource {
 
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
+									},
+									"node_selector": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
 									},
 									"password": {
 										Type: schema.TypeString,
@@ -463,6 +485,12 @@ func dataSourceSecretEngine() *schema.Resource {
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
 									},
+									"node_selector": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
+									},
 									"password": {
 										Type: schema.TypeString,
 
@@ -562,6 +590,12 @@ func dataSourceSecretEngine() *schema.Resource {
 
 										Optional:    true,
 										Description: "Unique human-readable name of the Secret Engine.",
+									},
+									"node_selector": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
 									},
 									"password": {
 										Type: schema.TypeString,
@@ -700,6 +734,10 @@ func convertSecretEngineFilterToPlumbing(d *schema.ResourceData) (string, []inte
 		filter += "name:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("node_selector"); ok {
+		filter += "nodeselector:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("password"); ok {
 		filter += "password:? "
 		args = append(args, v)
@@ -798,6 +836,7 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"max_backoff_duration":       convertDurationToPorcelain(v.MaxBackoffDuration),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"request_timeout":            (v.RequestTimeout),
 				"secret_store_id":            (v.SecretStoreID),
@@ -814,6 +853,7 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 				"id":                         (v.ID),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),
 				"secret_store_root_path":     (v.SecretStoreRootPath),
@@ -827,6 +867,7 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 				"id":                         (v.ID),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
@@ -846,6 +887,7 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 				"id":                         (v.ID),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
@@ -864,6 +906,7 @@ func dataSourceSecretEngineList(ctx context.Context, d *schema.ResourceData, cc 
 				"id":                         (v.ID),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),

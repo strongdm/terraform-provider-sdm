@@ -3045,6 +3045,7 @@ func convertActiveDirectoryEngineToPorcelain(plumbing *proto.ActiveDirectoryEngi
 		porcelain.MaxBackoffDuration = v
 	}
 	porcelain.Name = plumbing.Name
+	porcelain.NodeSelector = plumbing.NodeSelector
 	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
 		return nil, fmt.Errorf("error converting field Policy: %v", err)
 	} else {
@@ -3087,6 +3088,7 @@ func convertActiveDirectoryEngineToPlumbing(porcelain *ActiveDirectoryEngine) *p
 	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
 	plumbing.MaxBackoffDuration = convertDurationToPlumbing(porcelain.MaxBackoffDuration)
 	plumbing.Name = (porcelain.Name)
+	plumbing.NodeSelector = (porcelain.NodeSelector)
 	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.PublicKey = (porcelain.PublicKey)
 	plumbing.RequestTimeout = (porcelain.RequestTimeout)
@@ -8025,6 +8027,77 @@ func convertRepeatedDB2LUWToPorcelain(plumbings []*proto.DB2LUW) (
 	}
 	return items, nil
 }
+func convertDatabricksToPorcelain(plumbing *proto.Databricks) (*Databricks, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &Databricks{}
+	porcelain.AccessToken = plumbing.AccessToken
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.Hostname = plumbing.Hostname
+	porcelain.HttpPath = plumbing.HttpPath
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Schema = plumbing.Schema
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertDatabricksToPlumbing(porcelain *Databricks) *proto.Databricks {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Databricks{}
+	plumbing.AccessToken = (porcelain.AccessToken)
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Hostname = (porcelain.Hostname)
+	plumbing.HttpPath = (porcelain.HttpPath)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Schema = (porcelain.Schema)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedDatabricksToPlumbing(
+	porcelains []*Databricks,
+) []*proto.Databricks {
+	var items []*proto.Databricks
+	for _, porcelain := range porcelains {
+		items = append(items, convertDatabricksToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedDatabricksToPorcelain(plumbings []*proto.Databricks) (
+	[]*Databricks,
+	error,
+) {
+	var items []*Databricks
+	for _, plumbing := range plumbings {
+		if v, err := convertDatabricksToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertDeleteResponseMetadataToPorcelain(plumbing *proto.DeleteResponseMetadata) (*DeleteResponseMetadata, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -12218,6 +12291,7 @@ func convertKeyValueEngineToPorcelain(plumbing *proto.KeyValueEngine) (*KeyValue
 	porcelain.ID = plumbing.Id
 	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
 	porcelain.Name = plumbing.Name
+	porcelain.NodeSelector = plumbing.NodeSelector
 	porcelain.PublicKey = plumbing.PublicKey
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.SecretStoreRootPath = plumbing.SecretStoreRootPath
@@ -12237,6 +12311,7 @@ func convertKeyValueEngineToPlumbing(porcelain *KeyValueEngine) *proto.KeyValueE
 	plumbing.Id = (porcelain.ID)
 	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
 	plumbing.Name = (porcelain.Name)
+	plumbing.NodeSelector = (porcelain.NodeSelector)
 	plumbing.PublicKey = (porcelain.PublicKey)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.SecretStoreRootPath = (porcelain.SecretStoreRootPath)
@@ -15084,6 +15159,7 @@ func convertMysqlEngineToPorcelain(plumbing *proto.MysqlEngine) (*MysqlEngine, e
 	porcelain.ID = plumbing.Id
 	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
 	porcelain.Name = plumbing.Name
+	porcelain.NodeSelector = plumbing.NodeSelector
 	porcelain.Password = plumbing.Password
 	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
 		return nil, fmt.Errorf("error converting field Policy: %v", err)
@@ -15121,6 +15197,7 @@ func convertMysqlEngineToPlumbing(porcelain *MysqlEngine) *proto.MysqlEngine {
 	plumbing.Id = (porcelain.ID)
 	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
 	plumbing.Name = (porcelain.Name)
+	plumbing.NodeSelector = (porcelain.NodeSelector)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.Port = (porcelain.Port)
@@ -17418,6 +17495,7 @@ func convertPostgresEngineToPorcelain(plumbing *proto.PostgresEngine) (*Postgres
 	porcelain.ID = plumbing.Id
 	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
 	porcelain.Name = plumbing.Name
+	porcelain.NodeSelector = plumbing.NodeSelector
 	porcelain.Password = plumbing.Password
 	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
 		return nil, fmt.Errorf("error converting field Policy: %v", err)
@@ -17454,6 +17532,7 @@ func convertPostgresEngineToPlumbing(porcelain *PostgresEngine) *proto.PostgresE
 	plumbing.Id = (porcelain.ID)
 	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
 	plumbing.Name = (porcelain.Name)
+	plumbing.NodeSelector = (porcelain.NodeSelector)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.Port = (porcelain.Port)
@@ -19631,6 +19710,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_CouchbaseDatabase{CouchbaseDatabase: convertCouchbaseDatabaseToPlumbing(v)}
 	case *CouchbaseWebUI:
 		plumbing.Resource = &proto.Resource_CouchbaseWebUi{CouchbaseWebUi: convertCouchbaseWebUIToPlumbing(v)}
+	case *Databricks:
+		plumbing.Resource = &proto.Resource_Databricks{Databricks: convertDatabricksToPlumbing(v)}
 	case *DB2I:
 		plumbing.Resource = &proto.Resource_Db_2I{Db_2I: convertDB2IToPlumbing(v)}
 	case *DB2LUW:
@@ -19903,6 +19984,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetCouchbaseWebUi() != nil {
 		return convertCouchbaseWebUIToPorcelain(plumbing.GetCouchbaseWebUi())
+	}
+	if plumbing.GetDatabricks() != nil {
+		return convertDatabricksToPorcelain(plumbing.GetDatabricks())
 	}
 	if plumbing.GetDb_2I() != nil {
 		return convertDB2IToPorcelain(plumbing.GetDb_2I())
@@ -23164,6 +23248,7 @@ func convertSqlserverEngineToPorcelain(plumbing *proto.SqlserverEngine) (*Sqlser
 	porcelain.ID = plumbing.Id
 	porcelain.KeyRotationIntervalDays = plumbing.KeyRotationIntervalDays
 	porcelain.Name = plumbing.Name
+	porcelain.NodeSelector = plumbing.NodeSelector
 	porcelain.Password = plumbing.Password
 	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
 		return nil, fmt.Errorf("error converting field Policy: %v", err)
@@ -23201,6 +23286,7 @@ func convertSqlserverEngineToPlumbing(porcelain *SqlserverEngine) *proto.Sqlserv
 	plumbing.Id = (porcelain.ID)
 	plumbing.KeyRotationIntervalDays = (porcelain.KeyRotationIntervalDays)
 	plumbing.Name = (porcelain.Name)
+	plumbing.NodeSelector = (porcelain.NodeSelector)
 	plumbing.Password = (porcelain.Password)
 	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.Port = (porcelain.Port)

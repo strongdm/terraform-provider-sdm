@@ -369,104 +369,104 @@ const (
 
 // Permissions, all permissions that may be granted to an account.
 const (
-	PermissionGroupRead                    = "group:read"
-	PermissionGroupWrite                   = "group:write"
-	PermissionGroupRoleRead                = "grouprole:read"
-	PermissionGroupRoleWrite               = "grouprole:write"
-	PermissionAccountGroupRead             = "accountgroup:read"
-	PermissionAccountGroupWrite            = "accountgroup:write"
-	PermissionRelayList                    = "relay:list"
-	PermissionRelayCreate                  = "relay:create"
-	PermissionDatasourceList               = "datasource:list"
-	PermissionDatasourceCreate             = "datasource:create"
-	PermissionDatasourceHealthcheck        = "datasource:healthcheck"
-	PermissionDeprecatedDatasourceGrant    = "datasource:grant"
-	PermissionDatasourceDelete             = "datasource:delete"
-	PermissionDatasourceUpdate             = "datasource:update"
-	PermissionResourceLockDelete           = "resourcelock:delete"
-	PermissionResourceLockList             = "resourcelock:list"
-	PermissionSecretEngineCreate           = "secretengine:create"
-	PermissionSecretEngineList             = "secretengine:list"
-	PermissionSecretEngineDelete           = "secretengine:delete"
-	PermissionSecretEngineUpdate           = "secretengine:update"
-	PermissionSecretEngineStatus           = "secretengine:status"
-	PermissionSecretStoreCreate            = "secretstore:create"
-	PermissionSecretStoreList              = "secretstore:list"
-	PermissionSecretStoreDelete            = "secretstore:delete"
-	PermissionSecretStoreUpdate            = "secretstore:update"
-	PermissionSecretStoreStatus            = "secretstore:status"
-	PermissionRemoteIdentityGroupWrite     = "remoteidentitygroup:write"
-	PermissionRemoteIdentityGroupRead      = "remoteidentitygroup:read"
-	PermissionRemoteIdentityWrite          = "remoteidentity:write"
-	PermissionRemoteIdentityRead           = "remoteidentity:read"
-	PermissionUserCreate                   = "user:create"
-	PermissionUserList                     = "user:list"
-	PermissionUserUpdateAdmin              = "user:update_admin"
-	PermissionUserCreateAdminToken         = "user:create_admin_token"
-	PermissionUserCreateServiceAccount     = "user:create_service_account"
-	PermissionUserSetPermissionLevel       = "user:set_strong_role"
-	PermissionUserUpdate                   = "user:update"
-	PermissionUserInitiatePasswordReset    = "user:initiate_password_reset"
-	PermissionUserDelete                   = "user:delete"
-	PermissionUserAssign                   = "user:assign"
-	PermissionUserSuspend                  = "user:suspend"
-	PermissionUserSetPassword              = "user:set_password"
-	PermissionRoleList                     = "role:list"
-	PermissionRoleCreate                   = "role:create"
-	PermissionRoleDelete                   = "role:delete"
-	PermissionRoleUpdate                   = "role:update"
-	PermissionOrgViewSettings              = "organization:view_settings"
-	PermissionOrgEditSettings              = "organization:edit_settings"
-	PermissionOrgDeploymentDoctor          = "organization:deployment_doctor"
-	PermissionOrgListChildren              = "organization:list_children"
-	PermissionOrgCreateChildOrganization   = "organization:create_child_organization"
-	PermissionOrgAuditUsers                = "audit:users"
-	PermissionOrgAuditRoles                = "audit:roles"
-	PermissionOrgAuditDatasources          = "audit:datasources"
-	PermissionOrgAuditNodes                = "audit:nodes"
-	PermissionOrgAuditPermissions          = "audit:permissions"
-	PermissionOrgAuditQueries              = "audit:queries"
-	PermissionOrgAuditActivities           = "audit:activities"
-	PermissionOrgAuditSSH                  = "audit:ssh"
-	PermissionOrgAuditAccountGrants        = "audit:accountgrants"
-	PermissionOrgAuditOrg                  = "audit:organization"
-	PermissionOrgAuditRemoteIdentities     = "audit:remoteidentities"
-	PermissionOrgAuditRemoteIdentityGroups = "audit:remoteidentitygroups"
-	PermissionOrgAuditSecretEngines        = "audit:secretengines"
-	PermissionOrgAuditSecretStores         = "audit:secretstores"
-	PermissionOrgAuditWorkflows            = "audit:workflows"
-	PermissionOrgAuditApprovalFlows        = "audit:approvalflows"
-	PermissionOrgAuditAccessRequests       = "audit:accessrequests"
-	PermissionOrgAuditPolicies             = "audit:policies"
-	PermissionOrgAuditGroups               = "audit:groups"
-	PermissionWorkflowList                 = "workflow:list"
-	PermissionWorkflowEdit                 = "workflow:edit"
 	PermissionAccessRequestList            = "accessrequest:list"
 	PermissionAccessRequestRequester       = "accessrequest:requester"
+	PermissionAccountGroupRead             = "accountgroup:read"
+	PermissionAccountGroupWrite            = "accountgroup:write"
 	PermissionApprovalFlowEdit             = "approvalflow:edit"
 	PermissionApprovalFlowList             = "approvalflow:list"
-	PermissionInstallationBless            = "installation:bless"
-	PermissionInstallationCreate           = "installation:create"
-	PermissionInstallationRevoke           = "installation:revoke"
-	PermissionTestingOrgCreate             = "testing:organization:create"
-	PermissionTestingOrgDelete             = "testing:organization:delete"
-	PermissionTestingNoPermissions         = "testing:noperms"
-	PermissionTestingFetchQueries          = "testing:queries:get"
-	PermissionGrantRead                    = "grant:read"
-	PermissionGrantWrite                   = "grant:write"
-	PermissionReportRead                   = "report:read"
 	PermissionBillingRead                  = "billing:read"
 	PermissionCredentialRead               = "credential:read"
 	PermissionCredentialWrite              = "credential:write"
-	PermissionPolicyRead                   = "policy:read"
-	PermissionPolicyWrite                  = "policy:write"
+	PermissionDatasourceCreate             = "datasource:create"
+	PermissionDatasourceDelete             = "datasource:delete"
+	PermissionDatasourceHealthcheck        = "datasource:healthcheck"
+	PermissionDatasourceList               = "datasource:list"
+	PermissionDatasourceUpdate             = "datasource:update"
+	PermissionDeprecatedDatasourceGrant    = "datasource:grant"
 	PermissionDiscoveryConnectorRead       = "discoveryconnector:read"
 	PermissionDiscoveryConnectorWrite      = "discoveryconnector:write"
+	PermissionGrantRead                    = "grant:read"
+	PermissionGrantWrite                   = "grant:write"
+	PermissionGroupRead                    = "group:read"
+	PermissionGroupRoleRead                = "grouprole:read"
+	PermissionGroupRoleWrite               = "grouprole:write"
+	PermissionGroupWrite                   = "group:write"
+	PermissionInstallationBless            = "installation:bless"
+	PermissionInstallationCreate           = "installation:create"
+	PermissionInstallationRevoke           = "installation:revoke"
 	PermissionManagedSecretCreate          = "managedsecret:create"
-	PermissionManagedSecretList            = "managedsecret:list"
 	PermissionManagedSecretDelete          = "managedsecret:delete"
-	PermissionManagedSecretUpdate          = "managedsecret:update"
+	PermissionManagedSecretList            = "managedsecret:list"
 	PermissionManagedSecretRead            = "managedsecret:read"
+	PermissionManagedSecretUpdate          = "managedsecret:update"
+	PermissionOrgAuditAccessRequests       = "audit:accessrequests"
+	PermissionOrgAuditAccountGrants        = "audit:accountgrants"
+	PermissionOrgAuditActivities           = "audit:activities"
+	PermissionOrgAuditApprovalFlows        = "audit:approvalflows"
+	PermissionOrgAuditDatasources          = "audit:datasources"
+	PermissionOrgAuditGroups               = "audit:groups"
+	PermissionOrgAuditNodes                = "audit:nodes"
+	PermissionOrgAuditOrg                  = "audit:organization"
+	PermissionOrgAuditPermissions          = "audit:permissions"
+	PermissionOrgAuditPolicies             = "audit:policies"
+	PermissionOrgAuditQueries              = "audit:queries"
+	PermissionOrgAuditRemoteIdentities     = "audit:remoteidentities"
+	PermissionOrgAuditRemoteIdentityGroups = "audit:remoteidentitygroups"
+	PermissionOrgAuditRoles                = "audit:roles"
+	PermissionOrgAuditSSH                  = "audit:ssh"
+	PermissionOrgAuditSecretEngines        = "audit:secretengines"
+	PermissionOrgAuditSecretStores         = "audit:secretstores"
+	PermissionOrgAuditUsers                = "audit:users"
+	PermissionOrgAuditWorkflows            = "audit:workflows"
+	PermissionOrgCreateChildOrganization   = "organization:create_child_organization"
+	PermissionOrgDeploymentDoctor          = "organization:deployment_doctor"
+	PermissionOrgEditSettings              = "organization:edit_settings"
+	PermissionOrgListChildren              = "organization:list_children"
+	PermissionOrgViewSettings              = "organization:view_settings"
+	PermissionPolicyRead                   = "policy:read"
+	PermissionPolicyWrite                  = "policy:write"
+	PermissionRelayCreate                  = "relay:create"
+	PermissionRelayList                    = "relay:list"
+	PermissionRemoteIdentityGroupRead      = "remoteidentitygroup:read"
+	PermissionRemoteIdentityGroupWrite     = "remoteidentitygroup:write"
+	PermissionRemoteIdentityRead           = "remoteidentity:read"
+	PermissionRemoteIdentityWrite          = "remoteidentity:write"
+	PermissionReportRead                   = "report:read"
+	PermissionResourceLockDelete           = "resourcelock:delete"
+	PermissionResourceLockList             = "resourcelock:list"
+	PermissionRoleCreate                   = "role:create"
+	PermissionRoleDelete                   = "role:delete"
+	PermissionRoleList                     = "role:list"
+	PermissionRoleUpdate                   = "role:update"
+	PermissionSecretEngineCreate           = "secretengine:create"
+	PermissionSecretEngineDelete           = "secretengine:delete"
+	PermissionSecretEngineList             = "secretengine:list"
+	PermissionSecretEngineStatus           = "secretengine:status"
+	PermissionSecretEngineUpdate           = "secretengine:update"
+	PermissionSecretStoreCreate            = "secretstore:create"
+	PermissionSecretStoreDelete            = "secretstore:delete"
+	PermissionSecretStoreList              = "secretstore:list"
+	PermissionSecretStoreStatus            = "secretstore:status"
+	PermissionSecretStoreUpdate            = "secretstore:update"
+	PermissionTestingFetchQueries          = "testing:queries:get"
+	PermissionTestingNoPermissions         = "testing:noperms"
+	PermissionTestingOrgCreate             = "testing:organization:create"
+	PermissionTestingOrgDelete             = "testing:organization:delete"
+	PermissionUserAssign                   = "user:assign"
+	PermissionUserCreate                   = "user:create"
+	PermissionUserCreateAdminToken         = "user:create_admin_token"
+	PermissionUserCreateServiceAccount     = "user:create_service_account"
+	PermissionUserDelete                   = "user:delete"
+	PermissionUserInitiatePasswordReset    = "user:initiate_password_reset"
+	PermissionUserList                     = "user:list"
+	PermissionUserSetPassword              = "user:set_password"
+	PermissionUserSetPermissionLevel       = "user:set_strong_role"
+	PermissionUserSuspend                  = "user:suspend"
+	PermissionUserUpdate                   = "user:update"
+	PermissionUserUpdateAdmin              = "user:update_admin"
+	PermissionWorkflowEdit                 = "workflow:edit"
+	PermissionWorkflowList                 = "workflow:list"
 )
 
 // Query Categories, all the categories of resource against which queries are logged.
@@ -1006,104 +1006,104 @@ func OrgKindIsValid(v string) bool {
 }
 
 var AllPermission = []string{
-	PermissionGroupRead,
-	PermissionGroupWrite,
-	PermissionGroupRoleRead,
-	PermissionGroupRoleWrite,
-	PermissionAccountGroupRead,
-	PermissionAccountGroupWrite,
-	PermissionRelayList,
-	PermissionRelayCreate,
-	PermissionDatasourceList,
-	PermissionDatasourceCreate,
-	PermissionDatasourceHealthcheck,
-	PermissionDeprecatedDatasourceGrant,
-	PermissionDatasourceDelete,
-	PermissionDatasourceUpdate,
-	PermissionResourceLockDelete,
-	PermissionResourceLockList,
-	PermissionSecretEngineCreate,
-	PermissionSecretEngineList,
-	PermissionSecretEngineDelete,
-	PermissionSecretEngineUpdate,
-	PermissionSecretEngineStatus,
-	PermissionSecretStoreCreate,
-	PermissionSecretStoreList,
-	PermissionSecretStoreDelete,
-	PermissionSecretStoreUpdate,
-	PermissionSecretStoreStatus,
-	PermissionRemoteIdentityGroupWrite,
-	PermissionRemoteIdentityGroupRead,
-	PermissionRemoteIdentityWrite,
-	PermissionRemoteIdentityRead,
-	PermissionUserCreate,
-	PermissionUserList,
-	PermissionUserUpdateAdmin,
-	PermissionUserCreateAdminToken,
-	PermissionUserCreateServiceAccount,
-	PermissionUserSetPermissionLevel,
-	PermissionUserUpdate,
-	PermissionUserInitiatePasswordReset,
-	PermissionUserDelete,
-	PermissionUserAssign,
-	PermissionUserSuspend,
-	PermissionUserSetPassword,
-	PermissionRoleList,
-	PermissionRoleCreate,
-	PermissionRoleDelete,
-	PermissionRoleUpdate,
-	PermissionOrgViewSettings,
-	PermissionOrgEditSettings,
-	PermissionOrgDeploymentDoctor,
-	PermissionOrgListChildren,
-	PermissionOrgCreateChildOrganization,
-	PermissionOrgAuditUsers,
-	PermissionOrgAuditRoles,
-	PermissionOrgAuditDatasources,
-	PermissionOrgAuditNodes,
-	PermissionOrgAuditPermissions,
-	PermissionOrgAuditQueries,
-	PermissionOrgAuditActivities,
-	PermissionOrgAuditSSH,
-	PermissionOrgAuditAccountGrants,
-	PermissionOrgAuditOrg,
-	PermissionOrgAuditRemoteIdentities,
-	PermissionOrgAuditRemoteIdentityGroups,
-	PermissionOrgAuditSecretEngines,
-	PermissionOrgAuditSecretStores,
-	PermissionOrgAuditWorkflows,
-	PermissionOrgAuditApprovalFlows,
-	PermissionOrgAuditAccessRequests,
-	PermissionOrgAuditPolicies,
-	PermissionOrgAuditGroups,
-	PermissionWorkflowList,
-	PermissionWorkflowEdit,
 	PermissionAccessRequestList,
 	PermissionAccessRequestRequester,
+	PermissionAccountGroupRead,
+	PermissionAccountGroupWrite,
 	PermissionApprovalFlowEdit,
 	PermissionApprovalFlowList,
-	PermissionInstallationBless,
-	PermissionInstallationCreate,
-	PermissionInstallationRevoke,
-	PermissionTestingOrgCreate,
-	PermissionTestingOrgDelete,
-	PermissionTestingNoPermissions,
-	PermissionTestingFetchQueries,
-	PermissionGrantRead,
-	PermissionGrantWrite,
-	PermissionReportRead,
 	PermissionBillingRead,
 	PermissionCredentialRead,
 	PermissionCredentialWrite,
-	PermissionPolicyRead,
-	PermissionPolicyWrite,
+	PermissionDatasourceCreate,
+	PermissionDatasourceDelete,
+	PermissionDatasourceHealthcheck,
+	PermissionDatasourceList,
+	PermissionDatasourceUpdate,
+	PermissionDeprecatedDatasourceGrant,
 	PermissionDiscoveryConnectorRead,
 	PermissionDiscoveryConnectorWrite,
+	PermissionGrantRead,
+	PermissionGrantWrite,
+	PermissionGroupRead,
+	PermissionGroupRoleRead,
+	PermissionGroupRoleWrite,
+	PermissionGroupWrite,
+	PermissionInstallationBless,
+	PermissionInstallationCreate,
+	PermissionInstallationRevoke,
 	PermissionManagedSecretCreate,
-	PermissionManagedSecretList,
 	PermissionManagedSecretDelete,
-	PermissionManagedSecretUpdate,
+	PermissionManagedSecretList,
 	PermissionManagedSecretRead,
+	PermissionManagedSecretUpdate,
+	PermissionOrgAuditAccessRequests,
+	PermissionOrgAuditAccountGrants,
+	PermissionOrgAuditActivities,
+	PermissionOrgAuditApprovalFlows,
+	PermissionOrgAuditDatasources,
+	PermissionOrgAuditGroups,
+	PermissionOrgAuditNodes,
+	PermissionOrgAuditOrg,
+	PermissionOrgAuditPermissions,
+	PermissionOrgAuditPolicies,
+	PermissionOrgAuditQueries,
+	PermissionOrgAuditRemoteIdentities,
+	PermissionOrgAuditRemoteIdentityGroups,
+	PermissionOrgAuditRoles,
+	PermissionOrgAuditSSH,
+	PermissionOrgAuditSecretEngines,
+	PermissionOrgAuditSecretStores,
+	PermissionOrgAuditUsers,
+	PermissionOrgAuditWorkflows,
+	PermissionOrgCreateChildOrganization,
+	PermissionOrgDeploymentDoctor,
+	PermissionOrgEditSettings,
+	PermissionOrgListChildren,
+	PermissionOrgViewSettings,
+	PermissionPolicyRead,
+	PermissionPolicyWrite,
+	PermissionRelayCreate,
+	PermissionRelayList,
+	PermissionRemoteIdentityGroupRead,
+	PermissionRemoteIdentityGroupWrite,
+	PermissionRemoteIdentityRead,
+	PermissionRemoteIdentityWrite,
+	PermissionReportRead,
+	PermissionResourceLockDelete,
+	PermissionResourceLockList,
+	PermissionRoleCreate,
+	PermissionRoleDelete,
+	PermissionRoleList,
+	PermissionRoleUpdate,
+	PermissionSecretEngineCreate,
+	PermissionSecretEngineDelete,
+	PermissionSecretEngineList,
+	PermissionSecretEngineStatus,
+	PermissionSecretEngineUpdate,
+	PermissionSecretStoreCreate,
+	PermissionSecretStoreDelete,
+	PermissionSecretStoreList,
+	PermissionSecretStoreStatus,
+	PermissionSecretStoreUpdate,
+	PermissionTestingFetchQueries,
+	PermissionTestingNoPermissions,
+	PermissionTestingOrgCreate,
+	PermissionTestingOrgDelete,
+	PermissionUserAssign,
+	PermissionUserCreate,
+	PermissionUserCreateAdminToken,
+	PermissionUserCreateServiceAccount,
+	PermissionUserDelete,
+	PermissionUserInitiatePasswordReset,
+	PermissionUserList,
+	PermissionUserSetPassword,
+	PermissionUserSetPermissionLevel,
+	PermissionUserSuspend,
+	PermissionUserUpdate,
+	PermissionUserUpdateAdmin,
+	PermissionWorkflowEdit,
+	PermissionWorkflowList,
 }
 
 func PermissionIsValid(v string) bool {

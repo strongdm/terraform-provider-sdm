@@ -91,6 +91,12 @@ func resourceSecretEngine() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Secret Engine.",
 						},
+						"node_selector": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
+						},
 						"public_key": {
 							Type: schema.TypeString,
 
@@ -175,6 +181,12 @@ func resourceSecretEngine() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Secret Engine.",
 						},
+						"node_selector": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
+						},
 						"public_key": {
 							Type: schema.TypeString,
 
@@ -240,6 +252,12 @@ func resourceSecretEngine() *schema.Resource {
 
 							Required:    true,
 							Description: "Unique human-readable name of the Secret Engine.",
+						},
+						"node_selector": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
 						},
 						"password": {
 							Type: schema.TypeString,
@@ -344,6 +362,12 @@ func resourceSecretEngine() *schema.Resource {
 							Required:    true,
 							Description: "Unique human-readable name of the Secret Engine.",
 						},
+						"node_selector": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
+						},
 						"password": {
 							Type: schema.TypeString,
 
@@ -440,6 +464,12 @@ func resourceSecretEngine() *schema.Resource {
 
 							Required:    true,
 							Description: "Unique human-readable name of the Secret Engine.",
+						},
+						"node_selector": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
 						},
 						"password": {
 							Type: schema.TypeString,
@@ -538,6 +568,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			KeyRotationIntervalDays: convertInt32ToPlumbing(raw["key_rotation_interval_days"]),
 			MaxBackoffDuration:      convertDurationToPlumbing(raw["max_backoff_duration"]),
 			Name:                    convertStringToPlumbing(raw["name"]),
+			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
 			RequestTimeout:          convertUint32ToPlumbing(raw["request_timeout"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			SecretStoreRootPath:     convertStringToPlumbing(raw["secret_store_root_path"]),
@@ -559,6 +590,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			ID:                      d.Id(),
 			KeyRotationIntervalDays: convertInt32ToPlumbing(raw["key_rotation_interval_days"]),
 			Name:                    convertStringToPlumbing(raw["name"]),
+			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			SecretStoreRootPath:     convertStringToPlumbing(raw["secret_store_root_path"]),
 			Tags:                    convertTagsToPlumbing(raw["tags"]),
@@ -577,6 +609,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			Hostname:                convertStringToPlumbing(raw["hostname"]),
 			KeyRotationIntervalDays: convertInt32ToPlumbing(raw["key_rotation_interval_days"]),
 			Name:                    convertStringToPlumbing(raw["name"]),
+			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
 			Password:                convertStringToPlumbing(raw["password"]),
 			Port:                    convertUint32ToPlumbing(raw["port"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
@@ -601,6 +634,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			Hostname:                convertStringToPlumbing(raw["hostname"]),
 			KeyRotationIntervalDays: convertInt32ToPlumbing(raw["key_rotation_interval_days"]),
 			Name:                    convertStringToPlumbing(raw["name"]),
+			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
 			Password:                convertStringToPlumbing(raw["password"]),
 			Port:                    convertUint32ToPlumbing(raw["port"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
@@ -624,6 +658,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			Hostname:                convertStringToPlumbing(raw["hostname"]),
 			KeyRotationIntervalDays: convertInt32ToPlumbing(raw["key_rotation_interval_days"]),
 			Name:                    convertStringToPlumbing(raw["name"]),
+			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
 			Password:                convertStringToPlumbing(raw["password"]),
 			Port:                    convertUint32ToPlumbing(raw["port"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
@@ -664,6 +699,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"max_backoff_duration":       convertDurationToPorcelain(v.MaxBackoffDuration),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"request_timeout":            (v.RequestTimeout),
 				"secret_store_id":            (v.SecretStoreID),
@@ -683,6 +719,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 			{
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),
 				"secret_store_root_path":     (v.SecretStoreRootPath),
@@ -699,6 +736,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"hostname":                   (v.Hostname),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
@@ -721,6 +759,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"hostname":                   (v.Hostname),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
@@ -742,6 +781,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"hostname":                   (v.Hostname),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
@@ -790,6 +830,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"max_backoff_duration":       convertDurationToPorcelain(v.MaxBackoffDuration),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"request_timeout":            (v.RequestTimeout),
 				"secret_store_id":            (v.SecretStoreID),
@@ -812,6 +853,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 			{
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),
 				"secret_store_root_path":     (v.SecretStoreRootPath),
@@ -831,6 +873,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"hostname":                   (v.Hostname),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
@@ -856,6 +899,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"hostname":                   (v.Hostname),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
@@ -880,6 +924,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"hostname":                   (v.Hostname),
 				"key_rotation_interval_days": (v.KeyRotationIntervalDays),
 				"name":                       (v.Name),
+				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),

@@ -4030,6 +4030,93 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"databricks": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "Databricks is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"access_token": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Databricks Personal Access Token (PAT)",
+						},
+						"bind_interface": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+						},
+						"egress_filter": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The Databricks workspace hostname (e.g., dbc-xxx.cloud.databricks.com)",
+						},
+						"http_path": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The HTTP path to the SQL warehouse or cluster (e.g., /sql/1.0/warehouses/xxx)",
+						},
+						"name": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type: schema.TypeInt,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
+						},
+						"proxy_cluster_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"schema": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The Schema to use to direct initial requests.",
+						},
+						"secret_store_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"db_2_i": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -5715,7 +5802,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "GoogleSpanner is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -12519,6 +12606,25 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
+	if list := d.Get("databricks").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["access_token"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential access_token was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"access_token": convertStringToPlumbing(raw["access_token"]),
+		}, nil
+	}
 	if list := d.Get("db_2_i").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -15416,6 +15522,33 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Tags:           convertTagsToPlumbing(raw["tags"]),
 			Url:            convertStringToPlumbing(raw["url"]),
 			Username:       convertStringToPlumbing(raw["username"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("databricks").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.Databricks{}
+		}
+		out := &sdm.Databricks{
+			ID:             d.Id(),
+			AccessToken:    convertStringToPlumbing(raw["access_token"]),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:       convertStringToPlumbing(raw["hostname"]),
+			HttpPath:       convertStringToPlumbing(raw["http_path"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Schema:         convertStringToPlumbing(raw["schema"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -18423,6 +18556,25 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":         seValues["username"],
 			},
 		})
+	case *sdm.Databricks:
+		localV, _ := localVersion.(*sdm.Databricks)
+		_ = localV
+		d.Set("databricks", []map[string]interface{}{
+			{
+				"access_token":     seValues["access_token"],
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"http_path":        (v.HttpPath),
+				"name":             (v.Name),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"schema":           (v.Schema),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.DB2I:
 		localV, _ := localVersion.(*sdm.DB2I)
 		_ = localV
@@ -21250,6 +21402,31 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"tags":             convertTagsToPorcelain(v.Tags),
 				"url":              (v.Url),
 				"username":         seValues["username"],
+			},
+		})
+	case *sdm.Databricks:
+		localV, ok := localVersion.(*sdm.Databricks)
+		if !ok {
+			localV = &sdm.Databricks{}
+		}
+		_ = localV
+		if v.AccessToken != "" {
+			seValues["access_token"] = v.AccessToken
+		}
+		d.Set("databricks", []map[string]interface{}{
+			{
+				"access_token":     seValues["access_token"],
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"http_path":        (v.HttpPath),
+				"name":             (v.Name),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"schema":           (v.Schema),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.DB2I:

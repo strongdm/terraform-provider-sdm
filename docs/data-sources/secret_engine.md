@@ -22,6 +22,7 @@ The following arguments are supported by a SecretEngines data source:
 * `insecure_tls` - (Optional) If true, skips LDAP server SSL certificate verification - insecure, use with caution!
 * `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 * `name` - (Optional) Unique human-readable name of the Secret Engine.
+* `node_selector` - (Optional) node selector is used to narrow down the nodes used to communicate with with secret engine
 * `password` - (Optional) Password is the password to connect to the SQL Server server.
 * `port` - (Optional) Port is the port number of the SQL Server server.
 * `request_timeout` - (Optional) Timeout, in seconds, for the connection when making requests against the server before returning back an error.
@@ -52,6 +53,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
 		* `max_backoff_duration` - The maximum retry duration in case of automatic failure. On failed ttl rotation attempt it will be retried in an increasing intervals until it reaches max_backoff_duration
 		* `name` - Unique human-readable name of the Secret Engine.
+		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
 		* `public_key` - Public key linked with a secret engine
 		* `request_timeout` - Timeout, in seconds, for the connection when making requests against the server before returning back an error.
 		* `secret_store_id` - Backing secret store identifier
@@ -66,6 +68,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Secret Engine.
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
 		* `name` - Unique human-readable name of the Secret Engine.
+		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
 		* `public_key` - Public key linked with a secret engine
 		* `secret_store_id` - Backing secret store identifier
 		* `secret_store_root_path` - Backing Secret Store root path where managed secrets are going to be stored
@@ -77,6 +80,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Secret Engine.
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
 		* `name` - Unique human-readable name of the Secret Engine.
+		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
 		* `password` - Password is the password to connect to the MySQL server.
 		* `port` - Port is the port number of the MySQL server.
 		* `public_key` - Public key linked with a secret engine
@@ -94,6 +98,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Secret Engine.
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
 		* `name` - Unique human-readable name of the Secret Engine.
+		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
 		* `password` - Password is the password to connect to the Postgres server.
 		* `port` - Port is the port number of the Postgres server.
 		* `public_key` - Public key linked with a secret engine
@@ -110,6 +115,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Secret Engine.
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
 		* `name` - Unique human-readable name of the Secret Engine.
+		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
 		* `password` - Password is the password to connect to the SQL Server server.
 		* `port` - Port is the port number of the SQL Server server.
 		* `public_key` - Public key linked with a secret engine

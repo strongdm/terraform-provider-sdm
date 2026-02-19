@@ -20,6 +20,7 @@ The following arguments are supported by the SecretEngine resource:
 	* `insecure_tls` - (Optional) If true, skips LDAP server SSL certificate verification - insecure, use with caution!
 	* `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 	* `name` - (Required) Unique human-readable name of the Secret Engine.
+	* `node_selector` - (Optional) node selector is used to narrow down the nodes used to communicate with with secret engine
 	* `request_timeout` - (Optional) Timeout, in seconds, for the connection when making requests against the server before returning back an error.
 	* `secret_store_id` - (Required) Backing secret store identifier
 	* `secret_store_root_path` - (Required) Backing Secret Store root path where managed secrets are going to be stored
@@ -31,6 +32,7 @@ The following arguments are supported by the SecretEngine resource:
 * key_value:
 	* `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 	* `name` - (Required) Unique human-readable name of the Secret Engine.
+	* `node_selector` - (Optional) node selector is used to narrow down the nodes used to communicate with with secret engine
 	* `secret_store_id` - (Required) Backing secret store identifier
 	* `secret_store_root_path` - (Required) Backing Secret Store root path where managed secrets are going to be stored
 	* `tags` - (Optional) Tags is a map of key, value pairs.
@@ -39,6 +41,7 @@ The following arguments are supported by the SecretEngine resource:
 	* `hostname` - (Required) Hostname is the hostname or IP address of the MySQL server.
 	* `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 	* `name` - (Required) Unique human-readable name of the Secret Engine.
+	* `node_selector` - (Optional) node selector is used to narrow down the nodes used to communicate with with secret engine
 	* `password` - (Required) Password is the password to connect to the MySQL server.
 	* `port` - (Required) Port is the port number of the MySQL server.
 	* `secret_store_id` - (Required) Backing secret store identifier
@@ -52,6 +55,7 @@ The following arguments are supported by the SecretEngine resource:
 	* `hostname` - (Required) Hostname is the hostname or IP address of the Postgres server.
 	* `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 	* `name` - (Required) Unique human-readable name of the Secret Engine.
+	* `node_selector` - (Optional) node selector is used to narrow down the nodes used to communicate with with secret engine
 	* `password` - (Required) Password is the password to connect to the Postgres server.
 	* `port` - (Required) Port is the port number of the Postgres server.
 	* `secret_store_id` - (Required) Backing secret store identifier
@@ -64,6 +68,7 @@ The following arguments are supported by the SecretEngine resource:
 	* `hostname` - (Required) Hostname is the hostname or IP address of the SQL Server.
 	* `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 	* `name` - (Required) Unique human-readable name of the Secret Engine.
+	* `node_selector` - (Optional) node selector is used to narrow down the nodes used to communicate with with secret engine
 	* `password` - (Required) Password is the password to connect to the SQL Server server.
 	* `port` - (Required) Port is the port number of the SQL Server server.
 	* `secret_store_id` - (Required) Backing secret store identifier
