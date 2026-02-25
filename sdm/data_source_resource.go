@@ -7248,6 +7248,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "The OAuth 2.0 authorization endpoint URL.",
 									},
+									"oauth_scopes": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Space-separated list of OAuth scopes to request.",
+									},
 									"oauth_token_endpoint": {
 										Type: schema.TypeString,
 
@@ -7348,6 +7354,12 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "The OAuth 2.0 dynamic client registration endpoint URL.",
+									},
+									"oauth_scopes": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Space-separated list of OAuth scopes to request.",
 									},
 									"oauth_token_endpoint": {
 										Type: schema.TypeString,
@@ -13054,6 +13066,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"id":                   (v.ID),
 				"name":                 (v.Name),
 				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
+				"oauth_scopes":         (v.OauthScopes),
 				"oauth_token_endpoint": (v.OauthTokenEndpoint),
 				"password":             (v.Password),
 				"port_override":        (v.PortOverride),
@@ -13072,6 +13085,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                    (v.Name),
 				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
 				"oauth_register_endpoint": (v.OauthRegisterEndpoint),
+				"oauth_scopes":            (v.OauthScopes),
 				"oauth_token_endpoint":    (v.OauthTokenEndpoint),
 				"port_override":           (v.PortOverride),
 				"proxy_cluster_id":        (v.ProxyClusterID),

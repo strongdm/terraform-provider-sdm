@@ -1128,6 +1128,7 @@ The following arguments are supported by the Resource resource:
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `oauth_auth_endpoint` - (Required) The OAuth 2.0 authorization endpoint URL.
+	* `oauth_scopes` - (Optional) Space-separated list of OAuth scopes to request.
 	* `oauth_token_endpoint` - (Required) The OAuth 2.0 token endpoint URL.
 	* `password` - (Required, either in plaintext, or as a secret store path) OAuth App Client Secret
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
@@ -1143,6 +1144,7 @@ The following arguments are supported by the Resource resource:
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `oauth_auth_endpoint` - (Required) The OAuth 2.0 authorization endpoint URL.
 	* `oauth_register_endpoint` - (Required) The OAuth 2.0 dynamic client registration endpoint URL.
+	* `oauth_scopes` - (Optional) Space-separated list of OAuth scopes to request.
 	* `oauth_token_endpoint` - (Required) The OAuth 2.0 token endpoint URL.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.

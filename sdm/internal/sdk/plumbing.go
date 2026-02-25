@@ -13050,6 +13050,7 @@ func convertMCPToPorcelain(plumbing *proto.MCP) (*MCP, error) {
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.OauthAuthEndpoint = plumbing.OauthAuthEndpoint
+	porcelain.OauthScopes = plumbing.OauthScopes
 	porcelain.OauthTokenEndpoint = plumbing.OauthTokenEndpoint
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
@@ -13077,6 +13078,7 @@ func convertMCPToPlumbing(porcelain *MCP) *proto.MCP {
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.OauthAuthEndpoint = (porcelain.OauthAuthEndpoint)
+	plumbing.OauthScopes = (porcelain.OauthScopes)
 	plumbing.OauthTokenEndpoint = (porcelain.OauthTokenEndpoint)
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
@@ -13124,6 +13126,7 @@ func convertMCPDCRToPorcelain(plumbing *proto.MCPDCR) (*MCPDCR, error) {
 	porcelain.Name = plumbing.Name
 	porcelain.OauthAuthEndpoint = plumbing.OauthAuthEndpoint
 	porcelain.OauthRegisterEndpoint = plumbing.OauthRegisterEndpoint
+	porcelain.OauthScopes = plumbing.OauthScopes
 	porcelain.OauthTokenEndpoint = plumbing.OauthTokenEndpoint
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
@@ -13150,6 +13153,7 @@ func convertMCPDCRToPlumbing(porcelain *MCPDCR) *proto.MCPDCR {
 	plumbing.Name = (porcelain.Name)
 	plumbing.OauthAuthEndpoint = (porcelain.OauthAuthEndpoint)
 	plumbing.OauthRegisterEndpoint = (porcelain.OauthRegisterEndpoint)
+	plumbing.OauthScopes = (porcelain.OauthScopes)
 	plumbing.OauthTokenEndpoint = (porcelain.OauthTokenEndpoint)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)

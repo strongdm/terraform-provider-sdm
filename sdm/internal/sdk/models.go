@@ -488,8 +488,6 @@ type AKSUserImpersonation struct {
 	Tags Tags `json:"tags"`
 }
 
-// AMQP is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type AMQP struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
@@ -4883,6 +4881,8 @@ type MCP struct {
 	Name string `json:"name"`
 	// The OAuth 2.0 authorization endpoint URL.
 	OauthAuthEndpoint string `json:"oauthAuthEndpoint"`
+	// Space-separated list of OAuth scopes to request.
+	OauthScopes string `json:"oauthScopes"`
 	// The OAuth 2.0 token endpoint URL.
 	OauthTokenEndpoint string `json:"oauthTokenEndpoint"`
 	// OAuth App Client Secret
@@ -4920,6 +4920,8 @@ type MCPDCR struct {
 	OauthAuthEndpoint string `json:"oauthAuthEndpoint"`
 	// The OAuth 2.0 dynamic client registration endpoint URL.
 	OauthRegisterEndpoint string `json:"oauthRegisterEndpoint"`
+	// Space-separated list of OAuth scopes to request.
+	OauthScopes string `json:"oauthScopes"`
 	// The OAuth 2.0 token endpoint URL.
 	OauthTokenEndpoint string `json:"oauthTokenEndpoint"`
 	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.

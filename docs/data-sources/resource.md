@@ -1174,6 +1174,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `oauth_auth_endpoint` - The OAuth 2.0 authorization endpoint URL.
+		* `oauth_scopes` - Space-separated list of OAuth scopes to request.
 		* `oauth_token_endpoint` - The OAuth 2.0 token endpoint URL.
 		* `password` - OAuth App Client Secret
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
@@ -1190,6 +1191,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `name` - Unique human-readable name of the Resource.
 		* `oauth_auth_endpoint` - The OAuth 2.0 authorization endpoint URL.
 		* `oauth_register_endpoint` - The OAuth 2.0 dynamic client registration endpoint URL.
+		* `oauth_scopes` - Space-separated list of OAuth scopes to request.
 		* `oauth_token_endpoint` - The OAuth 2.0 token endpoint URL.
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.

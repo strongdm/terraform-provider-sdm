@@ -373,6 +373,8 @@ const (
 	PermissionAccessRequestRequester       = "accessrequest:requester"
 	PermissionAccountGroupRead             = "accountgroup:read"
 	PermissionAccountGroupWrite            = "accountgroup:write"
+	PermissionAdminRoleRead                = "adminrole:read"
+	PermissionAdminRoleWrite               = "adminrole:write"
 	PermissionApprovalFlowEdit             = "approvalflow:edit"
 	PermissionApprovalFlowList             = "approvalflow:list"
 	PermissionBillingRead                  = "billing:read"
@@ -1010,6 +1012,8 @@ var AllPermission = []string{
 	PermissionAccessRequestRequester,
 	PermissionAccountGroupRead,
 	PermissionAccountGroupWrite,
+	PermissionAdminRoleRead,
+	PermissionAdminRoleWrite,
 	PermissionApprovalFlowEdit,
 	PermissionApprovalFlowList,
 	PermissionBillingRead,

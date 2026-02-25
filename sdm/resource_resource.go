@@ -1448,7 +1448,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "AMQP is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -7071,6 +7071,12 @@ func resourceResource() *schema.Resource {
 							Required:    true,
 							Description: "The OAuth 2.0 authorization endpoint URL.",
 						},
+						"oauth_scopes": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "Space-separated list of OAuth scopes to request.",
+						},
 						"oauth_token_endpoint": {
 							Type: schema.TypeString,
 
@@ -7169,6 +7175,12 @@ func resourceResource() *schema.Resource {
 
 							Required:    true,
 							Description: "The OAuth 2.0 dynamic client registration endpoint URL.",
+						},
+						"oauth_scopes": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "Space-separated list of OAuth scopes to request.",
 						},
 						"oauth_token_endpoint": {
 							Type: schema.TypeString,
@@ -16425,6 +16437,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Hostname:           convertStringToPlumbing(raw["hostname"]),
 			Name:               convertStringToPlumbing(raw["name"]),
 			OauthAuthEndpoint:  convertStringToPlumbing(raw["oauth_auth_endpoint"]),
+			OauthScopes:        convertStringToPlumbing(raw["oauth_scopes"]),
 			OauthTokenEndpoint: convertStringToPlumbing(raw["oauth_token_endpoint"]),
 			Password:           convertStringToPlumbing(raw["password"]),
 			PortOverride:       convertInt32ToPlumbing(raw["port_override"]),
@@ -16454,6 +16467,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Name:                  convertStringToPlumbing(raw["name"]),
 			OauthAuthEndpoint:     convertStringToPlumbing(raw["oauth_auth_endpoint"]),
 			OauthRegisterEndpoint: convertStringToPlumbing(raw["oauth_register_endpoint"]),
+			OauthScopes:           convertStringToPlumbing(raw["oauth_scopes"]),
 			OauthTokenEndpoint:    convertStringToPlumbing(raw["oauth_token_endpoint"]),
 			PortOverride:          convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:        convertStringToPlumbing(raw["proxy_cluster_id"]),
@@ -19206,6 +19220,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"hostname":             (v.Hostname),
 				"name":                 (v.Name),
 				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
+				"oauth_scopes":         (v.OauthScopes),
 				"oauth_token_endpoint": (v.OauthTokenEndpoint),
 				"password":             seValues["password"],
 				"port_override":        (v.PortOverride),
@@ -19227,6 +19242,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"name":                    (v.Name),
 				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
 				"oauth_register_endpoint": (v.OauthRegisterEndpoint),
+				"oauth_scopes":            (v.OauthScopes),
 				"oauth_token_endpoint":    (v.OauthTokenEndpoint),
 				"port_override":           (v.PortOverride),
 				"proxy_cluster_id":        (v.ProxyClusterID),
@@ -22291,6 +22307,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"hostname":             (v.Hostname),
 				"name":                 (v.Name),
 				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
+				"oauth_scopes":         (v.OauthScopes),
 				"oauth_token_endpoint": (v.OauthTokenEndpoint),
 				"password":             seValues["password"],
 				"port_override":        (v.PortOverride),
@@ -22315,6 +22332,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"name":                    (v.Name),
 				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
 				"oauth_register_endpoint": (v.OauthRegisterEndpoint),
+				"oauth_scopes":            (v.OauthScopes),
 				"oauth_token_endpoint":    (v.OauthTokenEndpoint),
 				"port_override":           (v.PortOverride),
 				"proxy_cluster_id":        (v.ProxyClusterID),
