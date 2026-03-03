@@ -9849,6 +9849,216 @@ func convertRepeatedGoogleSpannerToPorcelain(plumbings []*proto.GoogleSpanner) (
 	}
 	return items, nil
 }
+func convertGrantedAccountEntitlementToPorcelain(plumbing *proto.GrantedAccountEntitlement) (*GrantedAccountEntitlement, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GrantedAccountEntitlement{}
+	porcelain.GroupID = plumbing.GroupId
+	if v, err := convertTimestampToPorcelain(plumbing.LastAccessed); err != nil {
+		return nil, fmt.Errorf("error converting field LastAccessed: %v", err)
+	} else {
+		porcelain.LastAccessed = v
+	}
+	if v, err := convertMappedIdentitiesToPorcelain(plumbing.MappedIdentities); err != nil {
+		return nil, fmt.Errorf("error converting field MappedIdentities: %v", err)
+	} else {
+		porcelain.MappedIdentities = v
+	}
+	porcelain.OriginID = plumbing.OriginId
+	porcelain.ResourceID = plumbing.ResourceId
+	return porcelain, nil
+}
+
+func convertGrantedAccountEntitlementToPlumbing(porcelain *GrantedAccountEntitlement) *proto.GrantedAccountEntitlement {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GrantedAccountEntitlement{}
+	plumbing.GroupId = (porcelain.GroupID)
+	plumbing.LastAccessed = convertTimestampToPlumbing(porcelain.LastAccessed)
+	plumbing.MappedIdentities = convertMappedIdentitiesToPlumbing(porcelain.MappedIdentities)
+	plumbing.OriginId = (porcelain.OriginID)
+	plumbing.ResourceId = (porcelain.ResourceID)
+	return plumbing
+}
+func convertRepeatedGrantedAccountEntitlementToPlumbing(
+	porcelains []*GrantedAccountEntitlement,
+) []*proto.GrantedAccountEntitlement {
+	var items []*proto.GrantedAccountEntitlement
+	for _, porcelain := range porcelains {
+		items = append(items, convertGrantedAccountEntitlementToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGrantedAccountEntitlementToPorcelain(plumbings []*proto.GrantedAccountEntitlement) (
+	[]*GrantedAccountEntitlement,
+	error,
+) {
+	var items []*GrantedAccountEntitlement
+	for _, plumbing := range plumbings {
+		if v, err := convertGrantedAccountEntitlementToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGrantedEntitlementKubernetesPrivilegesToPorcelain(plumbing *proto.GrantedEntitlementKubernetesPrivileges) (*GrantedEntitlementKubernetesPrivileges, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GrantedEntitlementKubernetesPrivileges{}
+	porcelain.Groups = plumbing.Groups
+	return porcelain, nil
+}
+
+func convertGrantedEntitlementKubernetesPrivilegesToPlumbing(porcelain *GrantedEntitlementKubernetesPrivileges) *proto.GrantedEntitlementKubernetesPrivileges {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GrantedEntitlementKubernetesPrivileges{}
+	plumbing.Groups = (porcelain.Groups)
+	return plumbing
+}
+func convertRepeatedGrantedEntitlementKubernetesPrivilegesToPlumbing(
+	porcelains []*GrantedEntitlementKubernetesPrivileges,
+) []*proto.GrantedEntitlementKubernetesPrivileges {
+	var items []*proto.GrantedEntitlementKubernetesPrivileges
+	for _, porcelain := range porcelains {
+		items = append(items, convertGrantedEntitlementKubernetesPrivilegesToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGrantedEntitlementKubernetesPrivilegesToPorcelain(plumbings []*proto.GrantedEntitlementKubernetesPrivileges) (
+	[]*GrantedEntitlementKubernetesPrivileges,
+	error,
+) {
+	var items []*GrantedEntitlementKubernetesPrivileges
+	for _, plumbing := range plumbings {
+		if v, err := convertGrantedEntitlementKubernetesPrivilegesToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGrantedResourceEntitlementToPorcelain(plumbing *proto.GrantedResourceEntitlement) (*GrantedResourceEntitlement, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GrantedResourceEntitlement{}
+	porcelain.AccountID = plumbing.AccountId
+	porcelain.GroupID = plumbing.GroupId
+	if v, err := convertTimestampToPorcelain(plumbing.LastAccessed); err != nil {
+		return nil, fmt.Errorf("error converting field LastAccessed: %v", err)
+	} else {
+		porcelain.LastAccessed = v
+	}
+	if v, err := convertMappedIdentitiesToPorcelain(plumbing.MappedIdentities); err != nil {
+		return nil, fmt.Errorf("error converting field MappedIdentities: %v", err)
+	} else {
+		porcelain.MappedIdentities = v
+	}
+	porcelain.OriginID = plumbing.OriginId
+	return porcelain, nil
+}
+
+func convertGrantedResourceEntitlementToPlumbing(porcelain *GrantedResourceEntitlement) *proto.GrantedResourceEntitlement {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GrantedResourceEntitlement{}
+	plumbing.AccountId = (porcelain.AccountID)
+	plumbing.GroupId = (porcelain.GroupID)
+	plumbing.LastAccessed = convertTimestampToPlumbing(porcelain.LastAccessed)
+	plumbing.MappedIdentities = convertMappedIdentitiesToPlumbing(porcelain.MappedIdentities)
+	plumbing.OriginId = (porcelain.OriginID)
+	return plumbing
+}
+func convertRepeatedGrantedResourceEntitlementToPlumbing(
+	porcelains []*GrantedResourceEntitlement,
+) []*proto.GrantedResourceEntitlement {
+	var items []*proto.GrantedResourceEntitlement
+	for _, porcelain := range porcelains {
+		items = append(items, convertGrantedResourceEntitlementToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGrantedResourceEntitlementToPorcelain(plumbings []*proto.GrantedResourceEntitlement) (
+	[]*GrantedResourceEntitlement,
+	error,
+) {
+	var items []*GrantedResourceEntitlement
+	for _, plumbing := range plumbings {
+		if v, err := convertGrantedResourceEntitlementToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertGrantedRoleEntitlementToPorcelain(plumbing *proto.GrantedRoleEntitlement) (*GrantedRoleEntitlement, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GrantedRoleEntitlement{}
+	porcelain.GroupID = plumbing.GroupId
+	if v, err := convertTimestampToPorcelain(plumbing.LastAccessed); err != nil {
+		return nil, fmt.Errorf("error converting field LastAccessed: %v", err)
+	} else {
+		porcelain.LastAccessed = v
+	}
+	if v, err := convertMappedIdentitiesToPorcelain(plumbing.MappedIdentities); err != nil {
+		return nil, fmt.Errorf("error converting field MappedIdentities: %v", err)
+	} else {
+		porcelain.MappedIdentities = v
+	}
+	porcelain.ResourceID = plumbing.ResourceId
+	return porcelain, nil
+}
+
+func convertGrantedRoleEntitlementToPlumbing(porcelain *GrantedRoleEntitlement) *proto.GrantedRoleEntitlement {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GrantedRoleEntitlement{}
+	plumbing.GroupId = (porcelain.GroupID)
+	plumbing.LastAccessed = convertTimestampToPlumbing(porcelain.LastAccessed)
+	plumbing.MappedIdentities = convertMappedIdentitiesToPlumbing(porcelain.MappedIdentities)
+	plumbing.ResourceId = (porcelain.ResourceID)
+	return plumbing
+}
+func convertRepeatedGrantedRoleEntitlementToPlumbing(
+	porcelains []*GrantedRoleEntitlement,
+) []*proto.GrantedRoleEntitlement {
+	var items []*proto.GrantedRoleEntitlement
+	for _, porcelain := range porcelains {
+		items = append(items, convertGrantedRoleEntitlementToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGrantedRoleEntitlementToPorcelain(plumbings []*proto.GrantedRoleEntitlement) (
+	[]*GrantedRoleEntitlement,
+	error,
+) {
+	var items []*GrantedRoleEntitlement
+	for _, plumbing := range plumbings {
+		if v, err := convertGrantedRoleEntitlementToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertGreenplumToPorcelain(plumbing *proto.Greenplum) (*Greenplum, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -14466,6 +14676,51 @@ func convertRepeatedManagedSecretValidateResponseToPorcelain(plumbings []*proto.
 	var items []*ManagedSecretValidateResponse
 	for _, plumbing := range plumbings {
 		if v, err := convertManagedSecretValidateResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertMappedIdentitiesToPorcelain(plumbing *proto.MappedIdentities) (*MappedIdentities, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &MappedIdentities{}
+	if v, err := convertGrantedEntitlementKubernetesPrivilegesToPorcelain(plumbing.Kubernetes); err != nil {
+		return nil, fmt.Errorf("error converting field Kubernetes: %v", err)
+	} else {
+		porcelain.Kubernetes = v
+	}
+	return porcelain, nil
+}
+
+func convertMappedIdentitiesToPlumbing(porcelain *MappedIdentities) *proto.MappedIdentities {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.MappedIdentities{}
+	plumbing.Kubernetes = convertGrantedEntitlementKubernetesPrivilegesToPlumbing(porcelain.Kubernetes)
+	return plumbing
+}
+func convertRepeatedMappedIdentitiesToPlumbing(
+	porcelains []*MappedIdentities,
+) []*proto.MappedIdentities {
+	var items []*proto.MappedIdentities
+	for _, porcelain := range porcelains {
+		items = append(items, convertMappedIdentitiesToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMappedIdentitiesToPorcelain(plumbings []*proto.MappedIdentities) (
+	[]*MappedIdentities,
+	error,
+) {
+	var items []*MappedIdentities
+	for _, plumbing := range plumbings {
+		if v, err := convertMappedIdentitiesToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -27126,6 +27381,141 @@ func (c *connectorIteratorImpl) Value() Connector {
 
 func (c *connectorIteratorImpl) Err() error {
 	return c.err
+}
+
+type grantedAccountEntitlementIteratorImplFetchFunc func() (
+	[]*GrantedAccountEntitlement,
+	bool, error)
+type grantedAccountEntitlementIteratorImpl struct {
+	buffer      []*GrantedAccountEntitlement
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       grantedAccountEntitlementIteratorImplFetchFunc
+}
+
+func newGrantedAccountEntitlementIteratorImpl(f grantedAccountEntitlementIteratorImplFetchFunc) *grantedAccountEntitlementIteratorImpl {
+	return &grantedAccountEntitlementIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (g *grantedAccountEntitlementIteratorImpl) Next() bool {
+	if g.index < len(g.buffer)-1 {
+		g.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !g.hasNextPage {
+		return false
+	}
+
+	g.index = 0
+	g.buffer, g.hasNextPage, g.err = g.fetch()
+	return len(g.buffer) > 0
+}
+
+func (g *grantedAccountEntitlementIteratorImpl) Value() *GrantedAccountEntitlement {
+	if g.index >= len(g.buffer) {
+		return nil
+	}
+	return g.buffer[g.index]
+}
+
+func (g *grantedAccountEntitlementIteratorImpl) Err() error {
+	return g.err
+}
+
+type grantedResourceEntitlementIteratorImplFetchFunc func() (
+	[]*GrantedResourceEntitlement,
+	bool, error)
+type grantedResourceEntitlementIteratorImpl struct {
+	buffer      []*GrantedResourceEntitlement
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       grantedResourceEntitlementIteratorImplFetchFunc
+}
+
+func newGrantedResourceEntitlementIteratorImpl(f grantedResourceEntitlementIteratorImplFetchFunc) *grantedResourceEntitlementIteratorImpl {
+	return &grantedResourceEntitlementIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (g *grantedResourceEntitlementIteratorImpl) Next() bool {
+	if g.index < len(g.buffer)-1 {
+		g.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !g.hasNextPage {
+		return false
+	}
+
+	g.index = 0
+	g.buffer, g.hasNextPage, g.err = g.fetch()
+	return len(g.buffer) > 0
+}
+
+func (g *grantedResourceEntitlementIteratorImpl) Value() *GrantedResourceEntitlement {
+	if g.index >= len(g.buffer) {
+		return nil
+	}
+	return g.buffer[g.index]
+}
+
+func (g *grantedResourceEntitlementIteratorImpl) Err() error {
+	return g.err
+}
+
+type grantedRoleEntitlementIteratorImplFetchFunc func() (
+	[]*GrantedRoleEntitlement,
+	bool, error)
+type grantedRoleEntitlementIteratorImpl struct {
+	buffer      []*GrantedRoleEntitlement
+	index       int
+	hasNextPage bool
+	err         error
+	fetch       grantedRoleEntitlementIteratorImplFetchFunc
+}
+
+func newGrantedRoleEntitlementIteratorImpl(f grantedRoleEntitlementIteratorImplFetchFunc) *grantedRoleEntitlementIteratorImpl {
+	return &grantedRoleEntitlementIteratorImpl{
+		hasNextPage: true,
+		fetch:       f,
+	}
+}
+
+func (g *grantedRoleEntitlementIteratorImpl) Next() bool {
+	if g.index < len(g.buffer)-1 {
+		g.index++
+		return true
+	}
+
+	// reached end of buffer
+	if !g.hasNextPage {
+		return false
+	}
+
+	g.index = 0
+	g.buffer, g.hasNextPage, g.err = g.fetch()
+	return len(g.buffer) > 0
+}
+
+func (g *grantedRoleEntitlementIteratorImpl) Value() *GrantedRoleEntitlement {
+	if g.index >= len(g.buffer) {
+		return nil
+	}
+	return g.buffer[g.index]
+}
+
+func (g *grantedRoleEntitlementIteratorImpl) Err() error {
+	return g.err
 }
 
 type roleIteratorImplFetchFunc func() (

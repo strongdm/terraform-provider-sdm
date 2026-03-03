@@ -334,6 +334,7 @@ const (
 	ActivityVerbTOTPEnrollmentDeleted                            = "user reset their totp enrollment"
 	ActivityVerbSuspendedUserEnrollAttemptFromTheUI              = "attempt to enroll by a suspended user from the Admin UI"
 	ActivityVerbResourceLocked                                   = "user locked a resource"
+	ActivityVerbResourceLockExtended                             = "user extended a resource lock"
 	ActivityVerbResourceUnlocked                                 = "user unlocked a resource"
 	ActivityVerbResourceForceUnlocked                            = "admin force-unlocked a resource"
 	ActivityVerbResourceLockRejected                             = "user lock rejected for a resource"
@@ -388,6 +389,7 @@ const (
 	PermissionDeprecatedDatasourceGrant    = "datasource:grant"
 	PermissionDiscoveryConnectorRead       = "discoveryconnector:read"
 	PermissionDiscoveryConnectorWrite      = "discoveryconnector:write"
+	PermissionEntitlementsRead             = "entitlements:read"
 	PermissionGrantRead                    = "grant:read"
 	PermissionGrantWrite                   = "grant:write"
 	PermissionGroupRead                    = "group:read"
@@ -824,6 +826,7 @@ var AllActivityVerb = []string{
 	ActivityVerbTOTPEnrollmentDeleted,
 	ActivityVerbSuspendedUserEnrollAttemptFromTheUI,
 	ActivityVerbResourceLocked,
+	ActivityVerbResourceLockExtended,
 	ActivityVerbResourceUnlocked,
 	ActivityVerbResourceForceUnlocked,
 	ActivityVerbResourceLockRejected,
@@ -1027,6 +1030,7 @@ var AllPermission = []string{
 	PermissionDeprecatedDatasourceGrant,
 	PermissionDiscoveryConnectorRead,
 	PermissionDiscoveryConnectorWrite,
+	PermissionEntitlementsRead,
 	PermissionGrantRead,
 	PermissionGrantWrite,
 	PermissionGroupRead,

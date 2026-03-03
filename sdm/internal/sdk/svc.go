@@ -2521,6 +2521,201 @@ func (svc *DiscoveryConnectors) List(
 	), nil
 }
 
+// GrantedAccountEntitlements enumerates the resources to which an account has been granted access.
+// The GrantedAccountEntitlements service is read-only.
+type GrantedAccountEntitlements struct {
+	client plumbing.GrantedAccountEntitlementsClient
+	parent *Client
+}
+
+// A SnapshotGrantedAccountEntitlements exposes the read only methods of the GrantedAccountEntitlements
+// service for historical queries.
+type SnapshotGrantedAccountEntitlements interface {
+	List(
+		ctx context.Context,
+		accountId string,
+		filter string,
+		args ...interface{}) (
+		GrantedAccountEntitlementIterator,
+		error)
+}
+
+// List gets a list of GrantedAccountEntitlement records matching a given set of criteria.
+func (svc *GrantedAccountEntitlements) List(
+	ctx context.Context,
+	accountId string,
+	filter string,
+	args ...interface{}) (
+	GrantedAccountEntitlementIterator,
+	error) {
+	req := plumbing.GrantedAccountEntitlementListRequest{}
+
+	req.AccountId = (accountId)
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newGrantedAccountEntitlementIteratorImpl(
+		func() (
+			[]*GrantedAccountEntitlement,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.GrantedAccountEntitlementListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "GrantedAccountEntitlements.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedGrantedAccountEntitlementToPorcelain(plumbingResponse.GrantedAccountEntitlements)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// GrantedResourceEntitlements enumerates the accounts that have been granted access to a given resource.
+// The GrantedResourceEntitlements service is read-only.
+type GrantedResourceEntitlements struct {
+	client plumbing.GrantedResourceEntitlementsClient
+	parent *Client
+}
+
+// A SnapshotGrantedResourceEntitlements exposes the read only methods of the GrantedResourceEntitlements
+// service for historical queries.
+type SnapshotGrantedResourceEntitlements interface {
+	List(
+		ctx context.Context,
+		resourceId string,
+		filter string,
+		args ...interface{}) (
+		GrantedResourceEntitlementIterator,
+		error)
+}
+
+// List gets a list of GrantedResourceEntitlement records matching a given set of criteria.
+func (svc *GrantedResourceEntitlements) List(
+	ctx context.Context,
+	resourceId string,
+	filter string,
+	args ...interface{}) (
+	GrantedResourceEntitlementIterator,
+	error) {
+	req := plumbing.GrantedResourceEntitlementListRequest{}
+
+	req.ResourceId = (resourceId)
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newGrantedResourceEntitlementIteratorImpl(
+		func() (
+			[]*GrantedResourceEntitlement,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.GrantedResourceEntitlementListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "GrantedResourceEntitlements.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedGrantedResourceEntitlementToPorcelain(plumbingResponse.GrantedResourceEntitlements)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// GrantedRoleEntitlements enumerates the resources to which a role grants access.
+// The GrantedRoleEntitlements service is read-only.
+type GrantedRoleEntitlements struct {
+	client plumbing.GrantedRoleEntitlementsClient
+	parent *Client
+}
+
+// A SnapshotGrantedRoleEntitlements exposes the read only methods of the GrantedRoleEntitlements
+// service for historical queries.
+type SnapshotGrantedRoleEntitlements interface {
+	List(
+		ctx context.Context,
+		roleId string,
+		filter string,
+		args ...interface{}) (
+		GrantedRoleEntitlementIterator,
+		error)
+}
+
+// List gets a list of GrantedRoleEntitlement records matching a given set of criteria.
+func (svc *GrantedRoleEntitlements) List(
+	ctx context.Context,
+	roleId string,
+	filter string,
+	args ...interface{}) (
+	GrantedRoleEntitlementIterator,
+	error) {
+	req := plumbing.GrantedRoleEntitlementListRequest{}
+
+	req.RoleId = (roleId)
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newGrantedRoleEntitlementIteratorImpl(
+		func() (
+			[]*GrantedRoleEntitlement,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.GrantedRoleEntitlementListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "GrantedRoleEntitlements.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedGrantedRoleEntitlementToPorcelain(plumbingResponse.GrantedRoleEntitlements)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // A Role has a list of access rules which determine which Resources the members
 // of the Role have access to. An Account can be a member of multiple Roles via
 // AccountAttachments.

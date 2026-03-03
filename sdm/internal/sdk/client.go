@@ -44,7 +44,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/16.12.0"
+	defaultUserAgent = "strongdm-sdk-go/16.15.0"
 )
 
 var _ = metadata.Pairs
@@ -97,6 +97,9 @@ type Client struct {
 	approvalWorkflowsHistory         *ApprovalWorkflowsHistory
 	controlPanel                     *ControlPanel
 	discoveryConnectors              *DiscoveryConnectors
+	grantedAccountEntitlements       *GrantedAccountEntitlements
+	grantedResourceEntitlements      *GrantedResourceEntitlements
+	grantedRoleEntitlements          *GrantedRoleEntitlements
 	roles                            *Roles
 	groups                           *Groups
 	groupsHistory                    *GroupsHistory
@@ -298,6 +301,18 @@ func (c *Client) initializeServices() {
 	}
 	c.discoveryConnectors = &DiscoveryConnectors{
 		client: plumbing.NewDiscoveryConnectorsClient(c.grpcConn),
+		parent: c,
+	}
+	c.grantedAccountEntitlements = &GrantedAccountEntitlements{
+		client: plumbing.NewGrantedAccountEntitlementsClient(c.grpcConn),
+		parent: c,
+	}
+	c.grantedResourceEntitlements = &GrantedResourceEntitlements{
+		client: plumbing.NewGrantedResourceEntitlementsClient(c.grpcConn),
+		parent: c,
+	}
+	c.grantedRoleEntitlements = &GrantedRoleEntitlements{
+		client: plumbing.NewGrantedRoleEntitlementsClient(c.grpcConn),
 		parent: c,
 	}
 	c.roles = &Roles{
@@ -685,6 +700,24 @@ func (c *Client) DiscoveryConnectors() *DiscoveryConnectors {
 	return c.discoveryConnectors
 }
 
+// GrantedAccountEntitlements enumerates the resources to which an account has been granted access.
+// The GrantedAccountEntitlements service is read-only.
+func (c *Client) GrantedAccountEntitlements() *GrantedAccountEntitlements {
+	return c.grantedAccountEntitlements
+}
+
+// GrantedResourceEntitlements enumerates the accounts that have been granted access to a given resource.
+// The GrantedResourceEntitlements service is read-only.
+func (c *Client) GrantedResourceEntitlements() *GrantedResourceEntitlements {
+	return c.grantedResourceEntitlements
+}
+
+// GrantedRoleEntitlements enumerates the resources to which a role grants access.
+// The GrantedRoleEntitlements service is read-only.
+func (c *Client) GrantedRoleEntitlements() *GrantedRoleEntitlements {
+	return c.grantedRoleEntitlements
+}
+
 // A Role has a list of access rules which determine which Resources the members
 // of the Role have access to. An Account can be a member of multiple Roles via
 // AccountAttachments.
@@ -971,6 +1004,18 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewDiscoveryConnectorsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.grantedAccountEntitlements = &GrantedAccountEntitlements{
+		client: plumbing.NewGrantedAccountEntitlementsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.grantedResourceEntitlements = &GrantedResourceEntitlements{
+		client: plumbing.NewGrantedResourceEntitlementsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.grantedRoleEntitlements = &GrantedRoleEntitlements{
+		client: plumbing.NewGrantedRoleEntitlementsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.roles = &Roles{
 		client: plumbing.NewRolesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -1098,6 +1143,24 @@ func (c *SnapshotClient) ApprovalWorkflows() SnapshotApprovalWorkflows {
 // Scans in remote systems such as AWS, GCP, Azure, and other systems.
 func (c *SnapshotClient) DiscoveryConnectors() SnapshotDiscoveryConnectors {
 	return c.client.discoveryConnectors
+}
+
+// GrantedAccountEntitlements enumerates the resources to which an account has been granted access.
+// The GrantedAccountEntitlements service is read-only.
+func (c *SnapshotClient) GrantedAccountEntitlements() SnapshotGrantedAccountEntitlements {
+	return c.client.grantedAccountEntitlements
+}
+
+// GrantedResourceEntitlements enumerates the accounts that have been granted access to a given resource.
+// The GrantedResourceEntitlements service is read-only.
+func (c *SnapshotClient) GrantedResourceEntitlements() SnapshotGrantedResourceEntitlements {
+	return c.client.grantedResourceEntitlements
+}
+
+// GrantedRoleEntitlements enumerates the resources to which a role grants access.
+// The GrantedRoleEntitlements service is read-only.
+func (c *SnapshotClient) GrantedRoleEntitlements() SnapshotGrantedRoleEntitlements {
+	return c.client.grantedRoleEntitlements
 }
 
 // A Role has a list of access rules which determine which Resources the members
