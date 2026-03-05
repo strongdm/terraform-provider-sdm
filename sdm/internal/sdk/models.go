@@ -3242,6 +3242,8 @@ type DB2LUW struct {
 	Username string `json:"username"`
 }
 
+// Databricks is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
 type Databricks struct {
 	// Databricks Personal Access Token (PAT)
 	AccessToken string `json:"accessToken"`
