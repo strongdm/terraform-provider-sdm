@@ -2321,6 +2321,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"use_https": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "This option enforces HTTPS on the client, not resource connection.",
+						},
 					},
 				},
 			},
@@ -2430,6 +2436,12 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"use_https": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "This option enforces HTTPS on the client, not resource connection",
 						},
 					},
 				},
@@ -4034,7 +4046,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "Databricks is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"access_token": {
@@ -6084,6 +6096,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_required": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "This option enforces HTTPS on the client, not resource connection.",
+						},
 						"url": {
 							Type: schema.TypeString,
 
@@ -6182,6 +6200,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_required": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "This option enforces HTTPS on the client, not resource connection.",
+						},
 						"url": {
 							Type: schema.TypeString,
 
@@ -6278,6 +6302,12 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_required": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "This option enforces HTTPS on the client, not resource connection.",
 						},
 						"url": {
 							Type: schema.TypeString,
@@ -7033,11 +7063,79 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"mcp": {
+			"mcp_gateway_no_auth": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "MCP is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+						},
+						"egress_filter": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"port_override": {
+							Type: schema.TypeInt,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
+						},
+						"proxy_cluster_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"mcp_gateway_o_auth": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -7132,11 +7230,11 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
-			"mcpdcr": {
+			"mcp_gateway_o_auth_dcr": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "MCPDCR is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "MCPGatewayOAuthDCR is currently unstable, and its API may change, or it may be removed, without a major version bump.",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -7187,6 +7285,81 @@ func resourceResource() *schema.Resource {
 
 							Required:    true,
 							Description: "The OAuth 2.0 token endpoint URL.",
+						},
+						"port_override": {
+							Type: schema.TypeInt,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
+						},
+						"proxy_cluster_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
+			"mcp_gateway_pat": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+						},
+						"egress_filter": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"hostname": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"name": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
 						},
 						"port_override": {
 							Type: schema.TypeInt,
@@ -10199,6 +10372,12 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"use_https": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "This option enforces HTTPS on the client, not resource connection.",
 						},
 					},
 				},
@@ -13305,7 +13484,18 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"username": convertStringToPlumbing(raw["username"]),
 		}, nil
 	}
-	if list := d.Get("mcp").([]interface{}); len(list) > 0 {
+	if list := d.Get("mcp_gateway_no_auth").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		}
+
+		return map[string]string{}, nil
+	}
+	if list := d.Get("mcp_gateway_o_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return map[string]string{}, nil
@@ -13324,7 +13514,7 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"password": convertStringToPlumbing(raw["password"]),
 		}, nil
 	}
-	if list := d.Get("mcpdcr").([]interface{}); len(list) > 0 {
+	if list := d.Get("mcp_gateway_o_auth_dcr").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
 			return map[string]string{}, nil
@@ -13334,6 +13524,25 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 
 		return map[string]string{}, nil
+	}
+	if list := d.Get("mcp_gateway_pat").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+		}, nil
 	}
 	if list := d.Get("memcached").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
@@ -15024,6 +15233,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SessionExpiry:                    convertInt32ToPlumbing(raw["session_expiry"]),
 			Subdomain:                        convertStringToPlumbing(raw["subdomain"]),
 			Tags:                             convertTagsToPlumbing(raw["tags"]),
+			UseHttps:                         convertBoolToPlumbing(raw["use_https"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -15055,6 +15265,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SessionExpiry:                    convertInt32ToPlumbing(raw["session_expiry"]),
 			Subdomain:                        convertStringToPlumbing(raw["subdomain"]),
 			Tags:                             convertTagsToPlumbing(raw["tags"]),
+			UseHttps:                         convertBoolToPlumbing(raw["use_https"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -16148,6 +16359,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:      convertBoolToPlumbing(raw["tls_required"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 		}
 		override, ok := raw["port_override"].(int)
@@ -16177,6 +16389,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:      convertBoolToPlumbing(raw["tls_required"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 			Username:         convertStringToPlumbing(raw["username"]),
 		}
@@ -16206,6 +16419,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TlsRequired:      convertBoolToPlumbing(raw["tls_required"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 		}
 		override, ok := raw["port_override"].(int)
@@ -16425,12 +16639,36 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
-	if list := d.Get("mcp").([]interface{}); len(list) > 0 {
+	if list := d.Get("mcp_gateway_no_auth").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return &sdm.MCP{}
+			return &sdm.MCPGatewayNoAuth{}
 		}
-		out := &sdm.MCP{
+		out := &sdm.MCPGatewayNoAuth{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:       convertStringToPlumbing(raw["hostname"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("mcp_gateway_o_auth").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.MCPGatewayOAuth{}
+		}
+		out := &sdm.MCPGatewayOAuth{
 			ID:                 d.Id(),
 			BindInterface:      convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:       convertStringToPlumbing(raw["egress_filter"]),
@@ -16454,12 +16692,12 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
-	if list := d.Get("mcpdcr").([]interface{}); len(list) > 0 {
+	if list := d.Get("mcp_gateway_o_auth_dcr").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
-			return &sdm.MCPDCR{}
+			return &sdm.MCPGatewayOAuthDCR{}
 		}
-		out := &sdm.MCPDCR{
+		out := &sdm.MCPGatewayOAuthDCR{
 			ID:                    d.Id(),
 			BindInterface:         convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:          convertStringToPlumbing(raw["egress_filter"]),
@@ -16474,6 +16712,31 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:         convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:             convertStringToPlumbing(raw["subdomain"]),
 			Tags:                  convertTagsToPlumbing(raw["tags"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
+	if list := d.Get("mcp_gateway_pat").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.MCPGatewayPAT{}
+		}
+		out := &sdm.MCPGatewayPAT{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:       convertStringToPlumbing(raw["hostname"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Password:       convertStringToPlumbing(raw["password"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -17340,6 +17603,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:       convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:           convertStringToPlumbing(raw["subdomain"]),
 			Tags:                convertTagsToPlumbing(raw["tags"]),
+			UseHttps:            convertBoolToPlumbing(raw["use_https"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -18202,6 +18466,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"session_expiry":                      (v.SessionExpiry),
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
+				"use_https":                           (v.UseHttps),
 			},
 		})
 	case *sdm.AWSConsoleStaticKeyPair:
@@ -18225,6 +18490,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"session_expiry":                      (v.SessionExpiry),
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
+				"use_https":                           (v.UseHttps),
 			},
 		})
 	case *sdm.AWSInstanceProfile:
@@ -19011,6 +19277,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			},
 		})
@@ -19032,6 +19299,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 				"username":          seValues["username"],
 			},
@@ -19053,6 +19321,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			},
 		})
@@ -19210,10 +19479,26 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":                          seValues["username"],
 			},
 		})
-	case *sdm.MCP:
-		localV, _ := localVersion.(*sdm.MCP)
+	case *sdm.MCPGatewayNoAuth:
+		localV, _ := localVersion.(*sdm.MCPGatewayNoAuth)
 		_ = localV
-		d.Set("mcp", []map[string]interface{}{
+		d.Set("mcp_gateway_no_auth", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.MCPGatewayOAuth:
+		localV, _ := localVersion.(*sdm.MCPGatewayOAuth)
+		_ = localV
+		d.Set("mcp_gateway_o_auth", []map[string]interface{}{
 			{
 				"bind_interface":       (v.BindInterface),
 				"egress_filter":        (v.EgressFilter),
@@ -19231,10 +19516,10 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"username":             (v.Username),
 			},
 		})
-	case *sdm.MCPDCR:
-		localV, _ := localVersion.(*sdm.MCPDCR)
+	case *sdm.MCPGatewayOAuthDCR:
+		localV, _ := localVersion.(*sdm.MCPGatewayOAuthDCR)
 		_ = localV
-		d.Set("mcpdcr", []map[string]interface{}{
+		d.Set("mcp_gateway_o_auth_dcr", []map[string]interface{}{
 			{
 				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
@@ -19249,6 +19534,23 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":         (v.SecretStoreID),
 				"subdomain":               (v.Subdomain),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.MCPGatewayPAT:
+		localV, _ := localVersion.(*sdm.MCPGatewayPAT)
+		_ = localV
+		d.Set("mcp_gateway_pat", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Memcached:
@@ -19881,6 +20183,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":      (v.SecretStoreID),
 				"subdomain":            (v.Subdomain),
 				"tags":                 convertTagsToPorcelain(v.Tags),
+				"use_https":            (v.UseHttps),
 			},
 		})
 	case *sdm.SQLServer:
@@ -20881,6 +21184,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"session_expiry":                      (v.SessionExpiry),
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
+				"use_https":                           (v.UseHttps),
 			},
 		})
 	case *sdm.AWSConsoleStaticKeyPair:
@@ -20919,6 +21223,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"session_expiry":                      (v.SessionExpiry),
 				"subdomain":                           (v.Subdomain),
 				"tags":                                convertTagsToPorcelain(v.Tags),
+				"use_https":                           (v.UseHttps),
 			},
 		})
 	case *sdm.AWSInstanceProfile:
@@ -22020,6 +22325,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			},
 		})
@@ -22050,6 +22356,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 				"username":          seValues["username"],
 			},
@@ -22074,6 +22381,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			},
 		})
@@ -22291,16 +22599,35 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":                          seValues["username"],
 			},
 		})
-	case *sdm.MCP:
-		localV, ok := localVersion.(*sdm.MCP)
+	case *sdm.MCPGatewayNoAuth:
+		localV, ok := localVersion.(*sdm.MCPGatewayNoAuth)
 		if !ok {
-			localV = &sdm.MCP{}
+			localV = &sdm.MCPGatewayNoAuth{}
+		}
+		_ = localV
+		d.Set("mcp_gateway_no_auth", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.MCPGatewayOAuth:
+		localV, ok := localVersion.(*sdm.MCPGatewayOAuth)
+		if !ok {
+			localV = &sdm.MCPGatewayOAuth{}
 		}
 		_ = localV
 		if v.Password != "" {
 			seValues["password"] = v.Password
 		}
-		d.Set("mcp", []map[string]interface{}{
+		d.Set("mcp_gateway_o_auth", []map[string]interface{}{
 			{
 				"bind_interface":       (v.BindInterface),
 				"egress_filter":        (v.EgressFilter),
@@ -22318,13 +22645,13 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"username":             (v.Username),
 			},
 		})
-	case *sdm.MCPDCR:
-		localV, ok := localVersion.(*sdm.MCPDCR)
+	case *sdm.MCPGatewayOAuthDCR:
+		localV, ok := localVersion.(*sdm.MCPGatewayOAuthDCR)
 		if !ok {
-			localV = &sdm.MCPDCR{}
+			localV = &sdm.MCPGatewayOAuthDCR{}
 		}
 		_ = localV
-		d.Set("mcpdcr", []map[string]interface{}{
+		d.Set("mcp_gateway_o_auth_dcr", []map[string]interface{}{
 			{
 				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
@@ -22339,6 +22666,29 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":         (v.SecretStoreID),
 				"subdomain":               (v.Subdomain),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+			},
+		})
+	case *sdm.MCPGatewayPAT:
+		localV, ok := localVersion.(*sdm.MCPGatewayPAT)
+		if !ok {
+			localV = &sdm.MCPGatewayPAT{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		d.Set("mcp_gateway_pat", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"hostname":         (v.Hostname),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
 			},
 		})
 	case *sdm.Memcached:
@@ -23223,6 +23573,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":      (v.SecretStoreID),
 				"subdomain":            (v.Subdomain),
 				"tags":                 convertTagsToPorcelain(v.Tags),
+				"use_https":            (v.UseHttps),
 			},
 		})
 	case *sdm.SQLServer:

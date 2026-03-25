@@ -265,6 +265,25 @@ func convertInt32ToPlumbing(porcelain interface{}) int32 {
 	return int32(porcelain.(int))
 }
 
+func convertRepeatedInt32ToPlumbing(porcelain interface{}) []int32 {
+	if porcelain == nil {
+		return nil
+	}
+	interfaces, ok := porcelain.([]interface{})
+	if !ok {
+		return nil
+	}
+	result := make([]int32, 0, len(interfaces))
+	for _, interf := range interfaces {
+		val, ok := interf.(int)
+		if !ok {
+			return nil
+		}
+		result = append(result, int32(val))
+	}
+	return result
+}
+
 func convertInt64ToPlumbing(porcelain interface{}) int64 {
 	if porcelain == nil {
 		return 0

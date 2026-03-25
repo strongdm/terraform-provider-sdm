@@ -410,6 +410,7 @@ The following arguments are supported by the Resource resource:
 	* `session_expiry` - (Optional) The length of time in seconds AWS console sessions will live before needing to reauthenticate.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_https` - (Optional) This option enforces HTTPS on the client, not resource connection.
 * aws_console_static_key_pair:
 	* `access_key` - (Required, either in plaintext, or as a secret store path) The Access Key ID to authenticate with.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -427,6 +428,7 @@ The following arguments are supported by the Resource resource:
 	* `session_expiry` - (Optional) The length of time in seconds AWS console sessions will live before needing to reauthenticate.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_https` - (Optional) This option enforces HTTPS on the client, not resource connection
 * aws_instance_profile:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -979,6 +981,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) This option enforces HTTPS on the client, not resource connection.
 	* `url` - (Required) The base address of your website without the path.
 * http_basic_auth:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -994,6 +997,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) This option enforces HTTPS on the client, not resource connection.
 	* `url` - (Required) The base address of your website without the path.
 	* `username` - (Optional) The username to authenticate with.
 * http_no_auth:
@@ -1009,6 +1013,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_required` - (Optional) This option enforces HTTPS on the client, not resource connection.
 	* `url` - (Required) The base address of your website without the path.
 * kubernetes:
 	* `allow_resource_role_bypass` - (Optional) If true, allows users to fallback to the existing authentication mode (Leased Credential or Identity Set) when a resource role is not provided.
@@ -1122,7 +1127,17 @@ The following arguments are supported by the Resource resource:
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `use_azure_single_server_usernames` - (Optional) If true, appends the hostname to the username when hitting a database.azure.com address
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
-* mcp:
+* mcp_gateway_no_auth:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* mcp_gateway_o_auth:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
@@ -1137,7 +1152,7 @@ The following arguments are supported by the Resource resource:
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `username` - (Required) OAuth App Client ID
-* mcpdcr:
+* mcp_gateway_o_auth_dcr:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
@@ -1146,6 +1161,17 @@ The following arguments are supported by the Resource resource:
 	* `oauth_register_endpoint` - (Required) The OAuth 2.0 dynamic client registration endpoint URL.
 	* `oauth_scopes` - (Optional) Space-separated list of OAuth scopes to request.
 	* `oauth_token_endpoint` - (Required) The OAuth 2.0 token endpoint URL.
+	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+* mcp_gateway_pat:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
@@ -1602,6 +1628,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `use_https` - (Optional) This option enforces HTTPS on the client, not resource connection.
 * sql_server:
 	* `allow_deprecated_encryption` - (Optional) Whether to allow deprecated encryption protocols to be used for this resource. For example, TLS 1.0.
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.

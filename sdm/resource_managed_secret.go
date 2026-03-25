@@ -40,6 +40,12 @@ func resourceManagedSecret() *schema.Resource {
 				Computed:    true,
 				Description: "Timestamp of when secret was last rotated",
 			},
+			"lock_required": {
+				Type: schema.TypeBool,
+
+				Optional:    true,
+				Description: "Whether the secret requires a lock to access",
+			},
 			"name": {
 				Type: schema.TypeString,
 
@@ -92,6 +98,7 @@ func convertManagedSecretToPlumbing(d *schema.ResourceData) *sdm.ManagedSecret {
 		Config:          convertStringToPlumbing(d.Get("config")),
 		ExpiresAt:       convertTimestampToPlumbing(d.Get("expires_at")),
 		LastRotatedAt:   convertTimestampToPlumbing(d.Get("last_rotated_at")),
+		LockRequired:    convertBoolToPlumbing(d.Get("lock_required")),
 		Name:            convertStringToPlumbing(d.Get("name")),
 		SecretEngineID:  convertStringToPlumbing(d.Get("secret_engine_id")),
 		SecretStorePath: convertStringToPlumbing(d.Get("secret_store_path")),
@@ -113,6 +120,7 @@ func resourceManagedSecretCreate(ctx context.Context, d *schema.ResourceData, cc
 	d.Set("config", (v.Config))
 	d.Set("expires_at", convertTimestampToPorcelain(v.ExpiresAt))
 	d.Set("last_rotated_at", convertTimestampToPorcelain(v.LastRotatedAt))
+	d.Set("lock_required", (v.LockRequired))
 	d.Set("name", (v.Name))
 	d.Set("secret_engine_id", (v.SecretEngineID))
 	d.Set("secret_store_path", (v.SecretStorePath))
@@ -138,6 +146,7 @@ func resourceManagedSecretRead(ctx context.Context, d *schema.ResourceData, cc *
 	d.Set("config", (v.Config))
 	d.Set("expires_at", convertTimestampToPorcelain(v.ExpiresAt))
 	d.Set("last_rotated_at", convertTimestampToPorcelain(v.LastRotatedAt))
+	d.Set("lock_required", (v.LockRequired))
 	d.Set("name", (v.Name))
 	d.Set("secret_engine_id", (v.SecretEngineID))
 	d.Set("secret_store_path", (v.SecretStorePath))

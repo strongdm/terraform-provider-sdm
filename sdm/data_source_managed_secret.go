@@ -45,6 +45,12 @@ func dataSourceManagedSecret() *schema.Resource {
 				Computed:    true,
 				Description: "Timestamp of when secret was last rotated",
 			},
+			"lock_required": {
+				Type: schema.TypeBool,
+
+				Optional:    true,
+				Description: "Whether the secret requires a lock to access",
+			},
 			"name": {
 				Type: schema.TypeString,
 
@@ -106,6 +112,12 @@ func dataSourceManagedSecret() *schema.Resource {
 
 							Computed:    true,
 							Description: "Timestamp of when secret was last rotated",
+						},
+						"lock_required": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Whether the secret requires a lock to access",
 						},
 						"name": {
 							Type: schema.TypeString,
@@ -172,6 +184,10 @@ func convertManagedSecretFilterToPlumbing(d *schema.ResourceData) (string, []int
 		filter += "lastrotatedat:? "
 		args = append(args, v)
 	}
+	if v, ok := d.GetOkExists("lock_required"); ok {
+		filter += "lockrequired:? "
+		args = append(args, v)
+	}
 	if v, ok := d.GetOkExists("name"); ok {
 		filter += "name:? "
 		args = append(args, v)
@@ -220,6 +236,7 @@ func dataSourceManagedSecretList(ctx context.Context, d *schema.ResourceData, cc
 				"expires_at":        convertTimestampToPorcelain(v.ExpiresAt),
 				"id":                (v.ID),
 				"last_rotated_at":   convertTimestampToPorcelain(v.LastRotatedAt),
+				"lock_required":     (v.LockRequired),
 				"name":              (v.Name),
 				"secret_engine_id":  (v.SecretEngineID),
 				"secret_store_path": (v.SecretStorePath),

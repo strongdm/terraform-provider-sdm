@@ -394,6 +394,7 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"role_external_id", `"role_external_id"`},
 				{"session_expiry", `20000`},
 				{"subdomain", `"all-resources-awsconsole-subdomain"`},
+				{"use_https", `true`},
 			},
 		},
 		{
@@ -410,6 +411,7 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"secret_access_key", `"secret_access_key"`},
 				{"session_expiry", `20000`},
 				{"subdomain", `"all-resources-awsconsolestatickeypair-subdomain"`},
+				{"use_https", `true`},
 			},
 		},
 		{
@@ -889,6 +891,7 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"host_override", `"host_override"`},
 				{"name", `"all-resources-httpauth-name"`},
 				{"subdomain", `"all-resources-httpauth-subdomain"`},
+				{"tls_required", `true`},
 				{"url", `"https://app.strongdm.com"`},
 			},
 		},
@@ -903,6 +906,7 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"name", `"all-resources-httpbasicauth-name"`},
 				{"password", `"password"`},
 				{"subdomain", `"all-resources-httpbasicauth-subdomain"`},
+				{"tls_required", `true`},
 				{"url", `"https://app.strongdm.com"`},
 				{"username", `"username"`},
 			},
@@ -917,6 +921,7 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"host_override", `"host_override"`},
 				{"name", `"all-resources-httpnoauth-name"`},
 				{"subdomain", `"all-resources-httpnoauth-subdomain"`},
+				{"tls_required", `true`},
 				{"url", `"https://app.strongdm.com"`},
 			},
 		},
@@ -1018,11 +1023,19 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 			},
 		},
 		{
-			resource: "mcp",
+			resource: "mcp_gateway_no_auth",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
-				{"name", `"all-resources-mcp-name"`},
+				{"name", `"all-resources-mcpgatewaynoauth-name"`},
+			},
+		},
+		{
+			resource: "mcp_gateway_o_auth",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"all-resources-mcpgatewayoauth-name"`},
 				{"oauth_auth_endpoint", `"oauth_auth_endpoint"`},
 				{"oauth_scopes", `"oauth_scopes"`},
 				{"oauth_token_endpoint", `"oauth_token_endpoint"`},
@@ -1031,15 +1044,24 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 			},
 		},
 		{
-			resource: "mcpdcr",
+			resource: "mcp_gateway_o_auth_dcr",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
-				{"name", `"all-resources-mcpdcr-name"`},
+				{"name", `"all-resources-mcpgatewayoauthdcr-name"`},
 				{"oauth_auth_endpoint", `"oauth_auth_endpoint"`},
 				{"oauth_register_endpoint", `"oauth_register_endpoint"`},
 				{"oauth_scopes", `"oauth_scopes"`},
 				{"oauth_token_endpoint", `"oauth_token_endpoint"`},
+			},
+		},
+		{
+			resource: "mcp_gateway_pat",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"all-resources-mcpgatewaypat-name"`},
+				{"password", `"password"`},
 			},
 		},
 		{
@@ -1432,6 +1454,7 @@ MgAJIeWchgYp8A3ll8mWzCJAeSn/UpR0TGz4jWckMYPHZnmN5lml
 				{"name", `"all-resources-snowsight-name"`},
 				{"saml_metadata", `"saml_metadata"`},
 				{"subdomain", `"all-resources-snowsight-subdomain"`},
+				{"use_https", `true`},
 			},
 		},
 		{
@@ -2038,6 +2061,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 				{"session_expiry", `20000`},
 				{"subdomain", `"all-resources-secret-awsconsole-subdomain"`},
+				{"use_https", `true`},
 			},
 		},
 
@@ -2055,6 +2079,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"secret_store_id", `"` + seID + `"`},
 				{"session_expiry", `20000`},
 				{"subdomain", `"all-resources-secret-awsconsolestatickeypair-subdomain"`},
+				{"use_https", `true`},
 			},
 		},
 
@@ -2524,6 +2549,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"name", `"all-resources-secret-httpauth-name"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"subdomain", `"all-resources-secret-httpauth-subdomain"`},
+				{"tls_required", `true`},
 				{"url", `"https://app.strongdm.com"`},
 			},
 		},
@@ -2540,6 +2566,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"subdomain", `"all-resources-secret-httpbasicauth-subdomain"`},
+				{"tls_required", `true`},
 				{"url", `"https://app.strongdm.com"`},
 				{"username", `"path/to/secret?key=key&encoding=base64"`},
 			},
@@ -2655,17 +2682,28 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		},
 
 		{
-			resource: "mcp",
+			resource: "mcp_gateway_o_auth",
 			pairs: [][2]string{
 				{"egress_filter", `"name:value"`},
 				{"hostname", `"hostname"`},
-				{"name", `"all-resources-secret-mcp-name"`},
+				{"name", `"all-resources-secret-mcpgatewayoauth-name"`},
 				{"oauth_auth_endpoint", `"oauth_auth_endpoint"`},
 				{"oauth_scopes", `"oauth_scopes"`},
 				{"oauth_token_endpoint", `"oauth_token_endpoint"`},
 				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"username", `"username"`},
+			},
+		},
+
+		{
+			resource: "mcp_gateway_pat",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"hostname", `"hostname"`},
+				{"name", `"all-resources-secret-mcpgatewaypat-name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
 			},
 		},
 
@@ -3038,6 +3076,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"saml_metadata", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_store_id", `"` + seID + `"`},
 				{"subdomain", `"all-resources-secret-snowsight-subdomain"`},
+				{"use_https", `true`},
 			},
 		},
 

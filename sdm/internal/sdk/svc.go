@@ -6568,6 +6568,201 @@ func (svc *Replays) List(
 	), nil
 }
 
+// RequestableAccountEntitlements enumerates the resources that an account is permitted to request access to.
+// The RequestableAccountEntitlements service is read-only.
+type RequestableAccountEntitlements struct {
+	client plumbing.RequestableAccountEntitlementsClient
+	parent *Client
+}
+
+// A SnapshotRequestableAccountEntitlements exposes the read only methods of the RequestableAccountEntitlements
+// service for historical queries.
+type SnapshotRequestableAccountEntitlements interface {
+	List(
+		ctx context.Context,
+		accountId string,
+		filter string,
+		args ...interface{}) (
+		RequestableAccountEntitlementIterator,
+		error)
+}
+
+// List gets a list of RequestableAccountEntitlement records matching a given set of criteria.
+func (svc *RequestableAccountEntitlements) List(
+	ctx context.Context,
+	accountId string,
+	filter string,
+	args ...interface{}) (
+	RequestableAccountEntitlementIterator,
+	error) {
+	req := plumbing.RequestableAccountEntitlementListRequest{}
+
+	req.AccountId = (accountId)
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newRequestableAccountEntitlementIteratorImpl(
+		func() (
+			[]*RequestableAccountEntitlement,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RequestableAccountEntitlementListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RequestableAccountEntitlements.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedRequestableAccountEntitlementToPorcelain(plumbingResponse.RequestableAccountEntitlements)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// RequestableResourceEntitlements enumerates the accounts that are permitted to request access to a given resource.
+// The RequestableResourceEntitlements service is read-only.
+type RequestableResourceEntitlements struct {
+	client plumbing.RequestableResourceEntitlementsClient
+	parent *Client
+}
+
+// A SnapshotRequestableResourceEntitlements exposes the read only methods of the RequestableResourceEntitlements
+// service for historical queries.
+type SnapshotRequestableResourceEntitlements interface {
+	List(
+		ctx context.Context,
+		resourceId string,
+		filter string,
+		args ...interface{}) (
+		RequestableResourceEntitlementIterator,
+		error)
+}
+
+// List gets a list of RequestableResourceEntitlement records matching a given set of criteria.
+func (svc *RequestableResourceEntitlements) List(
+	ctx context.Context,
+	resourceId string,
+	filter string,
+	args ...interface{}) (
+	RequestableResourceEntitlementIterator,
+	error) {
+	req := plumbing.RequestableResourceEntitlementListRequest{}
+
+	req.ResourceId = (resourceId)
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newRequestableResourceEntitlementIteratorImpl(
+		func() (
+			[]*RequestableResourceEntitlement,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RequestableResourceEntitlementListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RequestableResourceEntitlements.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedRequestableResourceEntitlementToPorcelain(plumbingResponse.RequestableResourceEntitlements)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
+// RequestableRoleEntitlements enumerates the resources that a role permits its members to request access to.
+// The RequestableRoleEntitlements service is read-only.
+type RequestableRoleEntitlements struct {
+	client plumbing.RequestableRoleEntitlementsClient
+	parent *Client
+}
+
+// A SnapshotRequestableRoleEntitlements exposes the read only methods of the RequestableRoleEntitlements
+// service for historical queries.
+type SnapshotRequestableRoleEntitlements interface {
+	List(
+		ctx context.Context,
+		roleId string,
+		filter string,
+		args ...interface{}) (
+		RequestableRoleEntitlementIterator,
+		error)
+}
+
+// List gets a list of RequestableRoleEntitlement records matching a given set of criteria.
+func (svc *RequestableRoleEntitlements) List(
+	ctx context.Context,
+	roleId string,
+	filter string,
+	args ...interface{}) (
+	RequestableRoleEntitlementIterator,
+	error) {
+	req := plumbing.RequestableRoleEntitlementListRequest{}
+
+	req.RoleId = (roleId)
+	var filterErr error
+	req.Filter, filterErr = quoteFilterArgs(filter, args...)
+	if filterErr != nil {
+		return nil, filterErr
+	}
+	req.Meta = &plumbing.ListRequestMetadata{}
+	if svc.parent.pageLimit > 0 {
+		req.Meta.Limit = int32(svc.parent.pageLimit)
+	}
+	req.Meta.SnapshotAt = convertTimestampToPlumbing(svc.parent.snapshotAt)
+	return newRequestableRoleEntitlementIteratorImpl(
+		func() (
+			[]*RequestableRoleEntitlement,
+			bool, error) {
+			plumbingResponse, err := retryWrapper(
+				ctx,
+				svc.parent.retryOptions,
+				&req.Meta.Fulfillments,
+				func() (*plumbing.RequestableRoleEntitlementListResponse, error) {
+					return svc.client.List(svc.parent.wrapContext(ctx, &req, "RequestableRoleEntitlements.List"), &req)
+				},
+			)
+			if err != nil {
+				return nil, false, convertErrorToPorcelain(err)
+			}
+			result, err := convertRepeatedRequestableRoleEntitlementToPorcelain(plumbingResponse.RequestableRoleEntitlements)
+			if err != nil {
+				return nil, false, err
+			}
+			req.Meta.Cursor = plumbingResponse.Meta.NextCursor
+			return result, req.Meta.Cursor != "", nil
+		},
+	), nil
+}
+
 // Resources are databases, servers, clusters, websites, or clouds that strongDM
 // delegates access to.
 type Resources struct {

@@ -11,6 +11,7 @@ ManagedSecret contains details about managed secret
 ## Argument Reference
 The following arguments are supported by a ManagedSecrets data source:
 * `id` - (Optional) Unique identifier of the Managed Secret.
+* `lock_required` - (Optional) Whether the secret requires a lock to access
 * `name` - (Optional) Unique human-readable name of the Managed Secret.
 * `policy` - (Optional) Password and rotation policy for the secret
 * `secret_engine_id` - (Optional) An ID of a Secret Engine linked with the Managed Secret.
@@ -25,6 +26,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* `expires_at` - Timestamp of when secret is going to be rotated
 	* `id` - Unique identifier of the Managed Secret.
 	* `last_rotated_at` - Timestamp of when secret was last rotated
+	* `lock_required` - Whether the secret requires a lock to access
 	* `name` - Unique human-readable name of the Managed Secret.
 	* `secret_engine_id` - An ID of a Secret Engine linked with the Managed Secret.
 	* `secret_store_path` - Path in a secret store.

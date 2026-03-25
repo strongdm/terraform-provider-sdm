@@ -44,7 +44,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/16.14.0"
+	defaultUserAgent = "strongdm-sdk-go/16.23.0"
 )
 
 var _ = metadata.Pairs
@@ -127,6 +127,9 @@ type Client struct {
 	remoteIdentityGroups             *RemoteIdentityGroups
 	remoteIdentityGroupsHistory      *RemoteIdentityGroupsHistory
 	replays                          *Replays
+	requestableAccountEntitlements   *RequestableAccountEntitlements
+	requestableResourceEntitlements  *RequestableResourceEntitlements
+	requestableRoleEntitlements      *RequestableRoleEntitlements
 	resources                        *Resources
 	resourcesHistory                 *ResourcesHistory
 	roleResources                    *RoleResources
@@ -421,6 +424,18 @@ func (c *Client) initializeServices() {
 	}
 	c.replays = &Replays{
 		client: plumbing.NewReplaysClient(c.grpcConn),
+		parent: c,
+	}
+	c.requestableAccountEntitlements = &RequestableAccountEntitlements{
+		client: plumbing.NewRequestableAccountEntitlementsClient(c.grpcConn),
+		parent: c,
+	}
+	c.requestableResourceEntitlements = &RequestableResourceEntitlements{
+		client: plumbing.NewRequestableResourceEntitlementsClient(c.grpcConn),
+		parent: c,
+	}
+	c.requestableRoleEntitlements = &RequestableRoleEntitlements{
+		client: plumbing.NewRequestableRoleEntitlementsClient(c.grpcConn),
 		parent: c,
 	}
 	c.resources = &Resources{
@@ -871,6 +886,24 @@ func (c *Client) Replays() *Replays {
 	return c.replays
 }
 
+// RequestableAccountEntitlements enumerates the resources that an account is permitted to request access to.
+// The RequestableAccountEntitlements service is read-only.
+func (c *Client) RequestableAccountEntitlements() *RequestableAccountEntitlements {
+	return c.requestableAccountEntitlements
+}
+
+// RequestableResourceEntitlements enumerates the accounts that are permitted to request access to a given resource.
+// The RequestableResourceEntitlements service is read-only.
+func (c *Client) RequestableResourceEntitlements() *RequestableResourceEntitlements {
+	return c.requestableResourceEntitlements
+}
+
+// RequestableRoleEntitlements enumerates the resources that a role permits its members to request access to.
+// The RequestableRoleEntitlements service is read-only.
+func (c *Client) RequestableRoleEntitlements() *RequestableRoleEntitlements {
+	return c.requestableRoleEntitlements
+}
+
 // Resources are databases, servers, clusters, websites, or clouds that strongDM
 // delegates access to.
 func (c *Client) Resources() *Resources {
@@ -1056,6 +1089,18 @@ func (c *Client) SnapshotAt(t time.Time) *SnapshotClient {
 		client: plumbing.NewRemoteIdentityGroupsClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
 	}
+	snapshotClient.client.requestableAccountEntitlements = &RequestableAccountEntitlements{
+		client: plumbing.NewRequestableAccountEntitlementsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.requestableResourceEntitlements = &RequestableResourceEntitlements{
+		client: plumbing.NewRequestableResourceEntitlementsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
+	snapshotClient.client.requestableRoleEntitlements = &RequestableRoleEntitlements{
+		client: plumbing.NewRequestableRoleEntitlementsClient(snapshotClient.client.grpcConn),
+		parent: snapshotClient.client,
+	}
 	snapshotClient.client.resources = &Resources{
 		client: plumbing.NewResourcesClient(snapshotClient.client.grpcConn),
 		parent: snapshotClient.client,
@@ -1223,6 +1268,24 @@ func (c *SnapshotClient) RemoteIdentities() SnapshotRemoteIdentities {
 // An Account's relationship to a RemoteIdentityGroup is defined via RemoteIdentity objects.
 func (c *SnapshotClient) RemoteIdentityGroups() SnapshotRemoteIdentityGroups {
 	return c.client.remoteIdentityGroups
+}
+
+// RequestableAccountEntitlements enumerates the resources that an account is permitted to request access to.
+// The RequestableAccountEntitlements service is read-only.
+func (c *SnapshotClient) RequestableAccountEntitlements() SnapshotRequestableAccountEntitlements {
+	return c.client.requestableAccountEntitlements
+}
+
+// RequestableResourceEntitlements enumerates the accounts that are permitted to request access to a given resource.
+// The RequestableResourceEntitlements service is read-only.
+func (c *SnapshotClient) RequestableResourceEntitlements() SnapshotRequestableResourceEntitlements {
+	return c.client.requestableResourceEntitlements
+}
+
+// RequestableRoleEntitlements enumerates the resources that a role permits its members to request access to.
+// The RequestableRoleEntitlements service is read-only.
+func (c *SnapshotClient) RequestableRoleEntitlements() SnapshotRequestableRoleEntitlements {
+	return c.client.requestableRoleEntitlements
 }
 
 // Resources are databases, servers, clusters, websites, or clouds that strongDM

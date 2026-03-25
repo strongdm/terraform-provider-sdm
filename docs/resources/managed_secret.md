@@ -11,6 +11,7 @@ ManagedSecret contains details about managed secret
 This resource can be imported using the [import](https://www.terraform.io/docs/cli/commands/import.html) command.
 ## Argument Reference
 The following arguments are supported by the ManagedSecret resource:
+* `lock_required` - (Optional) Whether the secret requires a lock to access
 * `name` - (Required) Unique human-readable name of the Managed Secret.
 * `policy` - (Required) Password and rotation policy for the secret
 * `secret_engine_id` - (Required) An ID of a Secret Engine linked with the Managed Secret.

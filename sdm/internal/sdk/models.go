@@ -196,9 +196,13 @@ const (
 
 	ResourceTypeKubernetesUserImpersonation ResourceType = "RESOURCE_TYPE_KUBERNETES_USER_IMPERSONATION"
 
+	ResourceTypeMcpNoAuth ResourceType = "RESOURCE_TYPE_MCP_NO_AUTH"
+
 	ResourceTypeMcp ResourceType = "RESOURCE_TYPE_MCP"
 
 	ResourceTypeMcpdcr ResourceType = "RESOURCE_TYPE_MCPDCR"
+
+	ResourceTypeMcppat ResourceType = "RESOURCE_TYPE_MCPPAT"
 
 	ResourceTypeMtlsMySql ResourceType = "RESOURCE_TYPE_MTLS_MY_SQL"
 
@@ -631,6 +635,8 @@ type AWSConsole struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// This option enforces HTTPS on the client, not resource connection.
+	UseHttps bool `json:"useHttps"`
 }
 
 type AWSConsoleStaticKeyPair struct {
@@ -670,6 +676,8 @@ type AWSConsoleStaticKeyPair struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// This option enforces HTTPS on the client, not resource connection
+	UseHttps bool `json:"useHttps"`
 }
 
 type AWSInstanceProfile struct {
@@ -1036,6 +1044,8 @@ type AccountGetResponse struct {
 
 // AccountGrants connect a resource directly to an account, giving the account the permission to connect to that resource.
 type AccountGrant struct {
+	// The access request ID that created this AccountGrant, if any.
+	AccessRequestID string `json:"accessRequestId"`
 	// The access rule associated with this AccountGrant.
 	AccessRule AccessRule `json:"accessRule"`
 	// The account ID of this AccountGrant.
@@ -3242,8 +3252,6 @@ type DB2LUW struct {
 	Username string `json:"username"`
 }
 
-// Databricks is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type Databricks struct {
 	// Databricks Personal Access Token (PAT)
 	AccessToken string `json:"accessToken"`
@@ -4316,6 +4324,8 @@ type HTTPAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// This option enforces HTTPS on the client, not resource connection.
+	TlsRequired bool `json:"tlsRequired"`
 	// The base address of your website without the path.
 	Url string `json:"url"`
 }
@@ -4353,6 +4363,8 @@ type HTTPBasicAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// This option enforces HTTPS on the client, not resource connection.
+	TlsRequired bool `json:"tlsRequired"`
 	// The base address of your website without the path.
 	Url string `json:"url"`
 	// The username to authenticate with.
@@ -4390,6 +4402,8 @@ type HTTPNoAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// This option enforces HTTPS on the client, not resource connection.
+	TlsRequired bool `json:"tlsRequired"`
 	// The base address of your website without the path.
 	Url string `json:"url"`
 }
@@ -4912,9 +4926,32 @@ type LogConfig struct {
 	PublicKey string `json:"publicKey"`
 }
 
-// MCP is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
-type MCP struct {
+type MCPGatewayNoAuth struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type MCPGatewayOAuth struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -4949,9 +4986,9 @@ type MCP struct {
 	Username string `json:"username"`
 }
 
-// MCPDCR is currently unstable, and its API may change, or it may be removed,
+// MCPGatewayOAuthDCR is currently unstable, and its API may change, or it may be removed,
 // without a major version bump.
-type MCPDCR struct {
+type MCPGatewayOAuthDCR struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
 	// A filter applied to the routing logic to pin datasource to nodes.
@@ -4972,6 +5009,33 @@ type MCPDCR struct {
 	OauthScopes string `json:"oauthScopes"`
 	// The OAuth 2.0 token endpoint URL.
 	OauthTokenEndpoint string `json:"oauthTokenEndpoint"`
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
+type MCPGatewayPAT struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// The host to dial to initiate a connection from the egress node to this resource.
+	Hostname string `json:"hostname"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
 	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
@@ -5082,6 +5146,8 @@ type ManagedSecret struct {
 	ID string `json:"id"`
 	// Timestamp of when secret was last rotated
 	LastRotatedAt time.Time `json:"lastRotatedAt"`
+	// Whether the secret requires a lock to access
+	LockRequired bool `json:"lockRequired"`
 	// Unique human-readable name of the Managed Secret.
 	Name string `json:"name"`
 	// Password and rotation policy for the secret
@@ -7110,6 +7176,18 @@ type ReplayChunkEvent struct {
 	Duration time.Duration `json:"duration"`
 }
 
+// RequestableAccountEntitlement represents an individual resource that an Account is permitted to request access to.
+type RequestableAccountEntitlement struct {
+	// The unique identifier of the group associated with this entitlement, if any.
+	GroupID string `json:"groupId"`
+	// The mapped identity privileges for this entitlement, such as Kubernetes group memberships.
+	MappedIdentities *MappedIdentities `json:"mappedIdentities"`
+	// The unique identifier of the origin of this entitlement (e.g., an Access Workflow ID).
+	OriginID string `json:"originId"`
+	// The unique identifier of the Resource to which access can be requested.
+	ResourceID string `json:"resourceId"`
+}
+
 // RequestableResource is a resource that can be requested via an AccessRequestConfig
 type RequestableResource struct {
 	// The current state of the user's access to the resources
@@ -7126,6 +7204,30 @@ type RequestableResource struct {
 	Tags Tags `json:"tags"`
 	// The resource type
 	Type string `json:"type"`
+}
+
+// RequestableResourceEntitlement represents an individual account that is permitted to request access to a Resource.
+type RequestableResourceEntitlement struct {
+	// The unique identifier of the Account that can request access to this resource.
+	AccountID string `json:"accountId"`
+	// The unique identifier of the group associated with this entitlement, if any.
+	GroupID string `json:"groupId"`
+	// The mapped identity privileges for this entitlement, such as Kubernetes group memberships.
+	MappedIdentities *MappedIdentities `json:"mappedIdentities"`
+	// The unique identifier of the origin of this entitlement (e.g., an Access Workflow ID).
+	OriginID string `json:"originId"`
+}
+
+// RequestableRoleEntitlement represents an individual resource that a Role permits its members to request access to.
+type RequestableRoleEntitlement struct {
+	// The unique identifier of the group associated with this entitlement, if any.
+	GroupID string `json:"groupId"`
+	// The mapped identity privileges for this entitlement, such as Kubernetes group memberships.
+	MappedIdentities *MappedIdentities `json:"mappedIdentities"`
+	// The unique identifier of the origin of this entitlement (e.g., an Access Workflow ID).
+	OriginID string `json:"originId"`
+	// The unique identifier of the Resource to which access can be requested through this role.
+	ResourceID string `json:"resourceId"`
 }
 
 // A Resource is a database, server, cluster, website, or cloud that strongDM
@@ -10990,112 +11092,220 @@ func (m *Maria) GetBindInterface() string {
 func (m *Maria) SetBindInterface(v string) {
 	m.BindInterface = v
 }
-func (*MCP) isOneOf_Resource() {}
+func (*MCPGatewayNoAuth) isOneOf_Resource() {}
 
-// GetID returns the unique identifier of the MCP.
-func (m *MCP) GetID() string { return m.ID }
+// GetID returns the unique identifier of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) GetID() string { return m.ID }
 
-// GetName returns the name of the MCP.
-func (m *MCP) GetName() string {
+// GetName returns the name of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the MCP.
-func (m *MCP) SetName(v string) {
+// SetName sets the name of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) SetName(v string) {
 	m.Name = v
 }
 
-// GetTags returns the tags of the MCP.
-func (m *MCP) GetTags() Tags {
+// GetTags returns the tags of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the MCP.
-func (m *MCP) SetTags(v Tags) {
+// SetTags sets the tags of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetSecretStoreID returns the secret store id of the MCP.
-func (m *MCP) GetSecretStoreID() string {
+// GetSecretStoreID returns the secret store id of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) GetSecretStoreID() string {
 	return m.SecretStoreID
 }
 
-// SetSecretStoreID sets the secret store id of the MCP.
-func (m *MCP) SetSecretStoreID(v string) {
+// SetSecretStoreID sets the secret store id of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
 
-// GetEgressFilter returns the egress filter of the MCP.
-func (m *MCP) GetEgressFilter() string {
+// GetEgressFilter returns the egress filter of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) GetEgressFilter() string {
 	return m.EgressFilter
 }
 
-// SetEgressFilter sets the egress filter of the MCP.
-func (m *MCP) SetEgressFilter(v string) {
+// SetEgressFilter sets the egress filter of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 
-// GetBindInterface returns the bind interface of the MCP.
-func (m *MCP) GetBindInterface() string {
+// GetBindInterface returns the bind interface of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) GetBindInterface() string {
 	return m.BindInterface
 }
 
-// SetBindInterface sets the bind interface of the MCP.
-func (m *MCP) SetBindInterface(v string) {
+// SetBindInterface sets the bind interface of the MCPGatewayNoAuth.
+func (m *MCPGatewayNoAuth) SetBindInterface(v string) {
 	m.BindInterface = v
 }
-func (*MCPDCR) isOneOf_Resource() {}
+func (*MCPGatewayOAuth) isOneOf_Resource() {}
 
-// GetID returns the unique identifier of the MCPDCR.
-func (m *MCPDCR) GetID() string { return m.ID }
+// GetID returns the unique identifier of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) GetID() string { return m.ID }
 
-// GetName returns the name of the MCPDCR.
-func (m *MCPDCR) GetName() string {
+// GetName returns the name of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) GetName() string {
 	return m.Name
 }
 
-// SetName sets the name of the MCPDCR.
-func (m *MCPDCR) SetName(v string) {
+// SetName sets the name of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) SetName(v string) {
 	m.Name = v
 }
 
-// GetTags returns the tags of the MCPDCR.
-func (m *MCPDCR) GetTags() Tags {
+// GetTags returns the tags of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) GetTags() Tags {
 	return m.Tags.clone()
 }
 
-// SetTags sets the tags of the MCPDCR.
-func (m *MCPDCR) SetTags(v Tags) {
+// SetTags sets the tags of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) SetTags(v Tags) {
 	m.Tags = v.clone()
 }
 
-// GetSecretStoreID returns the secret store id of the MCPDCR.
-func (m *MCPDCR) GetSecretStoreID() string {
+// GetSecretStoreID returns the secret store id of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) GetSecretStoreID() string {
 	return m.SecretStoreID
 }
 
-// SetSecretStoreID sets the secret store id of the MCPDCR.
-func (m *MCPDCR) SetSecretStoreID(v string) {
+// SetSecretStoreID sets the secret store id of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) SetSecretStoreID(v string) {
 	m.SecretStoreID = v
 }
 
-// GetEgressFilter returns the egress filter of the MCPDCR.
-func (m *MCPDCR) GetEgressFilter() string {
+// GetEgressFilter returns the egress filter of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) GetEgressFilter() string {
 	return m.EgressFilter
 }
 
-// SetEgressFilter sets the egress filter of the MCPDCR.
-func (m *MCPDCR) SetEgressFilter(v string) {
+// SetEgressFilter sets the egress filter of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) SetEgressFilter(v string) {
 	m.EgressFilter = v
 }
 
-// GetBindInterface returns the bind interface of the MCPDCR.
-func (m *MCPDCR) GetBindInterface() string {
+// GetBindInterface returns the bind interface of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) GetBindInterface() string {
 	return m.BindInterface
 }
 
-// SetBindInterface sets the bind interface of the MCPDCR.
-func (m *MCPDCR) SetBindInterface(v string) {
+// SetBindInterface sets the bind interface of the MCPGatewayOAuth.
+func (m *MCPGatewayOAuth) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*MCPGatewayOAuthDCR) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) GetID() string { return m.ID }
+
+// GetName returns the name of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MCPGatewayOAuthDCR.
+func (m *MCPGatewayOAuthDCR) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*MCPGatewayPAT) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) GetID() string { return m.ID }
+
+// GetName returns the name of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the MCPGatewayPAT.
+func (m *MCPGatewayPAT) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*Memcached) isOneOf_Resource() {}
@@ -15219,6 +15429,8 @@ type Snowsight struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// This option enforces HTTPS on the client, not resource connection.
+	UseHttps bool `json:"useHttps"`
 }
 
 type SqlserverEngine struct {
@@ -16911,6 +17123,57 @@ type ReplayChunkIterator interface {
 	Next() bool
 	// Value returns the current item, if one is available.
 	Value() *ReplayChunk
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// RequestableAccountEntitlementIterator provides read access to a list of RequestableAccountEntitlement.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    requestableAccountEntitlement := iterator.Value()
+//	    // ...
+//	}
+type RequestableAccountEntitlementIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *RequestableAccountEntitlement
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// RequestableResourceEntitlementIterator provides read access to a list of RequestableResourceEntitlement.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    requestableResourceEntitlement := iterator.Value()
+//	    // ...
+//	}
+type RequestableResourceEntitlementIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *RequestableResourceEntitlement
+	// Err returns the first error encountered during iteration, if any.
+	Err() error
+}
+
+// RequestableRoleEntitlementIterator provides read access to a list of RequestableRoleEntitlement.
+// Use it like so:
+//
+//	for iterator.Next() {
+//	    requestableRoleEntitlement := iterator.Value()
+//	    // ...
+//	}
+type RequestableRoleEntitlementIterator interface {
+	// Next advances the iterator to the next item in the list. It returns
+	// true if an item is available to retrieve via the `Value()` function.
+	Next() bool
+	// Value returns the current item, if one is available.
+	Value() *RequestableRoleEntitlement
 	// Err returns the first error encountered during iteration, if any.
 	Err() error
 }
