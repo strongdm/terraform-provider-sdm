@@ -1090,7 +1090,7 @@ func (x *AuthorizationPolicyListResponse) GetRateLimit() *RateLimitMetadata {
 	return nil
 }
 
-// AuthorizationPolicy represents a policy with structured items.
+// AuthorizationPolicy represents a policy with structured rules.
 type AuthorizationPolicy struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1102,8 +1102,8 @@ type AuthorizationPolicy struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional description of the AuthorizationPolicy.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	// items contains the policy rules as a list of union types.
-	Items []*AuthorizationPolicyItem `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
+	// rules contains the policy rules as a list of union types.
+	Rules []*AuthorizationPolicyRule `protobuf:"bytes,4,rep,name=rules,proto3" json:"rules,omitempty"`
 	// state indicates whether the policy is active or inactive.
 	State AuthorizationPolicyState `protobuf:"varint,5,opt,name=state,proto3,enum=v1.AuthorizationPolicyState" json:"state,omitempty"`
 }
@@ -1161,9 +1161,9 @@ func (x *AuthorizationPolicy) GetDescription() string {
 	return ""
 }
 
-func (x *AuthorizationPolicy) GetItems() []*AuthorizationPolicyItem {
+func (x *AuthorizationPolicy) GetRules() []*AuthorizationPolicyRule {
 	if x != nil {
-		return x.Items
+		return x.Rules
 	}
 	return nil
 }
@@ -1175,43 +1175,43 @@ func (x *AuthorizationPolicy) GetState() AuthorizationPolicyState {
 	return AuthorizationPolicyState_AUTHORIZATION_POLICY_STATE_UNSPECIFIED
 }
 
-// AuthorizationPolicyItem represents a single rule item in an authorization policy.
+// AuthorizationPolicyRule represents a single rule in an authorization policy.
 // Exactly one variant should be set: one principal scope, one resource scope, or
 // one condition.
 //
-// Enum constants for item fields are defined in the following locations:
+// Enum constants for rule fields are defined in the following locations:
 //   - Resource types (resource_by_type_and_tags.type): see ResourceType in resourcetypes.proto
 //   - Device trust operators and levels: AuthorizationPolicyDeviceTrust* enums below
 //   - Location operators: LocationOperator enum below
 //   - Location identifiers (continents, countries, subdivisions): see location_enums.proto
 //   - IP operators and networks: AuthorizationPolicyIP* enums below
 //   - Time operators and days of week: AuthorizationPolicyTime*/AuthorizationPolicyDayOfWeek enums below
-type AuthorizationPolicyItem struct {
+type AuthorizationPolicyRule struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Kind:
 	//
-	//	*AuthorizationPolicyItem_PrincipalAll
-	//	*AuthorizationPolicyItem_PrincipalByIds
-	//	*AuthorizationPolicyItem_ResourcesAll
-	//	*AuthorizationPolicyItem_ResourceByIds
-	//	*AuthorizationPolicyItem_ResourceByTypeAndTags
-	//	*AuthorizationPolicyItem_ResourceByTypeTagsAndKubernetesGroups
-	//	*AuthorizationPolicyItem_ResourceByOktaWithGroups
-	//	*AuthorizationPolicyItem_ResourceByEntraWithGroups
-	//	*AuthorizationPolicyItem_ConditionMfa
-	//	*AuthorizationPolicyItem_ConditionDeviceTrust
-	//	*AuthorizationPolicyItem_ConditionLocation
-	//	*AuthorizationPolicyItem_ConditionIp
-	//	*AuthorizationPolicyItem_ConditionTime
-	//	*AuthorizationPolicyItem_ConditionApprovalFlow
-	Kind isAuthorizationPolicyItem_Kind `protobuf_oneof:"kind"`
+	//	*AuthorizationPolicyRule_PrincipalAll
+	//	*AuthorizationPolicyRule_PrincipalByIds
+	//	*AuthorizationPolicyRule_ResourcesAll
+	//	*AuthorizationPolicyRule_ResourceByIds
+	//	*AuthorizationPolicyRule_ResourceByTypeAndTags
+	//	*AuthorizationPolicyRule_ResourceByTypeTagsAndKubernetesGroups
+	//	*AuthorizationPolicyRule_ResourceByOktaWithGroups
+	//	*AuthorizationPolicyRule_ResourceByEntraWithGroups
+	//	*AuthorizationPolicyRule_ConditionMfa
+	//	*AuthorizationPolicyRule_ConditionDeviceTrust
+	//	*AuthorizationPolicyRule_ConditionLocation
+	//	*AuthorizationPolicyRule_ConditionIp
+	//	*AuthorizationPolicyRule_ConditionTime
+	//	*AuthorizationPolicyRule_ConditionApprovalFlow
+	Kind isAuthorizationPolicyRule_Kind `protobuf_oneof:"kind"`
 }
 
-func (x *AuthorizationPolicyItem) Reset() {
-	*x = AuthorizationPolicyItem{}
+func (x *AuthorizationPolicyRule) Reset() {
+	*x = AuthorizationPolicyRule{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1219,13 +1219,13 @@ func (x *AuthorizationPolicyItem) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItem) String() string {
+func (x *AuthorizationPolicyRule) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItem) ProtoMessage() {}
+func (*AuthorizationPolicyRule) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItem) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRule) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1237,228 +1237,228 @@ func (x *AuthorizationPolicyItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItem.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRule.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRule) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{11}
 }
 
-func (m *AuthorizationPolicyItem) GetKind() isAuthorizationPolicyItem_Kind {
+func (m *AuthorizationPolicyRule) GetKind() isAuthorizationPolicyRule_Kind {
 	if m != nil {
 		return m.Kind
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetPrincipalAll() *AuthorizationPolicyItemPrincipalAll {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_PrincipalAll); ok {
+func (x *AuthorizationPolicyRule) GetPrincipalAll() *AuthorizationPolicyRulePrincipalAll {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_PrincipalAll); ok {
 		return x.PrincipalAll
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetPrincipalByIds() *AuthorizationPolicyItemPrincipalByIds {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_PrincipalByIds); ok {
+func (x *AuthorizationPolicyRule) GetPrincipalByIds() *AuthorizationPolicyRulePrincipalByIds {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_PrincipalByIds); ok {
 		return x.PrincipalByIds
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetResourcesAll() *AuthorizationPolicyItemResourcesAll {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ResourcesAll); ok {
+func (x *AuthorizationPolicyRule) GetResourcesAll() *AuthorizationPolicyRuleResourcesAll {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ResourcesAll); ok {
 		return x.ResourcesAll
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetResourceByIds() *AuthorizationPolicyItemResourceByIds {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ResourceByIds); ok {
+func (x *AuthorizationPolicyRule) GetResourceByIds() *AuthorizationPolicyRuleResourceByIds {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ResourceByIds); ok {
 		return x.ResourceByIds
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetResourceByTypeAndTags() *AuthorizationPolicyItemResourceByTypeAndTags {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ResourceByTypeAndTags); ok {
+func (x *AuthorizationPolicyRule) GetResourceByTypeAndTags() *AuthorizationPolicyRuleResourceByTypeAndTags {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ResourceByTypeAndTags); ok {
 		return x.ResourceByTypeAndTags
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetResourceByTypeTagsAndKubernetesGroups() *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ResourceByTypeTagsAndKubernetesGroups); ok {
+func (x *AuthorizationPolicyRule) GetResourceByTypeTagsAndKubernetesGroups() *AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ResourceByTypeTagsAndKubernetesGroups); ok {
 		return x.ResourceByTypeTagsAndKubernetesGroups
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetResourceByOktaWithGroups() *AuthorizationPolicyItemResourceByOktaWithGroups {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ResourceByOktaWithGroups); ok {
+func (x *AuthorizationPolicyRule) GetResourceByOktaWithGroups() *AuthorizationPolicyRuleResourceByOktaWithGroups {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ResourceByOktaWithGroups); ok {
 		return x.ResourceByOktaWithGroups
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetResourceByEntraWithGroups() *AuthorizationPolicyItemResourceByEntraWithGroups {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ResourceByEntraWithGroups); ok {
+func (x *AuthorizationPolicyRule) GetResourceByEntraWithGroups() *AuthorizationPolicyRuleResourceByEntraWithGroups {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ResourceByEntraWithGroups); ok {
 		return x.ResourceByEntraWithGroups
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetConditionMfa() *AuthorizationPolicyItemConditionMFA {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ConditionMfa); ok {
+func (x *AuthorizationPolicyRule) GetConditionMfa() *AuthorizationPolicyRuleConditionMFA {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ConditionMfa); ok {
 		return x.ConditionMfa
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetConditionDeviceTrust() *AuthorizationPolicyItemConditionDeviceTrust {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ConditionDeviceTrust); ok {
+func (x *AuthorizationPolicyRule) GetConditionDeviceTrust() *AuthorizationPolicyRuleConditionDeviceTrust {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ConditionDeviceTrust); ok {
 		return x.ConditionDeviceTrust
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetConditionLocation() *AuthorizationPolicyItemConditionLocation {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ConditionLocation); ok {
+func (x *AuthorizationPolicyRule) GetConditionLocation() *AuthorizationPolicyRuleConditionLocation {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ConditionLocation); ok {
 		return x.ConditionLocation
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetConditionIp() *AuthorizationPolicyItemConditionIP {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ConditionIp); ok {
+func (x *AuthorizationPolicyRule) GetConditionIp() *AuthorizationPolicyRuleConditionIP {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ConditionIp); ok {
 		return x.ConditionIp
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetConditionTime() *AuthorizationPolicyItemConditionTime {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ConditionTime); ok {
+func (x *AuthorizationPolicyRule) GetConditionTime() *AuthorizationPolicyRuleConditionTime {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ConditionTime); ok {
 		return x.ConditionTime
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItem) GetConditionApprovalFlow() *AuthorizationPolicyItemConditionApprovalFlow {
-	if x, ok := x.GetKind().(*AuthorizationPolicyItem_ConditionApprovalFlow); ok {
+func (x *AuthorizationPolicyRule) GetConditionApprovalFlow() *AuthorizationPolicyRuleConditionApprovalFlow {
+	if x, ok := x.GetKind().(*AuthorizationPolicyRule_ConditionApprovalFlow); ok {
 		return x.ConditionApprovalFlow
 	}
 	return nil
 }
 
-type isAuthorizationPolicyItem_Kind interface {
-	isAuthorizationPolicyItem_Kind()
+type isAuthorizationPolicyRule_Kind interface {
+	isAuthorizationPolicyRule_Kind()
 }
 
-type AuthorizationPolicyItem_PrincipalAll struct {
+type AuthorizationPolicyRule_PrincipalAll struct {
 	// Matches all principals.
-	PrincipalAll *AuthorizationPolicyItemPrincipalAll `protobuf:"bytes,1,opt,name=principal_all,json=principalAll,proto3,oneof"`
+	PrincipalAll *AuthorizationPolicyRulePrincipalAll `protobuf:"bytes,1,opt,name=principal_all,json=principalAll,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_PrincipalByIds struct {
+type AuthorizationPolicyRule_PrincipalByIds struct {
 	// Matches specific principals by ID.
-	PrincipalByIds *AuthorizationPolicyItemPrincipalByIds `protobuf:"bytes,2,opt,name=principal_by_ids,json=principalByIds,proto3,oneof"`
+	PrincipalByIds *AuthorizationPolicyRulePrincipalByIds `protobuf:"bytes,2,opt,name=principal_by_ids,json=principalByIds,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ResourcesAll struct {
+type AuthorizationPolicyRule_ResourcesAll struct {
 	// Matches all resources.
-	ResourcesAll *AuthorizationPolicyItemResourcesAll `protobuf:"bytes,3,opt,name=resources_all,json=resourcesAll,proto3,oneof"`
+	ResourcesAll *AuthorizationPolicyRuleResourcesAll `protobuf:"bytes,3,opt,name=resources_all,json=resourcesAll,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ResourceByIds struct {
+type AuthorizationPolicyRule_ResourceByIds struct {
 	// Matches specific resources by ID.
-	ResourceByIds *AuthorizationPolicyItemResourceByIds `protobuf:"bytes,4,opt,name=resource_by_ids,json=resourceByIds,proto3,oneof"`
+	ResourceByIds *AuthorizationPolicyRuleResourceByIds `protobuf:"bytes,4,opt,name=resource_by_ids,json=resourceByIds,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ResourceByTypeAndTags struct {
+type AuthorizationPolicyRule_ResourceByTypeAndTags struct {
 	// Matches resources by driver type and/or tags.
-	ResourceByTypeAndTags *AuthorizationPolicyItemResourceByTypeAndTags `protobuf:"bytes,5,opt,name=resource_by_type_and_tags,json=resourceByTypeAndTags,proto3,oneof"`
+	ResourceByTypeAndTags *AuthorizationPolicyRuleResourceByTypeAndTags `protobuf:"bytes,5,opt,name=resource_by_type_and_tags,json=resourceByTypeAndTags,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ResourceByTypeTagsAndKubernetesGroups struct {
+type AuthorizationPolicyRule_ResourceByTypeTagsAndKubernetesGroups struct {
 	// Matches resources by driver type, tags, and Kubernetes groups.
-	ResourceByTypeTagsAndKubernetesGroups *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups `protobuf:"bytes,6,opt,name=resource_by_type_tags_and_kubernetes_groups,json=resourceByTypeTagsAndKubernetesGroups,proto3,oneof"`
+	ResourceByTypeTagsAndKubernetesGroups *AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups `protobuf:"bytes,6,opt,name=resource_by_type_tags_and_kubernetes_groups,json=resourceByTypeTagsAndKubernetesGroups,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ResourceByOktaWithGroups struct {
+type AuthorizationPolicyRule_ResourceByOktaWithGroups struct {
 	// References an exact Okta resource with Okta groups.
-	ResourceByOktaWithGroups *AuthorizationPolicyItemResourceByOktaWithGroups `protobuf:"bytes,7,opt,name=resource_by_okta_with_groups,json=resourceByOktaWithGroups,proto3,oneof"`
+	ResourceByOktaWithGroups *AuthorizationPolicyRuleResourceByOktaWithGroups `protobuf:"bytes,7,opt,name=resource_by_okta_with_groups,json=resourceByOktaWithGroups,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ResourceByEntraWithGroups struct {
+type AuthorizationPolicyRule_ResourceByEntraWithGroups struct {
 	// References an exact Entra ID resource with Entra groups.
-	ResourceByEntraWithGroups *AuthorizationPolicyItemResourceByEntraWithGroups `protobuf:"bytes,8,opt,name=resource_by_entra_with_groups,json=resourceByEntraWithGroups,proto3,oneof"`
+	ResourceByEntraWithGroups *AuthorizationPolicyRuleResourceByEntraWithGroups `protobuf:"bytes,8,opt,name=resource_by_entra_with_groups,json=resourceByEntraWithGroups,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ConditionMfa struct {
+type AuthorizationPolicyRule_ConditionMfa struct {
 	// Requires multi-factor authentication.
-	ConditionMfa *AuthorizationPolicyItemConditionMFA `protobuf:"bytes,9,opt,name=condition_mfa,json=conditionMfa,proto3,oneof"`
+	ConditionMfa *AuthorizationPolicyRuleConditionMFA `protobuf:"bytes,9,opt,name=condition_mfa,json=conditionMfa,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ConditionDeviceTrust struct {
+type AuthorizationPolicyRule_ConditionDeviceTrust struct {
 	// Requires a specific device trust level.
-	ConditionDeviceTrust *AuthorizationPolicyItemConditionDeviceTrust `protobuf:"bytes,10,opt,name=condition_device_trust,json=conditionDeviceTrust,proto3,oneof"`
+	ConditionDeviceTrust *AuthorizationPolicyRuleConditionDeviceTrust `protobuf:"bytes,10,opt,name=condition_device_trust,json=conditionDeviceTrust,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ConditionLocation struct {
+type AuthorizationPolicyRule_ConditionLocation struct {
 	// Restricts access by geolocation.
-	ConditionLocation *AuthorizationPolicyItemConditionLocation `protobuf:"bytes,11,opt,name=condition_location,json=conditionLocation,proto3,oneof"`
+	ConditionLocation *AuthorizationPolicyRuleConditionLocation `protobuf:"bytes,11,opt,name=condition_location,json=conditionLocation,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ConditionIp struct {
+type AuthorizationPolicyRule_ConditionIp struct {
 	// Restricts access by IP address or range.
-	ConditionIp *AuthorizationPolicyItemConditionIP `protobuf:"bytes,12,opt,name=condition_ip,json=conditionIp,proto3,oneof"`
+	ConditionIp *AuthorizationPolicyRuleConditionIP `protobuf:"bytes,12,opt,name=condition_ip,json=conditionIp,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ConditionTime struct {
+type AuthorizationPolicyRule_ConditionTime struct {
 	// Restricts access by time of day or day of week.
-	ConditionTime *AuthorizationPolicyItemConditionTime `protobuf:"bytes,13,opt,name=condition_time,json=conditionTime,proto3,oneof"`
+	ConditionTime *AuthorizationPolicyRuleConditionTime `protobuf:"bytes,13,opt,name=condition_time,json=conditionTime,proto3,oneof"`
 }
 
-type AuthorizationPolicyItem_ConditionApprovalFlow struct {
+type AuthorizationPolicyRule_ConditionApprovalFlow struct {
 	// Requires an approval flow.
-	ConditionApprovalFlow *AuthorizationPolicyItemConditionApprovalFlow `protobuf:"bytes,14,opt,name=condition_approval_flow,json=conditionApprovalFlow,proto3,oneof"`
+	ConditionApprovalFlow *AuthorizationPolicyRuleConditionApprovalFlow `protobuf:"bytes,14,opt,name=condition_approval_flow,json=conditionApprovalFlow,proto3,oneof"`
 }
 
-func (*AuthorizationPolicyItem_PrincipalAll) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_PrincipalAll) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_PrincipalByIds) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_PrincipalByIds) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ResourcesAll) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ResourcesAll) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ResourceByIds) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ResourceByIds) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ResourceByTypeAndTags) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ResourceByTypeAndTags) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ResourceByTypeTagsAndKubernetesGroups) isAuthorizationPolicyItem_Kind() {
+func (*AuthorizationPolicyRule_ResourceByTypeTagsAndKubernetesGroups) isAuthorizationPolicyRule_Kind() {
 }
 
-func (*AuthorizationPolicyItem_ResourceByOktaWithGroups) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ResourceByOktaWithGroups) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ResourceByEntraWithGroups) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ResourceByEntraWithGroups) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ConditionMfa) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ConditionMfa) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ConditionDeviceTrust) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ConditionDeviceTrust) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ConditionLocation) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ConditionLocation) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ConditionIp) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ConditionIp) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ConditionTime) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ConditionTime) isAuthorizationPolicyRule_Kind() {}
 
-func (*AuthorizationPolicyItem_ConditionApprovalFlow) isAuthorizationPolicyItem_Kind() {}
+func (*AuthorizationPolicyRule_ConditionApprovalFlow) isAuthorizationPolicyRule_Kind() {}
 
-// AuthorizationPolicyItemPrincipalAll matches all principals.
-type AuthorizationPolicyItemPrincipalAll struct {
+// AuthorizationPolicyRulePrincipalAll matches all principals.
+type AuthorizationPolicyRulePrincipalAll struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *AuthorizationPolicyItemPrincipalAll) Reset() {
-	*x = AuthorizationPolicyItemPrincipalAll{}
+func (x *AuthorizationPolicyRulePrincipalAll) Reset() {
+	*x = AuthorizationPolicyRulePrincipalAll{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1466,13 +1466,13 @@ func (x *AuthorizationPolicyItemPrincipalAll) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemPrincipalAll) String() string {
+func (x *AuthorizationPolicyRulePrincipalAll) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemPrincipalAll) ProtoMessage() {}
+func (*AuthorizationPolicyRulePrincipalAll) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemPrincipalAll) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRulePrincipalAll) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1484,13 +1484,13 @@ func (x *AuthorizationPolicyItemPrincipalAll) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemPrincipalAll.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemPrincipalAll) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRulePrincipalAll.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRulePrincipalAll) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{12}
 }
 
-// AuthorizationPolicyItemPrincipalByIds matches specific principals by ID.
-type AuthorizationPolicyItemPrincipalByIds struct {
+// AuthorizationPolicyRulePrincipalByIds matches specific principals by ID.
+type AuthorizationPolicyRulePrincipalByIds struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1499,8 +1499,8 @@ type AuthorizationPolicyItemPrincipalByIds struct {
 	Ids []string `protobuf:"bytes,1,rep,name=ids,proto3" json:"ids,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemPrincipalByIds) Reset() {
-	*x = AuthorizationPolicyItemPrincipalByIds{}
+func (x *AuthorizationPolicyRulePrincipalByIds) Reset() {
+	*x = AuthorizationPolicyRulePrincipalByIds{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1508,13 +1508,13 @@ func (x *AuthorizationPolicyItemPrincipalByIds) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemPrincipalByIds) String() string {
+func (x *AuthorizationPolicyRulePrincipalByIds) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemPrincipalByIds) ProtoMessage() {}
+func (*AuthorizationPolicyRulePrincipalByIds) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemPrincipalByIds) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRulePrincipalByIds) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1526,27 +1526,27 @@ func (x *AuthorizationPolicyItemPrincipalByIds) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemPrincipalByIds.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemPrincipalByIds) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRulePrincipalByIds.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRulePrincipalByIds) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *AuthorizationPolicyItemPrincipalByIds) GetIds() []string {
+func (x *AuthorizationPolicyRulePrincipalByIds) GetIds() []string {
 	if x != nil {
 		return x.Ids
 	}
 	return nil
 }
 
-// AuthorizationPolicyItemResourcesAll matches all resources.
-type AuthorizationPolicyItemResourcesAll struct {
+// AuthorizationPolicyRuleResourcesAll matches all resources.
+type AuthorizationPolicyRuleResourcesAll struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *AuthorizationPolicyItemResourcesAll) Reset() {
-	*x = AuthorizationPolicyItemResourcesAll{}
+func (x *AuthorizationPolicyRuleResourcesAll) Reset() {
+	*x = AuthorizationPolicyRuleResourcesAll{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1554,13 +1554,13 @@ func (x *AuthorizationPolicyItemResourcesAll) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemResourcesAll) String() string {
+func (x *AuthorizationPolicyRuleResourcesAll) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemResourcesAll) ProtoMessage() {}
+func (*AuthorizationPolicyRuleResourcesAll) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemResourcesAll) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleResourcesAll) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1572,13 +1572,13 @@ func (x *AuthorizationPolicyItemResourcesAll) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemResourcesAll.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemResourcesAll) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleResourcesAll.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleResourcesAll) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{14}
 }
 
-// AuthorizationPolicyItemResourceByIds matches specific resources by ID.
-type AuthorizationPolicyItemResourceByIds struct {
+// AuthorizationPolicyRuleResourceByIds matches specific resources by ID.
+type AuthorizationPolicyRuleResourceByIds struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1587,8 +1587,8 @@ type AuthorizationPolicyItemResourceByIds struct {
 	Ids []string `protobuf:"bytes,1,rep,name=ids,proto3" json:"ids,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemResourceByIds) Reset() {
-	*x = AuthorizationPolicyItemResourceByIds{}
+func (x *AuthorizationPolicyRuleResourceByIds) Reset() {
+	*x = AuthorizationPolicyRuleResourceByIds{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1596,13 +1596,13 @@ func (x *AuthorizationPolicyItemResourceByIds) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemResourceByIds) String() string {
+func (x *AuthorizationPolicyRuleResourceByIds) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemResourceByIds) ProtoMessage() {}
+func (*AuthorizationPolicyRuleResourceByIds) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemResourceByIds) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleResourceByIds) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1614,20 +1614,20 @@ func (x *AuthorizationPolicyItemResourceByIds) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemResourceByIds.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemResourceByIds) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleResourceByIds.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleResourceByIds) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *AuthorizationPolicyItemResourceByIds) GetIds() []string {
+func (x *AuthorizationPolicyRuleResourceByIds) GetIds() []string {
 	if x != nil {
 		return x.Ids
 	}
 	return nil
 }
 
-// AuthorizationPolicyItemResourceByTypeAndTags matches resources by driver type and/or tags.
-type AuthorizationPolicyItemResourceByTypeAndTags struct {
+// AuthorizationPolicyRuleResourceByTypeAndTags matches resources by driver type and/or tags.
+type AuthorizationPolicyRuleResourceByTypeAndTags struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1638,8 +1638,8 @@ type AuthorizationPolicyItemResourceByTypeAndTags struct {
 	Tags []*Tag `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeAndTags) Reset() {
-	*x = AuthorizationPolicyItemResourceByTypeAndTags{}
+func (x *AuthorizationPolicyRuleResourceByTypeAndTags) Reset() {
+	*x = AuthorizationPolicyRuleResourceByTypeAndTags{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1647,13 +1647,13 @@ func (x *AuthorizationPolicyItemResourceByTypeAndTags) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeAndTags) String() string {
+func (x *AuthorizationPolicyRuleResourceByTypeAndTags) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemResourceByTypeAndTags) ProtoMessage() {}
+func (*AuthorizationPolicyRuleResourceByTypeAndTags) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemResourceByTypeAndTags) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleResourceByTypeAndTags) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1665,27 +1665,27 @@ func (x *AuthorizationPolicyItemResourceByTypeAndTags) ProtoReflect() protorefle
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemResourceByTypeAndTags.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemResourceByTypeAndTags) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleResourceByTypeAndTags.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleResourceByTypeAndTags) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeAndTags) GetType() ResourceType {
+func (x *AuthorizationPolicyRuleResourceByTypeAndTags) GetType() ResourceType {
 	if x != nil {
 		return x.Type
 	}
 	return ResourceType_RESOURCE_TYPE_UNSPECIFIED
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeAndTags) GetTags() []*Tag {
+func (x *AuthorizationPolicyRuleResourceByTypeAndTags) GetTags() []*Tag {
 	if x != nil {
 		return x.Tags
 	}
 	return nil
 }
 
-// AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups matches resources by driver type, tags, and Kubernetes groups.
-type AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups struct {
+// AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups matches resources by driver type, tags, and Kubernetes groups.
+type AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1698,8 +1698,8 @@ type AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups struct {
 	KubernetesGroups []string `protobuf:"bytes,3,rep,name=kubernetes_groups,json=kubernetesGroups,proto3" json:"kubernetes_groups,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) Reset() {
-	*x = AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups{}
+func (x *AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups) Reset() {
+	*x = AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1707,13 +1707,13 @@ func (x *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) String() string {
+func (x *AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) ProtoMessage() {}
+func (*AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1725,34 +1725,34 @@ func (x *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) ProtoRefl
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) GetType() ResourceType {
+func (x *AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups) GetType() ResourceType {
 	if x != nil {
 		return x.Type
 	}
 	return ResourceType_RESOURCE_TYPE_UNSPECIFIED
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) GetTags() []*Tag {
+func (x *AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups) GetTags() []*Tag {
 	if x != nil {
 		return x.Tags
 	}
 	return nil
 }
 
-func (x *AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups) GetKubernetesGroups() []string {
+func (x *AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups) GetKubernetesGroups() []string {
 	if x != nil {
 		return x.KubernetesGroups
 	}
 	return nil
 }
 
-// AuthorizationPolicyItemResourceByOktaWithGroups references an exact Okta resource and carries Okta groups.
-type AuthorizationPolicyItemResourceByOktaWithGroups struct {
+// AuthorizationPolicyRuleResourceByOktaWithGroups references an exact Okta resource and carries Okta groups.
+type AuthorizationPolicyRuleResourceByOktaWithGroups struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1763,8 +1763,8 @@ type AuthorizationPolicyItemResourceByOktaWithGroups struct {
 	Groups []string `protobuf:"bytes,2,rep,name=groups,proto3" json:"groups,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemResourceByOktaWithGroups) Reset() {
-	*x = AuthorizationPolicyItemResourceByOktaWithGroups{}
+func (x *AuthorizationPolicyRuleResourceByOktaWithGroups) Reset() {
+	*x = AuthorizationPolicyRuleResourceByOktaWithGroups{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1772,13 +1772,13 @@ func (x *AuthorizationPolicyItemResourceByOktaWithGroups) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemResourceByOktaWithGroups) String() string {
+func (x *AuthorizationPolicyRuleResourceByOktaWithGroups) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemResourceByOktaWithGroups) ProtoMessage() {}
+func (*AuthorizationPolicyRuleResourceByOktaWithGroups) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemResourceByOktaWithGroups) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleResourceByOktaWithGroups) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1790,27 +1790,27 @@ func (x *AuthorizationPolicyItemResourceByOktaWithGroups) ProtoReflect() protore
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemResourceByOktaWithGroups.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemResourceByOktaWithGroups) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleResourceByOktaWithGroups.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleResourceByOktaWithGroups) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *AuthorizationPolicyItemResourceByOktaWithGroups) GetResourceId() string {
+func (x *AuthorizationPolicyRuleResourceByOktaWithGroups) GetResourceId() string {
 	if x != nil {
 		return x.ResourceId
 	}
 	return ""
 }
 
-func (x *AuthorizationPolicyItemResourceByOktaWithGroups) GetGroups() []string {
+func (x *AuthorizationPolicyRuleResourceByOktaWithGroups) GetGroups() []string {
 	if x != nil {
 		return x.Groups
 	}
 	return nil
 }
 
-// AuthorizationPolicyItemResourceByEntraWithGroups references an exact Entra ID resource and carries Entra groups.
-type AuthorizationPolicyItemResourceByEntraWithGroups struct {
+// AuthorizationPolicyRuleResourceByEntraWithGroups references an exact Entra ID resource and carries Entra groups.
+type AuthorizationPolicyRuleResourceByEntraWithGroups struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1821,8 +1821,8 @@ type AuthorizationPolicyItemResourceByEntraWithGroups struct {
 	Groups []string `protobuf:"bytes,2,rep,name=groups,proto3" json:"groups,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemResourceByEntraWithGroups) Reset() {
-	*x = AuthorizationPolicyItemResourceByEntraWithGroups{}
+func (x *AuthorizationPolicyRuleResourceByEntraWithGroups) Reset() {
+	*x = AuthorizationPolicyRuleResourceByEntraWithGroups{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1830,13 +1830,13 @@ func (x *AuthorizationPolicyItemResourceByEntraWithGroups) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemResourceByEntraWithGroups) String() string {
+func (x *AuthorizationPolicyRuleResourceByEntraWithGroups) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemResourceByEntraWithGroups) ProtoMessage() {}
+func (*AuthorizationPolicyRuleResourceByEntraWithGroups) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemResourceByEntraWithGroups) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleResourceByEntraWithGroups) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1848,27 +1848,27 @@ func (x *AuthorizationPolicyItemResourceByEntraWithGroups) ProtoReflect() protor
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemResourceByEntraWithGroups.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemResourceByEntraWithGroups) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleResourceByEntraWithGroups.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleResourceByEntraWithGroups) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{19}
 }
 
-func (x *AuthorizationPolicyItemResourceByEntraWithGroups) GetResourceId() string {
+func (x *AuthorizationPolicyRuleResourceByEntraWithGroups) GetResourceId() string {
 	if x != nil {
 		return x.ResourceId
 	}
 	return ""
 }
 
-func (x *AuthorizationPolicyItemResourceByEntraWithGroups) GetGroups() []string {
+func (x *AuthorizationPolicyRuleResourceByEntraWithGroups) GetGroups() []string {
 	if x != nil {
 		return x.Groups
 	}
 	return nil
 }
 
-// AuthorizationPolicyItemConditionMFA represents a policy-level MFA requirement.
-type AuthorizationPolicyItemConditionMFA struct {
+// AuthorizationPolicyRuleConditionMFA represents a policy-level MFA requirement.
+type AuthorizationPolicyRuleConditionMFA struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1879,8 +1879,8 @@ type AuthorizationPolicyItemConditionMFA struct {
 	CacheTimeoutSeconds int32 `protobuf:"varint,2,opt,name=cache_timeout_seconds,json=cacheTimeoutSeconds,proto3" json:"cache_timeout_seconds,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemConditionMFA) Reset() {
-	*x = AuthorizationPolicyItemConditionMFA{}
+func (x *AuthorizationPolicyRuleConditionMFA) Reset() {
+	*x = AuthorizationPolicyRuleConditionMFA{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1888,13 +1888,13 @@ func (x *AuthorizationPolicyItemConditionMFA) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemConditionMFA) String() string {
+func (x *AuthorizationPolicyRuleConditionMFA) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemConditionMFA) ProtoMessage() {}
+func (*AuthorizationPolicyRuleConditionMFA) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemConditionMFA) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleConditionMFA) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1906,27 +1906,27 @@ func (x *AuthorizationPolicyItemConditionMFA) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemConditionMFA.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemConditionMFA) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleConditionMFA.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleConditionMFA) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *AuthorizationPolicyItemConditionMFA) GetReason() string {
+func (x *AuthorizationPolicyRuleConditionMFA) GetReason() string {
 	if x != nil {
 		return x.Reason
 	}
 	return ""
 }
 
-func (x *AuthorizationPolicyItemConditionMFA) GetCacheTimeoutSeconds() int32 {
+func (x *AuthorizationPolicyRuleConditionMFA) GetCacheTimeoutSeconds() int32 {
 	if x != nil {
 		return x.CacheTimeoutSeconds
 	}
 	return 0
 }
 
-// AuthorizationPolicyItemConditionDeviceTrust represents a policy-level device trust requirement.
-type AuthorizationPolicyItemConditionDeviceTrust struct {
+// AuthorizationPolicyRuleConditionDeviceTrust represents a policy-level device trust requirement.
+type AuthorizationPolicyRuleConditionDeviceTrust struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1937,8 +1937,8 @@ type AuthorizationPolicyItemConditionDeviceTrust struct {
 	Level AuthorizationPolicyDeviceTrustLevel `protobuf:"varint,2,opt,name=level,proto3,enum=v1.AuthorizationPolicyDeviceTrustLevel" json:"level,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemConditionDeviceTrust) Reset() {
-	*x = AuthorizationPolicyItemConditionDeviceTrust{}
+func (x *AuthorizationPolicyRuleConditionDeviceTrust) Reset() {
+	*x = AuthorizationPolicyRuleConditionDeviceTrust{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1946,13 +1946,13 @@ func (x *AuthorizationPolicyItemConditionDeviceTrust) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemConditionDeviceTrust) String() string {
+func (x *AuthorizationPolicyRuleConditionDeviceTrust) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemConditionDeviceTrust) ProtoMessage() {}
+func (*AuthorizationPolicyRuleConditionDeviceTrust) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemConditionDeviceTrust) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleConditionDeviceTrust) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1964,27 +1964,27 @@ func (x *AuthorizationPolicyItemConditionDeviceTrust) ProtoReflect() protoreflec
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemConditionDeviceTrust.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemConditionDeviceTrust) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleConditionDeviceTrust.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleConditionDeviceTrust) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *AuthorizationPolicyItemConditionDeviceTrust) GetOperator() AuthorizationPolicyDeviceTrustOperator {
+func (x *AuthorizationPolicyRuleConditionDeviceTrust) GetOperator() AuthorizationPolicyDeviceTrustOperator {
 	if x != nil {
 		return x.Operator
 	}
 	return AuthorizationPolicyDeviceTrustOperator_AUTHORIZATION_POLICY_DEVICE_TRUST_OPERATOR_UNSPECIFIED
 }
 
-func (x *AuthorizationPolicyItemConditionDeviceTrust) GetLevel() AuthorizationPolicyDeviceTrustLevel {
+func (x *AuthorizationPolicyRuleConditionDeviceTrust) GetLevel() AuthorizationPolicyDeviceTrustLevel {
 	if x != nil {
 		return x.Level
 	}
 	return AuthorizationPolicyDeviceTrustLevel_AUTHORIZATION_POLICY_DEVICE_TRUST_LEVEL_UNSPECIFIED
 }
 
-// AuthorizationPolicyItemConditionLocation represents policy-level geolocation restrictions.
-type AuthorizationPolicyItemConditionLocation struct {
+// AuthorizationPolicyRuleConditionLocation represents policy-level geolocation restrictions.
+type AuthorizationPolicyRuleConditionLocation struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -1993,8 +1993,8 @@ type AuthorizationPolicyItemConditionLocation struct {
 	Rules []*AuthorizationPolicyLocationRule `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemConditionLocation) Reset() {
-	*x = AuthorizationPolicyItemConditionLocation{}
+func (x *AuthorizationPolicyRuleConditionLocation) Reset() {
+	*x = AuthorizationPolicyRuleConditionLocation{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2002,13 +2002,13 @@ func (x *AuthorizationPolicyItemConditionLocation) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemConditionLocation) String() string {
+func (x *AuthorizationPolicyRuleConditionLocation) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemConditionLocation) ProtoMessage() {}
+func (*AuthorizationPolicyRuleConditionLocation) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemConditionLocation) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleConditionLocation) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2020,12 +2020,12 @@ func (x *AuthorizationPolicyItemConditionLocation) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemConditionLocation.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemConditionLocation) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleConditionLocation.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleConditionLocation) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *AuthorizationPolicyItemConditionLocation) GetRules() []*AuthorizationPolicyLocationRule {
+func (x *AuthorizationPolicyRuleConditionLocation) GetRules() []*AuthorizationPolicyLocationRule {
 	if x != nil {
 		return x.Rules
 	}
@@ -2303,8 +2303,8 @@ func (x *AuthorizationPolicySubdivisionRule) GetSubdivisions() []string {
 	return nil
 }
 
-// AuthorizationPolicyItemConditionIP represents policy-level IP address/range restrictions.
-type AuthorizationPolicyItemConditionIP struct {
+// AuthorizationPolicyRuleConditionIP represents policy-level IP address/range restrictions.
+type AuthorizationPolicyRuleConditionIP struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2313,8 +2313,8 @@ type AuthorizationPolicyItemConditionIP struct {
 	Rules []*AuthorizationPolicyIPRule `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemConditionIP) Reset() {
-	*x = AuthorizationPolicyItemConditionIP{}
+func (x *AuthorizationPolicyRuleConditionIP) Reset() {
+	*x = AuthorizationPolicyRuleConditionIP{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2322,13 +2322,13 @@ func (x *AuthorizationPolicyItemConditionIP) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemConditionIP) String() string {
+func (x *AuthorizationPolicyRuleConditionIP) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemConditionIP) ProtoMessage() {}
+func (*AuthorizationPolicyRuleConditionIP) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemConditionIP) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleConditionIP) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2340,12 +2340,12 @@ func (x *AuthorizationPolicyItemConditionIP) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemConditionIP.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemConditionIP) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleConditionIP.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleConditionIP) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{27}
 }
 
-func (x *AuthorizationPolicyItemConditionIP) GetRules() []*AuthorizationPolicyIPRule {
+func (x *AuthorizationPolicyRuleConditionIP) GetRules() []*AuthorizationPolicyIPRule {
 	if x != nil {
 		return x.Rules
 	}
@@ -2419,8 +2419,8 @@ func (x *AuthorizationPolicyIPRule) GetCidr() string {
 	return ""
 }
 
-// AuthorizationPolicyItemConditionTime represents policy-level time restrictions.
-type AuthorizationPolicyItemConditionTime struct {
+// AuthorizationPolicyRuleConditionTime represents policy-level time restrictions.
+type AuthorizationPolicyRuleConditionTime struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2429,8 +2429,8 @@ type AuthorizationPolicyItemConditionTime struct {
 	Rules []*AuthorizationPolicyTimeRule `protobuf:"bytes,1,rep,name=rules,proto3" json:"rules,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemConditionTime) Reset() {
-	*x = AuthorizationPolicyItemConditionTime{}
+func (x *AuthorizationPolicyRuleConditionTime) Reset() {
+	*x = AuthorizationPolicyRuleConditionTime{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2438,13 +2438,13 @@ func (x *AuthorizationPolicyItemConditionTime) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemConditionTime) String() string {
+func (x *AuthorizationPolicyRuleConditionTime) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemConditionTime) ProtoMessage() {}
+func (*AuthorizationPolicyRuleConditionTime) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemConditionTime) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleConditionTime) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2456,12 +2456,12 @@ func (x *AuthorizationPolicyItemConditionTime) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemConditionTime.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemConditionTime) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleConditionTime.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleConditionTime) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{29}
 }
 
-func (x *AuthorizationPolicyItemConditionTime) GetRules() []*AuthorizationPolicyTimeRule {
+func (x *AuthorizationPolicyRuleConditionTime) GetRules() []*AuthorizationPolicyTimeRule {
 	if x != nil {
 		return x.Rules
 	}
@@ -3001,8 +3001,8 @@ func (x *AuthorizationPolicyTimeRuleDaysOfMonth) GetDays() []int32 {
 	return nil
 }
 
-// AuthorizationPolicyItemConditionApprovalFlow attaches an approval flow to the policy.
-type AuthorizationPolicyItemConditionApprovalFlow struct {
+// AuthorizationPolicyRuleConditionApprovalFlow attaches an approval flow to the policy.
+type AuthorizationPolicyRuleConditionApprovalFlow struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -3011,8 +3011,8 @@ type AuthorizationPolicyItemConditionApprovalFlow struct {
 	ApprovalFlowId string `protobuf:"bytes,1,opt,name=approval_flow_id,json=approvalFlowId,proto3" json:"approval_flow_id,omitempty"`
 }
 
-func (x *AuthorizationPolicyItemConditionApprovalFlow) Reset() {
-	*x = AuthorizationPolicyItemConditionApprovalFlow{}
+func (x *AuthorizationPolicyRuleConditionApprovalFlow) Reset() {
+	*x = AuthorizationPolicyRuleConditionApprovalFlow{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_authorization_policies_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3020,13 +3020,13 @@ func (x *AuthorizationPolicyItemConditionApprovalFlow) Reset() {
 	}
 }
 
-func (x *AuthorizationPolicyItemConditionApprovalFlow) String() string {
+func (x *AuthorizationPolicyRuleConditionApprovalFlow) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AuthorizationPolicyItemConditionApprovalFlow) ProtoMessage() {}
+func (*AuthorizationPolicyRuleConditionApprovalFlow) ProtoMessage() {}
 
-func (x *AuthorizationPolicyItemConditionApprovalFlow) ProtoReflect() protoreflect.Message {
+func (x *AuthorizationPolicyRuleConditionApprovalFlow) ProtoReflect() protoreflect.Message {
 	mi := &file_authorization_policies_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3038,12 +3038,12 @@ func (x *AuthorizationPolicyItemConditionApprovalFlow) ProtoReflect() protorefle
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AuthorizationPolicyItemConditionApprovalFlow.ProtoReflect.Descriptor instead.
-func (*AuthorizationPolicyItemConditionApprovalFlow) Descriptor() ([]byte, []int) {
+// Deprecated: Use AuthorizationPolicyRuleConditionApprovalFlow.ProtoReflect.Descriptor instead.
+func (*AuthorizationPolicyRuleConditionApprovalFlow) Descriptor() ([]byte, []int) {
 	return file_authorization_policies_proto_rawDescGZIP(), []int{37}
 }
 
-func (x *AuthorizationPolicyItemConditionApprovalFlow) GetApprovalFlowId() string {
+func (x *AuthorizationPolicyRuleConditionApprovalFlow) GetApprovalFlowId() string {
 	if x != nil {
 		return x.ApprovalFlowId
 	}
@@ -3199,43 +3199,43 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0xc0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x2c, 0x0a, 0x0b, 0x64,
 	0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
 	0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x0b, 0x64, 0x65,
-	0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x3d, 0x0a, 0x05, 0x69, 0x74, 0x65,
-	0x6d, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75,
+	0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x3d, 0x0a, 0x05, 0x72, 0x75, 0x6c,
+	0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75,
 	0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63,
-	0x79, 0x49, 0x74, 0x65, 0x6d, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07,
-	0x01, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x12, 0x3e, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74,
+	0x79, 0x52, 0x75, 0x6c, 0x65, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07,
+	0x01, 0x52, 0x05, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x12, 0x3e, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74,
 	0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1c, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74,
 	0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79,
 	0x53, 0x74, 0x61, 0x74, 0x65, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07,
 	0x01, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8,
 	0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76,
 	0x61, 0x74, 0x65, 0x22, 0xab, 0x0b, 0x0a, 0x17, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x12,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x12,
 	0x4e, 0x0a, 0x0d, 0x70, 0x72, 0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x5f, 0x61, 0x6c, 0x6c,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68,
-	0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49,
-	0x74, 0x65, 0x6d, 0x50, 0x72, 0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x48,
+	0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52,
+	0x75, 0x6c, 0x65, 0x50, 0x72, 0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x48,
 	0x00, 0x52, 0x0c, 0x70, 0x72, 0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x12,
 	0x55, 0x0a, 0x10, 0x70, 0x72, 0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x5f, 0x62, 0x79, 0x5f,
 	0x69, 0x64, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x76, 0x31, 0x2e, 0x41,
 	0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69,
-	0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x50, 0x72, 0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x42,
+	0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x50, 0x72, 0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x42,
 	0x79, 0x49, 0x64, 0x73, 0x48, 0x00, 0x52, 0x0e, 0x70, 0x72, 0x69, 0x6e, 0x63, 0x69, 0x70, 0x61,
 	0x6c, 0x42, 0x79, 0x49, 0x64, 0x73, 0x12, 0x4e, 0x0a, 0x0d, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72,
 	0x63, 0x65, 0x73, 0x5f, 0x61, 0x6c, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e,
 	0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72,
+	0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72,
 	0x63, 0x65, 0x73, 0x41, 0x6c, 0x6c, 0x48, 0x00, 0x52, 0x0c, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72,
 	0x63, 0x65, 0x73, 0x41, 0x6c, 0x6c, 0x12, 0x52, 0x0a, 0x0f, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72,
 	0x63, 0x65, 0x5f, 0x62, 0x79, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x28, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f,
+	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f,
 	0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x73, 0x48, 0x00, 0x52, 0x0d, 0x72, 0x65, 0x73,
 	0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x73, 0x12, 0x6c, 0x0a, 0x19, 0x72, 0x65,
 	0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x62, 0x79, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x5f, 0x61,
 	0x6e, 0x64, 0x5f, 0x74, 0x61, 0x67, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e,
 	0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72,
+	0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72,
 	0x63, 0x65, 0x42, 0x79, 0x54, 0x79, 0x70, 0x65, 0x41, 0x6e, 0x64, 0x54, 0x61, 0x67, 0x73, 0x48,
 	0x00, 0x52, 0x15, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x54, 0x79, 0x70,
 	0x65, 0x41, 0x6e, 0x64, 0x54, 0x61, 0x67, 0x73, 0x12, 0x9e, 0x01, 0x0a, 0x2b, 0x72, 0x65, 0x73,
@@ -3243,7 +3243,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x67, 0x73, 0x5f, 0x61, 0x6e, 0x64, 0x5f, 0x6b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65,
 	0x73, 0x5f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x40,
 	0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75,
+	0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75,
 	0x72, 0x63, 0x65, 0x42, 0x79, 0x54, 0x79, 0x70, 0x65, 0x54, 0x61, 0x67, 0x73, 0x41, 0x6e, 0x64,
 	0x4b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73,
 	0x48, 0x00, 0x52, 0x25, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x54, 0x79,
@@ -3252,7 +3252,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x62, 0x79, 0x5f, 0x6f, 0x6b, 0x74, 0x61, 0x5f, 0x77, 0x69,
 	0x74, 0x68, 0x5f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x33, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f,
+	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f,
 	0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x4f, 0x6b, 0x74, 0x61, 0x57, 0x69, 0x74, 0x68, 0x47, 0x72,
 	0x6f, 0x75, 0x70, 0x73, 0x48, 0x00, 0x52, 0x18, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
 	0x42, 0x79, 0x4f, 0x6b, 0x74, 0x61, 0x57, 0x69, 0x74, 0x68, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73,
@@ -3260,69 +3260,69 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x65, 0x6e, 0x74, 0x72, 0x61, 0x5f, 0x77, 0x69, 0x74, 0x68, 0x5f, 0x67, 0x72, 0x6f, 0x75, 0x70,
 	0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x34, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74,
 	0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79,
-	0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x45, 0x6e,
+	0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x45, 0x6e,
 	0x74, 0x72, 0x61, 0x57, 0x69, 0x74, 0x68, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x48, 0x00, 0x52,
 	0x19, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x45, 0x6e, 0x74, 0x72, 0x61,
 	0x57, 0x69, 0x74, 0x68, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x12, 0x4e, 0x0a, 0x0d, 0x63, 0x6f,
 	0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x66, 0x61, 0x18, 0x09, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x27, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f,
+	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x43, 0x6f,
 	0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x46, 0x41, 0x48, 0x00, 0x52, 0x0c, 0x63, 0x6f,
 	0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x66, 0x61, 0x12, 0x67, 0x0a, 0x16, 0x63, 0x6f,
 	0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x64, 0x65, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x74,
 	0x72, 0x75, 0x73, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x76, 0x31, 0x2e,
 	0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c,
-	0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e,
+	0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e,
 	0x44, 0x65, 0x76, 0x69, 0x63, 0x65, 0x54, 0x72, 0x75, 0x73, 0x74, 0x48, 0x00, 0x52, 0x14, 0x63,
 	0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x65, 0x76, 0x69, 0x63, 0x65, 0x54, 0x72,
 	0x75, 0x73, 0x74, 0x12, 0x5d, 0x0a, 0x12, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e,
 	0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x2c, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6e, 0x64,
+	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x43, 0x6f, 0x6e, 0x64,
 	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x48, 0x00, 0x52,
 	0x11, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69,
 	0x6f, 0x6e, 0x12, 0x4b, 0x0a, 0x0c, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
 	0x69, 0x70, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75,
 	0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63,
-	0x79, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x50,
+	0x79, 0x52, 0x75, 0x6c, 0x65, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x50,
 	0x48, 0x00, 0x52, 0x0b, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x70, 0x12,
 	0x51, 0x0a, 0x0e, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x74, 0x69, 0x6d,
 	0x65, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74,
 	0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79,
-	0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x69, 0x6d,
+	0x52, 0x75, 0x6c, 0x65, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x69, 0x6d,
 	0x65, 0x48, 0x00, 0x52, 0x0d, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x69,
 	0x6d, 0x65, 0x12, 0x6a, 0x0a, 0x17, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
 	0x61, 0x70, 0x70, 0x72, 0x6f, 0x76, 0x61, 0x6c, 0x5f, 0x66, 0x6c, 0x6f, 0x77, 0x18, 0x0e, 0x20,
 	0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
-	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d,
+	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65,
 	0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x70, 0x70, 0x72, 0x6f, 0x76, 0x61,
 	0x6c, 0x46, 0x6c, 0x6f, 0x77, 0x48, 0x00, 0x52, 0x15, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69,
 	0x6f, 0x6e, 0x41, 0x70, 0x70, 0x72, 0x6f, 0x76, 0x61, 0x6c, 0x46, 0x6c, 0x6f, 0x77, 0x3a, 0x19,
 	0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67,
 	0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x42, 0x06, 0x0a, 0x04, 0x6b, 0x69, 0x6e,
 	0x64, 0x22, 0x40, 0x0a, 0x23, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x50, 0x72, 0x69, 0x6e,
+	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x50, 0x72, 0x69, 0x6e,
 	0x63, 0x69, 0x70, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8,
 	0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76,
 	0x61, 0x74, 0x65, 0x22, 0x60, 0x0a, 0x25, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x50, 0x72,
+	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x50, 0x72,
 	0x69, 0x6e, 0x63, 0x69, 0x70, 0x61, 0x6c, 0x42, 0x79, 0x49, 0x64, 0x73, 0x12, 0x1c, 0x0a, 0x03,
 	0x69, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05,
 	0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x03, 0x69, 0x64, 0x73, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07,
 	0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72,
 	0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0x40, 0x0a, 0x23, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
-	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d,
+	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65,
 	0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x41, 0x6c, 0x6c, 0x3a, 0x19, 0xfa, 0xf8,
 	0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f,
 	0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0x5f, 0x0a, 0x24, 0x41, 0x75, 0x74, 0x68, 0x6f,
-	0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74,
-	0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x73, 0x12,
+	0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75,
+	0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x49, 0x64, 0x73, 0x12,
 	0x1c, 0x0a, 0x03, 0x69, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8,
 	0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x03, 0x69, 0x64, 0x73, 0x3a, 0x19, 0xfa,
 	0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f,
 	0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0xa4, 0x01, 0x0a, 0x2c, 0x41, 0x75, 0x74,
 	0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79,
-	0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x54, 0x79,
+	0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x42, 0x79, 0x54, 0x79,
 	0x70, 0x65, 0x41, 0x6e, 0x64, 0x54, 0x61, 0x67, 0x73, 0x12, 0x30, 0x0a, 0x04, 0x74, 0x79, 0x70,
 	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x10, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x73,
 	0x6f, 0x75, 0x72, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05,
@@ -3332,7 +3332,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x74, 0x61, 0x67, 0x73, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01,
 	0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22,
 	0xed, 0x01, 0x0a, 0x3c, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75,
+	0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75,
 	0x72, 0x63, 0x65, 0x42, 0x79, 0x54, 0x79, 0x70, 0x65, 0x54, 0x61, 0x67, 0x73, 0x41, 0x6e, 0x64,
 	0x4b, 0x75, 0x62, 0x65, 0x72, 0x6e, 0x65, 0x74, 0x65, 0x73, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73,
 	0x12, 0x30, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x10,
@@ -3347,7 +3347,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x6f, 0x75, 0x70, 0x73, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01,
 	0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22,
 	0x9d, 0x01, 0x0a, 0x2f, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75,
+	0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75,
 	0x72, 0x63, 0x65, 0x42, 0x79, 0x4f, 0x6b, 0x74, 0x61, 0x57, 0x69, 0x74, 0x68, 0x47, 0x72, 0x6f,
 	0x75, 0x70, 0x73, 0x12, 0x2b, 0x0a, 0x0b, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f,
 	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0,
@@ -3357,7 +3357,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x6f, 0x75, 0x70, 0x73, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01,
 	0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22,
 	0x9e, 0x01, 0x0a, 0x30, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x6f, 0x75,
+	0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x6f, 0x75,
 	0x72, 0x63, 0x65, 0x42, 0x79, 0x45, 0x6e, 0x74, 0x72, 0x61, 0x57, 0x69, 0x74, 0x68, 0x47, 0x72,
 	0x6f, 0x75, 0x70, 0x73, 0x12, 0x2b, 0x0a, 0x0b, 0x72, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
 	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05,
@@ -3367,7 +3367,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x75, 0x70, 0x73, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07,
 	0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65,
 	0x22, 0xa4, 0x01, 0x0a, 0x23, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6e, 0x64,
+	0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x43, 0x6f, 0x6e, 0x64,
 	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x46, 0x41, 0x12, 0x22, 0x0a, 0x06, 0x72, 0x65, 0x61, 0x73,
 	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0,
 	0xf3, 0xb3, 0x07, 0x01, 0x52, 0x06, 0x72, 0x65, 0x61, 0x73, 0x6f, 0x6e, 0x12, 0x3e, 0x0a, 0x15,
@@ -3377,8 +3377,8 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x6d, 0x65, 0x6f, 0x75, 0x74, 0x53, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x73, 0x3a, 0x19, 0xfa, 0xf8,
 	0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f,
 	0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0xe7, 0x01, 0x0a, 0x2b, 0x41, 0x75, 0x74, 0x68,
-	0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49,
-	0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x65, 0x76, 0x69,
+	0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52,
+	0x75, 0x6c, 0x65, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x65, 0x76, 0x69,
 	0x63, 0x65, 0x54, 0x72, 0x75, 0x73, 0x74, 0x12, 0x52, 0x0a, 0x08, 0x6f, 0x70, 0x65, 0x72, 0x61,
 	0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x2a, 0x2e, 0x76, 0x31, 0x2e, 0x41,
 	0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69,
@@ -3392,7 +3392,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x05, 0x6c, 0x65, 0x76, 0x65, 0x6c, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3,
 	0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74,
 	0x65, 0x22, 0x8c, 0x01, 0x0a, 0x28, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6e,
+	0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65, 0x43, 0x6f, 0x6e,
 	0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x45,
 	0x0a, 0x05, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x23, 0x2e,
 	0x76, 0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
@@ -3453,8 +3453,8 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x62, 0x64, 0x69, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07,
 	0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72,
 	0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0x80, 0x01, 0x0a, 0x22, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72,
-	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65,
-	0x6d, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x50, 0x12, 0x3f, 0x0a, 0x05,
+	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c,
+	0x65, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x50, 0x12, 0x3f, 0x0a, 0x05,
 	0x72, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x76, 0x31,
 	0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f,
 	0x6c, 0x69, 0x63, 0x79, 0x49, 0x50, 0x52, 0x75, 0x6c, 0x65, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07,
@@ -3476,7 +3476,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0xb3, 0x07, 0x01, 0x52, 0x04, 0x63, 0x69, 0x64, 0x72, 0x3a, 0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14,
 	0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a, 0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69,
 	0x76, 0x61, 0x74, 0x65, 0x22, 0x84, 0x01, 0x0a, 0x24, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
-	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x49, 0x74, 0x65, 0x6d,
+	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63, 0x79, 0x52, 0x75, 0x6c, 0x65,
 	0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x41, 0x0a,
 	0x05, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x76,
 	0x31, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50,
@@ -3599,7 +3599,7 @@ var file_authorization_policies_proto_rawDesc = []byte{
 	0x19, 0xfa, 0xf8, 0xb3, 0x07, 0x14, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x0a,
 	0x67, 0x6f, 0x5f, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x22, 0x7f, 0x0a, 0x2c, 0x41, 0x75,
 	0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x6f, 0x6c, 0x69, 0x63,
-	0x79, 0x49, 0x74, 0x65, 0x6d, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x70,
+	0x79, 0x52, 0x75, 0x6c, 0x65, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x70,
 	0x70, 0x72, 0x6f, 0x76, 0x61, 0x6c, 0x46, 0x6c, 0x6f, 0x77, 0x12, 0x34, 0x0a, 0x10, 0x61, 0x70,
 	0x70, 0x72, 0x6f, 0x76, 0x61, 0x6c, 0x5f, 0x66, 0x6c, 0x6f, 0x77, 0x5f, 0x69, 0x64, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01,
@@ -3824,25 +3824,25 @@ var file_authorization_policies_proto_goTypes = []interface{}{
 	(*AuthorizationPolicyListRequest)(nil),                               // 16: v1.AuthorizationPolicyListRequest
 	(*AuthorizationPolicyListResponse)(nil),                              // 17: v1.AuthorizationPolicyListResponse
 	(*AuthorizationPolicy)(nil),                                          // 18: v1.AuthorizationPolicy
-	(*AuthorizationPolicyItem)(nil),                                      // 19: v1.AuthorizationPolicyItem
-	(*AuthorizationPolicyItemPrincipalAll)(nil),                          // 20: v1.AuthorizationPolicyItemPrincipalAll
-	(*AuthorizationPolicyItemPrincipalByIds)(nil),                        // 21: v1.AuthorizationPolicyItemPrincipalByIds
-	(*AuthorizationPolicyItemResourcesAll)(nil),                          // 22: v1.AuthorizationPolicyItemResourcesAll
-	(*AuthorizationPolicyItemResourceByIds)(nil),                         // 23: v1.AuthorizationPolicyItemResourceByIds
-	(*AuthorizationPolicyItemResourceByTypeAndTags)(nil),                 // 24: v1.AuthorizationPolicyItemResourceByTypeAndTags
-	(*AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups)(nil), // 25: v1.AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups
-	(*AuthorizationPolicyItemResourceByOktaWithGroups)(nil),              // 26: v1.AuthorizationPolicyItemResourceByOktaWithGroups
-	(*AuthorizationPolicyItemResourceByEntraWithGroups)(nil),             // 27: v1.AuthorizationPolicyItemResourceByEntraWithGroups
-	(*AuthorizationPolicyItemConditionMFA)(nil),                          // 28: v1.AuthorizationPolicyItemConditionMFA
-	(*AuthorizationPolicyItemConditionDeviceTrust)(nil),                  // 29: v1.AuthorizationPolicyItemConditionDeviceTrust
-	(*AuthorizationPolicyItemConditionLocation)(nil),                     // 30: v1.AuthorizationPolicyItemConditionLocation
+	(*AuthorizationPolicyRule)(nil),                                      // 19: v1.AuthorizationPolicyRule
+	(*AuthorizationPolicyRulePrincipalAll)(nil),                          // 20: v1.AuthorizationPolicyRulePrincipalAll
+	(*AuthorizationPolicyRulePrincipalByIds)(nil),                        // 21: v1.AuthorizationPolicyRulePrincipalByIds
+	(*AuthorizationPolicyRuleResourcesAll)(nil),                          // 22: v1.AuthorizationPolicyRuleResourcesAll
+	(*AuthorizationPolicyRuleResourceByIds)(nil),                         // 23: v1.AuthorizationPolicyRuleResourceByIds
+	(*AuthorizationPolicyRuleResourceByTypeAndTags)(nil),                 // 24: v1.AuthorizationPolicyRuleResourceByTypeAndTags
+	(*AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups)(nil), // 25: v1.AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups
+	(*AuthorizationPolicyRuleResourceByOktaWithGroups)(nil),              // 26: v1.AuthorizationPolicyRuleResourceByOktaWithGroups
+	(*AuthorizationPolicyRuleResourceByEntraWithGroups)(nil),             // 27: v1.AuthorizationPolicyRuleResourceByEntraWithGroups
+	(*AuthorizationPolicyRuleConditionMFA)(nil),                          // 28: v1.AuthorizationPolicyRuleConditionMFA
+	(*AuthorizationPolicyRuleConditionDeviceTrust)(nil),                  // 29: v1.AuthorizationPolicyRuleConditionDeviceTrust
+	(*AuthorizationPolicyRuleConditionLocation)(nil),                     // 30: v1.AuthorizationPolicyRuleConditionLocation
 	(*AuthorizationPolicyLocationRule)(nil),                              // 31: v1.AuthorizationPolicyLocationRule
 	(*AuthorizationPolicyContinentRule)(nil),                             // 32: v1.AuthorizationPolicyContinentRule
 	(*AuthorizationPolicyCountryRule)(nil),                               // 33: v1.AuthorizationPolicyCountryRule
 	(*AuthorizationPolicySubdivisionRule)(nil),                           // 34: v1.AuthorizationPolicySubdivisionRule
-	(*AuthorizationPolicyItemConditionIP)(nil),                           // 35: v1.AuthorizationPolicyItemConditionIP
+	(*AuthorizationPolicyRuleConditionIP)(nil),                           // 35: v1.AuthorizationPolicyRuleConditionIP
 	(*AuthorizationPolicyIPRule)(nil),                                    // 36: v1.AuthorizationPolicyIPRule
-	(*AuthorizationPolicyItemConditionTime)(nil),                         // 37: v1.AuthorizationPolicyItemConditionTime
+	(*AuthorizationPolicyRuleConditionTime)(nil),                         // 37: v1.AuthorizationPolicyRuleConditionTime
 	(*AuthorizationPolicyTimeRule)(nil),                                  // 38: v1.AuthorizationPolicyTimeRule
 	(*AuthorizationPolicyTimeRuleDayOfWeek)(nil),                         // 39: v1.AuthorizationPolicyTimeRuleDayOfWeek
 	(*LegacyAuthorizationPolicyTimeRuleTimeOfDay)(nil),                   // 40: v1.LegacyAuthorizationPolicyTimeRuleTimeOfDay
@@ -3850,7 +3850,7 @@ var file_authorization_policies_proto_goTypes = []interface{}{
 	(*AuthorizationPolicyTimeRuleTimeOfDay)(nil),                         // 42: v1.AuthorizationPolicyTimeRuleTimeOfDay
 	(*AuthorizationPolicyTimeRuleMonth)(nil),                             // 43: v1.AuthorizationPolicyTimeRuleMonth
 	(*AuthorizationPolicyTimeRuleDaysOfMonth)(nil),                       // 44: v1.AuthorizationPolicyTimeRuleDaysOfMonth
-	(*AuthorizationPolicyItemConditionApprovalFlow)(nil),                 // 45: v1.AuthorizationPolicyItemConditionApprovalFlow
+	(*AuthorizationPolicyRuleConditionApprovalFlow)(nil),                 // 45: v1.AuthorizationPolicyRuleConditionApprovalFlow
 	(*CreateRequestMetadata)(nil),                                        // 46: v1.CreateRequestMetadata
 	(*CreateResponseMetadata)(nil),                                       // 47: v1.CreateResponseMetadata
 	(*RateLimitMetadata)(nil),                                            // 48: v1.RateLimitMetadata
@@ -3889,29 +3889,29 @@ var file_authorization_policies_proto_depIdxs = []int32{
 	56, // 18: v1.AuthorizationPolicyListResponse.meta:type_name -> v1.ListResponseMetadata
 	18, // 19: v1.AuthorizationPolicyListResponse.authorization_policies:type_name -> v1.AuthorizationPolicy
 	48, // 20: v1.AuthorizationPolicyListResponse.rate_limit:type_name -> v1.RateLimitMetadata
-	19, // 21: v1.AuthorizationPolicy.items:type_name -> v1.AuthorizationPolicyItem
+	19, // 21: v1.AuthorizationPolicy.rules:type_name -> v1.AuthorizationPolicyRule
 	0,  // 22: v1.AuthorizationPolicy.state:type_name -> v1.AuthorizationPolicyState
-	20, // 23: v1.AuthorizationPolicyItem.principal_all:type_name -> v1.AuthorizationPolicyItemPrincipalAll
-	21, // 24: v1.AuthorizationPolicyItem.principal_by_ids:type_name -> v1.AuthorizationPolicyItemPrincipalByIds
-	22, // 25: v1.AuthorizationPolicyItem.resources_all:type_name -> v1.AuthorizationPolicyItemResourcesAll
-	23, // 26: v1.AuthorizationPolicyItem.resource_by_ids:type_name -> v1.AuthorizationPolicyItemResourceByIds
-	24, // 27: v1.AuthorizationPolicyItem.resource_by_type_and_tags:type_name -> v1.AuthorizationPolicyItemResourceByTypeAndTags
-	25, // 28: v1.AuthorizationPolicyItem.resource_by_type_tags_and_kubernetes_groups:type_name -> v1.AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups
-	26, // 29: v1.AuthorizationPolicyItem.resource_by_okta_with_groups:type_name -> v1.AuthorizationPolicyItemResourceByOktaWithGroups
-	27, // 30: v1.AuthorizationPolicyItem.resource_by_entra_with_groups:type_name -> v1.AuthorizationPolicyItemResourceByEntraWithGroups
-	28, // 31: v1.AuthorizationPolicyItem.condition_mfa:type_name -> v1.AuthorizationPolicyItemConditionMFA
-	29, // 32: v1.AuthorizationPolicyItem.condition_device_trust:type_name -> v1.AuthorizationPolicyItemConditionDeviceTrust
-	30, // 33: v1.AuthorizationPolicyItem.condition_location:type_name -> v1.AuthorizationPolicyItemConditionLocation
-	35, // 34: v1.AuthorizationPolicyItem.condition_ip:type_name -> v1.AuthorizationPolicyItemConditionIP
-	37, // 35: v1.AuthorizationPolicyItem.condition_time:type_name -> v1.AuthorizationPolicyItemConditionTime
-	45, // 36: v1.AuthorizationPolicyItem.condition_approval_flow:type_name -> v1.AuthorizationPolicyItemConditionApprovalFlow
-	57, // 37: v1.AuthorizationPolicyItemResourceByTypeAndTags.type:type_name -> v1.ResourceType
-	58, // 38: v1.AuthorizationPolicyItemResourceByTypeAndTags.tags:type_name -> v1.Tag
-	57, // 39: v1.AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups.type:type_name -> v1.ResourceType
-	58, // 40: v1.AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups.tags:type_name -> v1.Tag
-	1,  // 41: v1.AuthorizationPolicyItemConditionDeviceTrust.operator:type_name -> v1.AuthorizationPolicyDeviceTrustOperator
-	2,  // 42: v1.AuthorizationPolicyItemConditionDeviceTrust.level:type_name -> v1.AuthorizationPolicyDeviceTrustLevel
-	31, // 43: v1.AuthorizationPolicyItemConditionLocation.rules:type_name -> v1.AuthorizationPolicyLocationRule
+	20, // 23: v1.AuthorizationPolicyRule.principal_all:type_name -> v1.AuthorizationPolicyRulePrincipalAll
+	21, // 24: v1.AuthorizationPolicyRule.principal_by_ids:type_name -> v1.AuthorizationPolicyRulePrincipalByIds
+	22, // 25: v1.AuthorizationPolicyRule.resources_all:type_name -> v1.AuthorizationPolicyRuleResourcesAll
+	23, // 26: v1.AuthorizationPolicyRule.resource_by_ids:type_name -> v1.AuthorizationPolicyRuleResourceByIds
+	24, // 27: v1.AuthorizationPolicyRule.resource_by_type_and_tags:type_name -> v1.AuthorizationPolicyRuleResourceByTypeAndTags
+	25, // 28: v1.AuthorizationPolicyRule.resource_by_type_tags_and_kubernetes_groups:type_name -> v1.AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups
+	26, // 29: v1.AuthorizationPolicyRule.resource_by_okta_with_groups:type_name -> v1.AuthorizationPolicyRuleResourceByOktaWithGroups
+	27, // 30: v1.AuthorizationPolicyRule.resource_by_entra_with_groups:type_name -> v1.AuthorizationPolicyRuleResourceByEntraWithGroups
+	28, // 31: v1.AuthorizationPolicyRule.condition_mfa:type_name -> v1.AuthorizationPolicyRuleConditionMFA
+	29, // 32: v1.AuthorizationPolicyRule.condition_device_trust:type_name -> v1.AuthorizationPolicyRuleConditionDeviceTrust
+	30, // 33: v1.AuthorizationPolicyRule.condition_location:type_name -> v1.AuthorizationPolicyRuleConditionLocation
+	35, // 34: v1.AuthorizationPolicyRule.condition_ip:type_name -> v1.AuthorizationPolicyRuleConditionIP
+	37, // 35: v1.AuthorizationPolicyRule.condition_time:type_name -> v1.AuthorizationPolicyRuleConditionTime
+	45, // 36: v1.AuthorizationPolicyRule.condition_approval_flow:type_name -> v1.AuthorizationPolicyRuleConditionApprovalFlow
+	57, // 37: v1.AuthorizationPolicyRuleResourceByTypeAndTags.type:type_name -> v1.ResourceType
+	58, // 38: v1.AuthorizationPolicyRuleResourceByTypeAndTags.tags:type_name -> v1.Tag
+	57, // 39: v1.AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups.type:type_name -> v1.ResourceType
+	58, // 40: v1.AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups.tags:type_name -> v1.Tag
+	1,  // 41: v1.AuthorizationPolicyRuleConditionDeviceTrust.operator:type_name -> v1.AuthorizationPolicyDeviceTrustOperator
+	2,  // 42: v1.AuthorizationPolicyRuleConditionDeviceTrust.level:type_name -> v1.AuthorizationPolicyDeviceTrustLevel
+	31, // 43: v1.AuthorizationPolicyRuleConditionLocation.rules:type_name -> v1.AuthorizationPolicyLocationRule
 	32, // 44: v1.AuthorizationPolicyLocationRule.continent:type_name -> v1.AuthorizationPolicyContinentRule
 	33, // 45: v1.AuthorizationPolicyLocationRule.country:type_name -> v1.AuthorizationPolicyCountryRule
 	34, // 46: v1.AuthorizationPolicyLocationRule.subdivision:type_name -> v1.AuthorizationPolicySubdivisionRule
@@ -3920,10 +3920,10 @@ var file_authorization_policies_proto_depIdxs = []int32{
 	3,  // 49: v1.AuthorizationPolicyCountryRule.operator:type_name -> v1.LocationOperator
 	60, // 50: v1.AuthorizationPolicyCountryRule.countries:type_name -> v1.LocationCountry
 	3,  // 51: v1.AuthorizationPolicySubdivisionRule.operator:type_name -> v1.LocationOperator
-	36, // 52: v1.AuthorizationPolicyItemConditionIP.rules:type_name -> v1.AuthorizationPolicyIPRule
+	36, // 52: v1.AuthorizationPolicyRuleConditionIP.rules:type_name -> v1.AuthorizationPolicyIPRule
 	4,  // 53: v1.AuthorizationPolicyIPRule.operator:type_name -> v1.AuthorizationPolicyIPOperator
 	5,  // 54: v1.AuthorizationPolicyIPRule.network:type_name -> v1.AuthorizationPolicyIPNetwork
-	38, // 55: v1.AuthorizationPolicyItemConditionTime.rules:type_name -> v1.AuthorizationPolicyTimeRule
+	38, // 55: v1.AuthorizationPolicyRuleConditionTime.rules:type_name -> v1.AuthorizationPolicyTimeRule
 	39, // 56: v1.AuthorizationPolicyTimeRule.day_of_week:type_name -> v1.AuthorizationPolicyTimeRuleDayOfWeek
 	40, // 57: v1.AuthorizationPolicyTimeRule.time_of_day:type_name -> v1.LegacyAuthorizationPolicyTimeRuleTimeOfDay
 	43, // 58: v1.AuthorizationPolicyTimeRule.month:type_name -> v1.AuthorizationPolicyTimeRuleMonth
@@ -4094,7 +4094,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItem); i {
+			switch v := v.(*AuthorizationPolicyRule); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4106,7 +4106,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemPrincipalAll); i {
+			switch v := v.(*AuthorizationPolicyRulePrincipalAll); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4118,7 +4118,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemPrincipalByIds); i {
+			switch v := v.(*AuthorizationPolicyRulePrincipalByIds); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4130,7 +4130,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemResourcesAll); i {
+			switch v := v.(*AuthorizationPolicyRuleResourcesAll); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4142,7 +4142,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemResourceByIds); i {
+			switch v := v.(*AuthorizationPolicyRuleResourceByIds); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4154,7 +4154,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemResourceByTypeAndTags); i {
+			switch v := v.(*AuthorizationPolicyRuleResourceByTypeAndTags); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4166,7 +4166,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemResourceByTypeTagsAndKubernetesGroups); i {
+			switch v := v.(*AuthorizationPolicyRuleResourceByTypeTagsAndKubernetesGroups); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4178,7 +4178,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemResourceByOktaWithGroups); i {
+			switch v := v.(*AuthorizationPolicyRuleResourceByOktaWithGroups); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4190,7 +4190,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemResourceByEntraWithGroups); i {
+			switch v := v.(*AuthorizationPolicyRuleResourceByEntraWithGroups); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4202,7 +4202,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemConditionMFA); i {
+			switch v := v.(*AuthorizationPolicyRuleConditionMFA); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4214,7 +4214,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemConditionDeviceTrust); i {
+			switch v := v.(*AuthorizationPolicyRuleConditionDeviceTrust); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4226,7 +4226,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemConditionLocation); i {
+			switch v := v.(*AuthorizationPolicyRuleConditionLocation); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4286,7 +4286,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemConditionIP); i {
+			switch v := v.(*AuthorizationPolicyRuleConditionIP); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4310,7 +4310,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemConditionTime); i {
+			switch v := v.(*AuthorizationPolicyRuleConditionTime); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4406,7 +4406,7 @@ func file_authorization_policies_proto_init() {
 			}
 		}
 		file_authorization_policies_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AuthorizationPolicyItemConditionApprovalFlow); i {
+			switch v := v.(*AuthorizationPolicyRuleConditionApprovalFlow); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4419,20 +4419,20 @@ func file_authorization_policies_proto_init() {
 		}
 	}
 	file_authorization_policies_proto_msgTypes[11].OneofWrappers = []interface{}{
-		(*AuthorizationPolicyItem_PrincipalAll)(nil),
-		(*AuthorizationPolicyItem_PrincipalByIds)(nil),
-		(*AuthorizationPolicyItem_ResourcesAll)(nil),
-		(*AuthorizationPolicyItem_ResourceByIds)(nil),
-		(*AuthorizationPolicyItem_ResourceByTypeAndTags)(nil),
-		(*AuthorizationPolicyItem_ResourceByTypeTagsAndKubernetesGroups)(nil),
-		(*AuthorizationPolicyItem_ResourceByOktaWithGroups)(nil),
-		(*AuthorizationPolicyItem_ResourceByEntraWithGroups)(nil),
-		(*AuthorizationPolicyItem_ConditionMfa)(nil),
-		(*AuthorizationPolicyItem_ConditionDeviceTrust)(nil),
-		(*AuthorizationPolicyItem_ConditionLocation)(nil),
-		(*AuthorizationPolicyItem_ConditionIp)(nil),
-		(*AuthorizationPolicyItem_ConditionTime)(nil),
-		(*AuthorizationPolicyItem_ConditionApprovalFlow)(nil),
+		(*AuthorizationPolicyRule_PrincipalAll)(nil),
+		(*AuthorizationPolicyRule_PrincipalByIds)(nil),
+		(*AuthorizationPolicyRule_ResourcesAll)(nil),
+		(*AuthorizationPolicyRule_ResourceByIds)(nil),
+		(*AuthorizationPolicyRule_ResourceByTypeAndTags)(nil),
+		(*AuthorizationPolicyRule_ResourceByTypeTagsAndKubernetesGroups)(nil),
+		(*AuthorizationPolicyRule_ResourceByOktaWithGroups)(nil),
+		(*AuthorizationPolicyRule_ResourceByEntraWithGroups)(nil),
+		(*AuthorizationPolicyRule_ConditionMfa)(nil),
+		(*AuthorizationPolicyRule_ConditionDeviceTrust)(nil),
+		(*AuthorizationPolicyRule_ConditionLocation)(nil),
+		(*AuthorizationPolicyRule_ConditionIp)(nil),
+		(*AuthorizationPolicyRule_ConditionTime)(nil),
+		(*AuthorizationPolicyRule_ConditionApprovalFlow)(nil),
 	}
 	file_authorization_policies_proto_msgTypes[23].OneofWrappers = []interface{}{
 		(*AuthorizationPolicyLocationRule_Continent)(nil),
