@@ -1130,17 +1130,16 @@ The following arguments are supported by the Resource resource:
 * mcp_gateway_no_auth:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 * mcp_gateway_o_auth:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `oauth_auth_endpoint` - (Required) The OAuth 2.0 authorization endpoint URL.
 	* `oauth_scopes` - (Optional) Space-separated list of OAuth scopes to request.
@@ -1151,11 +1150,11 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 	* `username` - (Required) OAuth App Client ID
 * mcp_gateway_o_auth_dcr:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `oauth_auth_endpoint` - (Required) The OAuth 2.0 authorization endpoint URL.
 	* `oauth_register_endpoint` - (Required) The OAuth 2.0 dynamic client registration endpoint URL.
@@ -1166,10 +1165,10 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 * mcp_gateway_pat:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
-	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
 	* `name` - (Required) Unique human-readable name of the Resource.
 	* `password` - (Required, either in plaintext, or as a secret store path) The password to authenticate with.
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
@@ -1177,6 +1176,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 * memcached:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
@@ -1670,6 +1670,8 @@ The following arguments are supported by the Resource resource:
 	* `database` - (Optional) The database for healthchecks, and used for clients if Override Default Database is true.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `hostname` - (Required) The host to dial to initiate a connection from the egress node to this resource.
+	* `identity_alias_healthcheck_username` - (Optional) The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	* `identity_set_id` - (Optional) The ID of the identity set to use for identity connections.
 	* `keytab` - (Required, either in plaintext, or as a secret store path) The keytab file in base64 format containing an entry with the principal name (username@realm) and key version number with which to authenticate.
 	* `krb_config` - (Required, either in plaintext, or as a secret store path) The Kerberos 5 configuration file (krb5.conf) specifying the Active Directory server (KDC) for the configured realm.
 	* `name` - (Required) Unique human-readable name of the Resource.
@@ -1822,6 +1824,14 @@ The following arguments are supported by the Resource resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
+* mcp_gateway_no_auth:
+	* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
+* mcp_gateway_o_auth:
+	* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
+* mcp_gateway_o_auth_dcr:
+	* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
+* mcp_gateway_pat:
+	* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 * snowflake:
 	* `password` - Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/
 * ssh:

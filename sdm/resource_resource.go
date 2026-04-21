@@ -7086,7 +7086,7 @@ func resourceResource() *schema.Resource {
 						"hostname": {
 							Type: schema.TypeString,
 
-							Required:    true,
+							Computed:    true,
 							Description: "The host to dial to initiate a connection from the egress node to this resource.",
 						},
 						"name": {
@@ -7128,6 +7128,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"url": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The URL to dial to initiate a connection from the egress node to this resource.",
+						},
 					},
 				},
 			},
@@ -7154,7 +7160,7 @@ func resourceResource() *schema.Resource {
 						"hostname": {
 							Type: schema.TypeString,
 
-							Required:    true,
+							Computed:    true,
 							Description: "The host to dial to initiate a connection from the egress node to this resource.",
 						},
 						"name": {
@@ -7221,6 +7227,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"url": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The URL to dial to initiate a connection from the egress node to this resource.",
+						},
 						"username": {
 							Type: schema.TypeString,
 
@@ -7253,7 +7265,7 @@ func resourceResource() *schema.Resource {
 						"hostname": {
 							Type: schema.TypeString,
 
-							Required:    true,
+							Computed:    true,
 							Description: "The host to dial to initiate a connection from the egress node to this resource.",
 						},
 						"name": {
@@ -7319,6 +7331,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"url": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The URL to dial to initiate a connection from the egress node to this resource.",
+						},
 					},
 				},
 			},
@@ -7345,7 +7363,7 @@ func resourceResource() *schema.Resource {
 						"hostname": {
 							Type: schema.TypeString,
 
-							Required:    true,
+							Computed:    true,
 							Description: "The host to dial to initiate a connection from the egress node to this resource.",
 						},
 						"name": {
@@ -7393,6 +7411,12 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"url": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The URL to dial to initiate a connection from the egress node to this resource.",
 						},
 					},
 				},
@@ -10647,6 +10671,18 @@ func resourceResource() *schema.Resource {
 
 							Required:    true,
 							Description: "The host to dial to initiate a connection from the egress node to this resource.",
+						},
+						"identity_alias_healthcheck_username": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+						},
+						"identity_set_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The ID of the identity set to use for identity connections.",
 						},
 						"keytab": {
 							Type: schema.TypeString,
@@ -16648,13 +16684,13 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ID:             d.Id(),
 			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:       convertStringToPlumbing(raw["hostname"]),
 			Name:           convertStringToPlumbing(raw["name"]),
 			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
+			Url:            convertStringToPlumbing(raw["url"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -16672,7 +16708,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ID:                 d.Id(),
 			BindInterface:      convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:       convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:           convertStringToPlumbing(raw["hostname"]),
 			Name:               convertStringToPlumbing(raw["name"]),
 			OauthAuthEndpoint:  convertStringToPlumbing(raw["oauth_auth_endpoint"]),
 			OauthScopes:        convertStringToPlumbing(raw["oauth_scopes"]),
@@ -16683,6 +16718,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:      convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:          convertStringToPlumbing(raw["subdomain"]),
 			Tags:               convertTagsToPlumbing(raw["tags"]),
+			Url:                convertStringToPlumbing(raw["url"]),
 			Username:           convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
@@ -16701,7 +16737,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ID:                    d.Id(),
 			BindInterface:         convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:          convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:              convertStringToPlumbing(raw["hostname"]),
 			Name:                  convertStringToPlumbing(raw["name"]),
 			OauthAuthEndpoint:     convertStringToPlumbing(raw["oauth_auth_endpoint"]),
 			OauthRegisterEndpoint: convertStringToPlumbing(raw["oauth_register_endpoint"]),
@@ -16712,6 +16747,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:         convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:             convertStringToPlumbing(raw["subdomain"]),
 			Tags:                  convertTagsToPlumbing(raw["tags"]),
+			Url:                   convertStringToPlumbing(raw["url"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -16729,7 +16765,6 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ID:             d.Id(),
 			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
 			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:       convertStringToPlumbing(raw["hostname"]),
 			Name:           convertStringToPlumbing(raw["name"]),
 			Password:       convertStringToPlumbing(raw["password"]),
 			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
@@ -16737,6 +16772,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
+			Url:            convertStringToPlumbing(raw["url"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -17681,26 +17717,28 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			return &sdm.SQLServerKerberosAD{}
 		}
 		out := &sdm.SQLServerKerberosAD{
-			ID:                        d.Id(),
-			AllowDeprecatedEncryption: convertBoolToPlumbing(raw["allow_deprecated_encryption"]),
-			BindInterface:             convertStringToPlumbing(raw["bind_interface"]),
-			Database:                  convertStringToPlumbing(raw["database"]),
-			EgressFilter:              convertStringToPlumbing(raw["egress_filter"]),
-			Hostname:                  convertStringToPlumbing(raw["hostname"]),
-			Keytab:                    convertStringToPlumbing(raw["keytab"]),
-			KrbConfig:                 convertStringToPlumbing(raw["krb_config"]),
-			Name:                      convertStringToPlumbing(raw["name"]),
-			OverrideDatabase:          convertBoolToPlumbing(raw["override_database"]),
-			Port:                      convertInt32ToPlumbing(raw["port"]),
-			PortOverride:              convertInt32ToPlumbing(raw["port_override"]),
-			ProxyClusterID:            convertStringToPlumbing(raw["proxy_cluster_id"]),
-			Realm:                     convertStringToPlumbing(raw["realm"]),
-			Schema:                    convertStringToPlumbing(raw["schema"]),
-			SecretStoreID:             convertStringToPlumbing(raw["secret_store_id"]),
-			ServerSpn:                 convertStringToPlumbing(raw["server_spn"]),
-			Subdomain:                 convertStringToPlumbing(raw["subdomain"]),
-			Tags:                      convertTagsToPlumbing(raw["tags"]),
-			Username:                  convertStringToPlumbing(raw["username"]),
+			ID:                               d.Id(),
+			AllowDeprecatedEncryption:        convertBoolToPlumbing(raw["allow_deprecated_encryption"]),
+			BindInterface:                    convertStringToPlumbing(raw["bind_interface"]),
+			Database:                         convertStringToPlumbing(raw["database"]),
+			EgressFilter:                     convertStringToPlumbing(raw["egress_filter"]),
+			Hostname:                         convertStringToPlumbing(raw["hostname"]),
+			IdentityAliasHealthcheckUsername: convertStringToPlumbing(raw["identity_alias_healthcheck_username"]),
+			IdentitySetID:                    convertStringToPlumbing(raw["identity_set_id"]),
+			Keytab:                           convertStringToPlumbing(raw["keytab"]),
+			KrbConfig:                        convertStringToPlumbing(raw["krb_config"]),
+			Name:                             convertStringToPlumbing(raw["name"]),
+			OverrideDatabase:                 convertBoolToPlumbing(raw["override_database"]),
+			Port:                             convertInt32ToPlumbing(raw["port"]),
+			PortOverride:                     convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID:                   convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Realm:                            convertStringToPlumbing(raw["realm"]),
+			Schema:                           convertStringToPlumbing(raw["schema"]),
+			SecretStoreID:                    convertStringToPlumbing(raw["secret_store_id"]),
+			ServerSpn:                        convertStringToPlumbing(raw["server_spn"]),
+			Subdomain:                        convertStringToPlumbing(raw["subdomain"]),
+			Tags:                             convertTagsToPlumbing(raw["tags"]),
+			Username:                         convertStringToPlumbing(raw["username"]),
 		}
 		override, ok := raw["port_override"].(int)
 		if !ok || override == 0 {
@@ -19493,6 +19531,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
 			},
 		})
 	case *sdm.MCPGatewayOAuth:
@@ -19513,6 +19552,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":      (v.SecretStoreID),
 				"subdomain":            (v.Subdomain),
 				"tags":                 convertTagsToPorcelain(v.Tags),
+				"url":                  (v.Url),
 				"username":             (v.Username),
 			},
 		})
@@ -19534,6 +19574,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":         (v.SecretStoreID),
 				"subdomain":               (v.Subdomain),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+				"url":                     (v.Url),
 			},
 		})
 	case *sdm.MCPGatewayPAT:
@@ -19551,6 +19592,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
 			},
 		})
 	case *sdm.Memcached:
@@ -20238,25 +20280,27 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 		_ = localV
 		d.Set("sql_server_kerberos_ad", []map[string]interface{}{
 			{
-				"allow_deprecated_encryption": (v.AllowDeprecatedEncryption),
-				"bind_interface":              (v.BindInterface),
-				"database":                    (v.Database),
-				"egress_filter":               (v.EgressFilter),
-				"hostname":                    (v.Hostname),
-				"keytab":                      seValues["keytab"],
-				"krb_config":                  seValues["krb_config"],
-				"name":                        (v.Name),
-				"override_database":           (v.OverrideDatabase),
-				"port":                        (v.Port),
-				"port_override":               (v.PortOverride),
-				"proxy_cluster_id":            (v.ProxyClusterID),
-				"realm":                       seValues["realm"],
-				"schema":                      (v.Schema),
-				"secret_store_id":             (v.SecretStoreID),
-				"server_spn":                  (v.ServerSpn),
-				"subdomain":                   (v.Subdomain),
-				"tags":                        convertTagsToPorcelain(v.Tags),
-				"username":                    seValues["username"],
+				"allow_deprecated_encryption":         (v.AllowDeprecatedEncryption),
+				"bind_interface":                      (v.BindInterface),
+				"database":                            (v.Database),
+				"egress_filter":                       (v.EgressFilter),
+				"hostname":                            (v.Hostname),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"keytab":                              seValues["keytab"],
+				"krb_config":                          seValues["krb_config"],
+				"name":                                (v.Name),
+				"override_database":                   (v.OverrideDatabase),
+				"port":                                (v.Port),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"realm":                               seValues["realm"],
+				"schema":                              (v.Schema),
+				"secret_store_id":                     (v.SecretStoreID),
+				"server_spn":                          (v.ServerSpn),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"username":                            seValues["username"],
 			},
 		})
 	case *sdm.SSH:
@@ -22616,6 +22660,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
 			},
 		})
 	case *sdm.MCPGatewayOAuth:
@@ -22642,6 +22687,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":      (v.SecretStoreID),
 				"subdomain":            (v.Subdomain),
 				"tags":                 convertTagsToPorcelain(v.Tags),
+				"url":                  (v.Url),
 				"username":             (v.Username),
 			},
 		})
@@ -22666,6 +22712,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":         (v.SecretStoreID),
 				"subdomain":               (v.Subdomain),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+				"url":                     (v.Url),
 			},
 		})
 	case *sdm.MCPGatewayPAT:
@@ -22689,6 +22736,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
 			},
 		})
 	case *sdm.Memcached:
@@ -23664,25 +23712,27 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		}
 		d.Set("sql_server_kerberos_ad", []map[string]interface{}{
 			{
-				"allow_deprecated_encryption": (v.AllowDeprecatedEncryption),
-				"bind_interface":              (v.BindInterface),
-				"database":                    (v.Database),
-				"egress_filter":               (v.EgressFilter),
-				"hostname":                    (v.Hostname),
-				"keytab":                      seValues["keytab"],
-				"krb_config":                  seValues["krb_config"],
-				"name":                        (v.Name),
-				"override_database":           (v.OverrideDatabase),
-				"port":                        (v.Port),
-				"port_override":               (v.PortOverride),
-				"proxy_cluster_id":            (v.ProxyClusterID),
-				"realm":                       seValues["realm"],
-				"schema":                      (v.Schema),
-				"secret_store_id":             (v.SecretStoreID),
-				"server_spn":                  (v.ServerSpn),
-				"subdomain":                   (v.Subdomain),
-				"tags":                        convertTagsToPorcelain(v.Tags),
-				"username":                    seValues["username"],
+				"allow_deprecated_encryption":         (v.AllowDeprecatedEncryption),
+				"bind_interface":                      (v.BindInterface),
+				"database":                            (v.Database),
+				"egress_filter":                       (v.EgressFilter),
+				"hostname":                            (v.Hostname),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"keytab":                              seValues["keytab"],
+				"krb_config":                          seValues["krb_config"],
+				"name":                                (v.Name),
+				"override_database":                   (v.OverrideDatabase),
+				"port":                                (v.Port),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"realm":                               seValues["realm"],
+				"schema":                              (v.Schema),
+				"secret_store_id":                     (v.SecretStoreID),
+				"server_spn":                          (v.ServerSpn),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"username":                            seValues["username"],
 			},
 		})
 	case *sdm.SSH:

@@ -408,7 +408,10 @@ const (
 	PermissionManagedSecretDelete          = "managedsecret:delete"
 	PermissionManagedSecretList            = "managedsecret:list"
 	PermissionManagedSecretRead            = "managedsecret:read"
+	PermissionManagedSecretRetrieve        = "managedsecret:retrieve"
+	PermissionManagedSecretRotate          = "managedsecret:rotate"
 	PermissionManagedSecretUpdate          = "managedsecret:update"
+	PermissionManagedSecretValidate        = "managedsecret:validate"
 	PermissionOrgAuditAccessRequests       = "audit:accessrequests"
 	PermissionOrgAuditAccountGrants        = "audit:accountgrants"
 	PermissionOrgAuditActivities           = "audit:activities"
@@ -1054,7 +1057,10 @@ var AllPermission = []string{
 	PermissionManagedSecretDelete,
 	PermissionManagedSecretList,
 	PermissionManagedSecretRead,
+	PermissionManagedSecretRetrieve,
+	PermissionManagedSecretRotate,
 	PermissionManagedSecretUpdate,
+	PermissionManagedSecretValidate,
 	PermissionOrgAuditAccessRequests,
 	PermissionOrgAuditAccountGrants,
 	PermissionOrgAuditActivities,

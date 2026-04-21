@@ -13280,6 +13280,7 @@ func convertMCPGatewayNoAuthToPorcelain(plumbing *proto.MCPGatewayNoAuth) (*MCPG
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.Url = plumbing.Url
 	return porcelain, nil
 }
 
@@ -13299,6 +13300,7 @@ func convertMCPGatewayNoAuthToPlumbing(porcelain *MCPGatewayNoAuth) *proto.MCPGa
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
 	return plumbing
 }
 func convertRepeatedMCPGatewayNoAuthToPlumbing(
@@ -13349,6 +13351,7 @@ func convertMCPGatewayOAuthToPorcelain(plumbing *proto.MCPGatewayOAuth) (*MCPGat
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.Url = plumbing.Url
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
 }
@@ -13373,6 +13376,7 @@ func convertMCPGatewayOAuthToPlumbing(porcelain *MCPGatewayOAuth) *proto.MCPGate
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
 }
@@ -13424,6 +13428,7 @@ func convertMCPGatewayOAuthDCRToPorcelain(plumbing *proto.MCPGatewayOAuthDCR) (*
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.Url = plumbing.Url
 	return porcelain, nil
 }
 
@@ -13447,6 +13452,7 @@ func convertMCPGatewayOAuthDCRToPlumbing(porcelain *MCPGatewayOAuthDCR) *proto.M
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
 	return plumbing
 }
 func convertRepeatedMCPGatewayOAuthDCRToPlumbing(
@@ -13494,6 +13500,7 @@ func convertMCPGatewayPATToPorcelain(plumbing *proto.MCPGatewayPAT) (*MCPGateway
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.Url = plumbing.Url
 	return porcelain, nil
 }
 
@@ -13514,6 +13521,7 @@ func convertMCPGatewayPATToPlumbing(porcelain *MCPGatewayPAT) *proto.MCPGatewayP
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
 	return plumbing
 }
 func convertRepeatedMCPGatewayPATToPlumbing(
@@ -21795,6 +21803,8 @@ func convertSQLServerKerberosADToPorcelain(plumbing *proto.SQLServerKerberosAD) 
 	porcelain.Healthy = plumbing.Healthy
 	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
+	porcelain.IdentityAliasHealthcheckUsername = plumbing.IdentityAliasHealthcheckUsername
+	porcelain.IdentitySetID = plumbing.IdentitySetId
 	porcelain.Keytab = plumbing.Keytab
 	porcelain.KrbConfig = plumbing.KrbConfig
 	porcelain.Name = plumbing.Name
@@ -21828,6 +21838,8 @@ func convertSQLServerKerberosADToPlumbing(porcelain *SQLServerKerberosAD) *proto
 	plumbing.Healthy = (porcelain.Healthy)
 	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
+	plumbing.IdentityAliasHealthcheckUsername = (porcelain.IdentityAliasHealthcheckUsername)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
 	plumbing.Keytab = (porcelain.Keytab)
 	plumbing.KrbConfig = (porcelain.KrbConfig)
 	plumbing.Name = (porcelain.Name)

@@ -4949,6 +4949,8 @@ type MCPGatewayNoAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// The URL to dial to initiate a connection from the egress node to this resource.
+	Url string `json:"url"`
 }
 
 type MCPGatewayOAuth struct {
@@ -4982,6 +4984,8 @@ type MCPGatewayOAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// The URL to dial to initiate a connection from the egress node to this resource.
+	Url string `json:"url"`
 	// OAuth App Client ID
 	Username string `json:"username"`
 }
@@ -5019,6 +5023,8 @@ type MCPGatewayOAuthDCR struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// The URL to dial to initiate a connection from the egress node to this resource.
+	Url string `json:"url"`
 }
 
 type MCPGatewayPAT struct {
@@ -5046,6 +5052,8 @@ type MCPGatewayPAT struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// The URL to dial to initiate a connection from the egress node to this resource.
+	Url string `json:"url"`
 }
 
 type MTLSMysql struct {
@@ -13841,6 +13849,10 @@ type SQLServerKerberosAD struct {
 	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
+	// The username to use for healthchecks, when clients otherwise connect with their own identity alias username.
+	IdentityAliasHealthcheckUsername string `json:"identityAliasHealthcheckUsername"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
 	// The keytab file in base64 format containing an entry with the principal name (username@realm) and key version number with which to authenticate.
 	Keytab string `json:"keytab"`
 	// The Kerberos 5 configuration file (krb5.conf) specifying the Active Directory server (KDC) for the configured realm.

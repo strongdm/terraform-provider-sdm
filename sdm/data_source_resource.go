@@ -7257,7 +7257,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type: schema.TypeString,
 
-										Optional:    true,
+										Computed:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
@@ -7303,6 +7303,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"url": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The URL to dial to initiate a connection from the egress node to this resource.",
+									},
 								},
 							},
 						},
@@ -7327,7 +7333,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type: schema.TypeString,
 
-										Optional:    true,
+										Computed:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
@@ -7398,6 +7404,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"url": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The URL to dial to initiate a connection from the egress node to this resource.",
+									},
 									"username": {
 										Type: schema.TypeString,
 
@@ -7428,7 +7440,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type: schema.TypeString,
 
-										Optional:    true,
+										Computed:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
@@ -7498,6 +7510,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"url": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The URL to dial to initiate a connection from the egress node to this resource.",
+									},
 								},
 							},
 						},
@@ -7522,7 +7540,7 @@ func dataSourceResource() *schema.Resource {
 									"hostname": {
 										Type: schema.TypeString,
 
-										Optional:    true,
+										Computed:    true,
 										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
@@ -7574,6 +7592,12 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"url": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The URL to dial to initiate a connection from the egress node to this resource.",
 									},
 								},
 							},
@@ -10898,6 +10922,18 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Unique identifier of the Resource.",
 									},
+									"identity_alias_healthcheck_username": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The username to use for healthchecks, when clients otherwise connect with their own identity alias username.",
+									},
+									"identity_set_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
+									},
 									"keytab": {
 										Type: schema.TypeString,
 
@@ -13258,6 +13294,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
 			})
 		case *sdm.MCPGatewayOAuth:
 			output[0]["mcp_gateway_o_auth"] = append(output[0]["mcp_gateway_o_auth"], entity{
@@ -13275,6 +13312,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":      (v.SecretStoreID),
 				"subdomain":            (v.Subdomain),
 				"tags":                 convertTagsToPorcelain(v.Tags),
+				"url":                  (v.Url),
 				"username":             (v.Username),
 			})
 		case *sdm.MCPGatewayOAuthDCR:
@@ -13293,6 +13331,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":         (v.SecretStoreID),
 				"subdomain":               (v.Subdomain),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+				"url":                     (v.Url),
 			})
 		case *sdm.MCPGatewayPAT:
 			output[0]["mcp_gateway_pat"] = append(output[0]["mcp_gateway_pat"], entity{
@@ -13307,6 +13346,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
 			})
 		case *sdm.Memcached:
 			output[0]["memcached"] = append(output[0]["memcached"], entity{
@@ -13894,26 +13934,28 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			})
 		case *sdm.SQLServerKerberosAD:
 			output[0]["sql_server_kerberos_ad"] = append(output[0]["sql_server_kerberos_ad"], entity{
-				"allow_deprecated_encryption": (v.AllowDeprecatedEncryption),
-				"bind_interface":              (v.BindInterface),
-				"database":                    (v.Database),
-				"egress_filter":               (v.EgressFilter),
-				"hostname":                    (v.Hostname),
-				"id":                          (v.ID),
-				"keytab":                      (v.Keytab),
-				"krb_config":                  (v.KrbConfig),
-				"name":                        (v.Name),
-				"override_database":           (v.OverrideDatabase),
-				"port":                        (v.Port),
-				"port_override":               (v.PortOverride),
-				"proxy_cluster_id":            (v.ProxyClusterID),
-				"realm":                       (v.Realm),
-				"schema":                      (v.Schema),
-				"secret_store_id":             (v.SecretStoreID),
-				"server_spn":                  (v.ServerSpn),
-				"subdomain":                   (v.Subdomain),
-				"tags":                        convertTagsToPorcelain(v.Tags),
-				"username":                    (v.Username),
+				"allow_deprecated_encryption":         (v.AllowDeprecatedEncryption),
+				"bind_interface":                      (v.BindInterface),
+				"database":                            (v.Database),
+				"egress_filter":                       (v.EgressFilter),
+				"hostname":                            (v.Hostname),
+				"id":                                  (v.ID),
+				"identity_alias_healthcheck_username": (v.IdentityAliasHealthcheckUsername),
+				"identity_set_id":                     (v.IdentitySetID),
+				"keytab":                              (v.Keytab),
+				"krb_config":                          (v.KrbConfig),
+				"name":                                (v.Name),
+				"override_database":                   (v.OverrideDatabase),
+				"port":                                (v.Port),
+				"port_override":                       (v.PortOverride),
+				"proxy_cluster_id":                    (v.ProxyClusterID),
+				"realm":                               (v.Realm),
+				"schema":                              (v.Schema),
+				"secret_store_id":                     (v.SecretStoreID),
+				"server_spn":                          (v.ServerSpn),
+				"subdomain":                           (v.Subdomain),
+				"tags":                                convertTagsToPorcelain(v.Tags),
+				"username":                            (v.Username),
 			})
 		case *sdm.SSH:
 			output[0]["ssh"] = append(output[0]["ssh"], entity{
