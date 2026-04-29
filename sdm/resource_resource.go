@@ -4907,8 +4907,16 @@ func resourceResource() *schema.Resource {
 						"role_arn": {
 							Type: schema.TypeString,
 
-							Optional:    true,
-							Description: "The role to assume after logging in.",
+							Optional:      true,
+							Description:   "The role to assume after logging in. Provide the ARN directly; use role_assumption_arn instead when the ARN is stored in a secret store.",
+							ConflictsWith: []string{"dynamo_dbiam.0.role_assumption_arn"},
+						},
+						"role_assumption_arn": {
+							Type: schema.TypeString,
+
+							Optional:      true,
+							Description:   "The secret store path to the role ARN to assume after logging in. Required when storing the role ARN in a secret store (secret_store_id must be set). Mutually exclusive with role_arn.",
+							ConflictsWith: []string{"dynamo_dbiam.0.role_arn"},
 						},
 						"role_external_id": {
 							Type: schema.TypeString,
@@ -13051,10 +13059,10 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		}
 		_ = raw
 		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
-			if v := raw["role_arn"]; v != nil && v.(string) != "" {
+			if v := raw["role_assumption_arn"]; v != nil && v.(string) != "" {
 				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
 				if err != nil {
-					return nil, fmt.Errorf("secret store credential role_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+					return nil, fmt.Errorf("secret store credential role_assumption_arn was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
 				}
 			}
 			if v := raw["role_external_id"]; v != nil && v.(string) != "" {
@@ -13067,6 +13075,7 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 
 		return map[string]string{
 			"role_arn":         convertStringToPlumbing(raw["role_arn"]),
+			"role_assumption_arn":    convertStringToPlumbing(raw["role_assumption_arn"]),
 			"role_external_id": convertStringToPlumbing(raw["role_external_id"]),
 		}, nil
 	}
@@ -14619,6 +14628,20 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 	}
 	return map[string]string{}, nil
 }
+
+func dynamoDBIAMApplySeValues(v *sdm.DynamoDBIAM, seValues map[string]string) {
+	roleArn, roleAssumptionArn := dynamoDBIAMRoleArnFields(v)
+	if roleArn != "" {
+		seValues["role_arn"] = roleArn
+	}
+	if roleAssumptionArn != "" {
+		seValues["role_assumption_arn"] = roleAssumptionArn
+	}
+	if v.RoleExternalID != "" {
+		seValues["role_external_id"] = v.RoleExternalID
+	}
+}
+
 func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 	if list := d.Get("aerospike").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
@@ -16042,6 +16065,12 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		if !ok {
 			return &sdm.DynamoDBIAM{}
 		}
+		var roleArn string
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			roleArn = convertStringToPlumbing(raw["role_assumption_arn"])
+		} else {
+			roleArn = convertStringToPlumbing(raw["role_arn"])
+		}
 		out := &sdm.DynamoDBIAM{
 			ID:             d.Id(),
 			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
@@ -16051,7 +16080,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
 			Region:         convertStringToPlumbing(raw["region"]),
-			RoleArn:        convertStringToPlumbing(raw["role_arn"]),
+			RoleArn:        roleArn,
 			RoleExternalID: convertStringToPlumbing(raw["role_external_id"]),
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
@@ -19063,6 +19092,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"region":           (v.Region),
 				"role_arn":         seValues["role_arn"],
+				"role_assumption_arn":    seValues["role_assumption_arn"],
 				"role_external_id": seValues["role_external_id"],
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
@@ -22023,12 +22053,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			localV = &sdm.DynamoDBIAM{}
 		}
 		_ = localV
-		if v.RoleArn != "" {
-			seValues["role_arn"] = v.RoleArn
-		}
-		if v.RoleExternalID != "" {
-			seValues["role_external_id"] = v.RoleExternalID
-		}
+		dynamoDBIAMApplySeValues(v, seValues)
 		d.Set("dynamo_dbiam", []map[string]interface{}{
 			{
 				"bind_interface":   (v.BindInterface),
@@ -22039,6 +22064,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"region":           (v.Region),
 				"role_arn":         seValues["role_arn"],
+				"role_assumption_arn":    seValues["role_assumption_arn"],
 				"role_external_id": seValues["role_external_id"],
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),

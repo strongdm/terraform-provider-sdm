@@ -5040,7 +5040,13 @@ func dataSourceResource() *schema.Resource {
 										Type: schema.TypeString,
 
 										Optional:    true,
-										Description: "The role to assume after logging in.",
+										Description: "The role to assume after logging in. Provide the ARN directly; use role_assumption_arn instead when the ARN is stored in a secret store.",
+									},
+									"role_assumption_arn": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The secret store path to the role ARN to assume after logging in. Required when storing the role ARN in a secret store (secret_store_id must be set). Mutually exclusive with role_arn.",
 									},
 									"role_external_id": {
 										Type: schema.TypeString,
@@ -11988,6 +11994,13 @@ func convertResourceFilterToPlumbing(d *schema.ResourceData) (string, []interfac
 	return filter, args
 }
 
+func dynamoDBIAMRoleArnFields(v *sdm.DynamoDBIAM) (string, string) {
+	if v.SecretStoreID != "" {
+		return "", v.RoleArn
+	}
+	return v.RoleArn, ""
+}
+
 func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm.Client) error {
 	filter, args := convertResourceFilterToPlumbing(d)
 	resp, err := cc.Resources().List(ctx, filter, args...)
@@ -12882,7 +12895,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":              convertTagsToPorcelain(v.Tags),
 			})
 		case *sdm.DynamoDBIAM:
-			output[0]["dynamo_dbiam"] = append(output[0]["dynamo_dbiam"], entity{
+			dynamoDBIAMEntity := entity{
 				"bind_interface":   (v.BindInterface),
 				"egress_filter":    (v.EgressFilter),
 				"endpoint":         (v.Endpoint),
@@ -12891,12 +12904,15 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"region":           (v.Region),
-				"role_arn":         (v.RoleArn),
 				"role_external_id": (v.RoleExternalID),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
-			})
+			}
+			roleArn, roleAssumptionArn := dynamoDBIAMRoleArnFields(v)
+			dynamoDBIAMEntity["role_arn"] = roleArn
+			dynamoDBIAMEntity["role_assumption_arn"] = roleAssumptionArn
+			output[0]["dynamo_dbiam"] = append(output[0]["dynamo_dbiam"], dynamoDBIAMEntity)
 		case *sdm.Elastic:
 			output[0]["elastic"] = append(output[0]["elastic"], entity{
 				"bind_interface":   (v.BindInterface),

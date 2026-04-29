@@ -2373,7 +2373,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"endpoint", `"endpoint"`},
 				{"name", `"all-resources-secret-dynamodbiam-name"`},
 				{"region", `"region"`},
-				{"role_arn", `"path/to/secret?key=key&encoding=base64"`},
+				{"role_assumption_arn", `"path/to/secret?key=key&encoding=base64"`},
 				{"role_external_id", `"path/to/secret?key=key&encoding=base64"`},
 				{"secret_store_id", `"` + seID + `"`},
 			},

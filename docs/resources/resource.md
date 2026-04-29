@@ -800,7 +800,8 @@ The following arguments are supported by the Resource resource:
 	* `port_override` - (Optional) The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `region` - (Required) The region to authenticate requests against e.g. us-east-1
-	* `role_arn` - (Optional) The role to assume after logging in.
+	* `role_arn` - (Optional) The role to assume after logging in. Provide the ARN directly; use `role_assumption_arn` instead when the ARN is stored in a secret store.
+	* `role_assumption_arn` - (Optional) The secret store path to the role ARN to assume after logging in. Required when storing the role ARN in a secret store (`secret_store_id` must be set). Mutually exclusive with `role_arn`.
 	* `role_external_id` - (Optional) The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.

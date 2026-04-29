@@ -824,7 +824,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
 		* `region` - The region to authenticate requests against e.g. us-east-1
-		* `role_arn` - The role to assume after logging in.
+		* `role_arn` - The role to assume after logging in. Set when providing the ARN directly (without a secret store).
+		* `role_assumption_arn` - The secret store path to the role ARN to assume after logging in. Set when the role ARN is stored in a secret store (`secret_store_id` must be set). Mutually exclusive with `role_arn`.
 		* `role_external_id` - The external ID to associate with assume role requests. Does nothing if a role ARN is not provided.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
