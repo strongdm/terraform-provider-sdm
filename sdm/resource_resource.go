@@ -6958,6 +6958,87 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"llm": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "LLM is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+						},
+						"egress_filter": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"models": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "Space-separated list of model names this resource accepts. Requests for unlisted models are rejected. Leave empty to allow all models.",
+						},
+						"name": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"password": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
+						"port_override": {
+							Type: schema.TypeInt,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.",
+						},
+						"proxy_cluster_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"url": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The URL to dial to initiate a connection from the egress node to this resource.",
+						},
+					},
+				},
+			},
 			"maria": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -10710,6 +10791,13 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.",
 						},
+						"password": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "The password to authenticate with.",
+						},
 						"port": {
 							Type: schema.TypeInt,
 
@@ -13494,6 +13582,25 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"client_key":            convertStringToPlumbing(raw["client_key"]),
 		}, nil
 	}
+	if list := d.Get("llm").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
+		}
+
+		return map[string]string{
+			"password": convertStringToPlumbing(raw["password"]),
+		}, nil
+	}
 	if list := d.Get("maria").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -14383,6 +14490,12 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 					return nil, fmt.Errorf("secret store credential krb_config was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
 				}
 			}
+			if v := raw["password"]; v != nil && v.(string) != "" {
+				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
+				if err != nil {
+					return nil, fmt.Errorf("secret store credential password was not parseable, unset secret_store_id or use the path/to/secret?key=key format")
+				}
+			}
 			if v := raw["realm"]; v != nil && v.(string) != "" {
 				_, err := url.ParseRequestURI("secretstore://store/" + v.(string))
 				if err != nil {
@@ -14400,6 +14513,7 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 		return map[string]string{
 			"keytab":     convertStringToPlumbing(raw["keytab"]),
 			"krb_config": convertStringToPlumbing(raw["krb_config"]),
+			"password":   convertStringToPlumbing(raw["password"]),
 			"realm":      convertStringToPlumbing(raw["realm"]),
 			"username":   convertStringToPlumbing(raw["username"]),
 		}, nil
@@ -16645,6 +16759,32 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("llm").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.LLM{}
+		}
+		out := &sdm.LLM{
+			ID:             d.Id(),
+			BindInterface:  convertStringToPlumbing(raw["bind_interface"]),
+			EgressFilter:   convertStringToPlumbing(raw["egress_filter"]),
+			Models:         convertStringToPlumbing(raw["models"]),
+			Name:           convertStringToPlumbing(raw["name"]),
+			Password:       convertStringToPlumbing(raw["password"]),
+			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
+			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
+			Tags:           convertTagsToPlumbing(raw["tags"]),
+			Url:            convertStringToPlumbing(raw["url"]),
+		}
+		override, ok := raw["port_override"].(int)
+		if !ok || override == 0 {
+			override = -1
+		}
+		out.PortOverride = int32(override)
+		return out
+	}
 	if list := d.Get("maria").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -17729,6 +17869,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			KrbConfig:                        convertStringToPlumbing(raw["krb_config"]),
 			Name:                             convertStringToPlumbing(raw["name"]),
 			OverrideDatabase:                 convertBoolToPlumbing(raw["override_database"]),
+			Password:                         convertStringToPlumbing(raw["password"]),
 			Port:                             convertInt32ToPlumbing(raw["port"]),
 			PortOverride:                     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:                   convertStringToPlumbing(raw["proxy_cluster_id"]),
@@ -19495,6 +19636,24 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.LLM:
+		localV, _ := localVersion.(*sdm.LLM)
+		_ = localV
+		d.Set("llm", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"models":           (v.Models),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
+			},
+		})
 	case *sdm.Maria:
 		localV, _ := localVersion.(*sdm.Maria)
 		_ = localV
@@ -20291,6 +20450,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"krb_config":                          seValues["krb_config"],
 				"name":                                (v.Name),
 				"override_database":                   (v.OverrideDatabase),
+				"password":                            seValues["password"],
 				"port":                                (v.Port),
 				"port_override":                       (v.PortOverride),
 				"proxy_cluster_id":                    (v.ProxyClusterID),
@@ -22612,6 +22772,30 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.LLM:
+		localV, ok := localVersion.(*sdm.LLM)
+		if !ok {
+			localV = &sdm.LLM{}
+		}
+		_ = localV
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
+		d.Set("llm", []map[string]interface{}{
+			{
+				"bind_interface":   (v.BindInterface),
+				"egress_filter":    (v.EgressFilter),
+				"models":           (v.Models),
+				"name":             (v.Name),
+				"password":         seValues["password"],
+				"port_override":    (v.PortOverride),
+				"proxy_cluster_id": (v.ProxyClusterID),
+				"secret_store_id":  (v.SecretStoreID),
+				"subdomain":        (v.Subdomain),
+				"tags":             convertTagsToPorcelain(v.Tags),
+				"url":              (v.Url),
+			},
+		})
 	case *sdm.Maria:
 		localV, ok := localVersion.(*sdm.Maria)
 		if !ok {
@@ -23704,6 +23888,9 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 		if v.KrbConfig != "" {
 			seValues["krb_config"] = v.KrbConfig
 		}
+		if v.Password != "" {
+			seValues["password"] = v.Password
+		}
 		if v.Realm != "" {
 			seValues["realm"] = v.Realm
 		}
@@ -23723,6 +23910,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"krb_config":                          seValues["krb_config"],
 				"name":                                (v.Name),
 				"override_database":                   (v.OverrideDatabase),
+				"password":                            seValues["password"],
 				"port":                                (v.Port),
 				"port_override":                       (v.PortOverride),
 				"proxy_cluster_id":                    (v.ProxyClusterID),

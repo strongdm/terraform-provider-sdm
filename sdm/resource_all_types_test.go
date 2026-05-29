@@ -949,6 +949,16 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "llm",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"models", `"models"`},
+				{"name", `"all-resources-llm-name"`},
+				{"password", `"password"`},
+				{"url", `"https://app.strongdm.com"`},
+			},
+		},
+		{
 			resource: "maria",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -1441,6 +1451,7 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 				{"krb_config", `"krb_config"`},
 				{"name", `"all-resources-sqlserverkerberosad-name"`},
 				{"override_database", `true`},
+				{"password", `"password"`},
 				{"port", `443`},
 				{"realm", `"realm"`},
 				{"schema", `"schema"`},
@@ -2608,6 +2619,18 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 		},
 
 		{
+			resource: "llm",
+			pairs: [][2]string{
+				{"egress_filter", `"name:value"`},
+				{"models", `"models"`},
+				{"name", `"all-resources-secret-llm-name"`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
+				{"secret_store_id", `"` + seID + `"`},
+				{"url", `"https://app.strongdm.com"`},
+			},
+		},
+
+		{
 			resource: "maria",
 			pairs: [][2]string{
 				{"database", `"database"`},
@@ -3069,6 +3092,7 @@ func TestAccSDMResource_UpdateAllTypes_SecretStores(t *testing.T) {
 				{"krb_config", `"path/to/secret?key=key&encoding=base64"`},
 				{"name", `"all-resources-secret-sqlserverkerberosad-name"`},
 				{"override_database", `true`},
+				{"password", `"path/to/secret?key=key&encoding=base64"`},
 				{"port", `443`},
 				{"realm", `"path/to/secret?key=key&encoding=base64"`},
 				{"schema", `"schema"`},

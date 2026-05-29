@@ -13160,6 +13160,75 @@ func convertRepeatedKubernetesUserImpersonationToPorcelain(plumbings []*proto.Ku
 	}
 	return items, nil
 }
+func convertLLMToPorcelain(plumbing *proto.LLM) (*LLM, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &LLM{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.Models = plumbing.Models
+	porcelain.Name = plumbing.Name
+	porcelain.Password = plumbing.Password
+	porcelain.PortOverride = plumbing.PortOverride
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Url = plumbing.Url
+	return porcelain, nil
+}
+
+func convertLLMToPlumbing(porcelain *LLM) *proto.LLM {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.LLM{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.Models = (porcelain.Models)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Password = (porcelain.Password)
+	plumbing.PortOverride = (porcelain.PortOverride)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Url = (porcelain.Url)
+	return plumbing
+}
+func convertRepeatedLLMToPlumbing(
+	porcelains []*LLM,
+) []*proto.LLM {
+	var items []*proto.LLM
+	for _, porcelain := range porcelains {
+		items = append(items, convertLLMToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedLLMToPorcelain(plumbings []*proto.LLM) (
+	[]*LLM,
+	error,
+) {
+	var items []*LLM
+	for _, plumbing := range plumbings {
+		if v, err := convertLLMToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertLogCategoryConfigToPorcelain(plumbing *proto.LogCategoryConfig) (*LogCategoryConfig, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -13541,6 +13610,55 @@ func convertRepeatedMCPGatewayPATToPorcelain(plumbings []*proto.MCPGatewayPAT) (
 	var items []*MCPGatewayPAT
 	for _, plumbing := range plumbings {
 		if v, err := convertMCPGatewayPATToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertMFAConfigToPorcelain(plumbing *proto.MFAConfig) (*MFAConfig, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &MFAConfig{}
+	porcelain.Enabled = plumbing.Enabled
+	if v, err := convertOktaMFAConfigToPorcelain(plumbing.Okta); err != nil {
+		return nil, fmt.Errorf("error converting field Okta: %v", err)
+	} else {
+		porcelain.Okta = v
+	}
+	porcelain.Provider = plumbing.Provider
+	return porcelain, nil
+}
+
+func convertMFAConfigToPlumbing(porcelain *MFAConfig) *proto.MFAConfig {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.MFAConfig{}
+	plumbing.Enabled = (porcelain.Enabled)
+	plumbing.Okta = convertOktaMFAConfigToPlumbing(porcelain.Okta)
+	plumbing.Provider = (porcelain.Provider)
+	return plumbing
+}
+func convertRepeatedMFAConfigToPlumbing(
+	porcelains []*MFAConfig,
+) []*proto.MFAConfig {
+	var items []*proto.MFAConfig
+	for _, porcelain := range porcelains {
+		items = append(items, convertMFAConfigToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedMFAConfigToPorcelain(plumbings []*proto.MFAConfig) (
+	[]*MFAConfig,
+	error,
+) {
+	var items []*MFAConfig
+	for _, plumbing := range plumbings {
+		if v, err := convertMFAConfigToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -16297,6 +16415,67 @@ func convertRepeatedOktaGroupsToPorcelain(plumbings []*proto.OktaGroups) (
 	}
 	return items, nil
 }
+func convertOktaMFAConfigToPorcelain(plumbing *proto.OktaMFAConfig) (*OktaMFAConfig, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &OktaMFAConfig{}
+	porcelain.APIToken = plumbing.ApiToken
+	porcelain.APITokenSet = plumbing.ApiTokenSet
+	porcelain.AuthMode = plumbing.AuthMode
+	porcelain.ClientID = plumbing.ClientId
+	porcelain.MultidevicePushEnabled = plumbing.MultidevicePushEnabled
+	porcelain.OrganizationURL = plumbing.OrganizationUrl
+	porcelain.PrivateKeyID = plumbing.PrivateKeyId
+	porcelain.PrivateKeyIDSet = plumbing.PrivateKeyIdSet
+	porcelain.PrivateKeyPEM = plumbing.PrivateKeyPem
+	porcelain.PrivateKeyPEMSet = plumbing.PrivateKeyPemSet
+	porcelain.UserLookup = plumbing.UserLookup
+	return porcelain, nil
+}
+
+func convertOktaMFAConfigToPlumbing(porcelain *OktaMFAConfig) *proto.OktaMFAConfig {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.OktaMFAConfig{}
+	plumbing.ApiToken = (porcelain.APIToken)
+	plumbing.ApiTokenSet = (porcelain.APITokenSet)
+	plumbing.AuthMode = (porcelain.AuthMode)
+	plumbing.ClientId = (porcelain.ClientID)
+	plumbing.MultidevicePushEnabled = (porcelain.MultidevicePushEnabled)
+	plumbing.OrganizationUrl = (porcelain.OrganizationURL)
+	plumbing.PrivateKeyId = (porcelain.PrivateKeyID)
+	plumbing.PrivateKeyIdSet = (porcelain.PrivateKeyIDSet)
+	plumbing.PrivateKeyPem = (porcelain.PrivateKeyPEM)
+	plumbing.PrivateKeyPemSet = (porcelain.PrivateKeyPEMSet)
+	plumbing.UserLookup = (porcelain.UserLookup)
+	return plumbing
+}
+func convertRepeatedOktaMFAConfigToPlumbing(
+	porcelains []*OktaMFAConfig,
+) []*proto.OktaMFAConfig {
+	var items []*proto.OktaMFAConfig
+	for _, porcelain := range porcelains {
+		items = append(items, convertOktaMFAConfigToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedOktaMFAConfigToPorcelain(plumbings []*proto.OktaMFAConfig) (
+	[]*OktaMFAConfig,
+	error,
+) {
+	var items []*OktaMFAConfig
+	for _, plumbing := range plumbings {
+		if v, err := convertOktaMFAConfigToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertOracleToPorcelain(plumbing *proto.Oracle) (*Oracle, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -16572,6 +16751,63 @@ func convertRepeatedOrganizationToPorcelain(plumbings []*proto.Organization) (
 	}
 	return items, nil
 }
+func convertOrganizationGetMFAResponseToPorcelain(plumbing *proto.OrganizationGetMFAResponse) (*OrganizationGetMFAResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &OrganizationGetMFAResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbing.Meta); err != nil {
+		return nil, fmt.Errorf("error converting field Meta: %v", err)
+	} else {
+		porcelain.Meta = v
+	}
+	if v, err := convertMFAConfigToPorcelain(plumbing.Mfa); err != nil {
+		return nil, fmt.Errorf("error converting field Mfa: %v", err)
+	} else {
+		porcelain.MFA = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertOrganizationGetMFAResponseToPlumbing(porcelain *OrganizationGetMFAResponse) *proto.OrganizationGetMFAResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.OrganizationGetMFAResponse{}
+	plumbing.Meta = convertGetResponseMetadataToPlumbing(porcelain.Meta)
+	plumbing.Mfa = convertMFAConfigToPlumbing(porcelain.MFA)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedOrganizationGetMFAResponseToPlumbing(
+	porcelains []*OrganizationGetMFAResponse,
+) []*proto.OrganizationGetMFAResponse {
+	var items []*proto.OrganizationGetMFAResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertOrganizationGetMFAResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedOrganizationGetMFAResponseToPorcelain(plumbings []*proto.OrganizationGetMFAResponse) (
+	[]*OrganizationGetMFAResponse,
+	error,
+) {
+	var items []*OrganizationGetMFAResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertOrganizationGetMFAResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertOrganizationHistoryRecordToPorcelain(plumbing *proto.OrganizationHistoryRecord) (*OrganizationHistoryRecord, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -16618,6 +16854,102 @@ func convertRepeatedOrganizationHistoryRecordToPorcelain(plumbings []*proto.Orga
 	var items []*OrganizationHistoryRecord
 	for _, plumbing := range plumbings {
 		if v, err := convertOrganizationHistoryRecordToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertOrganizationTestMFAResponseToPorcelain(plumbing *proto.OrganizationTestMFAResponse) (*OrganizationTestMFAResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &OrganizationTestMFAResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertOrganizationTestMFAResponseToPlumbing(porcelain *OrganizationTestMFAResponse) *proto.OrganizationTestMFAResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.OrganizationTestMFAResponse{}
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedOrganizationTestMFAResponseToPlumbing(
+	porcelains []*OrganizationTestMFAResponse,
+) []*proto.OrganizationTestMFAResponse {
+	var items []*proto.OrganizationTestMFAResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertOrganizationTestMFAResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedOrganizationTestMFAResponseToPorcelain(plumbings []*proto.OrganizationTestMFAResponse) (
+	[]*OrganizationTestMFAResponse,
+	error,
+) {
+	var items []*OrganizationTestMFAResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertOrganizationTestMFAResponseToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
+func convertOrganizationUpdateMFAResponseToPorcelain(plumbing *proto.OrganizationUpdateMFAResponse) (*OrganizationUpdateMFAResponse, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &OrganizationUpdateMFAResponse{}
+	if v, err := convertMFAConfigToPorcelain(plumbing.Mfa); err != nil {
+		return nil, fmt.Errorf("error converting field Mfa: %v", err)
+	} else {
+		porcelain.MFA = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbing.RateLimit); err != nil {
+		return nil, fmt.Errorf("error converting field RateLimit: %v", err)
+	} else {
+		porcelain.RateLimit = v
+	}
+	return porcelain, nil
+}
+
+func convertOrganizationUpdateMFAResponseToPlumbing(porcelain *OrganizationUpdateMFAResponse) *proto.OrganizationUpdateMFAResponse {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.OrganizationUpdateMFAResponse{}
+	plumbing.Mfa = convertMFAConfigToPlumbing(porcelain.MFA)
+	plumbing.RateLimit = convertRateLimitMetadataToPlumbing(porcelain.RateLimit)
+	return plumbing
+}
+func convertRepeatedOrganizationUpdateMFAResponseToPlumbing(
+	porcelains []*OrganizationUpdateMFAResponse,
+) []*proto.OrganizationUpdateMFAResponse {
+	var items []*proto.OrganizationUpdateMFAResponse
+	for _, porcelain := range porcelains {
+		items = append(items, convertOrganizationUpdateMFAResponseToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedOrganizationUpdateMFAResponseToPorcelain(plumbings []*proto.OrganizationUpdateMFAResponse) (
+	[]*OrganizationUpdateMFAResponse,
+	error,
+) {
+	var items []*OrganizationUpdateMFAResponse
+	for _, plumbing := range plumbings {
+		if v, err := convertOrganizationUpdateMFAResponseToPorcelain(plumbing); err != nil {
 			return nil, err
 		} else {
 			items = append(items, v)
@@ -20336,6 +20668,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_KubernetesServiceAccountUserImpersonation{KubernetesServiceAccountUserImpersonation: convertKubernetesServiceAccountUserImpersonationToPlumbing(v)}
 	case *KubernetesUserImpersonation:
 		plumbing.Resource = &proto.Resource_KubernetesUserImpersonation{KubernetesUserImpersonation: convertKubernetesUserImpersonationToPlumbing(v)}
+	case *LLM:
+		plumbing.Resource = &proto.Resource_Llm{Llm: convertLLMToPlumbing(v)}
 	case *Maria:
 		plumbing.Resource = &proto.Resource_Maria{Maria: convertMariaToPlumbing(v)}
 	case *MCPGatewayNoAuth:
@@ -20644,6 +20978,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetKubernetesUserImpersonation() != nil {
 		return convertKubernetesUserImpersonationToPorcelain(plumbing.GetKubernetesUserImpersonation())
+	}
+	if plumbing.GetLlm() != nil {
+		return convertLLMToPorcelain(plumbing.GetLlm())
 	}
 	if plumbing.GetMaria() != nil {
 		return convertMariaToPorcelain(plumbing.GetMaria())
@@ -21809,6 +22146,7 @@ func convertSQLServerKerberosADToPorcelain(plumbing *proto.SQLServerKerberosAD) 
 	porcelain.KrbConfig = plumbing.KrbConfig
 	porcelain.Name = plumbing.Name
 	porcelain.OverrideDatabase = plumbing.OverrideDatabase
+	porcelain.Password = plumbing.Password
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
@@ -21844,6 +22182,7 @@ func convertSQLServerKerberosADToPlumbing(porcelain *SQLServerKerberosAD) *proto
 	plumbing.KrbConfig = (porcelain.KrbConfig)
 	plumbing.Name = (porcelain.Name)
 	plumbing.OverrideDatabase = (porcelain.OverrideDatabase)
+	plumbing.Password = (porcelain.Password)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)

@@ -44,7 +44,7 @@ import (
 const (
 	defaultAPIHost   = "app.strongdm.com:443"
 	apiVersion       = "2025-04-14"
-	defaultUserAgent = "strongdm-sdk-go/17.2.0"
+	defaultUserAgent = "strongdm-sdk-go/17.5.0"
 )
 
 var _ = metadata.Pairs
@@ -114,6 +114,7 @@ type Client struct {
 	nodes                            *Nodes
 	nodesHistory                     *NodesHistory
 	organizationHistory              *OrganizationHistory
+	organizations                    *Organizations
 	peeringGroupNodes                *PeeringGroupNodes
 	peeringGroupPeers                *PeeringGroupPeers
 	peeringGroupResources            *PeeringGroupResources
@@ -372,6 +373,10 @@ func (c *Client) initializeServices() {
 	}
 	c.organizationHistory = &OrganizationHistory{
 		client: plumbing.NewOrganizationHistoryClient(c.grpcConn),
+		parent: c,
+	}
+	c.organizations = &Organizations{
+		client: plumbing.NewOrganizationsClient(c.grpcConn),
 		parent: c,
 	}
 	c.peeringGroupNodes = &PeeringGroupNodes{
@@ -812,6 +817,15 @@ func (c *Client) NodesHistory() *NodesHistory {
 // OrganizationHistory records all changes to the state of an Organization.
 func (c *Client) OrganizationHistory() *OrganizationHistory {
 	return c.organizationHistory
+}
+
+// Organizations exposes organization configuration. Most RPCs remain private to the
+// go_private SDK; public MFA management is exposed to all public SDK targets.
+// The terraform-provider target is opted out at the service level because the
+// provider's data-source generator assumes every service has a List RPC; MFA is
+// instead surfaced via a hand-written resource template.
+func (c *Client) Organizations() *Organizations {
+	return c.organizations
 }
 
 // PeeringGroupNodes provides the building blocks necessary to obtain attach a node to a peering group.

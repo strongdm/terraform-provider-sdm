@@ -4904,6 +4904,122 @@ func (svc *OrganizationHistory) List(
 	), nil
 }
 
+// Organizations exposes organization configuration. Most RPCs remain private to the
+// go_private SDK; public MFA management is exposed to all public SDK targets.
+// The terraform-provider target is opted out at the service level because the
+// provider's data-source generator assumes every service has a List RPC; MFA is
+// instead surfaced via a hand-written resource template.
+type Organizations struct {
+	client plumbing.OrganizationsClient
+	parent *Client
+}
+
+// GetMFA gets the organization's MFA configuration.
+func (svc *Organizations) GetMFA(
+	ctx context.Context) (
+	*OrganizationGetMFAResponse,
+	error) {
+	req := plumbing.OrganizationGetMFARequest{}
+
+	req.Meta = &plumbing.GetRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.OrganizationGetMFAResponse, error) {
+			return svc.client.GetMFA(svc.parent.wrapContext(ctx, &req, "Organizations.GetMFA"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &OrganizationGetMFAResponse{}
+	if v, err := convertGetResponseMetadataToPorcelain(plumbingResponse.Meta); err != nil {
+		return nil, err
+	} else {
+		resp.Meta = v
+	}
+	if v, err := convertMFAConfigToPorcelain(plumbingResponse.Mfa); err != nil {
+		return nil, err
+	} else {
+		resp.MFA = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// UpdateMFA updates the organization's MFA configuration.
+func (svc *Organizations) UpdateMFA(
+	ctx context.Context,
+	mfa *MFAConfig) (
+	*OrganizationUpdateMFAResponse,
+	error) {
+	req := plumbing.OrganizationUpdateMFARequest{}
+
+	req.Mfa = convertMFAConfigToPlumbing(mfa)
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.OrganizationUpdateMFAResponse, error) {
+			return svc.client.UpdateMFA(svc.parent.wrapContext(ctx, &req, "Organizations.UpdateMFA"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &OrganizationUpdateMFAResponse{}
+	if v, err := convertMFAConfigToPorcelain(plumbingResponse.Mfa); err != nil {
+		return nil, err
+	} else {
+		resp.MFA = v
+	}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
+// TestMFA validates MFA connectivity without persisting changes.
+func (svc *Organizations) TestMFA(
+	ctx context.Context,
+	mfa *MFAConfig) (
+	*OrganizationTestMFAResponse,
+	error) {
+	req := plumbing.OrganizationTestMFARequest{}
+
+	req.Mfa = convertMFAConfigToPlumbing(mfa)
+	req.Meta = &plumbing.UpdateRequestMetadata{}
+	plumbingResponse, err := retryWrapper(
+		ctx,
+		svc.parent.retryOptions,
+		&req.Meta.Fulfillments,
+		func() (*plumbing.OrganizationTestMFAResponse, error) {
+			return svc.client.TestMFA(svc.parent.wrapContext(ctx, &req, "Organizations.TestMFA"), &req)
+		},
+	)
+	if err != nil {
+		return nil, convertErrorToPorcelain(err)
+	}
+
+	resp := &OrganizationTestMFAResponse{}
+	if v, err := convertRateLimitMetadataToPorcelain(plumbingResponse.RateLimit); err != nil {
+		return nil, err
+	} else {
+		resp.RateLimit = v
+	}
+	return resp, nil
+}
+
 // PeeringGroupNodes provides the building blocks necessary to obtain attach a node to a peering group.
 type PeeringGroupNodes struct {
 	client plumbing.PeeringGroupNodesClient

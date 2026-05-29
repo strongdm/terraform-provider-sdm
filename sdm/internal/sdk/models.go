@@ -196,6 +196,8 @@ const (
 
 	ResourceTypeKubernetesUserImpersonation ResourceType = "RESOURCE_TYPE_KUBERNETES_USER_IMPERSONATION"
 
+	ResourceTypeLlm ResourceType = "RESOURCE_TYPE_LLM"
+
 	ResourceTypeMcpNoAuth ResourceType = "RESOURCE_TYPE_MCP_NO_AUTH"
 
 	ResourceTypeMcp ResourceType = "RESOURCE_TYPE_MCP"
@@ -4902,6 +4904,37 @@ type KubernetesUserImpersonation struct {
 	Tags Tags `json:"tags"`
 }
 
+// LLM is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type LLM struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	BindInterface string `json:"bindInterface"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// Space-separated list of model names this resource accepts. Requests for unlisted models are rejected. Leave empty to allow all models.
+	Models string `json:"models"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The password to authenticate with.
+	Password string `json:"password"`
+	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
+	PortOverride int32 `json:"portOverride"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The URL to dial to initiate a connection from the egress node to this resource.
+	Url string `json:"url"`
+}
+
 type LogCategoryConfig struct {
 	// Indicates if the Organization should exclude replay data from remote logging for the log category.
 	RemoteDiscardReplays bool `json:"remoteDiscardReplays"`
@@ -5052,6 +5085,15 @@ type MCPGatewayPAT struct {
 	Tags Tags `json:"tags"`
 	// The URL to dial to initiate a connection from the egress node to this resource.
 	Url string `json:"url"`
+}
+
+type MFAConfig struct {
+	// Indicates if MFA is enabled for the organization.
+	Enabled bool `json:"enabled"`
+	// Okta MFA configuration. Future providers will be added to this wrapper.
+	Okta *OktaMFAConfig `json:"okta"`
+	// The MFA provider, one of the MFAProvider constants.
+	Provider string `json:"provider"`
 }
 
 type MTLSMysql struct {
@@ -5990,6 +6032,33 @@ type OktaGroups struct {
 	Tags Tags `json:"tags"`
 }
 
+type OktaMFAConfig struct {
+	// The API token to authenticate with when auth_mode is api_token.
+	APIToken string `json:"apiToken"`
+	// Indicates if an API token is already stored.
+	APITokenSet bool `json:"apiTokenSet"`
+	// The Okta auth mode, one of the OktaAuthMode constants.
+	AuthMode string `json:"authMode"`
+	// The Okta client ID to authenticate with when auth_mode is client_credentials.
+	ClientID string `json:"clientId"`
+	// Indicates if multidevice push is enabled.
+	MultidevicePushEnabled bool `json:"multidevicePushEnabled"`
+	// The Okta organization URL.
+	OrganizationURL string `json:"organizationUrl"`
+	// The key ID (kid) assigned by Okta to the registered public key.
+	PrivateKeyID string `json:"privateKeyId"`
+	// Indicates if a key ID is already stored or explicitly supplied. This allows
+	// callers to preserve the existing value when omitted or clear it by
+	// sending an empty string with private_key_id_set=true.
+	PrivateKeyIDSet bool `json:"privateKeyIdSet"`
+	// The PEM encoded private key to authenticate with when auth_mode is client_credentials.
+	PrivateKeyPEM string `json:"privateKeyPem"`
+	// Indicates if a PEM encoded private key is already stored.
+	PrivateKeyPEMSet bool `json:"privateKeyPemSet"`
+	// The Okta user lookup strategy, one of the OktaUserLookup constants.
+	UserLookup string `json:"userLookup"`
+}
+
 type Oracle struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
@@ -6133,6 +6202,15 @@ type Organization struct {
 	WebsitesSubdomain string `json:"websitesSubdomain"`
 }
 
+type OrganizationGetMFAResponse struct {
+	// Reserved for future use.
+	Meta *GetResponseMetadata `json:"meta"`
+	// The current MFA configuration.
+	MFA *MFAConfig `json:"mfa"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
 // OrganizationHistoryRecord records the state of an Organization at a given point in time,
 // where every change to an Organization produces an OrganizationHistoryRecord.
 type OrganizationHistoryRecord struct {
@@ -6143,6 +6221,18 @@ type OrganizationHistoryRecord struct {
 	Organization *Organization `json:"organization"`
 	// The time at which the Organization state was recorded.
 	Timestamp time.Time `json:"timestamp"`
+}
+
+type OrganizationTestMFAResponse struct {
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
+}
+
+type OrganizationUpdateMFAResponse struct {
+	// The updated MFA configuration.
+	MFA *MFAConfig `json:"mfa"`
+	// Rate limit information.
+	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
 // PeeringGroups are the building blocks used for explicit network topology making.
@@ -11044,6 +11134,60 @@ func (m *KubernetesUserImpersonation) GetBindInterface() string {
 func (m *KubernetesUserImpersonation) SetBindInterface(v string) {
 	m.BindInterface = v
 }
+func (*LLM) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the LLM.
+func (m *LLM) GetID() string { return m.ID }
+
+// GetName returns the name of the LLM.
+func (m *LLM) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the LLM.
+func (m *LLM) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the LLM.
+func (m *LLM) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the LLM.
+func (m *LLM) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the LLM.
+func (m *LLM) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the LLM.
+func (m *LLM) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the LLM.
+func (m *LLM) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the LLM.
+func (m *LLM) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the LLM.
+func (m *LLM) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the LLM.
+func (m *LLM) SetBindInterface(v string) {
+	m.BindInterface = v
+}
 func (*Maria) isOneOf_Resource() {}
 
 // GetID returns the unique identifier of the Maria.
@@ -13859,6 +14003,8 @@ type SQLServerKerberosAD struct {
 	Name string `json:"name"`
 	// If set, the database configured cannot be changed by users. This setting is not recommended for most use cases, as some clients will insist their database has changed when it has not, leading to user confusion.
 	OverrideDatabase bool `json:"overrideDatabase"`
+	// The password to authenticate with.
+	Password string `json:"password"`
 	// The port to dial to initiate a connection from the egress node to this resource.
 	Port int32 `json:"port"`
 	// The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
