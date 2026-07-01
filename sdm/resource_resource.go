@@ -3446,6 +3446,19 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
+						},
 						"url": {
 							Type: schema.TypeString,
 
@@ -3947,6 +3960,19 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
+						},
 						"tls_required": {
 							Type: schema.TypeBool,
 
@@ -4026,6 +4052,19 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
 						},
 						"url": {
 							Type: schema.TypeString,
@@ -6096,6 +6135,19 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
+						},
 						"tls_required": {
 							Type: schema.TypeBool,
 
@@ -6200,6 +6252,19 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
+						},
 						"tls_required": {
 							Type: schema.TypeBool,
 
@@ -6302,6 +6367,19 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
 						},
 						"tls_required": {
 							Type: schema.TypeBool,
@@ -7033,7 +7111,7 @@ func resourceResource() *schema.Resource {
 						"url": {
 							Type: schema.TypeString,
 
-							Optional:    true,
+							Required:    true,
 							Description: "The URL to dial to initiate a connection from the egress node to this resource.",
 						},
 					},
@@ -7209,6 +7287,19 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
+						},
 						"url": {
 							Type: schema.TypeString,
 
@@ -7307,6 +7398,19 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
 						},
 						"url": {
 							Type: schema.TypeString,
@@ -7412,6 +7516,19 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
 						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
+						},
 						"url": {
 							Type: schema.TypeString,
 
@@ -7492,6 +7609,19 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "Tags is a map of key, value pairs.",
+						},
+						"tls_cert": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Sensitive:   true,
+							Description: "Custom TLS certificate for upstream connection.",
+						},
+						"tls_insecure": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "Skip TLS certificate verification for the upstream connection.",
 						},
 						"url": {
 							Type: schema.TypeString,
@@ -15721,6 +15851,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsCert:        convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:    convertBoolToPlumbing(raw["tls_insecure"]),
 			Url:            convertStringToPlumbing(raw["url"]),
 			Username:       convertStringToPlumbing(raw["username"]),
 		}
@@ -15867,6 +15999,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsCert:        convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:    convertBoolToPlumbing(raw["tls_insecure"]),
 			TlsRequired:    convertBoolToPlumbing(raw["tls_required"]),
 			Username:       convertStringToPlumbing(raw["username"]),
 		}
@@ -15893,6 +16027,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsCert:        convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:    convertBoolToPlumbing(raw["tls_insecure"]),
 			Url:            convertStringToPlumbing(raw["url"]),
 			Username:       convertStringToPlumbing(raw["username"]),
 		}
@@ -16509,6 +16645,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TlsCert:          convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:      convertBoolToPlumbing(raw["tls_insecure"]),
 			TlsRequired:      convertBoolToPlumbing(raw["tls_required"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 		}
@@ -16539,6 +16677,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TlsCert:          convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:      convertBoolToPlumbing(raw["tls_insecure"]),
 			TlsRequired:      convertBoolToPlumbing(raw["tls_required"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 			Username:         convertStringToPlumbing(raw["username"]),
@@ -16569,6 +16709,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
+			TlsCert:          convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:      convertBoolToPlumbing(raw["tls_insecure"]),
 			TlsRequired:      convertBoolToPlumbing(raw["tls_required"]),
 			Url:              convertStringToPlumbing(raw["url"]),
 		}
@@ -16830,6 +16972,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsCert:        convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:    convertBoolToPlumbing(raw["tls_insecure"]),
 			Url:            convertStringToPlumbing(raw["url"]),
 		}
 		override, ok := raw["port_override"].(int)
@@ -16858,6 +17002,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:      convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:          convertStringToPlumbing(raw["subdomain"]),
 			Tags:               convertTagsToPlumbing(raw["tags"]),
+			TlsCert:            convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:        convertBoolToPlumbing(raw["tls_insecure"]),
 			Url:                convertStringToPlumbing(raw["url"]),
 			Username:           convertStringToPlumbing(raw["username"]),
 		}
@@ -16887,6 +17033,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:         convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:             convertStringToPlumbing(raw["subdomain"]),
 			Tags:                  convertTagsToPlumbing(raw["tags"]),
+			TlsCert:               convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:           convertBoolToPlumbing(raw["tls_insecure"]),
 			Url:                   convertStringToPlumbing(raw["url"]),
 		}
 		override, ok := raw["port_override"].(int)
@@ -16912,6 +17060,8 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
+			TlsCert:        convertStringToPlumbing(raw["tls_cert"]),
+			TlsInsecure:    convertBoolToPlumbing(raw["tls_insecure"]),
 			Url:            convertStringToPlumbing(raw["url"]),
 		}
 		override, ok := raw["port_override"].(int)
@@ -18887,6 +19037,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"secret_store_id":  (v.SecretStoreID),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 				"username":         seValues["username"],
 			},
@@ -18993,6 +19145,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"tls_required":     (v.TlsRequired),
 				"username":         seValues["username"],
 			},
@@ -19011,6 +19165,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 				"username":         seValues["username"],
 			},
@@ -19456,6 +19612,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          localV.TlsCert,
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			},
@@ -19478,6 +19636,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          localV.TlsCert,
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 				"username":          seValues["username"],
@@ -19500,6 +19660,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          localV.TlsCert,
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			},
@@ -19690,6 +19852,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 			},
 		})
@@ -19711,6 +19875,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":      (v.SecretStoreID),
 				"subdomain":            (v.Subdomain),
 				"tags":                 convertTagsToPorcelain(v.Tags),
+				"tls_cert":             localV.TlsCert,
+				"tls_insecure":         (v.TlsInsecure),
 				"url":                  (v.Url),
 				"username":             (v.Username),
 			},
@@ -19733,6 +19899,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":         (v.SecretStoreID),
 				"subdomain":               (v.Subdomain),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+				"tls_cert":                localV.TlsCert,
+				"tls_insecure":            (v.TlsInsecure),
 				"url":                     (v.Url),
 			},
 		})
@@ -19751,6 +19919,8 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 			},
 		})
@@ -21747,6 +21917,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"secret_store_id":  (v.SecretStoreID),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 				"username":         seValues["username"],
 			},
@@ -21898,6 +22070,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"tls_required":     (v.TlsRequired),
 				"username":         seValues["username"],
 			},
@@ -21925,6 +22099,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 				"username":         seValues["username"],
 			},
@@ -22529,6 +22705,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          localV.TlsCert,
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			},
@@ -22560,6 +22738,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          localV.TlsCert,
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 				"username":          seValues["username"],
@@ -22585,6 +22765,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          localV.TlsCert,
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			},
@@ -22844,6 +23026,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 			},
 		})
@@ -22871,6 +23055,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":      (v.SecretStoreID),
 				"subdomain":            (v.Subdomain),
 				"tags":                 convertTagsToPorcelain(v.Tags),
+				"tls_cert":             localV.TlsCert,
+				"tls_insecure":         (v.TlsInsecure),
 				"url":                  (v.Url),
 				"username":             (v.Username),
 			},
@@ -22896,6 +23082,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":         (v.SecretStoreID),
 				"subdomain":               (v.Subdomain),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+				"tls_cert":                localV.TlsCert,
+				"tls_insecure":            (v.TlsInsecure),
 				"url":                     (v.Url),
 			},
 		})
@@ -22920,6 +23108,8 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         localV.TlsCert,
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 			},
 		})

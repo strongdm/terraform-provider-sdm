@@ -2505,6 +2505,10 @@ type ClickHouseHTTP struct {
 	SecretStoreID string `json:"secretStoreId"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// The URL to dial to initiate a connection from the egress node to this resource.
 	Url string `json:"url"`
 	// The username to authenticate with.
@@ -3096,6 +3100,10 @@ type CouchbaseDatabase struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// If set, TLS must be used to connect to this resource.
 	TlsRequired bool `json:"tlsRequired"`
 	// The username to authenticate with.
@@ -3125,6 +3133,10 @@ type CouchbaseWebUI struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// The base address of your website without the path.
 	Url string `json:"url"`
 	// The username to authenticate with.
@@ -4326,6 +4338,10 @@ type HTTPAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// This option enforces HTTPS on the client, not resource connection.
 	TlsRequired bool `json:"tlsRequired"`
 	// The base address of your website without the path.
@@ -4365,6 +4381,10 @@ type HTTPBasicAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// This option enforces HTTPS on the client, not resource connection.
 	TlsRequired bool `json:"tlsRequired"`
 	// The base address of your website without the path.
@@ -4404,6 +4424,10 @@ type HTTPNoAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// This option enforces HTTPS on the client, not resource connection.
 	TlsRequired bool `json:"tlsRequired"`
 	// The base address of your website without the path.
@@ -4982,6 +5006,10 @@ type MCPGatewayNoAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// The URL to dial to initiate a connection from the egress node to this resource.
 	Url string `json:"url"`
 }
@@ -5017,6 +5045,10 @@ type MCPGatewayOAuth struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// The URL to dial to initiate a connection from the egress node to this resource.
 	Url string `json:"url"`
 	// OAuth App Client ID
@@ -5054,6 +5086,10 @@ type MCPGatewayOAuthDCR struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// The URL to dial to initiate a connection from the egress node to this resource.
 	Url string `json:"url"`
 }
@@ -5083,6 +5119,10 @@ type MCPGatewayPAT struct {
 	Subdomain string `json:"subdomain"`
 	// Tags is a map of key, value pairs.
 	Tags Tags `json:"tags"`
+	// Custom TLS certificate for upstream connection.
+	TlsCert string `json:"tlsCert"`
+	// Skip TLS certificate verification for the upstream connection.
+	TlsInsecure bool `json:"tlsInsecure"`
 	// The URL to dial to initiate a connection from the egress node to this resource.
 	Url string `json:"url"`
 }

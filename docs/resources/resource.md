@@ -580,6 +580,8 @@ The following arguments are supported by the Resource resource:
 	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * click_house_my_sql:
@@ -656,6 +658,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `tls_required` - (Optional) If set, TLS must be used to connect to this resource.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * couchbase_web_ui:
@@ -668,6 +672,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `url` - (Required) The base address of your website without the path.
 	* `username` - (Required, either in plaintext, or as a secret store path) The username to authenticate with.
 * databricks:
@@ -981,6 +987,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `tls_required` - (Optional) This option enforces HTTPS on the client, not resource connection.
 	* `url` - (Required) The base address of your website without the path.
 * http_basic_auth:
@@ -997,6 +1005,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `tls_required` - (Optional) This option enforces HTTPS on the client, not resource connection.
 	* `url` - (Required) The base address of your website without the path.
 	* `username` - (Optional) The username to authenticate with.
@@ -1013,6 +1023,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Required) Subdomain is the local DNS address.  (e.g. app-prod1 turns into app-prod1.your-org-name.sdm.network)
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `tls_required` - (Optional) This option enforces HTTPS on the client, not resource connection.
 	* `url` - (Required) The base address of your website without the path.
 * kubernetes:
@@ -1122,7 +1134,7 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
-	* `url` - (Optional) The URL to dial to initiate a connection from the egress node to this resource.
+	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 * maria:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `database` - (Optional) The database for healthchecks. Does not affect client requests.
@@ -1148,6 +1160,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 * mcp_gateway_o_auth:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -1162,6 +1176,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 	* `username` - (Required) OAuth App Client ID
 * mcp_gateway_o_auth_dcr:
@@ -1177,6 +1193,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 * mcp_gateway_pat:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
@@ -1188,6 +1206,8 @@ The following arguments are supported by the Resource resource:
 	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tls_cert` - (Optional) Custom TLS certificate for upstream connection.
+	* `tls_insecure` - (Optional) Skip TLS certificate verification for the upstream connection.
 	* `url` - (Required) The URL to dial to initiate a connection from the egress node to this resource.
 * memcached:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.

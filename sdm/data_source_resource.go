@@ -3544,6 +3544,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
+									},
 									"url": {
 										Type: schema.TypeString,
 
@@ -4055,6 +4068,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
+									},
 									"tls_required": {
 										Type: schema.TypeBool,
 
@@ -4137,6 +4163,19 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
 									},
 									"url": {
 										Type: schema.TypeString,
@@ -6253,6 +6292,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
+									},
 									"tls_required": {
 										Type: schema.TypeBool,
 
@@ -6360,6 +6412,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
+									},
 									"tls_required": {
 										Type: schema.TypeBool,
 
@@ -6465,6 +6530,19 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
 									},
 									"tls_required": {
 										Type: schema.TypeBool,
@@ -7386,6 +7464,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
+									},
 									"url": {
 										Type: schema.TypeString,
 
@@ -7486,6 +7577,19 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
 									},
 									"url": {
 										Type: schema.TypeString,
@@ -7593,6 +7697,19 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
 									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
+									},
 									"url": {
 										Type: schema.TypeString,
 
@@ -7675,6 +7792,19 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "Tags is a map of key, value pairs.",
+									},
+									"tls_cert": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Sensitive:   true,
+										Description: "Custom TLS certificate for upstream connection.",
+									},
+									"tls_insecure": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "Skip TLS certificate verification for the upstream connection.",
 									},
 									"url": {
 										Type: schema.TypeString,
@@ -12713,6 +12843,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"proxy_cluster_id": (v.ProxyClusterID),
 				"secret_store_id":  (v.SecretStoreID),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         (v.TlsCert),
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 				"username":         (v.Username),
 			})
@@ -12804,6 +12936,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         (v.TlsCert),
+				"tls_insecure":     (v.TlsInsecure),
 				"tls_required":     (v.TlsRequired),
 				"username":         (v.Username),
 			})
@@ -12819,6 +12953,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         (v.TlsCert),
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 				"username":         (v.Username),
 			})
@@ -13198,6 +13334,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          (v.TlsCert),
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			})
@@ -13217,6 +13355,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          (v.TlsCert),
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 				"username":          (v.Username),
@@ -13236,6 +13376,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":   (v.SecretStoreID),
 				"subdomain":         (v.Subdomain),
 				"tags":              convertTagsToPorcelain(v.Tags),
+				"tls_cert":          (v.TlsCert),
+				"tls_insecure":      (v.TlsInsecure),
 				"tls_required":      (v.TlsRequired),
 				"url":               (v.Url),
 			})
@@ -13399,6 +13541,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         (v.TlsCert),
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 			})
 		case *sdm.MCPGatewayOAuth:
@@ -13417,6 +13561,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":      (v.SecretStoreID),
 				"subdomain":            (v.Subdomain),
 				"tags":                 convertTagsToPorcelain(v.Tags),
+				"tls_cert":             (v.TlsCert),
+				"tls_insecure":         (v.TlsInsecure),
 				"url":                  (v.Url),
 				"username":             (v.Username),
 			})
@@ -13436,6 +13582,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":         (v.SecretStoreID),
 				"subdomain":               (v.Subdomain),
 				"tags":                    convertTagsToPorcelain(v.Tags),
+				"tls_cert":                (v.TlsCert),
+				"tls_insecure":            (v.TlsInsecure),
 				"url":                     (v.Url),
 			})
 		case *sdm.MCPGatewayPAT:
@@ -13451,6 +13599,8 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
+				"tls_cert":         (v.TlsCert),
+				"tls_insecure":     (v.TlsInsecure),
 				"url":              (v.Url),
 			})
 		case *sdm.Memcached:

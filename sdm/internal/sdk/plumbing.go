@@ -6369,6 +6369,8 @@ func convertClickHouseHTTPToPorcelain(plumbing *proto.ClickHouseHTTP) (*ClickHou
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.Url = plumbing.Url
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
@@ -6390,6 +6392,8 @@ func convertClickHouseHTTPToPlumbing(porcelain *ClickHouseHTTP) *proto.ClickHous
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.Url = (porcelain.Url)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
@@ -7482,6 +7486,8 @@ func convertCouchbaseDatabaseToPorcelain(plumbing *proto.CouchbaseDatabase) (*Co
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.TlsRequired = plumbing.TlsRequired
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
@@ -7506,6 +7512,8 @@ func convertCouchbaseDatabaseToPlumbing(porcelain *CouchbaseDatabase) *proto.Cou
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
@@ -7554,6 +7562,8 @@ func convertCouchbaseWebUIToPorcelain(plumbing *proto.CouchbaseWebUI) (*Couchbas
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.Url = plumbing.Url
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
@@ -7575,6 +7585,8 @@ func convertCouchbaseWebUIToPlumbing(porcelain *CouchbaseWebUI) *proto.Couchbase
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.Url = (porcelain.Url)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
@@ -11394,6 +11406,8 @@ func convertHTTPAuthToPorcelain(plumbing *proto.HTTPAuth) (*HTTPAuth, error) {
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.TlsRequired = plumbing.TlsRequired
 	porcelain.Url = plumbing.Url
 	return porcelain, nil
@@ -11420,6 +11434,8 @@ func convertHTTPAuthToPlumbing(porcelain *HTTPAuth) *proto.HTTPAuth {
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
 	plumbing.Url = (porcelain.Url)
 	return plumbing
@@ -11477,6 +11493,8 @@ func convertHTTPBasicAuthToPorcelain(plumbing *proto.HTTPBasicAuth) (*HTTPBasicA
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.TlsRequired = plumbing.TlsRequired
 	porcelain.Url = plumbing.Url
 	porcelain.Username = plumbing.Username
@@ -11504,6 +11522,8 @@ func convertHTTPBasicAuthToPlumbing(porcelain *HTTPBasicAuth) *proto.HTTPBasicAu
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
 	plumbing.Url = (porcelain.Url)
 	plumbing.Username = (porcelain.Username)
@@ -11561,6 +11581,8 @@ func convertHTTPNoAuthToPorcelain(plumbing *proto.HTTPNoAuth) (*HTTPNoAuth, erro
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.TlsRequired = plumbing.TlsRequired
 	porcelain.Url = plumbing.Url
 	return porcelain, nil
@@ -11586,6 +11608,8 @@ func convertHTTPNoAuthToPlumbing(porcelain *HTTPNoAuth) *proto.HTTPNoAuth {
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.TlsRequired = (porcelain.TlsRequired)
 	plumbing.Url = (porcelain.Url)
 	return plumbing
@@ -13349,6 +13373,8 @@ func convertMCPGatewayNoAuthToPorcelain(plumbing *proto.MCPGatewayNoAuth) (*MCPG
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.Url = plumbing.Url
 	return porcelain, nil
 }
@@ -13369,6 +13395,8 @@ func convertMCPGatewayNoAuthToPlumbing(porcelain *MCPGatewayNoAuth) *proto.MCPGa
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.Url = (porcelain.Url)
 	return plumbing
 }
@@ -13420,6 +13448,8 @@ func convertMCPGatewayOAuthToPorcelain(plumbing *proto.MCPGatewayOAuth) (*MCPGat
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.Url = plumbing.Url
 	porcelain.Username = plumbing.Username
 	return porcelain, nil
@@ -13445,6 +13475,8 @@ func convertMCPGatewayOAuthToPlumbing(porcelain *MCPGatewayOAuth) *proto.MCPGate
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.Url = (porcelain.Url)
 	plumbing.Username = (porcelain.Username)
 	return plumbing
@@ -13497,6 +13529,8 @@ func convertMCPGatewayOAuthDCRToPorcelain(plumbing *proto.MCPGatewayOAuthDCR) (*
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.Url = plumbing.Url
 	return porcelain, nil
 }
@@ -13521,6 +13555,8 @@ func convertMCPGatewayOAuthDCRToPlumbing(porcelain *MCPGatewayOAuthDCR) *proto.M
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.Url = (porcelain.Url)
 	return plumbing
 }
@@ -13569,6 +13605,8 @@ func convertMCPGatewayPATToPorcelain(plumbing *proto.MCPGatewayPAT) (*MCPGateway
 	} else {
 		porcelain.Tags = v
 	}
+	porcelain.TlsCert = plumbing.TlsCert
+	porcelain.TlsInsecure = plumbing.TlsInsecure
 	porcelain.Url = plumbing.Url
 	return porcelain, nil
 }
@@ -13590,6 +13628,8 @@ func convertMCPGatewayPATToPlumbing(porcelain *MCPGatewayPAT) *proto.MCPGatewayP
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.TlsCert = (porcelain.TlsCert)
+	plumbing.TlsInsecure = (porcelain.TlsInsecure)
 	plumbing.Url = (porcelain.Url)
 	return plumbing
 }
