@@ -357,6 +357,46 @@ func dataSourceSecretStore() *schema.Resource {
 								},
 							},
 						},
+						"delinea_dsv_store": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Unique identifier of the SecretStore.",
+									},
+									"name": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Unique human-readable name of the SecretStore.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+									"tenant": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The tenant name to target, e.g. \"acme\" for acme.secretsvaultcloud.com",
+									},
+									"tld": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The top level domain of the DSV instance, e.g. \"com\". Defaults to \"com\".",
+									},
+								},
+							},
+						},
 						"gcp_store": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -1591,6 +1631,14 @@ func dataSourceSecretStoreList(ctx context.Context, d *schema.ResourceData, cc *
 				"server_url":  (v.ServerUrl),
 				"tags":        convertTagsToPorcelain(v.Tags),
 				"tenant_name": (v.TenantName),
+			})
+		case *sdm.DelineaDSVStore:
+			output[0]["delinea_dsv_store"] = append(output[0]["delinea_dsv_store"], entity{
+				"id":     (v.ID),
+				"name":   (v.Name),
+				"tags":   convertTagsToPorcelain(v.Tags),
+				"tenant": (v.Tenant),
+				"tld":    (v.Tld),
 			})
 		case *sdm.GCPStore:
 			output[0]["gcp_store"] = append(output[0]["gcp_store"], entity{

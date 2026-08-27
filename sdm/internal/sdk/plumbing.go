@@ -8155,6 +8155,59 @@ func convertRepeatedDeleteResponseMetadataToPorcelain(plumbings []*proto.DeleteR
 	}
 	return items, nil
 }
+func convertDelineaDSVStoreToPorcelain(plumbing *proto.DelineaDSVStore) (*DelineaDSVStore, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &DelineaDSVStore{}
+	porcelain.ID = plumbing.Id
+	porcelain.Name = plumbing.Name
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	porcelain.Tenant = plumbing.Tenant
+	porcelain.Tld = plumbing.Tld
+	return porcelain, nil
+}
+
+func convertDelineaDSVStoreToPlumbing(porcelain *DelineaDSVStore) *proto.DelineaDSVStore {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.DelineaDSVStore{}
+	plumbing.Id = (porcelain.ID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	plumbing.Tenant = (porcelain.Tenant)
+	plumbing.Tld = (porcelain.Tld)
+	return plumbing
+}
+func convertRepeatedDelineaDSVStoreToPlumbing(
+	porcelains []*DelineaDSVStore,
+) []*proto.DelineaDSVStore {
+	var items []*proto.DelineaDSVStore
+	for _, porcelain := range porcelains {
+		items = append(items, convertDelineaDSVStoreToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedDelineaDSVStoreToPorcelain(plumbings []*proto.DelineaDSVStore) (
+	[]*DelineaDSVStore,
+	error,
+) {
+	var items []*DelineaDSVStore
+	for _, plumbing := range plumbings {
+		if v, err := convertDelineaDSVStoreToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertDelineaStoreToPorcelain(plumbing *proto.DelineaStore) (*DelineaStore, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -15277,6 +15330,7 @@ func convertMongoHostToPorcelain(plumbing *proto.MongoHost) (*MongoHost, error) 
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -15305,6 +15359,7 @@ func convertMongoHostToPlumbing(porcelain *MongoHost) *proto.MongoHost {
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -15505,6 +15560,7 @@ func convertMongoReplicaSetToPorcelain(plumbing *proto.MongoReplicaSet) (*MongoR
 	porcelain.Port = plumbing.Port
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -15534,6 +15590,7 @@ func convertMongoReplicaSetToPlumbing(porcelain *MongoReplicaSet) *proto.MongoRe
 	plumbing.Port = (porcelain.Port)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -15580,6 +15637,7 @@ func convertMongoShardedClusterToPorcelain(plumbing *proto.MongoShardedCluster) 
 	porcelain.Password = plumbing.Password
 	porcelain.PortOverride = plumbing.PortOverride
 	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.Region = plumbing.Region
 	porcelain.SecretStoreID = plumbing.SecretStoreId
 	porcelain.Subdomain = plumbing.Subdomain
 	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
@@ -15607,6 +15665,7 @@ func convertMongoShardedClusterToPlumbing(porcelain *MongoShardedCluster) *proto
 	plumbing.Password = (porcelain.Password)
 	plumbing.PortOverride = (porcelain.PortOverride)
 	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.Region = (porcelain.Region)
 	plumbing.SecretStoreId = (porcelain.SecretStoreID)
 	plumbing.Subdomain = (porcelain.Subdomain)
 	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
@@ -23325,6 +23384,8 @@ func convertSecretStoreToPlumbing(porcelain SecretStore) *proto.SecretStore {
 		plumbing.SecretStore = &proto.SecretStore_CyberarkPamExperimental{CyberarkPamExperimental: convertCyberarkPAMExperimentalStoreToPlumbing(v)}
 	case *DelineaStore:
 		plumbing.SecretStore = &proto.SecretStore_Delinea{Delinea: convertDelineaStoreToPlumbing(v)}
+	case *DelineaDSVStore:
+		plumbing.SecretStore = &proto.SecretStore_DelineaDsv{DelineaDsv: convertDelineaDSVStoreToPlumbing(v)}
 	case *GCPStore:
 		plumbing.SecretStore = &proto.SecretStore_Gcp{Gcp: convertGCPStoreToPlumbing(v)}
 	case *GCPCertX509Store:
@@ -23393,6 +23454,9 @@ func convertSecretStoreToPorcelain(plumbing *proto.SecretStore) (SecretStore, er
 	}
 	if plumbing.GetDelinea() != nil {
 		return convertDelineaStoreToPorcelain(plumbing.GetDelinea())
+	}
+	if plumbing.GetDelineaDsv() != nil {
+		return convertDelineaDSVStoreToPorcelain(plumbing.GetDelineaDsv())
 	}
 	if plumbing.GetGcp() != nil {
 		return convertGCPStoreToPorcelain(plumbing.GetGcp())

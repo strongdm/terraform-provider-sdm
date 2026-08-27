@@ -8065,6 +8065,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
+									"region": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The AWS region to use for IAM (MONGODB-AWS) authentication.",
+									},
 									"secret_store_id": {
 										Type: schema.TypeString,
 
@@ -8380,6 +8386,12 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
 									},
+									"region": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The AWS region to use for IAM (MONGODB-AWS) authentication.",
+									},
 									"secret_store_id": {
 										Type: schema.TypeString,
 
@@ -8474,6 +8486,12 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"region": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The AWS region to use for IAM (MONGODB-AWS) authentication.",
 									},
 									"secret_store_id": {
 										Type: schema.TypeString,
@@ -13648,6 +13666,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":             (v.Port),
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
@@ -13704,6 +13723,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
+				"region":             (v.Region),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -13721,6 +13741,7 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":         (v.Password),
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),

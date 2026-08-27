@@ -296,6 +296,41 @@ func resourceSecretStore() *schema.Resource {
 					},
 				},
 			},
+			"delinea_dsv_store": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "DelineaDSVStore is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"name": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "Unique human-readable name of the SecretStore.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+						"tenant": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The tenant name to target, e.g. \"acme\" for acme.secretsvaultcloud.com",
+						},
+						"tld": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The top level domain of the DSV instance, e.g. \"com\". Defaults to \"com\".",
+						},
+					},
+				},
+			},
 			"gcp_store": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -1440,6 +1475,20 @@ func convertSecretStoreToPlumbing(d *schema.ResourceData) sdm.SecretStore {
 		}
 		return out
 	}
+	if list := d.Get("delinea_dsv_store").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.DelineaDSVStore{}
+		}
+		out := &sdm.DelineaDSVStore{
+			ID:     d.Id(),
+			Name:   convertStringToPlumbing(raw["name"]),
+			Tags:   convertTagsToPlumbing(raw["tags"]),
+			Tenant: convertStringToPlumbing(raw["tenant"]),
+			Tld:    convertStringToPlumbing(raw["tld"]),
+		}
+		return out
+	}
 	if list := d.Get("gcp_store").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -1873,6 +1922,17 @@ func resourceSecretStoreCreate(ctx context.Context, d *schema.ResourceData, cc *
 				"tenant_name": (v.TenantName),
 			},
 		})
+	case *sdm.DelineaDSVStore:
+		localV, _ := localVersion.(*sdm.DelineaDSVStore)
+		_ = localV
+		d.Set("delinea_dsv_store", []map[string]interface{}{
+			{
+				"name":   (v.Name),
+				"tags":   convertTagsToPorcelain(v.Tags),
+				"tenant": (v.Tenant),
+				"tld":    (v.Tld),
+			},
+		})
 	case *sdm.GCPStore:
 		localV, _ := localVersion.(*sdm.GCPStore)
 		_ = localV
@@ -2273,6 +2333,20 @@ func resourceSecretStoreRead(ctx context.Context, d *schema.ResourceData, cc *sd
 				"server_url":  (v.ServerUrl),
 				"tags":        convertTagsToPorcelain(v.Tags),
 				"tenant_name": (v.TenantName),
+			},
+		})
+	case *sdm.DelineaDSVStore:
+		localV, ok := localVersion.(*sdm.DelineaDSVStore)
+		if !ok {
+			localV = &sdm.DelineaDSVStore{}
+		}
+		_ = localV
+		d.Set("delinea_dsv_store", []map[string]interface{}{
+			{
+				"name":   (v.Name),
+				"tags":   convertTagsToPorcelain(v.Tags),
+				"tenant": (v.Tenant),
+				"tld":    (v.Tld),
 			},
 		})
 	case *sdm.GCPStore:

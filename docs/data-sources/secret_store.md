@@ -67,6 +67,12 @@ In addition to provided arguments above, the following attributes are returned b
 		* `server_url` - The URL of the Delinea instance
 		* `tags` - Tags is a map of key, value pairs.
 		* `tenant_name` - The tenant name to target
+	* delinea_dsv_store:
+		* `id` - Unique identifier of the SecretStore.
+		* `name` - Unique human-readable name of the SecretStore.
+		* `tags` - Tags is a map of key, value pairs.
+		* `tenant` - The tenant name to target, e.g. "acme" for acme.secretsvaultcloud.com
+		* `tld` - The top level domain of the DSV instance, e.g. "com". Defaults to "com".
 	* gcp_store:
 		* `id` - Unique identifier of the SecretStore.
 		* `name` - Unique human-readable name of the SecretStore.

@@ -3301,6 +3301,21 @@ type Databricks struct {
 type DeleteResponseMetadata struct {
 }
 
+// DelineaDSVStore is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type DelineaDSVStore struct {
+	// Unique identifier of the SecretStore.
+	ID string `json:"id"`
+	// Unique human-readable name of the SecretStore.
+	Name string `json:"name"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+	// The tenant name to target, e.g. "acme" for acme.secretsvaultcloud.com
+	Tenant string `json:"tenant"`
+	// The top level domain of the DSV instance, e.g. "com". Defaults to "com".
+	Tld string `json:"tld"`
+}
+
 type DelineaStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
@@ -5566,6 +5581,8 @@ type MongoHost struct {
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to use for IAM (MONGODB-AWS) authentication.
+	Region string `json:"region"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
@@ -5679,6 +5696,8 @@ type MongoReplicaSet struct {
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to use for IAM (MONGODB-AWS) authentication.
+	Region string `json:"region"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
@@ -5712,6 +5731,8 @@ type MongoShardedCluster struct {
 	PortOverride int32 `json:"portOverride"`
 	// ID of the proxy cluster for this resource, if any.
 	ProxyClusterID string `json:"proxyClusterId"`
+	// The AWS region to use for IAM (MONGODB-AWS) authentication.
+	Region string `json:"region"`
 	// ID of the secret store containing credentials for this resource, if any.
 	SecretStoreID string `json:"secretStoreId"`
 	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
@@ -14942,6 +14963,30 @@ func (m *DelineaStore) GetName() string {
 
 // SetName sets the name of the DelineaStore.
 func (m *DelineaStore) SetName(v string) {
+	m.Name = v
+}
+func (*DelineaDSVStore) isOneOf_SecretStore() {}
+
+// GetID returns the unique identifier of the DelineaDSVStore.
+func (m *DelineaDSVStore) GetID() string { return m.ID }
+
+// GetTags returns the tags of the DelineaDSVStore.
+func (m *DelineaDSVStore) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the DelineaDSVStore.
+func (m *DelineaDSVStore) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetName returns the name of the DelineaDSVStore.
+func (m *DelineaDSVStore) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the DelineaDSVStore.
+func (m *DelineaDSVStore) SetName(v string) {
 	m.Name = v
 }
 func (*GCPStore) isOneOf_SecretStore() {}

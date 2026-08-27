@@ -1303,6 +1303,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `region` - The AWS region to use for IAM (MONGODB-AWS) authentication.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 		* `tags` - Tags is a map of key, value pairs.
@@ -1353,6 +1354,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `port` - The port to dial to initiate a connection from the egress node to this resource.
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `region` - The AWS region to use for IAM (MONGODB-AWS) authentication.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 		* `tags` - Tags is a map of key, value pairs.
@@ -1368,6 +1370,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `password` - The password to authenticate with.
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
 		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `region` - The AWS region to use for IAM (MONGODB-AWS) authentication.
 		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
 		* `subdomain` - DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 		* `tags` - Tags is a map of key, value pairs.

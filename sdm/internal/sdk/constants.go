@@ -354,6 +354,7 @@ const (
 	ActivityVerbOrgIntegrationInstalled                          = "org integration installed"
 	ActivityVerbUserIntegrationAuthorized                        = "user authorized integration"
 	ActivityVerbOrgIntegrationUninstalled                        = "org integration uninstalled"
+	ActivityVerbOrgIntegrationAPIKeyRevealed                     = "org integration API key revealed"
 	ActivityVerbUserIntegrationDeauthorized                      = "user deauthorized integration"
 	ActivityVerbServiceNowTokenAdded                             = "ServiceNow token created"
 	ActivityVerbServiceNowTokenDeleted                           = "ServiceNow token deleted"
@@ -854,6 +855,7 @@ var AllActivityVerb = []string{
 	ActivityVerbOrgIntegrationInstalled,
 	ActivityVerbUserIntegrationAuthorized,
 	ActivityVerbOrgIntegrationUninstalled,
+	ActivityVerbOrgIntegrationAPIKeyRevealed,
 	ActivityVerbUserIntegrationDeauthorized,
 	ActivityVerbServiceNowTokenAdded,
 	ActivityVerbServiceNowTokenDeleted,

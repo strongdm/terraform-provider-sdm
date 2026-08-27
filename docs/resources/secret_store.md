@@ -51,6 +51,11 @@ The following arguments are supported by the SecretStore resource:
 	* `server_url` - (Optional) The URL of the Delinea instance
 	* `tags` - (Optional) Tags is a map of key, value pairs.
 	* `tenant_name` - (Optional) The tenant name to target
+* delinea_dsv_store:
+	* `name` - (Required) Unique human-readable name of the SecretStore.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
+	* `tenant` - (Required) The tenant name to target, e.g. "acme" for acme.secretsvaultcloud.com
+	* `tld` - (Optional) The top level domain of the DSV instance, e.g. "com". Defaults to "com".
 * gcp_store:
 	* `name` - (Required) Unique human-readable name of the SecretStore.
 	* `project_id` - (Required) The GCP project ID to target.

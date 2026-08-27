@@ -7875,6 +7875,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "ID of the proxy cluster for this resource, if any.",
 						},
+						"region": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The AWS region to use for IAM (MONGODB-AWS) authentication.",
+						},
 						"secret_store_id": {
 							Type: schema.TypeString,
 
@@ -8184,6 +8190,12 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "ID of the proxy cluster for this resource, if any.",
 						},
+						"region": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The AWS region to use for IAM (MONGODB-AWS) authentication.",
+						},
 						"secret_store_id": {
 							Type: schema.TypeString,
 
@@ -8276,6 +8288,12 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"region": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The AWS region to use for IAM (MONGODB-AWS) authentication.",
 						},
 						"secret_store_id": {
 							Type: schema.TypeString,
@@ -17142,6 +17160,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Port:           convertInt32ToPlumbing(raw["port"]),
 			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:         convertStringToPlumbing(raw["region"]),
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
@@ -17231,6 +17250,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Port:             convertInt32ToPlumbing(raw["port"]),
 			PortOverride:     convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:           convertStringToPlumbing(raw["region"]),
 			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
 			Tags:             convertTagsToPlumbing(raw["tags"]),
@@ -17259,6 +17279,7 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 			Password:       convertStringToPlumbing(raw["password"]),
 			PortOverride:   convertInt32ToPlumbing(raw["port_override"]),
 			ProxyClusterID: convertStringToPlumbing(raw["proxy_cluster_id"]),
+			Region:         convertStringToPlumbing(raw["region"]),
 			SecretStoreID:  convertStringToPlumbing(raw["secret_store_id"]),
 			Subdomain:      convertStringToPlumbing(raw["subdomain"]),
 			Tags:           convertTagsToPlumbing(raw["tags"]),
@@ -19977,6 +19998,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":             (v.Port),
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
@@ -20042,6 +20064,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
+				"region":             (v.Region),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -20062,6 +20085,7 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"password":         seValues["password"],
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
@@ -23187,6 +23211,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":             (v.Port),
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
@@ -23279,6 +23304,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"port":               (v.Port),
 				"port_override":      (v.PortOverride),
 				"proxy_cluster_id":   (v.ProxyClusterID),
+				"region":             (v.Region),
 				"secret_store_id":    (v.SecretStoreID),
 				"subdomain":          (v.Subdomain),
 				"tags":               convertTagsToPorcelain(v.Tags),
@@ -23308,6 +23334,7 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"password":         seValues["password"],
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
+				"region":           (v.Region),
 				"secret_store_id":  (v.SecretStoreID),
 				"subdomain":        (v.Subdomain),
 				"tags":             convertTagsToPorcelain(v.Tags),
