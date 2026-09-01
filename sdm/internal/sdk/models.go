@@ -174,6 +174,8 @@ const (
 
 	ResourceTypeGoogleGkeUserImpersonation ResourceType = "RESOURCE_TYPE_GOOGLE_GKE_USER_IMPERSONATION"
 
+	ResourceTypeGoogleGroups ResourceType = "RESOURCE_TYPE_GOOGLE_GROUPS"
+
 	ResourceTypeGoogleSpanner ResourceType = "RESOURCE_TYPE_GOOGLE_SPANNER"
 
 	ResourceTypeGreenplum ResourceType = "RESOURCE_TYPE_GREENPLUM"
@@ -3987,6 +3989,41 @@ type GoogleGKEUserImpersonation struct {
 	Tags Tags `json:"tags"`
 }
 
+// GoogleGroups is currently unstable, and its API may change, or it may be removed,
+// without a major version bump.
+type GoogleGroups struct {
+	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	BindInterface string `json:"bindInterface"`
+	// If true, configures discovery of the Google Workspace account to be run
+	// from a node.
+	DiscoveryEnabled bool `json:"discoveryEnabled"`
+	// The primary domain of the Google Workspace account that owns the groups.
+	Domain string `json:"domain"`
+	// A filter applied to the routing logic to pin datasource to nodes.
+	EgressFilter string `json:"egressFilter"`
+	// comma separated list of group email addresses to filter by. Supports
+	// wildcards (*)
+	GroupEmails string `json:"groupEmails"`
+	// True if the datasource is reachable and the credentials are valid.
+	Healthy bool `json:"healthy"`
+	// Unique identifier of the Resource.
+	ID string `json:"id"`
+	// The ID of the identity set to use for identity connections.
+	IdentitySetID string `json:"identitySetId"`
+	// Unique human-readable name of the Resource.
+	Name string `json:"name"`
+	// The privilege levels specify which Groups are managed externally
+	PrivilegeLevels string `json:"privilegeLevels"`
+	// ID of the proxy cluster for this resource, if any.
+	ProxyClusterID string `json:"proxyClusterId"`
+	// ID of the secret store containing credentials for this resource, if any.
+	SecretStoreID string `json:"secretStoreId"`
+	// DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	Subdomain string `json:"subdomain"`
+	// Tags is a map of key, value pairs.
+	Tags Tags `json:"tags"`
+}
+
 type GoogleSpanner struct {
 	// The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	BindInterface string `json:"bindInterface"`
@@ -5005,8 +5042,6 @@ type MCPGatewayNoAuth struct {
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-	// The host to dial to initiate a connection from the egress node to this resource.
-	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
@@ -5036,8 +5071,6 @@ type MCPGatewayOAuth struct {
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-	// The host to dial to initiate a connection from the egress node to this resource.
-	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
@@ -5077,8 +5110,6 @@ type MCPGatewayOAuthDCR struct {
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-	// The host to dial to initiate a connection from the egress node to this resource.
-	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
@@ -5116,8 +5147,6 @@ type MCPGatewayPAT struct {
 	EgressFilter string `json:"egressFilter"`
 	// True if the datasource is reachable and the credentials are valid.
 	Healthy bool `json:"healthy"`
-	// The host to dial to initiate a connection from the egress node to this resource.
-	Hostname string `json:"hostname"`
 	// Unique identifier of the Resource.
 	ID string `json:"id"`
 	// Unique human-readable name of the Resource.
@@ -10599,6 +10628,60 @@ func (m *GoogleGKEUserImpersonation) GetBindInterface() string {
 
 // SetBindInterface sets the bind interface of the GoogleGKEUserImpersonation.
 func (m *GoogleGKEUserImpersonation) SetBindInterface(v string) {
+	m.BindInterface = v
+}
+func (*GoogleGroups) isOneOf_Resource() {}
+
+// GetID returns the unique identifier of the GoogleGroups.
+func (m *GoogleGroups) GetID() string { return m.ID }
+
+// GetName returns the name of the GoogleGroups.
+func (m *GoogleGroups) GetName() string {
+	return m.Name
+}
+
+// SetName sets the name of the GoogleGroups.
+func (m *GoogleGroups) SetName(v string) {
+	m.Name = v
+}
+
+// GetTags returns the tags of the GoogleGroups.
+func (m *GoogleGroups) GetTags() Tags {
+	return m.Tags.clone()
+}
+
+// SetTags sets the tags of the GoogleGroups.
+func (m *GoogleGroups) SetTags(v Tags) {
+	m.Tags = v.clone()
+}
+
+// GetSecretStoreID returns the secret store id of the GoogleGroups.
+func (m *GoogleGroups) GetSecretStoreID() string {
+	return m.SecretStoreID
+}
+
+// SetSecretStoreID sets the secret store id of the GoogleGroups.
+func (m *GoogleGroups) SetSecretStoreID(v string) {
+	m.SecretStoreID = v
+}
+
+// GetEgressFilter returns the egress filter of the GoogleGroups.
+func (m *GoogleGroups) GetEgressFilter() string {
+	return m.EgressFilter
+}
+
+// SetEgressFilter sets the egress filter of the GoogleGroups.
+func (m *GoogleGroups) SetEgressFilter(v string) {
+	m.EgressFilter = v
+}
+
+// GetBindInterface returns the bind interface of the GoogleGroups.
+func (m *GoogleGroups) GetBindInterface() string {
+	return m.BindInterface
+}
+
+// SetBindInterface sets the bind interface of the GoogleGroups.
+func (m *GoogleGroups) SetBindInterface(v string) {
 	m.BindInterface = v
 }
 func (*GoogleSpanner) isOneOf_Resource() {}

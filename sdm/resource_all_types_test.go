@@ -798,6 +798,18 @@ func TestAccSDMResource_UpdateAllTypes(t *testing.T) {
 			},
 		},
 		{
+			resource: "google_groups",
+			pairs: [][2]string{
+				{"discovery_enabled", `true`},
+				{"domain", `"domain"`},
+				{"egress_filter", `"name:value"`},
+				{"group_emails", `"group_emails"`},
+				{"identity_set_id", identitySetID},
+				{"name", `"all-resources-googlegroups-name"`},
+				{"privilege_levels", `"privilege_levels"`},
+			},
+		},
+		{
 			resource: "google_spanner",
 			pairs: [][2]string{
 				{"database", `"database"`},

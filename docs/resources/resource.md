@@ -943,6 +943,19 @@ The following arguments are supported by the Resource resource:
 	* `service_account_key` - (Required, either in plaintext, or as a secret store path) The service account key to authenticate with.
 	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 	* `tags` - (Optional) Tags is a map of key, value pairs.
+* google_groups:
+	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+	* `discovery_enabled` - (Optional) If true, configures discovery of the Google Workspace account to be run from a node.
+	* `domain` - (Required) The primary domain of the Google Workspace account that owns the groups.
+	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
+	* `group_emails` - (Optional) comma separated list of group email addresses to filter by. Supports wildcards (*)
+	* `identity_set_id` - (Required) The ID of the identity set to use for identity connections.
+	* `name` - (Required) Unique human-readable name of the Resource.
+	* `privilege_levels` - (Optional) The privilege levels specify which Groups are managed externally
+	* `proxy_cluster_id` - (Optional) ID of the proxy cluster for this resource, if any.
+	* `secret_store_id` - (Optional) ID of the secret store containing credentials for this resource, if any.
+	* `subdomain` - (Optional) DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+	* `tags` - (Optional) Tags is a map of key, value pairs.
 * google_spanner:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `database` - (Required) The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
@@ -1860,14 +1873,6 @@ The following arguments are supported by the Resource resource:
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by the Resource resource:
 * `id` - A unique identifier for the Resource resource.
-* mcp_gateway_no_auth:
-	* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
-* mcp_gateway_o_auth:
-	* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
-* mcp_gateway_o_auth_dcr:
-	* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
-* mcp_gateway_pat:
-	* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 * snowflake:
 	* `password` - Deprecated: https://www.snowflake.com/en/blog/blocking-single-factor-password-authentification/
 * ssh:

@@ -976,6 +976,20 @@ In addition to provided arguments above, the following attributes are returned b
 		* `service_account_key` - The service account key to authenticate with.
 		* `subdomain` - DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
 		* `tags` - Tags is a map of key, value pairs.
+	* google_groups:
+		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
+		* `discovery_enabled` - If true, configures discovery of the Google Workspace account to be run from a node.
+		* `domain` - The primary domain of the Google Workspace account that owns the groups.
+		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
+		* `group_emails` - comma separated list of group email addresses to filter by. Supports wildcards (*)
+		* `id` - Unique identifier of the Resource.
+		* `identity_set_id` - The ID of the identity set to use for identity connections.
+		* `name` - Unique human-readable name of the Resource.
+		* `privilege_levels` - The privilege levels specify which Groups are managed externally
+		* `proxy_cluster_id` - ID of the proxy cluster for this resource, if any.
+		* `secret_store_id` - ID of the secret store containing credentials for this resource, if any.
+		* `subdomain` - DNS subdomain through which this resource may be accessed on clients.  (e.g. "app-prod1" allows the resource to be accessed at "app-prod1.your-org-name.sdm-proxy-domain"). Only applicable to HTTP-based resources or resources using virtual networking mode.
+		* `tags` - Tags is a map of key, value pairs.
 	* google_spanner:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 		* `database` - The initial database to connect to. This setting does not by itself prevent switching to another database after connecting.
@@ -1200,7 +1214,6 @@ In addition to provided arguments above, the following attributes are returned b
 	* mcp_gateway_no_auth:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `port_override` - The local port used by clients to connect to this resource. It is automatically generated if not provided on create and may be re-generated on update by specifying a value of -1.
@@ -1214,7 +1227,6 @@ In addition to provided arguments above, the following attributes are returned b
 	* mcp_gateway_o_auth:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `oauth_auth_endpoint` - The OAuth 2.0 authorization endpoint URL.
@@ -1233,7 +1245,6 @@ In addition to provided arguments above, the following attributes are returned b
 	* mcp_gateway_o_auth_dcr:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `oauth_auth_endpoint` - The OAuth 2.0 authorization endpoint URL.
@@ -1251,7 +1262,6 @@ In addition to provided arguments above, the following attributes are returned b
 	* mcp_gateway_pat:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
-		* `hostname` - The host to dial to initiate a connection from the egress node to this resource.
 		* `id` - Unique identifier of the Resource.
 		* `name` - Unique human-readable name of the Resource.
 		* `password` - The password to authenticate with.

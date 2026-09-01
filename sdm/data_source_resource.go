@@ -5999,6 +5999,94 @@ func dataSourceResource() *schema.Resource {
 								},
 							},
 						},
+						"google_groups": {
+							Type:        schema.TypeList,
+							Computed:    true,
+							Description: "",
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"bind_interface": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+									},
+									"discovery_enabled": {
+										Type: schema.TypeBool,
+
+										Optional:    true,
+										Description: "If true, configures discovery of the Google Workspace account to be run from a node.",
+									},
+									"domain": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The primary domain of the Google Workspace account that owns the groups.",
+									},
+									"egress_filter": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "A filter applied to the routing logic to pin datasource to nodes.",
+									},
+									"group_emails": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "comma separated list of group email addresses to filter by. Supports wildcards (*)",
+									},
+									"id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Unique identifier of the Resource.",
+									},
+									"identity_set_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The ID of the identity set to use for identity connections.",
+									},
+									"name": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "Unique human-readable name of the Resource.",
+									},
+									"privilege_levels": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "The privilege levels specify which Groups are managed externally",
+									},
+									"proxy_cluster_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "ID of the proxy cluster for this resource, if any.",
+									},
+									"secret_store_id": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "ID of the secret store containing credentials for this resource, if any.",
+									},
+									"subdomain": {
+										Type: schema.TypeString,
+
+										Optional:    true,
+										Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+									},
+									"tags": {
+										Type: schema.TypeMap,
+										Elem: tagsElemType,
+
+										Optional:    true,
+										Description: "Tags is a map of key, value pairs.",
+									},
+								},
+							},
+						},
 						"google_spanner": {
 							Type:        schema.TypeList,
 							Computed:    true,
@@ -7415,12 +7503,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
-									"hostname": {
-										Type: schema.TypeString,
-
-										Computed:    true,
-										Description: "The host to dial to initiate a connection from the egress node to this resource.",
-									},
 									"id": {
 										Type: schema.TypeString,
 
@@ -7503,12 +7585,6 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type: schema.TypeString,
-
-										Computed:    true,
-										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type: schema.TypeString,
@@ -7624,12 +7700,6 @@ func dataSourceResource() *schema.Resource {
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
 									},
-									"hostname": {
-										Type: schema.TypeString,
-
-										Computed:    true,
-										Description: "The host to dial to initiate a connection from the egress node to this resource.",
-									},
 									"id": {
 										Type: schema.TypeString,
 
@@ -7736,12 +7806,6 @@ func dataSourceResource() *schema.Resource {
 
 										Optional:    true,
 										Description: "A filter applied to the routing logic to pin datasource to nodes.",
-									},
-									"hostname": {
-										Type: schema.TypeString,
-
-										Computed:    true,
-										Description: "The host to dial to initiate a connection from the egress node to this resource.",
 									},
 									"id": {
 										Type: schema.TypeString,
@@ -13300,6 +13364,22 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"subdomain":             (v.Subdomain),
 				"tags":                  convertTagsToPorcelain(v.Tags),
 			})
+		case *sdm.GoogleGroups:
+			output[0]["google_groups"] = append(output[0]["google_groups"], entity{
+				"bind_interface":    (v.BindInterface),
+				"discovery_enabled": (v.DiscoveryEnabled),
+				"domain":            (v.Domain),
+				"egress_filter":     (v.EgressFilter),
+				"group_emails":      (v.GroupEmails),
+				"id":                (v.ID),
+				"identity_set_id":   (v.IdentitySetID),
+				"name":              (v.Name),
+				"privilege_levels":  (v.PrivilegeLevels),
+				"proxy_cluster_id":  (v.ProxyClusterID),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+			})
 		case *sdm.GoogleSpanner:
 			output[0]["google_spanner"] = append(output[0]["google_spanner"], entity{
 				"bind_interface":                 (v.BindInterface),
@@ -13551,7 +13631,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			output[0]["mcp_gateway_no_auth"] = append(output[0]["mcp_gateway_no_auth"], entity{
 				"bind_interface":   (v.BindInterface),
 				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
 				"id":               (v.ID),
 				"name":             (v.Name),
 				"port_override":    (v.PortOverride),
@@ -13567,7 +13646,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			output[0]["mcp_gateway_o_auth"] = append(output[0]["mcp_gateway_o_auth"], entity{
 				"bind_interface":       (v.BindInterface),
 				"egress_filter":        (v.EgressFilter),
-				"hostname":             (v.Hostname),
 				"id":                   (v.ID),
 				"name":                 (v.Name),
 				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
@@ -13588,7 +13666,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			output[0]["mcp_gateway_o_auth_dcr"] = append(output[0]["mcp_gateway_o_auth_dcr"], entity{
 				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
-				"hostname":                (v.Hostname),
 				"id":                      (v.ID),
 				"name":                    (v.Name),
 				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
@@ -13608,7 +13685,6 @@ func dataSourceResourceList(ctx context.Context, d *schema.ResourceData, cc *sdm
 			output[0]["mcp_gateway_pat"] = append(output[0]["mcp_gateway_pat"], entity{
 				"bind_interface":   (v.BindInterface),
 				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
 				"id":               (v.ID),
 				"name":             (v.Name),
 				"password":         (v.Password),

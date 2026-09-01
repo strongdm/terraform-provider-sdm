@@ -5849,6 +5849,91 @@ func resourceResource() *schema.Resource {
 					},
 				},
 			},
+			"google_groups": {
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Description: "GoogleGroups is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"bind_interface": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.",
+						},
+						"discovery_enabled": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "If true, configures discovery of the Google Workspace account to be run from a node.",
+						},
+						"domain": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The primary domain of the Google Workspace account that owns the groups.",
+						},
+						"egress_filter": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "A filter applied to the routing logic to pin datasource to nodes.",
+						},
+						"group_emails": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "comma separated list of group email addresses to filter by. Supports wildcards (*)",
+						},
+						"identity_set_id": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "The ID of the identity set to use for identity connections.",
+						},
+						"name": {
+							Type: schema.TypeString,
+
+							Required:    true,
+							Description: "Unique human-readable name of the Resource.",
+						},
+						"privilege_levels": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "The privilege levels specify which Groups are managed externally",
+						},
+						"proxy_cluster_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the proxy cluster for this resource, if any.",
+						},
+						"secret_store_id": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Description: "ID of the secret store containing credentials for this resource, if any.",
+						},
+						"subdomain": {
+							Type: schema.TypeString,
+
+							Optional:    true,
+							Computed:    true,
+							Description: "DNS subdomain through which this resource may be accessed on clients.  (e.g. \"app-prod1\" allows the resource to be accessed at \"app-prod1.your-org-name.sdm-proxy-domain\"). Only applicable to HTTP-based resources or resources using virtual networking mode.",
+						},
+						"tags": {
+							Type: schema.TypeMap,
+							Elem: tagsElemType,
+
+							Optional:    true,
+							Description: "Tags is a map of key, value pairs.",
+						},
+					},
+				},
+			},
 			"google_spanner": {
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -7242,12 +7327,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "A filter applied to the routing logic to pin datasource to nodes.",
 						},
-						"hostname": {
-							Type: schema.TypeString,
-
-							Computed:    true,
-							Description: "The host to dial to initiate a connection from the egress node to this resource.",
-						},
 						"name": {
 							Type: schema.TypeString,
 
@@ -7328,12 +7407,6 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "A filter applied to the routing logic to pin datasource to nodes.",
-						},
-						"hostname": {
-							Type: schema.TypeString,
-
-							Computed:    true,
-							Description: "The host to dial to initiate a connection from the egress node to this resource.",
 						},
 						"name": {
 							Type: schema.TypeString,
@@ -7447,12 +7520,6 @@ func resourceResource() *schema.Resource {
 							Optional:    true,
 							Description: "A filter applied to the routing logic to pin datasource to nodes.",
 						},
-						"hostname": {
-							Type: schema.TypeString,
-
-							Computed:    true,
-							Description: "The host to dial to initiate a connection from the egress node to this resource.",
-						},
 						"name": {
 							Type: schema.TypeString,
 
@@ -7557,12 +7624,6 @@ func resourceResource() *schema.Resource {
 
 							Optional:    true,
 							Description: "A filter applied to the routing logic to pin datasource to nodes.",
-						},
-						"hostname": {
-							Type: schema.TypeString,
-
-							Computed:    true,
-							Description: "The host to dial to initiate a connection from the egress node to this resource.",
 						},
 						"name": {
 							Type: schema.TypeString,
@@ -13488,6 +13549,17 @@ func secretStoreValuesForResource(d *schema.ResourceData) (map[string]string, er
 			"service_account_key":   convertStringToPlumbing(raw["service_account_key"]),
 		}, nil
 	}
+	if list := d.Get("google_groups").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return map[string]string{}, nil
+		}
+		_ = raw
+		if seID := raw["secret_store_id"]; seID != nil && seID.(string) != "" {
+		}
+
+		return map[string]string{}, nil
+	}
 	if list := d.Get("google_spanner").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -16585,6 +16657,28 @@ func convertResourceToPlumbing(d *schema.ResourceData) sdm.Resource {
 		out.PortOverride = int32(override)
 		return out
 	}
+	if list := d.Get("google_groups").([]interface{}); len(list) > 0 {
+		raw, ok := list[0].(map[string]interface{})
+		if !ok {
+			return &sdm.GoogleGroups{}
+		}
+		out := &sdm.GoogleGroups{
+			ID:               d.Id(),
+			BindInterface:    convertStringToPlumbing(raw["bind_interface"]),
+			DiscoveryEnabled: convertBoolToPlumbing(raw["discovery_enabled"]),
+			Domain:           convertStringToPlumbing(raw["domain"]),
+			EgressFilter:     convertStringToPlumbing(raw["egress_filter"]),
+			GroupEmails:      convertStringToPlumbing(raw["group_emails"]),
+			IdentitySetID:    convertStringToPlumbing(raw["identity_set_id"]),
+			Name:             convertStringToPlumbing(raw["name"]),
+			PrivilegeLevels:  convertStringToPlumbing(raw["privilege_levels"]),
+			ProxyClusterID:   convertStringToPlumbing(raw["proxy_cluster_id"]),
+			SecretStoreID:    convertStringToPlumbing(raw["secret_store_id"]),
+			Subdomain:        convertStringToPlumbing(raw["subdomain"]),
+			Tags:             convertTagsToPlumbing(raw["tags"]),
+		}
+		return out
+	}
 	if list := d.Get("google_spanner").([]interface{}); len(list) > 0 {
 		raw, ok := list[0].(map[string]interface{})
 		if !ok {
@@ -19573,6 +19667,25 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.GoogleGroups:
+		localV, _ := localVersion.(*sdm.GoogleGroups)
+		_ = localV
+		d.Set("google_groups", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"discovery_enabled": (v.DiscoveryEnabled),
+				"domain":            (v.Domain),
+				"egress_filter":     (v.EgressFilter),
+				"group_emails":      (v.GroupEmails),
+				"identity_set_id":   (v.IdentitySetID),
+				"name":              (v.Name),
+				"privilege_levels":  (v.PrivilegeLevels),
+				"proxy_cluster_id":  (v.ProxyClusterID),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.GoogleSpanner:
 		localV, _ := localVersion.(*sdm.GoogleSpanner)
 		_ = localV
@@ -19866,7 +19979,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 			{
 				"bind_interface":   (v.BindInterface),
 				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
 				"name":             (v.Name),
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
@@ -19885,7 +19997,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 			{
 				"bind_interface":       (v.BindInterface),
 				"egress_filter":        (v.EgressFilter),
-				"hostname":             (v.Hostname),
 				"name":                 (v.Name),
 				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
 				"oauth_scopes":         (v.OauthScopes),
@@ -19909,7 +20020,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 			{
 				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
-				"hostname":                (v.Hostname),
 				"name":                    (v.Name),
 				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
 				"oauth_register_endpoint": (v.OauthRegisterEndpoint),
@@ -19932,7 +20042,6 @@ func resourceResourceCreate(ctx context.Context, d *schema.ResourceData, cc *sdm
 			{
 				"bind_interface":   (v.BindInterface),
 				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
 				"name":             (v.Name),
 				"password":         seValues["password"],
 				"port_override":    (v.PortOverride),
@@ -22651,6 +22760,28 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 				"tags":                  convertTagsToPorcelain(v.Tags),
 			},
 		})
+	case *sdm.GoogleGroups:
+		localV, ok := localVersion.(*sdm.GoogleGroups)
+		if !ok {
+			localV = &sdm.GoogleGroups{}
+		}
+		_ = localV
+		d.Set("google_groups", []map[string]interface{}{
+			{
+				"bind_interface":    (v.BindInterface),
+				"discovery_enabled": (v.DiscoveryEnabled),
+				"domain":            (v.Domain),
+				"egress_filter":     (v.EgressFilter),
+				"group_emails":      (v.GroupEmails),
+				"identity_set_id":   (v.IdentitySetID),
+				"name":              (v.Name),
+				"privilege_levels":  (v.PrivilegeLevels),
+				"proxy_cluster_id":  (v.ProxyClusterID),
+				"secret_store_id":   (v.SecretStoreID),
+				"subdomain":         (v.Subdomain),
+				"tags":              convertTagsToPorcelain(v.Tags),
+			},
+		})
 	case *sdm.GoogleSpanner:
 		localV, ok := localVersion.(*sdm.GoogleSpanner)
 		if !ok {
@@ -23043,7 +23174,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			{
 				"bind_interface":   (v.BindInterface),
 				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
 				"name":             (v.Name),
 				"port_override":    (v.PortOverride),
 				"proxy_cluster_id": (v.ProxyClusterID),
@@ -23068,7 +23198,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			{
 				"bind_interface":       (v.BindInterface),
 				"egress_filter":        (v.EgressFilter),
-				"hostname":             (v.Hostname),
 				"name":                 (v.Name),
 				"oauth_auth_endpoint":  (v.OauthAuthEndpoint),
 				"oauth_scopes":         (v.OauthScopes),
@@ -23095,7 +23224,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			{
 				"bind_interface":          (v.BindInterface),
 				"egress_filter":           (v.EgressFilter),
-				"hostname":                (v.Hostname),
 				"name":                    (v.Name),
 				"oauth_auth_endpoint":     (v.OauthAuthEndpoint),
 				"oauth_register_endpoint": (v.OauthRegisterEndpoint),
@@ -23124,7 +23252,6 @@ func resourceResourceRead(ctx context.Context, d *schema.ResourceData, cc *sdm.C
 			{
 				"bind_interface":   (v.BindInterface),
 				"egress_filter":    (v.EgressFilter),
-				"hostname":         (v.Hostname),
 				"name":             (v.Name),
 				"password":         seValues["password"],
 				"port_override":    (v.PortOverride),

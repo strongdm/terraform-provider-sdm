@@ -9845,6 +9845,77 @@ func convertRepeatedGoogleGKEUserImpersonationToPorcelain(plumbings []*proto.Goo
 	}
 	return items, nil
 }
+func convertGoogleGroupsToPorcelain(plumbing *proto.GoogleGroups) (*GoogleGroups, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &GoogleGroups{}
+	porcelain.BindInterface = plumbing.BindInterface
+	porcelain.DiscoveryEnabled = plumbing.DiscoveryEnabled
+	porcelain.Domain = plumbing.Domain
+	porcelain.EgressFilter = plumbing.EgressFilter
+	porcelain.GroupEmails = plumbing.GroupEmails
+	porcelain.Healthy = plumbing.Healthy
+	porcelain.ID = plumbing.Id
+	porcelain.IdentitySetID = plumbing.IdentitySetId
+	porcelain.Name = plumbing.Name
+	porcelain.PrivilegeLevels = plumbing.PrivilegeLevels
+	porcelain.ProxyClusterID = plumbing.ProxyClusterId
+	porcelain.SecretStoreID = plumbing.SecretStoreId
+	porcelain.Subdomain = plumbing.Subdomain
+	if v, err := convertTagsToPorcelain(plumbing.Tags); err != nil {
+		return nil, fmt.Errorf("error converting field Tags: %v", err)
+	} else {
+		porcelain.Tags = v
+	}
+	return porcelain, nil
+}
+
+func convertGoogleGroupsToPlumbing(porcelain *GoogleGroups) *proto.GoogleGroups {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.GoogleGroups{}
+	plumbing.BindInterface = (porcelain.BindInterface)
+	plumbing.DiscoveryEnabled = (porcelain.DiscoveryEnabled)
+	plumbing.Domain = (porcelain.Domain)
+	plumbing.EgressFilter = (porcelain.EgressFilter)
+	plumbing.GroupEmails = (porcelain.GroupEmails)
+	plumbing.Healthy = (porcelain.Healthy)
+	plumbing.Id = (porcelain.ID)
+	plumbing.IdentitySetId = (porcelain.IdentitySetID)
+	plumbing.Name = (porcelain.Name)
+	plumbing.PrivilegeLevels = (porcelain.PrivilegeLevels)
+	plumbing.ProxyClusterId = (porcelain.ProxyClusterID)
+	plumbing.SecretStoreId = (porcelain.SecretStoreID)
+	plumbing.Subdomain = (porcelain.Subdomain)
+	plumbing.Tags = convertTagsToPlumbing(porcelain.Tags)
+	return plumbing
+}
+func convertRepeatedGoogleGroupsToPlumbing(
+	porcelains []*GoogleGroups,
+) []*proto.GoogleGroups {
+	var items []*proto.GoogleGroups
+	for _, porcelain := range porcelains {
+		items = append(items, convertGoogleGroupsToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedGoogleGroupsToPorcelain(plumbings []*proto.GoogleGroups) (
+	[]*GoogleGroups,
+	error,
+) {
+	var items []*GoogleGroups
+	for _, plumbing := range plumbings {
+		if v, err := convertGoogleGroupsToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertGoogleSpannerToPorcelain(plumbing *proto.GoogleSpanner) (*GoogleSpanner, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -13414,7 +13485,6 @@ func convertMCPGatewayNoAuthToPorcelain(plumbing *proto.MCPGatewayNoAuth) (*MCPG
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.PortOverride = plumbing.PortOverride
@@ -13440,7 +13510,6 @@ func convertMCPGatewayNoAuthToPlumbing(porcelain *MCPGatewayNoAuth) *proto.MCPGa
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.PortOverride = (porcelain.PortOverride)
@@ -13485,7 +13554,6 @@ func convertMCPGatewayOAuthToPorcelain(plumbing *proto.MCPGatewayOAuth) (*MCPGat
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.OauthAuthEndpoint = plumbing.OauthAuthEndpoint
@@ -13516,7 +13584,6 @@ func convertMCPGatewayOAuthToPlumbing(porcelain *MCPGatewayOAuth) *proto.MCPGate
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.OauthAuthEndpoint = (porcelain.OauthAuthEndpoint)
@@ -13566,7 +13633,6 @@ func convertMCPGatewayOAuthDCRToPorcelain(plumbing *proto.MCPGatewayOAuthDCR) (*
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.OauthAuthEndpoint = plumbing.OauthAuthEndpoint
@@ -13596,7 +13662,6 @@ func convertMCPGatewayOAuthDCRToPlumbing(porcelain *MCPGatewayOAuthDCR) *proto.M
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.OauthAuthEndpoint = (porcelain.OauthAuthEndpoint)
@@ -13645,7 +13710,6 @@ func convertMCPGatewayPATToPorcelain(plumbing *proto.MCPGatewayPAT) (*MCPGateway
 	porcelain.BindInterface = plumbing.BindInterface
 	porcelain.EgressFilter = plumbing.EgressFilter
 	porcelain.Healthy = plumbing.Healthy
-	porcelain.Hostname = plumbing.Hostname
 	porcelain.ID = plumbing.Id
 	porcelain.Name = plumbing.Name
 	porcelain.Password = plumbing.Password
@@ -13672,7 +13736,6 @@ func convertMCPGatewayPATToPlumbing(porcelain *MCPGatewayPAT) *proto.MCPGatewayP
 	plumbing.BindInterface = (porcelain.BindInterface)
 	plumbing.EgressFilter = (porcelain.EgressFilter)
 	plumbing.Healthy = (porcelain.Healthy)
-	plumbing.Hostname = (porcelain.Hostname)
 	plumbing.Id = (porcelain.ID)
 	plumbing.Name = (porcelain.Name)
 	plumbing.Password = (porcelain.Password)
@@ -20745,6 +20808,8 @@ func convertResourceToPlumbing(porcelain Resource) *proto.Resource {
 		plumbing.Resource = &proto.Resource_GoogleGke{GoogleGke: convertGoogleGKEToPlumbing(v)}
 	case *GoogleGKEUserImpersonation:
 		plumbing.Resource = &proto.Resource_GoogleGkeUserImpersonation{GoogleGkeUserImpersonation: convertGoogleGKEUserImpersonationToPlumbing(v)}
+	case *GoogleGroups:
+		plumbing.Resource = &proto.Resource_GoogleGroups{GoogleGroups: convertGoogleGroupsToPlumbing(v)}
 	case *GoogleSpanner:
 		plumbing.Resource = &proto.Resource_GoogleSpanner{GoogleSpanner: convertGoogleSpannerToPlumbing(v)}
 	case *Greenplum:
@@ -21044,6 +21109,9 @@ func convertResourceToPorcelain(plumbing *proto.Resource) (Resource, error) {
 	}
 	if plumbing.GetGoogleGkeUserImpersonation() != nil {
 		return convertGoogleGKEUserImpersonationToPorcelain(plumbing.GetGoogleGkeUserImpersonation())
+	}
+	if plumbing.GetGoogleGroups() != nil {
+		return convertGoogleGroupsToPorcelain(plumbing.GetGoogleGroups())
 	}
 	if plumbing.GetGoogleSpanner() != nil {
 		return convertGoogleSpannerToPorcelain(plumbing.GetGoogleSpanner())
