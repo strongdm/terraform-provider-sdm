@@ -3303,8 +3303,6 @@ type Databricks struct {
 type DeleteResponseMetadata struct {
 }
 
-// DelineaDSVStore is currently unstable, and its API may change, or it may be removed,
-// without a major version bump.
 type DelineaDSVStore struct {
 	// Unique identifier of the SecretStore.
 	ID string `json:"id"`
