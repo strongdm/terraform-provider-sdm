@@ -946,7 +946,7 @@ The following arguments are supported by the Resource resource:
 * google_groups:
 	* `bind_interface` - (Optional) The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 	* `discovery_enabled` - (Optional) If true, configures discovery of the Google Workspace account to be run from a node.
-	* `domain` - (Required) The primary domain of the Google Workspace account that owns the groups.
+	* `domain` - (Required) The Google Workspace domain that owns the groups. Only groups whose email address is at this exact domain are discovered; add one resource per secondary domain.
 	* `egress_filter` - (Optional) A filter applied to the routing logic to pin datasource to nodes.
 	* `group_emails` - (Optional) comma separated list of group email addresses to filter by. Supports wildcards (*)
 	* `identity_set_id` - (Required) The ID of the identity set to use for identity connections.

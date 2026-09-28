@@ -5853,7 +5853,7 @@ func resourceResource() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
-				Description: "GoogleGroups is currently unstable, and its API may change, or it may be removed, without a major version bump.",
+				Description: "",
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"bind_interface": {
@@ -5873,7 +5873,7 @@ func resourceResource() *schema.Resource {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "The primary domain of the Google Workspace account that owns the groups.",
+							Description: "The Google Workspace domain that owns the groups. Only groups whose email address is at this exact domain are discovered; add one resource per secondary domain.",
 						},
 						"egress_filter": {
 							Type: schema.TypeString,

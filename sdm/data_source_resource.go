@@ -6021,7 +6021,7 @@ func dataSourceResource() *schema.Resource {
 										Type: schema.TypeString,
 
 										Optional:    true,
-										Description: "The primary domain of the Google Workspace account that owns the groups.",
+										Description: "The Google Workspace domain that owns the groups. Only groups whose email address is at this exact domain are discovered; add one resource per secondary domain.",
 									},
 									"egress_filter": {
 										Type: schema.TypeString,

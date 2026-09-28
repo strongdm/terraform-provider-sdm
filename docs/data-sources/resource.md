@@ -979,7 +979,7 @@ In addition to provided arguments above, the following attributes are returned b
 	* google_groups:
 		* `bind_interface` - The bind interface is the IP address to which the port override of a resource is bound (for example, 127.0.0.1). It is automatically generated if not provided and may also be set to one of the ResourceIPAllocationMode constants to select between VNM, loopback, or default allocation.
 		* `discovery_enabled` - If true, configures discovery of the Google Workspace account to be run from a node.
-		* `domain` - The primary domain of the Google Workspace account that owns the groups.
+		* `domain` - The Google Workspace domain that owns the groups. Only groups whose email address is at this exact domain are discovered; add one resource per secondary domain.
 		* `egress_filter` - A filter applied to the routing logic to pin datasource to nodes.
 		* `group_emails` - comma separated list of group email addresses to filter by. Supports wildcards (*)
 		* `id` - Unique identifier of the Resource.
