@@ -380,8 +380,6 @@ const (
 	PermissionAccessRequestRequester       = "accessrequest:requester"
 	PermissionAccountGroupRead             = "accountgroup:read"
 	PermissionAccountGroupWrite            = "accountgroup:write"
-	PermissionAdminRoleRead                = "adminrole:read"
-	PermissionAdminRoleWrite               = "adminrole:write"
 	PermissionApprovalFlowEdit             = "approvalflow:edit"
 	PermissionApprovalFlowList             = "approvalflow:list"
 	PermissionBillingRead                  = "billing:read"
@@ -437,6 +435,8 @@ const (
 	PermissionOrgEditSettings              = "organization:edit_settings"
 	PermissionOrgListChildren              = "organization:list_children"
 	PermissionOrgViewSettings              = "organization:view_settings"
+	PermissionPermissionSetRead            = "permissionset:read"
+	PermissionPermissionSetWrite           = "permissionset:write"
 	PermissionPolicyRead                   = "policy:read"
 	PermissionPolicyWrite                  = "policy:write"
 	PermissionRelayCreate                  = "relay:create"
@@ -574,6 +574,13 @@ const (
 	APIHostUS = "app.strongdm.com:443"
 	APIHostUK = "app.uk.strongdm.com:443"
 	APIHostEU = "app.eu.strongdm.com:443"
+)
+
+// InitiatorType defines who established a connection to a resource, as classified by the local StrongDM client.
+const (
+	InitiatorTypeAIAgent = "ai_agent"
+	InitiatorTypeHuman   = "human"
+	InitiatorTypeUnknown = "unknown"
 )
 
 // ApproverReference defines the type for approver references.
@@ -948,6 +955,16 @@ func DeviceTrustProviderIsValid(v string) bool {
 	return slices.Contains(AllDeviceTrustProvider, v)
 }
 
+var AllInitiatorType = []string{
+	InitiatorTypeAIAgent,
+	InitiatorTypeHuman,
+	InitiatorTypeUnknown,
+}
+
+func InitiatorTypeIsValid(v string) bool {
+	return slices.Contains(AllInitiatorType, v)
+}
+
 var AllLogLocalEncoder = []string{
 	LogLocalEncoderPlaintext,
 	LogLocalEncoderPubKey,
@@ -1030,8 +1047,6 @@ var AllPermission = []string{
 	PermissionAccessRequestRequester,
 	PermissionAccountGroupRead,
 	PermissionAccountGroupWrite,
-	PermissionAdminRoleRead,
-	PermissionAdminRoleWrite,
 	PermissionApprovalFlowEdit,
 	PermissionApprovalFlowList,
 	PermissionBillingRead,
@@ -1087,6 +1102,8 @@ var AllPermission = []string{
 	PermissionOrgEditSettings,
 	PermissionOrgListChildren,
 	PermissionOrgViewSettings,
+	PermissionPermissionSetRead,
+	PermissionPermissionSetWrite,
 	PermissionPolicyRead,
 	PermissionPolicyWrite,
 	PermissionRelayCreate,

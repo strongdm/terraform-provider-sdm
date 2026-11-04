@@ -248,6 +248,9 @@ type Query struct {
 	IdentityAliasUsername string `protobuf:"bytes,30,opt,name=identity_alias_username,json=identityAliasUsername,proto3" json:"identity_alias_username,omitempty"`
 	// Driver specific metadata associated with this query.
 	MetadataJson string `protobuf:"bytes,31,opt,name=metadata_json,json=metadataJson,proto3" json:"metadata_json,omitempty"`
+	// Who established the connection to the resource, as classified by the local StrongDM client.
+	// Absent when the initiator was not recorded or the organization does not have AI Agent controls.
+	Initiator *Initiator `protobuf:"bytes,32,opt,name=initiator,proto3" json:"initiator,omitempty"`
 }
 
 func (x *Query) Reset() {
@@ -500,6 +503,93 @@ func (x *Query) GetMetadataJson() string {
 	return ""
 }
 
+func (x *Query) GetInitiator() *Initiator {
+	if x != nil {
+		return x.Initiator
+	}
+	return nil
+}
+
+// An Initiator describes who established the connection to the resource, as classified by
+// the local StrongDM client.
+type Initiator struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// The kind of initiator, one of the InitiatorType constants: "ai_agent" when a supported AI
+	// Agent was detected, "human" when no supported AI Agent was detected, or "unknown" when the
+	// client could not determine the initiator.
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	// A stable identifier of the AI Agent that established the connection, e.g. "claude-code".
+	// Empty unless type is "ai_agent".
+	AiAgent string `protobuf:"bytes,2,opt,name=ai_agent,json=aiAgent,proto3" json:"ai_agent,omitempty"`
+	// The version of the AI Agent, when it could be determined.
+	Version string `protobuf:"bytes,3,opt,name=version,proto3" json:"version,omitempty"`
+	// Indicates whether the initiator detection is trusted, meaning it cannot be spoofed by the end user.
+	Trusted bool `protobuf:"varint,4,opt,name=trusted,proto3" json:"trusted,omitempty"`
+}
+
+func (x *Initiator) Reset() {
+	*x = Initiator{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_queries_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Initiator) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Initiator) ProtoMessage() {}
+
+func (x *Initiator) ProtoReflect() protoreflect.Message {
+	mi := &file_queries_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Initiator.ProtoReflect.Descriptor instead.
+func (*Initiator) Descriptor() ([]byte, []int) {
+	return file_queries_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *Initiator) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *Initiator) GetAiAgent() string {
+	if x != nil {
+		return x.AiAgent
+	}
+	return ""
+}
+
+func (x *Initiator) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+func (x *Initiator) GetTrusted() bool {
+	if x != nil {
+		return x.Trusted
+	}
+	return false
+}
+
 // A QueryCapture contains additional information about queries against SSH, Kubernetes, and RDP resources.
 type QueryCapture struct {
 	state         protoimpl.MessageState
@@ -543,7 +633,7 @@ type QueryCapture struct {
 func (x *QueryCapture) Reset() {
 	*x = QueryCapture{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_queries_proto_msgTypes[3]
+		mi := &file_queries_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -556,7 +646,7 @@ func (x *QueryCapture) String() string {
 func (*QueryCapture) ProtoMessage() {}
 
 func (x *QueryCapture) ProtoReflect() protoreflect.Message {
-	mi := &file_queries_proto_msgTypes[3]
+	mi := &file_queries_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -569,7 +659,7 @@ func (x *QueryCapture) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryCapture.ProtoReflect.Descriptor instead.
 func (*QueryCapture) Descriptor() ([]byte, []int) {
-	return file_queries_proto_rawDescGZIP(), []int{3}
+	return file_queries_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *QueryCapture) GetWidth() int32 {
@@ -718,7 +808,7 @@ var file_queries_proto_rawDesc = []byte{
 	0x6f, 0x6e, 0x5f, 0x67, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x52, 0x09, 0x72, 0x61, 0x74, 0x65,
 	0x4c, 0x69, 0x6d, 0x69, 0x74, 0x3a, 0x23, 0xfa, 0xf8, 0xb3, 0x07, 0x1e, 0xd2, 0xf3, 0xb3, 0x07,
 	0x01, 0x2a, 0xd2, 0xf3, 0xb3, 0x07, 0x13, 0x21, 0x74, 0x65, 0x72, 0x72, 0x61, 0x66, 0x6f, 0x72,
-	0x6d, 0x2d, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x22, 0xda, 0x0d, 0x0a, 0x05, 0x51,
+	0x6d, 0x2d, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x22, 0x98, 0x0e, 0x0a, 0x05, 0x51,
 	0x75, 0x65, 0x72, 0x79, 0x12, 0x1a, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
 	0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x02, 0x69, 0x64,
 	0x12, 0x29, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02,
@@ -825,7 +915,25 @@ var file_queries_proto_rawDesc = []byte{
 	0x6e, 0x18, 0x1f, 0x20, 0x01, 0x28, 0x09, 0x42, 0x26, 0xf2, 0xf8, 0xb3, 0x07, 0x21, 0xb0, 0xf3,
 	0xb3, 0x07, 0x01, 0xca, 0xf3, 0xb3, 0x07, 0x17, 0xc2, 0xf4, 0xb3, 0x07, 0x12, 0x0a, 0x02, 0x67,
 	0x6f, 0x12, 0x0c, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x4a, 0x53, 0x4f, 0x4e, 0x52,
-	0x0c, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x4a, 0x73, 0x6f, 0x6e, 0x3a, 0x28, 0xfa,
+	0x0c, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x4a, 0x73, 0x6f, 0x6e, 0x12, 0x3c, 0x0a,
+	0x09, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x20, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x0d, 0x2e, 0x76, 0x31, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x74, 0x6f, 0x72, 0x42,
+	0x0f, 0xf2, 0xf8, 0xb3, 0x07, 0x0a, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0xf0, 0xf4, 0xb3, 0x07, 0x01,
+	0x52, 0x09, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x61, 0x74, 0x6f, 0x72, 0x3a, 0x28, 0xfa, 0xf8, 0xb3,
+	0x07, 0x23, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x01, 0x2a, 0xd2, 0xf3, 0xb3,
+	0x07, 0x13, 0x21, 0x74, 0x65, 0x72, 0x72, 0x61, 0x66, 0x6f, 0x72, 0x6d, 0x2d, 0x70, 0x72, 0x6f,
+	0x76, 0x69, 0x64, 0x65, 0x72, 0x22, 0xdf, 0x01, 0x0a, 0x09, 0x49, 0x6e, 0x69, 0x74, 0x69, 0x61,
+	0x74, 0x6f, 0x72, 0x12, 0x1e, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x04, 0x74,
+	0x79, 0x70, 0x65, 0x12, 0x3c, 0x0a, 0x08, 0x61, 0x69, 0x5f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x21, 0xf2, 0xf8, 0xb3, 0x07, 0x1c, 0xb0, 0xf3, 0xb3, 0x07,
+	0x01, 0xca, 0xf3, 0xb3, 0x07, 0x12, 0xc2, 0xf4, 0xb3, 0x07, 0x0d, 0x0a, 0x02, 0x67, 0x6f, 0x12,
+	0x07, 0x41, 0x49, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x07, 0x61, 0x69, 0x41, 0x67, 0x65, 0x6e,
+	0x74, 0x12, 0x24, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0, 0xf3, 0xb3, 0x07, 0x01, 0x52, 0x07,
+	0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x24, 0x0a, 0x07, 0x74, 0x72, 0x75, 0x73, 0x74,
+	0x65, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x42, 0x0a, 0xf2, 0xf8, 0xb3, 0x07, 0x05, 0xb0,
+	0xf3, 0xb3, 0x07, 0x01, 0x52, 0x07, 0x74, 0x72, 0x75, 0x73, 0x74, 0x65, 0x64, 0x3a, 0x28, 0xfa,
 	0xf8, 0xb3, 0x07, 0x23, 0xa8, 0xf3, 0xb3, 0x07, 0x01, 0xd2, 0xf3, 0xb3, 0x07, 0x01, 0x2a, 0xd2,
 	0xf3, 0xb3, 0x07, 0x13, 0x21, 0x74, 0x65, 0x72, 0x72, 0x61, 0x66, 0x6f, 0x72, 0x6d, 0x2d, 0x70,
 	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x22, 0xdc, 0x06, 0x0a, 0x0c, 0x51, 0x75, 0x65, 0x72,
@@ -915,39 +1023,41 @@ func file_queries_proto_rawDescGZIP() []byte {
 	return file_queries_proto_rawDescData
 }
 
-var file_queries_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_queries_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_queries_proto_goTypes = []interface{}{
 	(*QueryListRequest)(nil),      // 0: v1.QueryListRequest
 	(*QueryListResponse)(nil),     // 1: v1.QueryListResponse
 	(*Query)(nil),                 // 2: v1.Query
-	(*QueryCapture)(nil),          // 3: v1.QueryCapture
-	nil,                           // 4: v1.QueryCapture.EnvEntry
-	(*ListRequestMetadata)(nil),   // 5: v1.ListRequestMetadata
-	(*ListResponseMetadata)(nil),  // 6: v1.ListResponseMetadata
-	(*RateLimitMetadata)(nil),     // 7: v1.RateLimitMetadata
-	(*durationpb.Duration)(nil),   // 8: google.protobuf.Duration
-	(*timestamppb.Timestamp)(nil), // 9: google.protobuf.Timestamp
-	(*Tags)(nil),                  // 10: v1.Tags
+	(*Initiator)(nil),             // 3: v1.Initiator
+	(*QueryCapture)(nil),          // 4: v1.QueryCapture
+	nil,                           // 5: v1.QueryCapture.EnvEntry
+	(*ListRequestMetadata)(nil),   // 6: v1.ListRequestMetadata
+	(*ListResponseMetadata)(nil),  // 7: v1.ListResponseMetadata
+	(*RateLimitMetadata)(nil),     // 8: v1.RateLimitMetadata
+	(*durationpb.Duration)(nil),   // 9: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
+	(*Tags)(nil),                  // 11: v1.Tags
 }
 var file_queries_proto_depIdxs = []int32{
-	5,  // 0: v1.QueryListRequest.meta:type_name -> v1.ListRequestMetadata
-	6,  // 1: v1.QueryListResponse.meta:type_name -> v1.ListResponseMetadata
+	6,  // 0: v1.QueryListRequest.meta:type_name -> v1.ListRequestMetadata
+	7,  // 1: v1.QueryListResponse.meta:type_name -> v1.ListResponseMetadata
 	2,  // 2: v1.QueryListResponse.queries:type_name -> v1.Query
-	7,  // 3: v1.QueryListResponse.rate_limit:type_name -> v1.RateLimitMetadata
-	8,  // 4: v1.Query.duration:type_name -> google.protobuf.Duration
-	9,  // 5: v1.Query.timestamp:type_name -> google.protobuf.Timestamp
-	10, // 6: v1.Query.resource_tags:type_name -> v1.Tags
-	10, // 7: v1.Query.account_tags:type_name -> v1.Tags
-	9,  // 8: v1.Query.completed_at:type_name -> google.protobuf.Timestamp
-	3,  // 9: v1.Query.capture:type_name -> v1.QueryCapture
-	4,  // 10: v1.QueryCapture.env:type_name -> v1.QueryCapture.EnvEntry
-	0,  // 11: v1.Queries.List:input_type -> v1.QueryListRequest
-	1,  // 12: v1.Queries.List:output_type -> v1.QueryListResponse
-	12, // [12:13] is the sub-list for method output_type
-	11, // [11:12] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	8,  // 3: v1.QueryListResponse.rate_limit:type_name -> v1.RateLimitMetadata
+	9,  // 4: v1.Query.duration:type_name -> google.protobuf.Duration
+	10, // 5: v1.Query.timestamp:type_name -> google.protobuf.Timestamp
+	11, // 6: v1.Query.resource_tags:type_name -> v1.Tags
+	11, // 7: v1.Query.account_tags:type_name -> v1.Tags
+	10, // 8: v1.Query.completed_at:type_name -> google.protobuf.Timestamp
+	4,  // 9: v1.Query.capture:type_name -> v1.QueryCapture
+	3,  // 10: v1.Query.initiator:type_name -> v1.Initiator
+	5,  // 11: v1.QueryCapture.env:type_name -> v1.QueryCapture.EnvEntry
+	0,  // 12: v1.Queries.List:input_type -> v1.QueryListRequest
+	1,  // 13: v1.Queries.List:output_type -> v1.QueryListResponse
+	13, // [13:14] is the sub-list for method output_type
+	12, // [12:13] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_queries_proto_init() }
@@ -996,6 +1106,18 @@ func file_queries_proto_init() {
 			}
 		}
 		file_queries_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Initiator); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_queries_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QueryCapture); i {
 			case 0:
 				return &v.state
@@ -1014,7 +1136,7 @@ func file_queries_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_queries_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

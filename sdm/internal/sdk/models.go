@@ -1275,9 +1275,9 @@ type AccountUpdateResponse struct {
 type ActiveDirectoryEngine struct {
 	// The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
 	AfterReadTtl time.Duration `json:"afterReadTtl"`
-	// Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com
+	// Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
 	Binddn string `json:"binddn"`
-	// Password to use along with binddn when performing user search.
+	// Bindpass is the password to use along with binddn when performing user search. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
 	Bindpass string `json:"bindpass"`
 	// CA certificate to use when verifying LDAP server certificate, must be x509 PEM encoded.
 	Certificate string `json:"certificate"`
@@ -1298,6 +1298,8 @@ type ActiveDirectoryEngine struct {
 	Name string `json:"name"`
 	// node selector is used to narrow down the nodes used to communicate with with secret engine
 	NodeSelector string `json:"nodeSelector"`
+	// PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
+	PathCredentials bool `json:"pathCredentials"`
 	// Policy for password creation
 	Policy *SecretEnginePolicy `json:"policy"`
 	// Public key linked with a secret engine
@@ -4661,6 +4663,22 @@ type IdentitySetUpdateResponse struct {
 	RateLimit *RateLimitMetadata `json:"rateLimit"`
 }
 
+// An Initiator describes who established the connection to the resource, as classified by
+// the local StrongDM client.
+type Initiator struct {
+	// A stable identifier of the AI Agent that established the connection, e.g. "claude-code".
+	// Empty unless type is "ai_agent".
+	AIAgent string `json:"aiAgent"`
+	// Indicates whether the initiator detection is trusted, meaning it cannot be spoofed by the end user.
+	Trusted bool `json:"trusted"`
+	// The kind of initiator, one of the InitiatorType constants: "ai_agent" when a supported AI
+	// Agent was detected, "human" when no supported AI Agent was detected, or "unknown" when the
+	// client could not determine the initiator.
+	Type string `json:"type"`
+	// The version of the AI Agent, when it could be determined.
+	Version string `json:"version"`
+}
+
 type KeyValueEngine struct {
 	// Unique identifier of the Secret Engine.
 	ID string `json:"id"`
@@ -5824,8 +5842,10 @@ type MysqlEngine struct {
 	Name string `json:"name"`
 	// node selector is used to narrow down the nodes used to communicate with with secret engine
 	NodeSelector string `json:"nodeSelector"`
-	// Password is the password to connect to the MySQL server.
+	// Password is the password to connect to the MySQL server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
 	Password string `json:"password"`
+	// PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
+	PathCredentials bool `json:"pathCredentials"`
 	// Policy for password creation
 	Policy *SecretEnginePolicy `json:"policy"`
 	// Port is the port number of the MySQL server.
@@ -5844,7 +5864,7 @@ type MysqlEngine struct {
 	TlsSkipVerify bool `json:"tlsSkipVerify"`
 	// The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
 	Ttl time.Duration `json:"ttl"`
-	// Username is the username to connect to the MySQL server.
+	// Username is the username to connect to the MySQL server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
 	Username string `json:"username"`
 }
 
@@ -6592,8 +6612,10 @@ type PostgresEngine struct {
 	Name string `json:"name"`
 	// node selector is used to narrow down the nodes used to communicate with with secret engine
 	NodeSelector string `json:"nodeSelector"`
-	// Password is the password to connect to the Postgres server.
+	// Password is the password to connect to the Postgres server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
 	Password string `json:"password"`
+	// PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
+	PathCredentials bool `json:"pathCredentials"`
 	// Policy for password creation
 	Policy *SecretEnginePolicy `json:"policy"`
 	// Port is the port number of the Postgres server.
@@ -6610,7 +6632,7 @@ type PostgresEngine struct {
 	Tls bool `json:"tls"`
 	// The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
 	Ttl time.Duration `json:"ttl"`
-	// Username is the username to connect to the Postgres server.
+	// Username is the username to connect to the Postgres server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
 	Username string `json:"username"`
 }
 
@@ -6762,6 +6784,9 @@ type Query struct {
 	ID string `json:"id"`
 	// The username of the IdentityAlias used to access the Resource.
 	IdentityAliasUsername string `json:"identityAliasUsername"`
+	// Who established the connection to the resource, as classified by the local StrongDM client.
+	// Absent when the initiator was not recorded or the organization does not have AI Agent controls.
+	Initiator *Initiator `json:"initiator"`
 	// Driver specific metadata associated with this query.
 	MetadataJSON string `json:"metadataJson"`
 	// The captured content of the Query.
@@ -15770,8 +15795,10 @@ type SqlserverEngine struct {
 	Name string `json:"name"`
 	// node selector is used to narrow down the nodes used to communicate with with secret engine
 	NodeSelector string `json:"nodeSelector"`
-	// Password is the password to connect to the SQL Server server.
+	// Password is the password to connect to the SQL Server server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
 	Password string `json:"password"`
+	// PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
+	PathCredentials bool `json:"pathCredentials"`
 	// Policy for password creation
 	Policy *SecretEnginePolicy `json:"policy"`
 	// Port is the port number of the SQL Server server.
@@ -15790,7 +15817,7 @@ type SqlserverEngine struct {
 	TlsSkipVerify bool `json:"tlsSkipVerify"`
 	// The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
 	Ttl time.Duration `json:"ttl"`
-	// Username is the username to connect to the SQL Server.
+	// Username is the username to connect to the SQL Server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
 	Username string `json:"username"`
 }
 

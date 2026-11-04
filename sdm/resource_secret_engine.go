@@ -40,13 +40,13 @@ func resourceSecretEngine() *schema.Resource {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com",
+							Description: "Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.",
 						},
 						"bindpass": {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "Password to use along with binddn when performing user search.",
+							Description: "Bindpass is the password to use along with binddn when performing user search. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.",
 						},
 						"certificate": {
 							Type: schema.TypeString,
@@ -96,6 +96,12 @@ func resourceSecretEngine() *schema.Resource {
 
 							Optional:    true,
 							Description: "node selector is used to narrow down the nodes used to communicate with with secret engine",
+						},
+						"path_credentials": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.",
 						},
 						"public_key": {
 							Type: schema.TypeString,
@@ -263,7 +269,13 @@ func resourceSecretEngine() *schema.Resource {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "Password is the password to connect to the MySQL server.",
+							Description: "Password is the password to connect to the MySQL server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.",
+						},
+						"path_credentials": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.",
 						},
 						"port": {
 							Type: schema.TypeInt,
@@ -319,7 +331,7 @@ func resourceSecretEngine() *schema.Resource {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "Username is the username to connect to the MySQL server.",
+							Description: "Username is the username to connect to the MySQL server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.",
 						},
 					},
 				},
@@ -372,7 +384,13 @@ func resourceSecretEngine() *schema.Resource {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "Password is the password to connect to the Postgres server.",
+							Description: "Password is the password to connect to the Postgres server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.",
+						},
+						"path_credentials": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.",
 						},
 						"port": {
 							Type: schema.TypeInt,
@@ -422,7 +440,7 @@ func resourceSecretEngine() *schema.Resource {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "Username is the username to connect to the Postgres server.",
+							Description: "Username is the username to connect to the Postgres server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.",
 						},
 					},
 				},
@@ -475,7 +493,13 @@ func resourceSecretEngine() *schema.Resource {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "Password is the password to connect to the SQL Server server.",
+							Description: "Password is the password to connect to the SQL Server server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.",
+						},
+						"path_credentials": {
+							Type: schema.TypeBool,
+
+							Optional:    true,
+							Description: "PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.",
 						},
 						"port": {
 							Type: schema.TypeInt,
@@ -531,7 +555,7 @@ func resourceSecretEngine() *schema.Resource {
 							Type: schema.TypeString,
 
 							Required:    true,
-							Description: "Username is the username to connect to the SQL Server.",
+							Description: "Username is the username to connect to the SQL Server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.",
 						},
 					},
 				},
@@ -569,6 +593,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			MaxBackoffDuration:      convertDurationToPlumbing(raw["max_backoff_duration"]),
 			Name:                    convertStringToPlumbing(raw["name"]),
 			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
+			PathCredentials:         convertBoolToPlumbing(raw["path_credentials"]),
 			RequestTimeout:          convertUint32ToPlumbing(raw["request_timeout"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			SecretStoreRootPath:     convertStringToPlumbing(raw["secret_store_root_path"]),
@@ -611,6 +636,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			Name:                    convertStringToPlumbing(raw["name"]),
 			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
 			Password:                convertStringToPlumbing(raw["password"]),
+			PathCredentials:         convertBoolToPlumbing(raw["path_credentials"]),
 			Port:                    convertUint32ToPlumbing(raw["port"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			SecretStoreRootPath:     convertStringToPlumbing(raw["secret_store_root_path"]),
@@ -636,6 +662,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			Name:                    convertStringToPlumbing(raw["name"]),
 			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
 			Password:                convertStringToPlumbing(raw["password"]),
+			PathCredentials:         convertBoolToPlumbing(raw["path_credentials"]),
 			Port:                    convertUint32ToPlumbing(raw["port"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			SecretStoreRootPath:     convertStringToPlumbing(raw["secret_store_root_path"]),
@@ -660,6 +687,7 @@ func convertSecretEngineToPlumbing(d *schema.ResourceData) sdm.SecretEngine {
 			Name:                    convertStringToPlumbing(raw["name"]),
 			NodeSelector:            convertStringToPlumbing(raw["node_selector"]),
 			Password:                convertStringToPlumbing(raw["password"]),
+			PathCredentials:         convertBoolToPlumbing(raw["path_credentials"]),
 			Port:                    convertUint32ToPlumbing(raw["port"]),
 			SecretStoreID:           convertStringToPlumbing(raw["secret_store_id"]),
 			SecretStoreRootPath:     convertStringToPlumbing(raw["secret_store_root_path"]),
@@ -700,6 +728,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"max_backoff_duration":       convertDurationToPorcelain(v.MaxBackoffDuration),
 				"name":                       (v.Name),
 				"node_selector":              (v.NodeSelector),
+				"path_credentials":           (v.PathCredentials),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"request_timeout":            (v.RequestTimeout),
 				"secret_store_id":            (v.SecretStoreID),
@@ -738,6 +767,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"name":                       (v.Name),
 				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
+				"path_credentials":           (v.PathCredentials),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),
@@ -761,6 +791,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"name":                       (v.Name),
 				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
+				"path_credentials":           (v.PathCredentials),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),
@@ -783,6 +814,7 @@ func resourceSecretEngineCreate(ctx context.Context, d *schema.ResourceData, cc 
 				"name":                       (v.Name),
 				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
+				"path_credentials":           (v.PathCredentials),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),
@@ -831,6 +863,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"max_backoff_duration":       convertDurationToPorcelain(v.MaxBackoffDuration),
 				"name":                       (v.Name),
 				"node_selector":              (v.NodeSelector),
+				"path_credentials":           (v.PathCredentials),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"request_timeout":            (v.RequestTimeout),
 				"secret_store_id":            (v.SecretStoreID),
@@ -875,6 +908,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"name":                       (v.Name),
 				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
+				"path_credentials":           (v.PathCredentials),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),
@@ -901,6 +935,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"name":                       (v.Name),
 				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
+				"path_credentials":           (v.PathCredentials),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),
@@ -926,6 +961,7 @@ func resourceSecretEngineRead(ctx context.Context, d *schema.ResourceData, cc *s
 				"name":                       (v.Name),
 				"node_selector":              (v.NodeSelector),
 				"password":                   (v.Password),
+				"path_credentials":           (v.PathCredentials),
 				"port":                       (v.Port),
 				"public_key":                 convertBytesToPorcelain(v.PublicKey),
 				"secret_store_id":            (v.SecretStoreID),

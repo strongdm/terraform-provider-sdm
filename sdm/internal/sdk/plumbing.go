@@ -3052,6 +3052,7 @@ func convertActiveDirectoryEngineToPorcelain(plumbing *proto.ActiveDirectoryEngi
 	}
 	porcelain.Name = plumbing.Name
 	porcelain.NodeSelector = plumbing.NodeSelector
+	porcelain.PathCredentials = plumbing.PathCredentials
 	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
 		return nil, fmt.Errorf("error converting field Policy: %v", err)
 	} else {
@@ -3095,6 +3096,7 @@ func convertActiveDirectoryEngineToPlumbing(porcelain *ActiveDirectoryEngine) *p
 	plumbing.MaxBackoffDuration = convertDurationToPlumbing(porcelain.MaxBackoffDuration)
 	plumbing.Name = (porcelain.Name)
 	plumbing.NodeSelector = (porcelain.NodeSelector)
+	plumbing.PathCredentials = (porcelain.PathCredentials)
 	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.PublicKey = (porcelain.PublicKey)
 	plumbing.RequestTimeout = (porcelain.RequestTimeout)
@@ -12653,6 +12655,53 @@ func convertRepeatedIdentitySetUpdateResponseToPorcelain(plumbings []*proto.Iden
 	}
 	return items, nil
 }
+func convertInitiatorToPorcelain(plumbing *proto.Initiator) (*Initiator, error) {
+	if plumbing == nil {
+		return nil, nil
+	}
+	porcelain := &Initiator{}
+	porcelain.AIAgent = plumbing.AiAgent
+	porcelain.Trusted = plumbing.Trusted
+	porcelain.Type = plumbing.Type
+	porcelain.Version = plumbing.Version
+	return porcelain, nil
+}
+
+func convertInitiatorToPlumbing(porcelain *Initiator) *proto.Initiator {
+	if porcelain == nil {
+		return nil
+	}
+	plumbing := &proto.Initiator{}
+	plumbing.AiAgent = (porcelain.AIAgent)
+	plumbing.Trusted = (porcelain.Trusted)
+	plumbing.Type = (porcelain.Type)
+	plumbing.Version = (porcelain.Version)
+	return plumbing
+}
+func convertRepeatedInitiatorToPlumbing(
+	porcelains []*Initiator,
+) []*proto.Initiator {
+	var items []*proto.Initiator
+	for _, porcelain := range porcelains {
+		items = append(items, convertInitiatorToPlumbing(porcelain))
+	}
+	return items
+}
+
+func convertRepeatedInitiatorToPorcelain(plumbings []*proto.Initiator) (
+	[]*Initiator,
+	error,
+) {
+	var items []*Initiator
+	for _, plumbing := range plumbings {
+		if v, err := convertInitiatorToPorcelain(plumbing); err != nil {
+			return nil, err
+		} else {
+			items = append(items, v)
+		}
+	}
+	return items, nil
+}
 func convertKeyValueEngineToPorcelain(plumbing *proto.KeyValueEngine) (*KeyValueEngine, error) {
 	if plumbing == nil {
 		return nil, nil
@@ -15854,6 +15903,7 @@ func convertMysqlEngineToPorcelain(plumbing *proto.MysqlEngine) (*MysqlEngine, e
 	porcelain.Name = plumbing.Name
 	porcelain.NodeSelector = plumbing.NodeSelector
 	porcelain.Password = plumbing.Password
+	porcelain.PathCredentials = plumbing.PathCredentials
 	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
 		return nil, fmt.Errorf("error converting field Policy: %v", err)
 	} else {
@@ -15892,6 +15942,7 @@ func convertMysqlEngineToPlumbing(porcelain *MysqlEngine) *proto.MysqlEngine {
 	plumbing.Name = (porcelain.Name)
 	plumbing.NodeSelector = (porcelain.NodeSelector)
 	plumbing.Password = (porcelain.Password)
+	plumbing.PathCredentials = (porcelain.PathCredentials)
 	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PublicKey = (porcelain.PublicKey)
@@ -18404,6 +18455,7 @@ func convertPostgresEngineToPorcelain(plumbing *proto.PostgresEngine) (*Postgres
 	porcelain.Name = plumbing.Name
 	porcelain.NodeSelector = plumbing.NodeSelector
 	porcelain.Password = plumbing.Password
+	porcelain.PathCredentials = plumbing.PathCredentials
 	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
 		return nil, fmt.Errorf("error converting field Policy: %v", err)
 	} else {
@@ -18441,6 +18493,7 @@ func convertPostgresEngineToPlumbing(porcelain *PostgresEngine) *proto.PostgresE
 	plumbing.Name = (porcelain.Name)
 	plumbing.NodeSelector = (porcelain.NodeSelector)
 	plumbing.Password = (porcelain.Password)
+	plumbing.PathCredentials = (porcelain.PathCredentials)
 	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PublicKey = (porcelain.PublicKey)
@@ -18865,6 +18918,11 @@ func convertQueryToPorcelain(plumbing *proto.Query) (*Query, error) {
 	porcelain.Encrypted = plumbing.Encrypted
 	porcelain.ID = plumbing.Id
 	porcelain.IdentityAliasUsername = plumbing.IdentityAliasUsername
+	if v, err := convertInitiatorToPorcelain(plumbing.Initiator); err != nil {
+		return nil, fmt.Errorf("error converting field Initiator: %v", err)
+	} else {
+		porcelain.Initiator = v
+	}
 	porcelain.MetadataJSON = plumbing.MetadataJson
 	porcelain.QueryBody = plumbing.QueryBody
 	porcelain.QueryCategory = plumbing.QueryCategory
@@ -18910,6 +18968,7 @@ func convertQueryToPlumbing(porcelain *Query) *proto.Query {
 	plumbing.Encrypted = (porcelain.Encrypted)
 	plumbing.Id = (porcelain.ID)
 	plumbing.IdentityAliasUsername = (porcelain.IdentityAliasUsername)
+	plumbing.Initiator = convertInitiatorToPlumbing(porcelain.Initiator)
 	plumbing.MetadataJson = (porcelain.MetadataJSON)
 	plumbing.QueryBody = (porcelain.QueryBody)
 	plumbing.QueryCategory = (porcelain.QueryCategory)
@@ -24343,6 +24402,7 @@ func convertSqlserverEngineToPorcelain(plumbing *proto.SqlserverEngine) (*Sqlser
 	porcelain.Name = plumbing.Name
 	porcelain.NodeSelector = plumbing.NodeSelector
 	porcelain.Password = plumbing.Password
+	porcelain.PathCredentials = plumbing.PathCredentials
 	if v, err := convertSecretEnginePolicyToPorcelain(plumbing.Policy); err != nil {
 		return nil, fmt.Errorf("error converting field Policy: %v", err)
 	} else {
@@ -24381,6 +24441,7 @@ func convertSqlserverEngineToPlumbing(porcelain *SqlserverEngine) *proto.Sqlserv
 	plumbing.Name = (porcelain.Name)
 	plumbing.NodeSelector = (porcelain.NodeSelector)
 	plumbing.Password = (porcelain.Password)
+	plumbing.PathCredentials = (porcelain.PathCredentials)
 	plumbing.Policy = convertSecretEnginePolicyToPlumbing(porcelain.Policy)
 	plumbing.Port = (porcelain.Port)
 	plumbing.PublicKey = (porcelain.PublicKey)

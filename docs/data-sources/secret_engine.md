@@ -11,8 +11,8 @@ A SecretEngine is managing secrets in SecretStores.
 ## Argument Reference
 The following arguments are supported by a SecretEngines data source:
 * `type` - (Optional) a filter to select all items of a certain subtype. See the [filter documentation](https://docs.strongdm.com/references/cli/filters/) for more information.
-* `binddn` - (Optional) Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com
-* `bindpass` - (Optional) Password to use along with binddn when performing user search.
+* `binddn` - (Optional) Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
+* `bindpass` - (Optional) Bindpass is the password to use along with binddn when performing user search. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
 * `certificate` - (Optional) CA certificate to use when verifying LDAP server certificate, must be x509 PEM encoded.
 * `connection_timeout` - (Optional) Timeout, in seconds, when attempting to connect to the LDAP server before trying the next URL in the configuration.
 * `database` - (Optional) Database is the database to verify credential against.
@@ -23,7 +23,8 @@ The following arguments are supported by a SecretEngines data source:
 * `key_rotation_interval_days` - (Optional) An interval of public/private key rotation for secret engine in days
 * `name` - (Optional) Unique human-readable name of the Secret Engine.
 * `node_selector` - (Optional) node selector is used to narrow down the nodes used to communicate with with secret engine
-* `password` - (Optional) Password is the password to connect to the SQL Server server.
+* `password` - (Optional) Password is the password to connect to the SQL Server server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
+* `path_credentials` - (Optional) PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
 * `port` - (Optional) Port is the port number of the SQL Server server.
 * `request_timeout` - (Optional) Timeout, in seconds, for the connection when making requests against the server before returning back an error.
 * `secret_store_id` - (Optional) Backing secret store identifier
@@ -35,7 +36,7 @@ The following arguments are supported by a SecretEngines data source:
 * `upndomain` - (Optional) The domain (userPrincipalDomain) used to construct a UPN string for authentication.
 * `url` - (Optional) The LDAP server to connect to.
 * `userdn` - (Optional) Base DN under which to perform user search. Example: ou=Users,dc=example,dc=com
-* `username` - (Optional) Username is the username to connect to the SQL Server.
+* `username` - (Optional) Username is the username to connect to the SQL Server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
 ## Attribute Reference
 In addition to provided arguments above, the following attributes are returned by a SecretEngines data source:
 * `id` - a generated id representing this request, unrelated to input id and sdm_secret_engine ids.
@@ -43,8 +44,8 @@ In addition to provided arguments above, the following attributes are returned b
 * `secret_engines` - A single element list containing a map, where each key lists one of the following objects:
 	* active_directory:
 		* `after_read_ttl` - The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
-		* `binddn` - Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com
-		* `bindpass` - Password to use along with binddn when performing user search.
+		* `binddn` - Distinguished name of object to bind when performing user and group search. Example: cn=vault,ou=Users,dc=example,dc=com. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
+		* `bindpass` - Bindpass is the password to use along with binddn when performing user search. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
 		* `certificate` - CA certificate to use when verifying LDAP server certificate, must be x509 PEM encoded.
 		* `connection_timeout` - Timeout, in seconds, when attempting to connect to the LDAP server before trying the next URL in the configuration.
 		* `do_not_validate_timestamps` - If set to true this will prevent password change timestamp validation in Active Directory when validating credentials
@@ -54,6 +55,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `max_backoff_duration` - The maximum retry duration in case of automatic failure. On failed ttl rotation attempt it will be retried in an increasing intervals until it reaches max_backoff_duration
 		* `name` - Unique human-readable name of the Secret Engine.
 		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
+		* `path_credentials` - PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
 		* `public_key` - Public key linked with a secret engine
 		* `request_timeout` - Timeout, in seconds, for the connection when making requests against the server before returning back an error.
 		* `secret_store_id` - Backing secret store identifier
@@ -81,7 +83,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
 		* `name` - Unique human-readable name of the Secret Engine.
 		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
-		* `password` - Password is the password to connect to the MySQL server.
+		* `password` - Password is the password to connect to the MySQL server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
+		* `path_credentials` - PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
 		* `port` - Port is the port number of the MySQL server.
 		* `public_key` - Public key linked with a secret engine
 		* `secret_store_id` - Backing secret store identifier
@@ -90,7 +93,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tls` - TLS enables TLS/SSL when connecting to the MySQL server.
 		* `tls_skip_verify` - TLS disable certificate verification
 		* `ttl` - The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
-		* `username` - Username is the username to connect to the MySQL server.
+		* `username` - Username is the username to connect to the MySQL server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
 	* postgres_secret_engine:
 		* `after_read_ttl` - The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
 		* `database` - Database is the database to verify credential against.
@@ -99,7 +102,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
 		* `name` - Unique human-readable name of the Secret Engine.
 		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
-		* `password` - Password is the password to connect to the Postgres server.
+		* `password` - Password is the password to connect to the Postgres server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
+		* `path_credentials` - PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
 		* `port` - Port is the port number of the Postgres server.
 		* `public_key` - Public key linked with a secret engine
 		* `secret_store_id` - Backing secret store identifier
@@ -107,7 +111,7 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tags` - Tags is a map of key, value pairs.
 		* `tls` - TLS enables TLS/SSL when connecting to the Postgres server.
 		* `ttl` - The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
-		* `username` - Username is the username to connect to the Postgres server.
+		* `username` - Username is the username to connect to the Postgres server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
 	* sqlserver_secret_engine:
 		* `after_read_ttl` - The default time-to-live duration of the password after it's read. Once the ttl has passed, a password will be rotated.
 		* `database` - Database is the database to verify credential against.
@@ -116,7 +120,8 @@ In addition to provided arguments above, the following attributes are returned b
 		* `key_rotation_interval_days` - An interval of public/private key rotation for secret engine in days
 		* `name` - Unique human-readable name of the Secret Engine.
 		* `node_selector` - node selector is used to narrow down the nodes used to communicate with with secret engine
-		* `password` - Password is the password to connect to the SQL Server server.
+		* `password` - Password is the password to connect to the SQL Server server. With path_credentials it is a secret store path in the resource format path?key=password, otherwise it is the literal password.
+		* `path_credentials` - PathCredentials is true when username and password are secret store paths, which the control plane stores. When false, they are literal values and the password is rotated and kept in the engine's secret store.
 		* `port` - Port is the port number of the SQL Server server.
 		* `public_key` - Public key linked with a secret engine
 		* `secret_store_id` - Backing secret store identifier
@@ -125,4 +130,4 @@ In addition to provided arguments above, the following attributes are returned b
 		* `tls` - TLS enables TLS/SSL when connecting to the SQL Server server.
 		* `tls_skip_verify` - TLS disable certificate verification
 		* `ttl` - The default password time-to-live duration. Once the ttl has passed, a password will be rotated the next time it's requested.
-		* `username` - Username is the username to connect to the SQL Server.
+		* `username` - Username is the username to connect to the SQL Server. With path_credentials it is a secret store path in the resource format path?key=username, otherwise it is the literal username.
